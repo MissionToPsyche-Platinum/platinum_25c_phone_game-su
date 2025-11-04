@@ -462,7 +462,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ashwath Ayimen
+  m_Text: 'Ashwath Ayimen
+
+    Aidan'
 --- !u!222 &1275809288
 CanvasRenderer:
   m_ObjectHideFlags: 0

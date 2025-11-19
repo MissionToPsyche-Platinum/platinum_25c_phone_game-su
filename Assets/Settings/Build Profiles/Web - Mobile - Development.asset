@@ -34,7 +34,7 @@ MonoBehaviour:
     - line: '|   targetDevice: 2'
     - line: '|   useOnDemandResources: 0'
     - line: '|   accelerometerFrequency: 60'
-    - line: '|   companyName: DefaultCompany'
+    - line: '|   companyName: NASA 26 13'
     - line: '|   productName: NASA Phone Game'
     - line: '|   defaultCursor: {instanceID: 0}'
     - line: '|   cursorHotspot: {x: 0, y: 0}'
@@ -725,7 +725,13 @@ MonoBehaviour:
     - line: '|   XboxOneOverrideIdentityName: '
     - line: '|   XboxOneOverrideIdentityPublisher: '
     - line: '|   vrEditorSettings: {}'
-    - line: '|   cloudServicesEnabled: {}'
+    - line: '|   cloudServicesEnabled:'
+    - line: '|     Build: 0'
+    - line: '|     Game Performance: 0'
+    - line: '|     Legacy Analytics: 0'
+    - line: '|     Purchasing: 0'
+    - line: '|     UDP: 0'
+    - line: '|     Unity Ads: 0'
     - line: '|   luminIcon:'
     - line: '|     m_Name: '
     - line: '|     m_ModelFolderPath: '
@@ -747,11 +753,11 @@ MonoBehaviour:
     - line: '|   captureStartupLogs: {}'
     - line: '|   activeInputHandler: 1'
     - line: '|   windowsGamepadBackendHint: 0'
-    - line: '|   cloudProjectId: 15b0085f-7600-4ad5-8eda-b404fe841bc4'
+    - line: '|   cloudProjectId: d56b4703-294f-49e4-94e6-a7a24e8d6ef6'
     - line: '|   framebufferDepthMemorylessMode: 0'
     - line: '|   qualitySettingsNames: []'
     - line: '|   projectName: NASA Phone Game'
-    - line: '|   organizationId: ashwathsrinivasan'
+    - line: '|   organizationId: unity_379b1f251b02c9064a43'
     - line: '|   cloudEnabled: 0'
     - line: '|   legacyClampBlendShapeWeights: 0'
     - line: '|   hmiLoadingImage: {instanceID: 0}'
@@ -770,8 +776,8 @@ MonoBehaviour:
       type: {class: WebGLPlatformSettings, ns: UnityEditor.WebGL, asm: UnityEditor.WebGL.Extensions}
       data:
         m_Development: 1
-        m_ConnectProfiler: 0
-        m_BuildWithDeepProfilingSupport: 0
+        m_ConnectProfiler: 1
+        m_BuildWithDeepProfilingSupport: 1
         m_AllowDebugging: 0
         m_WaitForManagedDebugger: 0
         m_ManagedDebuggerFixedPort: 0

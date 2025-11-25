@@ -5,7 +5,7 @@ public class ProbeController : MonoBehaviour
 {
     private InputSystem_Actions myInputActions;
     private bool shouldMoveToFinger;
-
+    public bool HasCollided { get; private set; } = false;
     private void Awake() {
         shouldMoveToFinger = false;
         myInputActions = new InputSystem_Actions();
@@ -24,11 +24,13 @@ public class ProbeController : MonoBehaviour
     private void FingerDown_canceled(InputAction.CallbackContext obj) {
         shouldMoveToFinger = false;
     }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.GetComponent<AsteroidController>() != null)
         {
             //if the collided object is asteroid
             Debug.Log("Collision with asteroid!");
+            HasCollided = true;
         }
 
     }

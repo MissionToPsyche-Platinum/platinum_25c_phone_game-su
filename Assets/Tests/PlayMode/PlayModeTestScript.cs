@@ -122,4 +122,35 @@ public class MenuNavigationButtonsPlayModeTests
         // Cleanup
         Object.Destroy(go);
     }
+
+    public class ProbeControllerTests
+    {
+        [UnityTest]
+        public IEnumerator Probe_SetsFlag_OnAsteroidTrigger()
+        {
+            // arrange: probe object
+            var probeGO = new GameObject("Probe");
+            var probe = probeGO.AddComponent<ProbeController>();
+            var rb = probeGO.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = 0;
+            probeGO.AddComponent<CircleCollider2D>().isTrigger = true;
+
+            // arrange: asteroid object
+            var asteroidGO = new GameObject("Asteroid");
+            asteroidGO.AddComponent<AsteroidController>();
+            asteroidGO.AddComponent<BoxCollider2D>(); // non trigger
+            asteroidGO.transform.position = Vector3.right; // 1 unit away
+
+            // move probe into asteroid
+            probeGO.transform.position = Vector3.right;
+
+            // act: wait one physics step so OnTriggerEnter2D can run
+            yield return new WaitForFixedUpdate();
+
+            // assert
+            Assert.IsTrue(probe.HasCollided, "Probe should have detected asteroid trigger.");
+        }
+    }
+
 }

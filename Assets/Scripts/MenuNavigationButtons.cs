@@ -6,7 +6,7 @@ public class MenuNavigationButtons : MonoBehaviour
 {
     [SerializeField] private Button settingsScreenButton;
     [SerializeField] private Button startScreenButton;
-    [SerializeField] private Button levelSelectionScreenButton;
+    [SerializeField] private Button gameScreenButton;
 
     private void Awake() {
         //enables all buttons that have been connected
@@ -16,8 +16,8 @@ public class MenuNavigationButtons : MonoBehaviour
         if (startScreenButton) {
             startScreenButton.onClick.AddListener(() => LoadScene("Start Screen"));
         }
-        if (levelSelectionScreenButton != null) {
-            levelSelectionScreenButton.onClick.AddListener(() => LoadScene("Level Selection Screen"));
+        if (gameScreenButton != null) {
+            gameScreenButton.onClick.AddListener(() => LoadScene("Game Screen"));
         }
     }
 

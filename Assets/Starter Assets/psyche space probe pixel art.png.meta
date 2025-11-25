@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b8f59081a30d3fb4ca5f181f3b9a12b7
+guid: 8edeccc65b0886e4db7b2a5bf741b6df
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8968318593782090438
-    second: asteroid belt pixel art_0
+      213: 2016713904401210246
+    second: psyche space probe pixel art_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -101,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: asteroid belt pixel art_0
+      name: psyche space probe pixel art_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 800
-        height: 693
+        width: 1024
+        height: 845
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a35761151c12a8380800000000000000
-      internalID: -8968318593782090438
+      spriteID: 68bdc6d6c9eccfb10800000000000000
+      internalID: 2016713904401210246
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      asteroid belt pixel art_0: -8968318593782090438
+      psyche space probe pixel art_0: 2016713904401210246
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

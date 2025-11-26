@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>11/25/2025 - 5:17:29 PM</Generatedon>
+    <Parser>MultiReportParser (4x OpenCoverParser)</Parser>
+    <Assemblies>4</Assemblies>
+    <Classes>14</Classes>
+    <Files>14</Files>
+    <Coveredlines>129</Coveredlines>
+    <Uncoveredlines>542</Uncoveredlines>
+    <Coverablelines>671</Coverablelines>
+    <Totallines>2277</Totallines>
+    <Linecoverage>19.2</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>41</Coveredmethods>
+    <Totalmethods>189</Totalmethods>
+    <Methodcoverage>21.6</Methodcoverage>
+  </Summary>
+  <Coverage>
+    <Assembly name="Assembly-CSharp" classes="2" coverage="0" coveredlines="0" coverablelines="107" totallines="273" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="18" methodcoverage="0">
+      <Class name="Crystal.SafeArea" coverage="0" coveredlines="0" coverablelines="90" totallines="233" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="11" methodcoverage="0" />
+      <Class name="Crystal.SafeAreaDemo" coverage="0" coveredlines="0" coverablelines="17" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="7" methodcoverage="0" />
+    </Assembly>
+    <Assembly name="EditMode" classes="2" coverage="77.5" coveredlines="93" coverablelines="120" totallines="271" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="28" totalmethods="32" methodcoverage="87.5">
+      <Class name="MenuNavigationButtonsEditModeTests" coverage="0" coveredlines="0" coverablelines="13" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
+      <Class name="PauseButtonTestScript" coverage="86.9" coveredlines="93" coverablelines="107" totallines="234" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="28" totalmethods="28" methodcoverage="100" />
+    </Assembly>
+    <Assembly name="GameScript" classes="8" coverage="8.6" coveredlines="30" coverablelines="346" totallines="1556" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="11" totalmethods="126" methodcoverage="8.7">
+      <Class name="AsteroidController" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
+      <Class name="DebrisController" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
+      <Class name="DebrisMoveScript" coverage="54.5" coveredlines="6" coverablelines="11" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
+      <Class name="DebrisSpawnScript" coverage="0" coveredlines="0" coverablelines="25" totallines="55" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="7" methodcoverage="0" />
+      <Class name="InputSystem_Actions" coverage="0" coveredlines="0" coverablelines="210" totallines="1279" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="78" methodcoverage="0" />
+      <Class name="MenuNavigationButtons" coverage="0" coveredlines="0" coverablelines="14" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
+      <Class name="PauseMenuManager" coverage="48" coveredlines="24" coverablelines="50" totallines="94" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="11" methodcoverage="54.5" />
+      <Class name="ProbeController" coverage="0" coveredlines="0" coverablelines="28" totallines="46" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="13" methodcoverage="0" />
+    </Assembly>
+    <Assembly name="PlayMode" classes="2" coverage="6.1" coveredlines="6" coverablelines="98" totallines="177" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="13" methodcoverage="15.3">
+      <Class name="DebrisTests" coverage="26" coveredlines="6" coverablelines="23" totallines="51" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="4" methodcoverage="50" />
+      <Class name="MenuNavigationButtonsPlayModeTests" coverage="0" coveredlines="0" coverablelines="75" totallines="126" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="9" methodcoverage="0" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>

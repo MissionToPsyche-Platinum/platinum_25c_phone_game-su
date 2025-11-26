@@ -432,13 +432,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00446ee15bf5440d8aa469e044daafb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::PowerUpSpawnScript
-  powerUp1: {fileID: 7261104184832056788, guid: 12ddc4ac1209346f0bd7ea487edc9481, type: 3}
-  powerUp2: {fileID: 755567322770923196, guid: 6dfd84d67cd83443da73ccf37d585558, type: 3}
-  powerUp3: {fileID: 7291806466940929682, guid: fd19d355b56694c848e5e4676d692156, type: 3}
-  powerUp4: {fileID: 4511466829300863812, guid: e5230040b77a249539e52dc575ceb41c, type: 3}
-  powerUp5: {fileID: 9032309022033969916, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-  minSpawnInterval: 0.3
-  maxSpawnInterval: 1
+  powerUps:
+  - {fileID: 7261104184832056788, guid: 12ddc4ac1209346f0bd7ea487edc9481, type: 3}
+  - {fileID: 755567322770923196, guid: 6dfd84d67cd83443da73ccf37d585558, type: 3}
+  - {fileID: 7291806466940929682, guid: fd19d355b56694c848e5e4676d692156, type: 3}
+  - {fileID: 4511466829300863812, guid: e5230040b77a249539e52dc575ceb41c, type: 3}
+  - {fileID: 9032309022033969916, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
+  powerUpSpawnWeights: 0100000001000000010000000100000001000000
+  minSpawnInterval: 10
+  maxSpawnInterval: 15
 --- !u!1 &372154182
 GameObject:
   m_ObjectHideFlags: 0

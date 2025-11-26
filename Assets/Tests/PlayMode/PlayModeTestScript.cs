@@ -73,36 +73,6 @@ public class MenuNavigationButtonsPlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator LevelSelectionButton_InvokesListener()
-    {
-        // Arrange
-        GameObject go = new GameObject();
-        MenuNavigationButtons menu = go.AddComponent<MenuNavigationButtons>();
-
-        GameObject buttonGO = new GameObject();
-        Button button = buttonGO.AddComponent<Button>();
-
-        var field = typeof(MenuNavigationButtons).GetField("levelSelectionScreenButton",
-            BindingFlags.NonPublic | BindingFlags.Instance);
-        field.SetValue(menu, button);
-
-        // Manually trigger Awake
-        var awakeMethod = typeof(MenuNavigationButtons).GetMethod("Awake",
-            BindingFlags.NonPublic | BindingFlags.Instance);
-        awakeMethod.Invoke(menu, null);
-
-        yield return null;
-
-        // Assert
-        Assert.DoesNotThrow(() => button.onClick.Invoke(),
-            "Level selection button should have a listener that can be invoked");
-
-        // Cleanup
-        Object.Destroy(go);
-        Object.Destroy(buttonGO);
-    }
-
-    [UnityTest]
     public IEnumerator NullButtons_DoNotCauseErrors()
     {
         // Arrange

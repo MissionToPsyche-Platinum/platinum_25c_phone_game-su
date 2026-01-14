@@ -10,7 +10,8 @@ public class StarSpawnScript : MonoBehaviour
 
     public float minSpawnInterval = 0.1f; // Minimum time between spawns
     public float maxSpawnInterval = 0.5f; // Maximum time between spawns
-    public float moveSpeed;
+    public int initialSpawnCount;
+    private float moveSpeed;
     private float timer = 0f;
     private float nextSpawnTime;
     private int totalWeight;
@@ -30,7 +31,7 @@ public class StarSpawnScript : MonoBehaviour
             totalWeight += starWeights[i];
         }
 
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < initialSpawnCount; i++){
 
             Vector3 spawnPos = new Vector3(
                 UnityEngine.Random.Range(-2.0f, 2.0f),  

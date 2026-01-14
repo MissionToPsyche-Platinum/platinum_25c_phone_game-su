@@ -1772,9 +1772,9 @@ MonoBehaviour:
   - 0.5
   - 1
   - 2
-  minSpawnInterval: 0.1
-  maxSpawnInterval: 0.5
-  moveSpeed: 0
+  minSpawnInterval: 0.2
+  maxSpawnInterval: 1
+  initialSpawnCount: 50
 --- !u!4 &1981466090
 Transform:
   m_ObjectHideFlags: 0

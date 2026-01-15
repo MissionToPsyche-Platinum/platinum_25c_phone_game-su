@@ -7,18 +7,9 @@
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
-                    "name": "Finger Down",
-                    "type": "Button",
-                    "id": "20e3b79f-8d20-4d5f-8d75-ad22986ea3be",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Point Position",
+                    "name": "Movement",
                     "type": "Value",
-                    "id": "a9a9ff9d-ec8b-469b-b8e9-a3e8dd01260d",
+                    "id": "5c45ce1b-661f-41c2-8256-2ba23ca69885",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -28,23 +19,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "eab7d91f-7545-4c12-80b4-e5d1ad85d559",
-                    "path": "<Mouse>/leftButton",
+                    "id": "0c010054-f6f9-41b5-a30e-7b00e800bc7d",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Finger Down",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "77a3badd-d921-46c3-b0f6-e2b3b2ccc1d8",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Point Position",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

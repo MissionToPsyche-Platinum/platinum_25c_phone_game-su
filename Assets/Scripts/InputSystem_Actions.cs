@@ -93,18 +93,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""id"": ""df70fa95-8a34-4494-b137-73ab6b9c7d37"",
             ""actions"": [
                 {
-                    ""name"": ""Finger Down"",
-                    ""type"": ""Button"",
-                    ""id"": ""20e3b79f-8d20-4d5f-8d75-ad22986ea3be"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Point Position"",
+                    ""name"": ""Movement"",
                     ""type"": ""Value"",
-                    ""id"": ""a9a9ff9d-ec8b-469b-b8e9-a3e8dd01260d"",
+                    ""id"": ""5c45ce1b-661f-41c2-8256-2ba23ca69885"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -114,23 +105,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""eab7d91f-7545-4c12-80b4-e5d1ad85d559"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""0c010054-f6f9-41b5-a30e-7b00e800bc7d"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Finger Down"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""77a3badd-d921-46c3-b0f6-e2b3b2ccc1d8"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Point Position"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -718,8 +698,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_FingerDown = m_Player.FindAction("Finger Down", throwIfNotFound: true);
-        m_Player_PointPosition = m_Player.FindAction("Point Position", throwIfNotFound: true);
+        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -813,8 +792,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_FingerDown;
-    private readonly InputAction m_Player_PointPosition;
+    private readonly InputAction m_Player_Movement;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -827,13 +805,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public PlayerActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Player/FingerDown".
+        /// Provides access to the underlying input action "Player/Movement".
         /// </summary>
-        public InputAction @FingerDown => m_Wrapper.m_Player_FingerDown;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/PointPosition".
-        /// </summary>
-        public InputAction @PointPosition => m_Wrapper.m_Player_PointPosition;
+        public InputAction @Movement => m_Wrapper.m_Player_Movement;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -860,12 +834,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @FingerDown.started += instance.OnFingerDown;
-            @FingerDown.performed += instance.OnFingerDown;
-            @FingerDown.canceled += instance.OnFingerDown;
-            @PointPosition.started += instance.OnPointPosition;
-            @PointPosition.performed += instance.OnPointPosition;
-            @PointPosition.canceled += instance.OnPointPosition;
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
         }
 
         /// <summary>
@@ -877,12 +848,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="PlayerActions" />
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @FingerDown.started -= instance.OnFingerDown;
-            @FingerDown.performed -= instance.OnFingerDown;
-            @FingerDown.canceled -= instance.OnFingerDown;
-            @PointPosition.started -= instance.OnPointPosition;
-            @PointPosition.performed -= instance.OnPointPosition;
-            @PointPosition.canceled -= instance.OnPointPosition;
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
         }
 
         /// <summary>
@@ -1184,19 +1152,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Finger Down" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Movement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnFingerDown(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Point Position" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPointPosition(InputAction.CallbackContext context);
+        void OnMovement(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

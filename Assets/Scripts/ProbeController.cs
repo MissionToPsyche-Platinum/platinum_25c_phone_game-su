@@ -5,6 +5,7 @@ public class ProbeController : MonoBehaviour
 {
     private InputSystem_Actions myInputActions;
     private Rigidbody2D myRigidbody2D;
+    private ProbeHealth healthSystem;
 
     [SerializeField] private float moveSpeed = 1f;
         
@@ -14,15 +15,28 @@ public class ProbeController : MonoBehaviour
         myRigidbody2D = GetComponent<Rigidbody2D>();
 
         myInputActions.Player.Enable();
+
+        healthSystem = GetComponent<ProbeHealth>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.GetComponent<AsteroidController>() != null)
+        if (collision.gameObject.GetComponent<AsteroidController>() != null)
         {
             //if the collided object is asteroid
             Debug.Log("Collision with asteroid!");
             HasCollided = true;
+
+            // Take damage
+            if (healthSystem != null)
+            {
+                healthSystem.TakeDamage(1);
+            }
+            // Destroy the debris/asteroid
+            Destroy(collision.gameObject);
         }
+
+
+
 
     }
 

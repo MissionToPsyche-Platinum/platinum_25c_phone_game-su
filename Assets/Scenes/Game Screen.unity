@@ -512,11 +512,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::PowerUpSpawnScript
   powerUps:
-  - {fileID: 7261104184832056788, guid: 12ddc4ac1209346f0bd7ea487edc9481, type: 3}
-  - {fileID: 755567322770923196, guid: 6dfd84d67cd83443da73ccf37d585558, type: 3}
-  - {fileID: 7291806466940929682, guid: fd19d355b56694c848e5e4676d692156, type: 3}
-  - {fileID: 4511466829300863812, guid: e5230040b77a249539e52dc575ceb41c, type: 3}
-  - {fileID: 9032309022033969916, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
+  - {fileID: 4209194027668280864, guid: 56798ef66eef541c68786a1ff9229cee, type: 3}
+  - {fileID: 3357609223072307667, guid: a09463fa457ea49e4932b6f852db4fe7, type: 3}
+  - {fileID: 5768814781467460656, guid: ada7f43567e0f48ef80bb82239e9b923, type: 3}
+  - {fileID: 6154391625889750010, guid: 5ef8241dbb167443194a69b5705c9a2f, type: 3}
+  - {fileID: 2464809715701818637, guid: 39222a3a8995942699a5f3a2d370ef7f, type: 3}
   powerUpSpawnWeights: 0100000001000000010000000100000001000000
   minSpawnInterval: 10
   maxSpawnInterval: 15
@@ -1352,6 +1352,7 @@ GameObject:
   - component: {fileID: 908402710}
   - component: {fileID: 908402711}
   - component: {fileID: 908402712}
+  - component: {fileID: 908402713}
   m_Layer: 0
   m_Name: Probe
   m_TagString: Untagged
@@ -1523,6 +1524,24 @@ MonoBehaviour:
   maxHealth: 3
   currentHealth: 0
   gameOverPanel: {fileID: 0}
+--- !u!114 &908402713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908402706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a467dfd3f44b43bd941bb7e7c06de3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  powerUpActiveLengths:
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
 --- !u!1 &1146425557
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,63 +2234,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2388783550915476008
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3638506154033438889, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 59.19162
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638506154033438889, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1191.7375
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638506154033438889, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638506154033438889, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638506154033438889, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638506154033438889, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638506154033438889, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638506154033438889, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638506154033438889, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638506154033438889, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9032309022033969916, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
-      propertyPath: m_Name
-      value: PowerUp
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fef848b723bde4d1798ea8aac2fe6af9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2282,6 +2244,5 @@ SceneRoots:
   - {fileID: 908402709}
   - {fileID: 1384828552}
   - {fileID: 201524966}
-  - {fileID: 2388783550915476008}
   - {fileID: 1981466090}
   - {fileID: 785719837}

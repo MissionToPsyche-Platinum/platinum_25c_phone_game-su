@@ -517,7 +517,7 @@ MonoBehaviour:
   - {fileID: 5768814781467460656, guid: ada7f43567e0f48ef80bb82239e9b923, type: 3}
   - {fileID: 6154391625889750010, guid: 5ef8241dbb167443194a69b5705c9a2f, type: 3}
   - {fileID: 2464809715701818637, guid: 39222a3a8995942699a5f3a2d370ef7f, type: 3}
-  powerUpSpawnWeights: 0a0000000a000000010000000100000001000000
+  powerUpSpawnWeights: 0100000001000000010000000100000001000000
   minSpawnInterval: 10
   maxSpawnInterval: 15
 --- !u!1 &265588173
@@ -1536,6 +1536,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f7e7dc973594a6497833c9cd71d5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  powerUpLengths:
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
 --- !u!1 &1146425557
 GameObject:
   m_ObjectHideFlags: 0

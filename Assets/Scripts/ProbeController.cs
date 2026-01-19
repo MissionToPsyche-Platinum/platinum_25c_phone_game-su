@@ -6,6 +6,7 @@ public class ProbeController : MonoBehaviour
     private InputSystem_Actions myInputActions;
     private Rigidbody2D myRigidbody2D;
     private ProbeHealth healthSystem;
+    private PowerUpBehavior powerUpSystem;
 
     [SerializeField] private float moveSpeed = 1f;
         
@@ -17,63 +18,7 @@ public class ProbeController : MonoBehaviour
         myInputActions.Player.Enable();
 
         healthSystem = GetComponent<ProbeHealth>();
-    }
-
-    void beginPowerUp(int index){
-
-        switch(index) 
-        {
-            case 0: //Hyperspace
-
-                //disable damage
-                //smoothly increase speed to max
-                //increase score rate proportionally
-                break;
-            case 1: //Shield
-
-                //set shield active in probe health
-                break;
-            case 2: //2x
-
-                //
-                break;
-            case 3: //Star
-
-                break;
-            case 4: //Hex
-
-                break;
-            default:
-                Debug.Log("Invalid index given to beginPowerUp()");
-                break;
-        }
-    }
-
-    void endPowerUp(int index){
-        switch(index) 
-        {
-            case 0:
-
-                //smoothly decrease speed to normal
-                //reset score rate to normal
-                //enable damage
-                break;
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-            case 4:
-
-                break;
-            default:
-                Debug.Log("Invalid index given to endPowerUp()");
-                break;
-        }
+        powerUpSystem = GetComponent<PowerUpBehavior>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -94,42 +39,33 @@ public class ProbeController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("PowerUpHyperspace"))
         {
-            beginPowerUp(0);
-            Debug.Log("Collision with Hyperspace power up");
+            powerUpSystem.beginPowerUp(0);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("PowerUpShield"))
         {
-            beginPowerUp(1);
-            Debug.Log("Collision with Shield power up");
+            powerUpSystem.beginPowerUp(1);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("PowerUp2x"))
         {
-            beginPowerUp(2);
-            Debug.Log("Collision with 2x power up");
+            powerUpSystem.beginPowerUp(2);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("PowerUpStar"))
         {
-            beginPowerUp(3);
-            Debug.Log("Collision with Star power up");
+            powerUpSystem.beginPowerUp(3);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("PowerUpHex"))
         {
-            beginPowerUp(4);
-            Debug.Log("Collision with Hex power up");
+            powerUpSystem.beginPowerUp(4);
             Destroy(collision.gameObject);
         }
-
-
-
-
     }
 
     private void FixedUpdate() {

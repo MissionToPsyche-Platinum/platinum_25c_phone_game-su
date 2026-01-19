@@ -21,4 +21,8 @@ public class ScoreIncrement : MonoBehaviour
         finalScore = Mathf.FloorToInt(currentScore);
         scoreText.text = "Score: " + finalScore.ToString();
     }
+
+    public void ScaleScoreRate(float scalar){
+        scorePerSecond *= scalar;
+    }
 }

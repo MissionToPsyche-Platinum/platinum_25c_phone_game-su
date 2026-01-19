@@ -517,7 +517,7 @@ MonoBehaviour:
   - {fileID: 5768814781467460656, guid: ada7f43567e0f48ef80bb82239e9b923, type: 3}
   - {fileID: 6154391625889750010, guid: 5ef8241dbb167443194a69b5705c9a2f, type: 3}
   - {fileID: 2464809715701818637, guid: 39222a3a8995942699a5f3a2d370ef7f, type: 3}
-  powerUpSpawnWeights: 0100000001000000010000000100000001000000
+  powerUpSpawnWeights: 0a0000000a000000010000000100000001000000
   minSpawnInterval: 10
   maxSpawnInterval: 15
 --- !u!1 &265588173
@@ -1533,15 +1533,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 908402706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a467dfd3f44b43bd941bb7e7c06de3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 71f7e7dc973594a6497833c9cd71d5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  powerUpActiveLengths:
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
 --- !u!1 &1146425557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,8 +1645,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   debris: {fileID: 8420540731902456465, guid: 76cdbca5218d6f64e8d462c2619fcf97, type: 3}
-  minSpawnInterval: 0.3
-  maxSpawnInterval: 1
+  minSpawnInterval: 1
+  maxSpawnInterval: 4
 --- !u!4 &1384828552
 Transform:
   m_ObjectHideFlags: 0

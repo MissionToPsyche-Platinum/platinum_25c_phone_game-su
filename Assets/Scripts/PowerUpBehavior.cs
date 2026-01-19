@@ -1,0 +1,105 @@
+using UnityEngine;
+
+public class PowerUpBehavior : MonoBehaviour
+{
+    private bool[] powerUpsActive;
+    private float[] powerUpTimers;
+    public float[] powerUpLengths;
+
+    private ProbeHealth healthSystem;
+    private ScoreIncrement scoreSystem;
+    
+    private int shieldHealth = 1;
+    private float hyperspaceScoreScale = 2;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        powerUpsActive = new bool[5];
+        powerUpTimers = new float[5];
+        for(int i = 0; i < 5; i++){
+            powerUpsActive[i] = false;
+        }
+
+        healthSystem = GetComponent<ProbeHealth>();
+        GameObject scoreIncrement = GameObject.Find("Canvas/ScoreIncrement");
+        GameObject debris = GameObject.Find("Canvas/ScoreIncrement");
+        scoreSystem = scoreIncrement.GetComponent<ScoreIncrement>();
+    }
+
+    public void beginPowerUp(int index){
+        powerUpsActive[index] = true;
+        powerUpTimers[index] = powerUpLengths[index];
+        switch(index) 
+        {
+            case 0: //Hyperspace
+                Debug.Log("Collision with Hyperspace power up");
+                healthSystem.DisableDamage();
+                scoreSystem.ScaleScoreRate(hyperspaceScoreScale);
+                break;
+            case 1: //Shield
+                Debug.Log("Collision with Shield power up");
+                healthSystem.AddShield(shieldHealth);
+                break;
+            case 2: //2x
+                Debug.Log("Collision with 2x power up");
+                
+                break;
+            case 3: //Star
+                Debug.Log("Collision with Star power up");
+                break;
+            case 4: //Hex
+                Debug.Log("Collision with Hex power up");
+                break;
+            default:
+                Debug.Log("Invalid index given to beginPowerUp()");
+                break;
+        }
+    }
+
+    void endPowerUp(int index){
+        powerUpsActive[index] = false;
+        switch(index) 
+        {
+            case 0:
+                Debug.Log("Ending Hyperspace power up");
+                scoreSystem.ScaleScoreRate(1 / hyperspaceScoreScale);
+                healthSystem.EnableDamage();
+                break;
+            case 1:
+            Debug.Log("Ending Shield power up");
+                healthSystem.RemoveShield();
+                break;
+            case 2:
+                Debug.Log("Ending 2x power up");
+                break;
+            case 3:
+                Debug.Log("Ending Star power up");
+                break;
+            case 4:
+                Debug.Log("Ending Hex power up");
+                break;
+            default:
+                Debug.Log("Invalid index given to endPowerUp()");
+                break;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        for(int i = 0; i < 5; i++){
+            if(powerUpsActive[i]){
+                if(powerUpTimers[i] > 0){
+                    powerUpTimers[i] -= Time.deltaTime;
+                } else {
+                    endPowerUp(i);
+                }
+            }
+        }
+    }
+
+    float GetShieldHealth(){
+        return shieldHealth;
+    }
+}

@@ -70,7 +70,7 @@ public class PowerUpSpawnScript : MonoBehaviour
         GameObject newPowerUp = Instantiate(selectedPowerUp, spawnPos, Quaternion.identity);
 
         // Scale power up
-        newPowerUp.transform.localScale = Vector3.one * 0.75f;
+        newPowerUp.transform.localScale = Vector3.one * 0.1f;
         
         // Random speed
         DebrisMoveScript script = newPowerUp.GetComponent<DebrisMoveScript>();

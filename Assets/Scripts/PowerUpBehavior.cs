@@ -22,8 +22,7 @@ public class PowerUpBehavior : MonoBehaviour
         }
 
         healthSystem = GetComponent<ProbeHealth>();
-        GameObject scoreIncrement = GameObject.Find("Canvas/ScoreIncrement");
-        GameObject debris = GameObject.Find("Canvas/ScoreIncrement");
+        GameObject scoreIncrement = GameObject.Find("Canvas/GameScreenPanel/ScoreIncrement");
         scoreSystem = scoreIncrement.GetComponent<ScoreIncrement>();
     }
 

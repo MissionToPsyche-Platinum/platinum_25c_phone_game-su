@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7323483928432715416}
   - component: {fileID: 7904478609481821128}
+  - component: {fileID: -2673155528282318440}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Untagged
@@ -90,3 +91,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2673155528282318440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891233785764602438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea677cf1b36044d65af2e04933bf3826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'

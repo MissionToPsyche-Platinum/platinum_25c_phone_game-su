@@ -8,30 +8,40 @@ public class MenuNavigationButtons : MonoBehaviour
     [SerializeField] private Button startScreenButton;
     [SerializeField] private Button gameScreenButton;
 
-    public GameObject StartScreenPanel;
-    public GameObject GameScreenPanel;
-    public GameObject SettingsScreenPanel;
+    public GameObject startScreenPanel;
+    public GameObject gameScreenPanel;
+    public GameObject settingsScreenPanel;
+
+    public GameObject checkpointSpawner;
+    private CheckpointSpawnScript checkpointSpawnScript;
 
     private void Awake() {
         //enables all buttons that have been connected
         if (settingsScreenButton != null) {
-            settingsScreenButton.onClick.AddListener(() => SwitchPanels(StartScreenPanel, SettingsScreenPanel));
+            settingsScreenButton.onClick.AddListener(() => SwitchPanels(startScreenPanel, settingsScreenPanel));
         }
         if (startScreenButton) {
-            startScreenButton.onClick.AddListener(() => SwitchPanels(SettingsScreenPanel, StartScreenPanel));
+            startScreenButton.onClick.AddListener(() => SwitchPanels(settingsScreenPanel, startScreenPanel));
         }
         if (gameScreenButton != null) {
-            gameScreenButton.onClick.AddListener(() => SwitchPanels(StartScreenPanel, GameScreenPanel));
+            gameScreenButton.onClick.AddListener(() => StartGame());
         }
     }
 
     void Start(){
-        GameScreenPanel.SetActive(false);
-        SettingsScreenPanel.SetActive(false);
+        checkpointSpawnScript = checkpointSpawner.GetComponent<CheckpointSpawnScript>();
+
+        gameScreenPanel.SetActive(false);
+        settingsScreenPanel.SetActive(false);
     }
 
     private void LoadScene(string newScene) {
         SceneManager.LoadScene(newScene);
+    }
+
+    private void StartGame(){
+        checkpointSpawnScript.resumeMovement(0);
+        SwitchPanels(startScreenPanel, gameScreenPanel);
     }
 
     private void SwitchPanels(GameObject srcPanel, GameObject dstPanel){

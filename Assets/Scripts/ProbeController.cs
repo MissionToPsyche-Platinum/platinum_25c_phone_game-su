@@ -9,6 +9,7 @@ public class ProbeController : MonoBehaviour, IListenToStartGame
     private PowerUpBehavior powerUpSystem;
 
     [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private AudioClip asteroidCollisionSoundClip;
         
     public bool HasCollided { get; private set; } = false;
     private void Awake() {
@@ -27,7 +28,7 @@ public class ProbeController : MonoBehaviour, IListenToStartGame
             //if the collided object is asteroid
             Debug.Log("Collision with asteroid!");
             HasCollided = true;
-
+            SFXController.instance.PlaySoundFXClip(asteroidCollisionSoundClip, transform, 1f);
             // Take damage
             if (healthSystem != null)
             {

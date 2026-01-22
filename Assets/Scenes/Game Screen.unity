@@ -447,11 +447,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 34
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 34
+    m_MinSize: 4
+    m_MaxSize: 45
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1532,7 +1532,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 177958551896923981, guid: 1e56721aa69119442a02b44f099281fa, type: 3}
       propertyPath: labelText
-      value: Main Volume
+      value: Background Music
       objectReference: {fileID: 0}
     - target: {fileID: 1791310802504608825, guid: 1e56721aa69119442a02b44f099281fa, type: 3}
       propertyPath: m_Text

@@ -6,6 +6,9 @@ public class PowerUpBehavior : MonoBehaviour
     private float[] powerUpTimers;
     public float[] powerUpLengths;
 
+    [SerializeField] private AudioClip powerUpStartSoundClip;
+    [SerializeField] private AudioClip powerUpEndSoundClip;
+
     private ProbeHealth healthSystem;
     private ScoreIncrement scoreSystem;
     
@@ -27,6 +30,7 @@ public class PowerUpBehavior : MonoBehaviour
     }
 
     public void beginPowerUp(int index){
+        SFXController.instance.PlaySoundFXClip(powerUpStartSoundClip, transform, 1f);
         powerUpsActive[index] = true;
         powerUpTimers[index] = powerUpLengths[index];
         switch(index) 
@@ -57,6 +61,7 @@ public class PowerUpBehavior : MonoBehaviour
     }
 
     void endPowerUp(int index){
+        SFXController.instance.PlaySoundFXClip(powerUpEndSoundClip, transform, 1f);
         powerUpsActive[index] = false;
         switch(index) 
         {

@@ -15,17 +15,13 @@ public class CheckpointMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!stoppedAtCenter){
+        if(!stoppedAtCenter && !alreadyStopped){
             transform.position = transform.position + (Vector3.down * moveSpeed) * Time.deltaTime;
             Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
             if (screenPos.y < -0.1f) // Slightly below screen
             {
-                Destroy(gameObject);
-            }
-
-            if(!alreadyStopped && transform.position.y <= 0.0f){
-                stoppedAtCenter = true;
                 alreadyStopped = true;
+                Destroy(gameObject);
             }
         }
     }

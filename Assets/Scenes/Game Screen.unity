@@ -483,7 +483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &201524966
 Transform:
   m_ObjectHideFlags: 0
@@ -649,7 +649,6 @@ MonoBehaviour:
   startScreenButton: {fileID: 1063932538}
   gameScreenButton: {fileID: 1346822507}
   buttonSoundClip: {fileID: 8300000, guid: 7f6dfd18f332c473c83920a860e7c0f1, type: 3}
-  probe: {fileID: 908402706}
   startScreenPanel: {fileID: 693361281}
   gameScreenPanel: {fileID: 881652874}
   settingsScreenPanel: {fileID: 1885955886}
@@ -2044,7 +2043,7 @@ RectTransform:
   - {fileID: 1437848278}
   - {fileID: 631130229}
   - {fileID: 112710856}
-  - {fileID: 899328918}
+  - {fileID: 972041586}
   m_Father: {fileID: 785719837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2111,7 +2110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &908402707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2865,7 +2864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1384828551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2912,7 +2911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1420386463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3933,7 +3932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1981466089
 MonoBehaviour:
   m_ObjectHideFlags: 0

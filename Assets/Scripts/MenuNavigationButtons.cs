@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -43,7 +44,7 @@ public class MenuNavigationButtons : MonoBehaviour
 
     private void GameScreenButtonAction(){
         SFXController.instance.PlaySoundFXClip(buttonSoundClip, transform, 1f);
-        checkpointSpawnScript.resumeMovement(0);
+        CallAllStartGameListeners();
         SwitchPanels(startScreenPanel, gameScreenPanel);
     }
 
@@ -52,14 +53,20 @@ public class MenuNavigationButtons : MonoBehaviour
         SwitchPanels(startScreenPanel, settingsScreenPanel);
     }
 
-
-
-    private void LoadScene(string newScene) {
-        SceneManager.LoadScene(newScene);
-    }
-
     private void SwitchPanels(GameObject srcPanel, GameObject dstPanel){
         srcPanel.SetActive(false);
         dstPanel.SetActive(true);
+    }
+    
+    private void CallAllStartGameListeners()
+    {
+        IListenToStartGame[] allGOsThatListenToStartGame =
+            FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                .OfType<IListenToStartGame>().ToArray();
+
+        foreach (IListenToStartGame goThatListensTostartGame in allGOsThatListenToStartGame)
+        {
+            goThatListensTostartGame.OnStartGame();
+        }
     }
 }

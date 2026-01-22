@@ -13,12 +13,12 @@ public class CheckpointSpawnScript : MonoBehaviour, IListenToStartGame
     private void Awake()
     {
         checkpointInstances = new GameObject[numCheckpoints];
+        this.gameObject.SetActive(false);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        spawnCheckpoint(0);
     }
 
     // Update is called once per frame
@@ -41,6 +41,7 @@ public class CheckpointSpawnScript : MonoBehaviour, IListenToStartGame
     public void OnStartGame()
     {
         this.gameObject.SetActive(true);
-        resumeMovement(1);
+        spawnCheckpoint(0);
+        resumeMovement(0);
     }
 }

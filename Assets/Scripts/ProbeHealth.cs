@@ -40,6 +40,7 @@ public class ProbeHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
+            gameOverPanel.gameObject.SetActive(true);
             Debug.Log("Game Over!");
         }
     }

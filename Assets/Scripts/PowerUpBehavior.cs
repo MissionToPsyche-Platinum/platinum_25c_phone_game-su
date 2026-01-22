@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PowerUpBehavior : MonoBehaviour
 {
+    [SerializeField] private ScoreIncrement scoreIncrement;
     private bool[] powerUpsActive;
     private float[] powerUpTimers;
     public float[] powerUpLengths;
@@ -22,7 +23,6 @@ public class PowerUpBehavior : MonoBehaviour
         }
 
         healthSystem = GetComponent<ProbeHealth>();
-        GameObject scoreIncrement = GameObject.Find("Canvas/GameScreenPanel/ScoreIncrement");
         scoreSystem = scoreIncrement.GetComponent<ScoreIncrement>();
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DebrisSpawnScript : MonoBehaviour
+public class DebrisSpawnScript : MonoBehaviour, IListenToStartGame
 {
     public GameObject debris;
     public float minSpawnInterval = 0.3f; // Minimum time between spawns
@@ -51,5 +51,10 @@ public class DebrisSpawnScript : MonoBehaviour
         {
             script.moveSpeed = Random.Range(2.0f, 8.0f);
         }
+    }
+
+    public void OnStartGame()
+    {
+        this.gameObject.SetActive(true);
     }
 }

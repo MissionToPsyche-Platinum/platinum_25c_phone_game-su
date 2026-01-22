@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ProbeController : MonoBehaviour
+public class ProbeController : MonoBehaviour, IListenToStartGame
 {
     private InputSystem_Actions myInputActions;
     private Rigidbody2D myRigidbody2D;
@@ -73,5 +73,10 @@ public class ProbeController : MonoBehaviour
         
         // Debug.Log("Movement vector: " +  myInputActions.Player.Movement.ReadValue<Vector2>());
         myRigidbody2D.linearVelocity = myInputActions.Player.Movement.ReadValue<Vector2>() * moveSpeed;
+    }
+
+    public void OnStartGame()
+    {
+        this.gameObject.SetActive(true);
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,7 +14,6 @@ public class MenuNavigationButtons : MonoBehaviour
     public GameObject gameScreenPanel;
     public GameObject settingsScreenPanel;
 
-    public GameObject checkpointSpawner;
     private CheckpointSpawnScript checkpointSpawnScript;
 
     private void Awake() {
@@ -29,23 +30,26 @@ public class MenuNavigationButtons : MonoBehaviour
     }
 
     void Start(){
-        checkpointSpawnScript = checkpointSpawner.GetComponent<CheckpointSpawnScript>();
-
         gameScreenPanel.SetActive(false);
         settingsScreenPanel.SetActive(false);
     }
 
-    private void LoadScene(string newScene) {
-        SceneManager.LoadScene(newScene);
-    }
-
     private void StartGame(){
-        checkpointSpawnScript.resumeMovement(0);
+        CallOnStartGameOnObjects();
         SwitchPanels(startScreenPanel, gameScreenPanel);
     }
 
     private void SwitchPanels(GameObject srcPanel, GameObject dstPanel){
         srcPanel.SetActive(false);
         dstPanel.SetActive(true);
+    }
+
+    private void CallOnStartGameOnObjects()
+    {
+        IListenToStartGame[] allGOsThatListenToStartGame = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None).OfType<IListenToStartGame>().ToArray();
+        foreach (IListenToStartGame objectListeningToStartGame in allGOsThatListenToStartGame)
+        {
+            objectListeningToStartGame.OnStartGame();
+        }
     }
 }

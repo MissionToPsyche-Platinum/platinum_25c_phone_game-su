@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 
-public class StarSpawnScript : MonoBehaviour
+public class StarSpawnScript : MonoBehaviour, IListenToStartGame
 {
     public GameObject[] starSprites;   //list of all stars that can be spawned
     public int[] starWeights; //chance of each star spawned (Ex: chance of starSprites[i] spawning is starWeights[i] / sum(starWeights))
@@ -90,5 +90,10 @@ public class StarSpawnScript : MonoBehaviour
         {
             script.moveSpeed = moveSpeed;
         }
+    }
+
+    public void OnStartGame()
+    {
+        this.gameObject.SetActive(true);
     }
 }

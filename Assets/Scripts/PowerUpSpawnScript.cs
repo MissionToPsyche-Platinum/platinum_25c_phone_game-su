@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 
-public class PowerUpSpawnScript : MonoBehaviour
+public class PowerUpSpawnScript : MonoBehaviour, IListenToStartGame
 {
     public GameObject[] powerUps;   //list of all power ups that can be spawned
     public int[] powerUpSpawnWeights; //chance of each power up spawned (Ex: chance of powerUps[i] spawning is powerUpSpawnWeights[i] / sum(powerUpSpawnWeights))
@@ -78,5 +78,10 @@ public class PowerUpSpawnScript : MonoBehaviour
         {
             script.moveSpeed = UnityEngine.Random.Range(2.0f, 8.0f);
         }
+    }
+
+    public void OnStartGame()
+    {
+        this.gameObject.SetActive(true);
     }
 }

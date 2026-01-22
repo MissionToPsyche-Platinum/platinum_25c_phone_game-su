@@ -20,6 +20,7 @@ public class ProbeController : MonoBehaviour, IListenToStartGame
 
         healthSystem = GetComponent<ProbeHealth>();
         powerUpSystem = GetComponent<PowerUpBehavior>();
+        this.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

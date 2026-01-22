@@ -15,7 +15,12 @@ public class StarSpawnScript : MonoBehaviour, IListenToStartGame
     private float timer = 0f;
     private float nextSpawnTime;
     private int totalWeight;
-    
+
+    private void Awake()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

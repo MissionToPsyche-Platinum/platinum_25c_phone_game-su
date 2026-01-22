@@ -9,6 +9,7 @@ TagManager:
   - PowerUpHyperspace
   - PowerUpStar
   - PowerUpHex
+  - Coin
   layers:
   - Default
   - TransparentFX

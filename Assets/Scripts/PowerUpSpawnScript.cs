@@ -16,7 +16,7 @@ public class PowerUpSpawnScript : MonoBehaviour, IListenToStartGame
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        this.gameObject.SetActive(false);
         //throw an error if powerUps and powerUpSpawnWeights are different sizes
         if(powerUps.Length != powerUpSpawnWeights.Length){
             throw new Exception("Number of power ups and power up spawn weights do not match.");

@@ -18,7 +18,7 @@ public class CheckpointSpawnScript : MonoBehaviour, IListenToStartGame
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        spawnCheckpoint(0);
     }
 
     // Update is called once per frame
@@ -38,10 +38,7 @@ public class CheckpointSpawnScript : MonoBehaviour, IListenToStartGame
         moveScript.resumeMovement();
     }
 
-    public void OnStartGame()
-    {
-        this.gameObject.SetActive(true);
-        spawnCheckpoint(0);
+    public void OnStartGame(){
         resumeMovement(0);
     }
 }

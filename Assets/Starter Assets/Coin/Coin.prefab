@@ -141,3 +141,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::CoinBehavior
   lifetime: 3
+  value: 1
+  coinSoundClip: {fileID: 8300000, guid: 7aa6f528cee57446884cf415849ba444, type: 3}

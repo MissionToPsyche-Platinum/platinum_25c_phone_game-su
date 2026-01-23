@@ -10,9 +10,12 @@ public class ProbeController : MonoBehaviour, IListenToStartGame
 
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private AudioClip asteroidCollisionSoundClip;
+
+    public int coinAmount;
         
     public bool HasCollided { get; private set; } = false;
     private void Awake() {
+        coinAmount = 0;
         myInputActions = new InputSystem_Actions();
         myRigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -66,6 +69,13 @@ public class ProbeController : MonoBehaviour, IListenToStartGame
         if (collision.gameObject.CompareTag("PowerUpHex"))
         {
             powerUpSystem.beginPowerUp(4);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            CoinBehavior coinBehaviorScript = collision.gameObject.GetComponent<CoinBehavior>();
+            coinAmount += coinBehaviorScript.collect();
             Destroy(collision.gameObject);
         }
     }

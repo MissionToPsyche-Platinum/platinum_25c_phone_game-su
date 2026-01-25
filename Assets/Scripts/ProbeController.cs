@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,8 @@ public class ProbeController : MonoBehaviour, IListenToStartGame
 
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private AudioClip asteroidCollisionSoundClip;
+
+    public event EventHandler<EventArgs> OnTakeDamage;
         
     public bool HasCollided { get; private set; } = false;
     private void Awake() {
@@ -34,6 +37,7 @@ public class ProbeController : MonoBehaviour, IListenToStartGame
             if (healthSystem != null)
             {
                 healthSystem.TakeDamage(1);
+                OnTakeDamage?.Invoke(this, EventArgs.Empty);
             }
             // Destroy the debris/asteroid
             Destroy(collision.gameObject);

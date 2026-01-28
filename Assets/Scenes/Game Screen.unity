@@ -2240,6 +2240,8 @@ GameObject:
   - component: {fileID: 908402711}
   - component: {fileID: 908402712}
   - component: {fileID: 908402713}
+  - component: {fileID: 908402714}
+  - component: {fileID: 908402715}
   m_Layer: 0
   m_Name: Probe
   m_TagString: Untagged
@@ -2433,6 +2435,35 @@ MonoBehaviour:
   - 5
   powerUpStartSoundClip: {fileID: 8300000, guid: ac92d166844444a008a978f865f520ca, type: 3}
   powerUpEndSoundClip: {fileID: 8300000, guid: 36cbf5200f423450e99bd827fdd52cf3, type: 3}
+--- !u!114 &908402714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908402706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ba1f819b0ba8244b357d4e72dc8254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::ProbeComponentController
+  myProbeComponentDisablers:
+  - {fileID: 908402715}
+  myProbeController: {fileID: 908402707}
+  chanceToDisableComponentOnDamage: 0.3
+--- !u!114 &908402715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908402706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c353ffa898f96504ea669742a7b8cd70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::EngineComponentDisabler
+  weight: 3
 --- !u!1 &972041585
 GameObject:
   m_ObjectHideFlags: 0

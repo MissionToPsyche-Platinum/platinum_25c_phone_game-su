@@ -11,6 +11,10 @@ public class ProbeController : MonoBehaviour, IListenToStartGame
 
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private AudioClip asteroidCollisionSoundClip;
+
+    public event EventHandler<EventArgs> OnTakeDamage;
+
+    public int coinAmount = 0;
         
     public bool HasCollided { get; private set; } = false;
     private void Awake() {

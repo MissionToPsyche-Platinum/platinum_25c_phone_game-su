@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class CoinSpawner : MonoBehaviour, IListenToStartGame
+public class CoinSpawner : MonoBehaviour
 {
     public GameObject coinPrefab;
     public float minSpawnInterval = 3f;  
@@ -17,13 +17,15 @@ public class CoinSpawner : MonoBehaviour, IListenToStartGame
 
     private void Awake()
     {
-        this.gameObject.SetActive(false);
     }
 
     void Start()
     {
         nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+        this.gameObject.SetActive(false);
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
+
 
     void Update()
     {
@@ -50,7 +52,7 @@ public class CoinSpawner : MonoBehaviour, IListenToStartGame
         Instantiate(coinPrefab, spawnPos, Quaternion.identity);
     }
 
-    public void OnStartGame()
+    private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
     }

@@ -44,8 +44,8 @@ public class MenuNavigationButtons : MonoBehaviour
 
     private void GameScreenButtonAction(){
         SFXController.instance.PlaySoundFXClip(buttonSoundClip, transform, 1f);
-        CallAllStartGameListeners();
         SwitchPanels(startScreenPanel, gameScreenPanel);
+        GameStateManager.Instance.StartPlaying();
     }
 
     private void SettingsScreenButtonAction(){
@@ -56,17 +56,5 @@ public class MenuNavigationButtons : MonoBehaviour
     private void SwitchPanels(GameObject srcPanel, GameObject dstPanel){
         srcPanel.SetActive(false);
         dstPanel.SetActive(true);
-    }
-    
-    private void CallAllStartGameListeners()
-    {
-        IListenToStartGame[] allGOsThatListenToStartGame =
-            FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None)
-                .OfType<IListenToStartGame>().ToArray();
-
-        foreach (IListenToStartGame goThatListensTostartGame in allGOsThatListenToStartGame)
-        {
-            goThatListensTostartGame.OnStartGame();
-        }
     }
 }

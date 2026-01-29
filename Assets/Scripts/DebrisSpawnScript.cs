@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class DebrisSpawnScript : MonoBehaviour, IListenToStartGame
+public class DebrisSpawnScript : MonoBehaviour
 {
     public GameObject debris;
     public float minSpawnInterval = 0.3f; // Minimum time between spawns
@@ -12,7 +14,10 @@ public class DebrisSpawnScript : MonoBehaviour, IListenToStartGame
     void Start()
     {
         this.gameObject.SetActive(false);
+        
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -53,7 +58,7 @@ public class DebrisSpawnScript : MonoBehaviour, IListenToStartGame
         }
     }
 
-    public void OnStartGame()
+    private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
     }

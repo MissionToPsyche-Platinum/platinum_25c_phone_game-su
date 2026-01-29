@@ -17,19 +17,7 @@ public class GameOverPanelController : MonoBehaviour
     public void RestartGameButtonClicked()
     {
         gameOverPanel.SetActive(false);
-        CallAllStartGameListeners();
-    }
-
-    private void CallAllStartGameListeners()
-    {
-        IListenToStartGame[] allGOsThatListenToStartGame =
-            FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None)
-                .OfType<IListenToStartGame>().ToArray();
-
-        foreach (IListenToStartGame goThatListensTostartGame in allGOsThatListenToStartGame)
-        {
-            goThatListensTostartGame.OnStartGame();
-        }
+        GameStateManager.Instance.StartPlaying();
     }
 
     public void Show()

@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 
-public class StarSpawnScript : MonoBehaviour, IListenToStartGame
+public class StarSpawnScript : MonoBehaviour
 {
     public GameObject[] starSprites;   //list of all stars that can be spawned
     public int[] starWeights; //chance of each star spawned (Ex: chance of starSprites[i] spawning is starWeights[i] / sum(starWeights))
@@ -16,14 +16,10 @@ public class StarSpawnScript : MonoBehaviour, IListenToStartGame
     private float nextSpawnTime;
     private int totalWeight;
 
-    private void Awake()
-    {
-
-    }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
 
         //throw an error if powerUps and powerUpSpawnWeights are different sizes
         if(starSprites.Length != starWeights.Length){
@@ -96,9 +92,10 @@ public class StarSpawnScript : MonoBehaviour, IListenToStartGame
             script.moveSpeed = moveSpeed;
         }
     }
-
-    public void OnStartGame()
+    private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
     }
+
+
 }

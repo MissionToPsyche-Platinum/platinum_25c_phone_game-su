@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ProbeController : MonoBehaviour, IListenToStartGame
+public class ProbeController : MonoBehaviour
 {
     private InputSystem_Actions myInputActions;
     private Rigidbody2D myRigidbody2D;
@@ -26,7 +26,12 @@ public class ProbeController : MonoBehaviour, IListenToStartGame
 
         healthSystem = GetComponent<ProbeHealth>();
         powerUpSystem = GetComponent<PowerUpBehavior>();
+    }
+
+    private void Start()
+    {
         this.gameObject.SetActive(false);
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -91,8 +96,9 @@ public class ProbeController : MonoBehaviour, IListenToStartGame
         myRigidbody2D.linearVelocity = myInputActions.Player.Movement.ReadValue<Vector2>() * moveSpeed;
     }
 
-    public void OnStartGame()
+    private void OnStartPlaying(object sender, EventArgs e)
     {
+        Debug.Log("started");
         this.gameObject.SetActive(true);
     }
 }

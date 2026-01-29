@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class CheckpointSpawnScript : MonoBehaviour, IListenToStartGame
+public class CheckpointSpawnScript : MonoBehaviour
 {
 
     public GameObject[] checkpoints;
@@ -19,12 +19,7 @@ public class CheckpointSpawnScript : MonoBehaviour, IListenToStartGame
     void Start()
     {
         spawnCheckpoint(0);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
     public void spawnCheckpoint(int index){
@@ -37,8 +32,8 @@ public class CheckpointSpawnScript : MonoBehaviour, IListenToStartGame
         CheckpointMoveScript moveScript = checkpointInstances[index].GetComponent<CheckpointMoveScript>();
         moveScript.resumeMovement();
     }
-
-    public void OnStartGame(){
+    private void OnStartPlaying(object sender, EventArgs e)
+    {
         resumeMovement(0);
     }
 }

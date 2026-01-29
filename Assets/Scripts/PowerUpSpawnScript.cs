@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 
-public class PowerUpSpawnScript : MonoBehaviour, IListenToStartGame
+public class PowerUpSpawnScript : MonoBehaviour
 {
     public GameObject[] powerUps;   //list of all power ups that can be spawned
     public int[] powerUpSpawnWeights; //chance of each power up spawned (Ex: chance of powerUps[i] spawning is powerUpSpawnWeights[i] / sum(powerUpSpawnWeights))
@@ -27,6 +27,8 @@ public class PowerUpSpawnScript : MonoBehaviour, IListenToStartGame
         for(int i = 0; i < powerUpSpawnWeights.Length; i++){
             totalWeight += powerUpSpawnWeights[i];
         }
+        
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
     // Update is called once per frame
@@ -79,8 +81,8 @@ public class PowerUpSpawnScript : MonoBehaviour, IListenToStartGame
             script.moveSpeed = UnityEngine.Random.Range(2.0f, 8.0f);
         }
     }
-
-    public void OnStartGame()
+    
+    private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
     }

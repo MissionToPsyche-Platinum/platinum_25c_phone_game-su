@@ -100,5 +100,6 @@ public class ProbeController : MonoBehaviour
     {
         Debug.Log("started");
         this.gameObject.SetActive(true);
+        
     }
 }

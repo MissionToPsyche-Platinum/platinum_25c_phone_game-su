@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +8,14 @@ public class ScoreIncrement : MonoBehaviour
     public float scorePerSecond = 10f; // Modify to change score per second
     
     private float currentScore;
+    [SerializeField] private float scoreMultiplier = 1f;
     
     [SerializeField] private int finalScore; // Can be grabbed by other sections
+
+    private void Start()
+    {
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+    }
 
     public int FinalScore
     {
@@ -17,12 +24,22 @@ public class ScoreIncrement : MonoBehaviour
 
     void Update()
     {
-        currentScore += scorePerSecond * Time.deltaTime;
+        currentScore += scorePerSecond * Time.deltaTime * scoreMultiplier;
         finalScore = Mathf.FloorToInt(currentScore);
         scoreText.text = "Score: " + finalScore.ToString();
     }
 
     public void ScaleScoreRate(float scalar){
         scorePerSecond *= scalar;
+    }
+
+    public void SetScoreMultiplier(float scoreScalar)
+    {
+        scoreMultiplier = scoreScalar;
+    }
+    
+    private void OnStartPlaying(object sender, EventArgs e)
+    {
+        SetScoreMultiplier(1f);
     }
 }

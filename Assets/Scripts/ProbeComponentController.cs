@@ -4,7 +4,7 @@ using System.Linq;
 
 public class ProbeComponentController : MonoBehaviour
 {
-    [SerializeField] private List<ProbeComponentDisabler> myProbeComponentDisablers;
+    [SerializeField] private List<ProbeComponent> myProbeComponentDisablers;
     [SerializeField] private ProbeController myProbeController;
     [SerializeField] private float chanceToDisableComponentOnDamage = 0.3f;
 
@@ -24,7 +24,7 @@ public class ProbeComponentController : MonoBehaviour
     public void DisableRandomComponent()
     {
         //Get all candidates that are not disabled and have a positive weight
-        List<ProbeComponentDisabler> candidates = myProbeComponentDisablers.
+        List<ProbeComponent> candidates = myProbeComponentDisablers.
                 Where(d => !d.GetIsDisabled() && d.GetWeight() > 0f).ToList();
 
         if (candidates.Count == 0)
@@ -40,7 +40,7 @@ public class ProbeComponentController : MonoBehaviour
         float cumulative = 0f;
 
         //Randomly select a candidate based on weight
-        foreach (ProbeComponentDisabler candidate in candidates)
+        foreach (ProbeComponent candidate in candidates)
         {
             cumulative += candidate.GetWeight();
             if (randomTargetWeight <= cumulative)

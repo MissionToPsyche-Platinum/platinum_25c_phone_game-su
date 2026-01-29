@@ -1,13 +1,18 @@
 using UnityEngine;
 
 //Base class for all probe components
-public class ProbeComponentDisabler : MonoBehaviour
+public class ProbeComponent : MonoBehaviour
 {
     private bool isDisabled = false;
     [SerializeField] private float weight;
     protected virtual void DisableComponent()
     {
         isDisabled = true;
+    }
+
+    protected virtual void EnableComponent()
+    {
+        isDisabled = false;
     }
 
     public void TryDisable()

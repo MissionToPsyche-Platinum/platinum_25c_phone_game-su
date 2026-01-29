@@ -1517,6 +1517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ad3fc30e3e05547a348af337f92a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::GameStateManager
+  currentGameState: 0
+  gameStage: 0
 --- !u!4 &602257834
 Transform:
   m_ObjectHideFlags: 0
@@ -1578,6 +1580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScript::ScoreIncrement
   scoreText: {fileID: 112710857}
   scorePerSecond: 10
+  scoreMultiplier: 1
   finalScore: 0
 --- !u!1 &693361281
 GameObject:
@@ -2510,6 +2513,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::EngineComponentDisabler
   weight: 3
+  myScoreIncrement: {fileID: 631130230}
+  engineBreakSoundEffect: {fileID: 8300000, guid: 900e031307f6b7846acddcbdc9d427b5, type: 3}
 --- !u!1 &972041585
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,6 +39,5 @@ public class JoystickMover : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnPointerUp(PointerEventData eventData)
     {
         ExecuteEvents.Execute(joystickKnob.gameObject, eventData, ExecuteEvents.pointerUpHandler);
-        joystickBase.anchoredPosition = defaultPosition;
     }
 }

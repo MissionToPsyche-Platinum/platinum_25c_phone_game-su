@@ -549,7 +549,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.5286748}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1699653023}
   m_Father: {fileID: 1437848278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2263,6 +2264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   moveSpeed: 4
   asteroidCollisionSoundClip: {fileID: 8300000, guid: 97c7e8fc768c84a0c8d2282da7399e46, type: 3}
+  coinAmount: 0
 --- !u!212 &908402708
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3140,13 +3142,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 265588174}
-  - {fileID: 1699653023}
   m_Father: {fileID: 881652875}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -641.00836}
+  m_SizeDelta: {x: 0, y: -1282.0167}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1437848279
 MonoBehaviour:
@@ -3160,7 +3161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26048f0aa9c743745b8a622e53e30fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::JoystickSpawner
-  canvasRect: {fileID: 785719837}
+  canvasRect: {fileID: 1437848278}
   joystickBase: {fileID: 265588174}
   joystickKnob: {fileID: 1699653026}
 --- !u!114 &1437848280
@@ -3393,14 +3394,14 @@ RectTransform:
   m_GameObject: {fileID: 1699653022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6999998, y: 0.6999998, z: 0.5286748}
+  m_LocalScale: {x: 0.6999998, y: 0.6999998, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1437848278}
+  m_Father: {fileID: 265588174}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 398.00003, y: -255.99997}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0.000061035156}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1699653024

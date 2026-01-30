@@ -31,6 +31,11 @@ public class PowerUpSpawnScript : MonoBehaviour
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+    }
+
     // Update is called once per frame
     void Update()
     {

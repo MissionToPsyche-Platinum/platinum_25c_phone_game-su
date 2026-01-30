@@ -22,8 +22,6 @@ public class ProbeController : MonoBehaviour
         myInputActions = new InputSystem_Actions();
         myRigidbody2D = GetComponent<Rigidbody2D>();
 
-        myInputActions.Player.Enable();
-
         healthSystem = GetComponent<ProbeHealth>();
         powerUpSystem = GetComponent<PowerUpBehavior>();
     }
@@ -33,6 +31,22 @@ public class ProbeController : MonoBehaviour
         this.gameObject.SetActive(false);
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+    }
+
+    private void OnEnable()
+    {
+        myInputActions.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        myInputActions.Player.Disable();
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.GetComponent<AsteroidController>() != null)

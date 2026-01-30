@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 public class ProbeComponentController : MonoBehaviour
 {
@@ -11,6 +13,11 @@ public class ProbeComponentController : MonoBehaviour
     private void Start()
     {
         myProbeController.OnTakeDamage += HandleProbeTakeDamage;
+    }
+
+    private void OnDestroy()
+    {
+        myProbeController.OnTakeDamage -= HandleProbeTakeDamage;
     }
 
     private void HandleProbeTakeDamage(object sender, System.EventArgs e)

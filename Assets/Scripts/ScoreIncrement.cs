@@ -17,6 +17,11 @@ public class ScoreIncrement : MonoBehaviour
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+    }
+
     public int FinalScore
     {
         get { return finalScore; }

@@ -22,6 +22,11 @@ public class CheckpointSpawnScript : MonoBehaviour
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+    }
+
     public void spawnCheckpoint(int index){
         Vector3 spawnPos = new Vector3(0.0f, 0.00f, checkpointZ);
         checkpointInstances[index] = Instantiate(checkpoints[index], spawnPos, Quaternion.identity);

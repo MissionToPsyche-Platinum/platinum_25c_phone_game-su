@@ -44,6 +44,11 @@ public class StarSpawnScript : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+    }
+
     // Update is called once per frame
     void Update()
     {

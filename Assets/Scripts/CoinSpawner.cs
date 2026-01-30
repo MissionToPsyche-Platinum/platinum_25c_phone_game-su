@@ -26,6 +26,11 @@ public class CoinSpawner : MonoBehaviour
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+    }
+
 
     void Update()
     {

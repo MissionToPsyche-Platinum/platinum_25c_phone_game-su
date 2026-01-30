@@ -13,9 +13,9 @@ public class EngineComponent : ProbeComponent
         Debug.Log("Engine component disabled! Score increases slower");
     }
 
-    protected override void EnableComponent()
+    protected override void RepairComponent()
     {
-        base.EnableComponent();
+        base.RepairComponent();
         myScoreIncrement.SetScoreMultiplier(1f);
         Debug.Log("Engine component enabled! Score increases normally");
     }

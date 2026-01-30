@@ -1795,81 +1795,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &615112942
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 615112943}
-  - component: {fileID: 615112945}
-  - component: {fileID: 615112944}
-  m_Layer: 5
-  m_Name: CrackedScreenImage (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &615112943
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615112942}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1956583460}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1353, y: 312}
-  m_SizeDelta: {x: 2780.118, y: 797.279}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &615112944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615112942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.09803922}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -4530590280073455602, guid: e936d2e8bf6573349ba71e49e80ca979, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &615112945
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615112942}
-  m_CullTransparentMesh: 1
 --- !u!1 &631130228
 GameObject:
   m_ObjectHideFlags: 0
@@ -2522,7 +2447,6 @@ RectTransform:
   - {fileID: 1885955887}
   - {fileID: 1923588364}
   - {fileID: 1345099209}
-  - {fileID: 1956583460}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2975,7 +2899,7 @@ MonoBehaviour:
   - {fileID: 908402715}
   - {fileID: 908402716}
   myProbeController: {fileID: 908402707}
-  chanceToDisableComponentOnDamage: 0.3
+  chanceToDisableComponentOnDamage: 1
 --- !u!114 &908402715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2988,7 +2912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c353ffa898f96504ea669742a7b8cd70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::EngineComponentDisabler
-  weight: 5
+  weight: 0
   myScoreIncrement: {fileID: 631130230}
   engineBreakSoundEffect: {fileID: 8300000, guid: 900e031307f6b7846acddcbdc9d427b5, type: 3}
 --- !u!114 &908402716
@@ -3003,9 +2927,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ad5bc73522031438d0edc3956048f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::ScreenComponent
-  weight: 5
-  crackedScreenPanel: {fileID: 1956583459}
-  crackedScreenSoundEffect: {fileID: 8300000, guid: 7f5d64ffe1699794282c3d4240fc20e0, type: 3}
+  weight: 100
+  crackedScreenPanel: {fileID: 0}
 --- !u!1 &972041585
 GameObject:
   m_ObjectHideFlags: 0
@@ -4902,42 +4825,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScript::GameOverPanelController
   restartGameButton: {fileID: 2139568965}
   gameOverPanel: {fileID: 1923588363}
---- !u!1 &1956583459
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1956583460}
-  m_Layer: 5
-  m_Name: CrackedScreenOverlay
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1956583460
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956583459}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 615112943}
-  m_Father: {fileID: 785719837}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1966239433
 GameObject:
   m_ObjectHideFlags: 0

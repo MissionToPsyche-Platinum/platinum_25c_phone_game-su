@@ -10,7 +10,7 @@ public class ProbeComponent : MonoBehaviour
         isDisabled = true;
     }
 
-    protected virtual void EnableComponent()
+    protected virtual void RepairComponent()
     {
         isDisabled = false;
     }

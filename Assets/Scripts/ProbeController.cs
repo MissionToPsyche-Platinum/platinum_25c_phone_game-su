@@ -96,6 +96,12 @@ public class ProbeController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            GameStateManager.Instance.AddCoins(1);
+            Destroy(collision.gameObject);
+        }
+
         if (collision.gameObject.CompareTag("PowerUpHyperspace"))
         {
             powerUpSystem.beginPowerUp(0);

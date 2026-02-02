@@ -22,6 +22,7 @@ public class GameStateManager : MonoBehaviour
 
     public GameState currentGameState = GameState.None;
     public GameStage gameStage = GameStage.None;
+    public int totalCoins = 0;
     public event EventHandler<EventArgs> OnStartPlaying;
 
     private void Awake()
@@ -39,5 +40,15 @@ public class GameStateManager : MonoBehaviour
     {
         OnStartPlaying?.Invoke(this, EventArgs.Empty);
         currentGameState = GameState.Playing;
+    }
+
+    public void AddCoins(int amount)
+    {
+        totalCoins += amount;
+    }
+
+    public int GetCoins()
+    {
+        return totalCoins;
     }
 }

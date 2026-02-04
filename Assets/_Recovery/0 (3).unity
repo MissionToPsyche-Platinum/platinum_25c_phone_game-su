@@ -1730,11 +1730,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2148412142962102433, guid: 57970c6bb711ec24b8d98424b1806f3b, type: 3}
   m_PrefabInstance: {fileID: 542875137}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &542875139 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2787556212050310887, guid: 57970c6bb711ec24b8d98424b1806f3b, type: 3}
-  m_PrefabInstance: {fileID: 542875137}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &546263884
 GameObject:
   m_ObjectHideFlags: 0
@@ -3708,7 +3703,6 @@ MonoBehaviour:
   weight: 5
   myScoreIncrement: {fileID: 631130230}
   engineBreakSoundEffect: {fileID: 8300000, guid: 900e031307f6b7846acddcbdc9d427b5, type: 3}
-  smokeEffect: {fileID: 542875139}
 --- !u!114 &908402716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6148,7 +6142,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1956583460}
-  - component: {fileID: 1956583461}
   m_Layer: 5
   m_Name: CrackedScreenOverlay
   m_TagString: Untagged
@@ -6176,18 +6169,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!225 &1956583461
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956583459}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &1966239433
 GameObject:
   m_ObjectHideFlags: 0

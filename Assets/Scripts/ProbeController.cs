@@ -165,4 +165,9 @@ public class ProbeController : MonoBehaviour
         this.gameObject.SetActive(true);
         
     }
+
+    public void SetMoveSpeed(float newMoveSpeed)
+    {
+        moveSpeed = newMoveSpeed;
+    }
 }

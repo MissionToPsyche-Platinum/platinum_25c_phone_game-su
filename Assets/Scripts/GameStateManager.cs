@@ -17,7 +17,10 @@ public class GameStateManager : MonoBehaviour
     public enum GameStage
     {
         None,
-        Earth
+        Earth,
+        Moon,
+        Mars,
+        Psyche
     }
 
     public GameState currentGameState = GameState.None;

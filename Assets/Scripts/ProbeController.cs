@@ -16,7 +16,7 @@ public class ProbeController : MonoBehaviour
     [SerializeField] private float extraPadding = 0.1f; // Adjust value to keep entire probe from going offscreen
 
     public event EventHandler<EventArgs> OnTakeDamage;
-    public event EventHandler<EventArgs> OnCoinCollected ;
+    public event EventHandler<EventArgs> OnCoinCollected;
 
     public int coinAmount = 0;
         

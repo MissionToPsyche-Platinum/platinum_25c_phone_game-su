@@ -9,6 +9,8 @@ public class ScoreIncrement : MonoBehaviour
     
     private float currentScore;
     [SerializeField] private float scoreMultiplier = 1f;
+
+    private bool scoreUpdate = true;
     
     [SerializeField] private int finalScore; // Can be grabbed by other sections
 
@@ -29,9 +31,11 @@ public class ScoreIncrement : MonoBehaviour
 
     void Update()
     {
-        currentScore += scorePerSecond * Time.deltaTime * scoreMultiplier;
-        finalScore = Mathf.FloorToInt(currentScore);
-        scoreText.text = "Score: " + finalScore.ToString();
+        if(scoreUpdate){
+            currentScore += scorePerSecond * Time.deltaTime * scoreMultiplier;
+            finalScore = Mathf.FloorToInt(currentScore);
+            scoreText.text = "Score: " + finalScore.ToString();
+        }
     }
 
     public void ScaleScoreRate(float scalar){
@@ -52,5 +56,15 @@ public class ScoreIncrement : MonoBehaviour
     public float GetCurrentScore()
     {
         return currentScore;
+    }
+
+    public void PauseScore()
+    {
+        scoreUpdate = false;
+    }
+
+    public void ResumeScore()
+    {
+        scoreUpdate = true;
     }
 }

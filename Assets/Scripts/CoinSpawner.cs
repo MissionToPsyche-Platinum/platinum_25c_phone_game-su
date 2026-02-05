@@ -16,6 +16,8 @@ public class CoinSpawner : MonoBehaviour
     private float nextSpawnTime;
     private float spawnRateMultiplier = 1f;
 
+    private bool spawnerActive = true;
+
     private void Awake()
     {
     }
@@ -35,13 +37,15 @@ public class CoinSpawner : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
+        if(spawnerActive){
+            timer += Time.deltaTime;
 
-        if (timer >= nextSpawnTime / spawnRateMultiplier)
-        {
-            SpawnCoin();
-            timer = 0f;
-            nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+            if (timer >= nextSpawnTime / spawnRateMultiplier)
+            {
+                SpawnCoin();
+                timer = 0f;
+                nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+            }
         }
     }
 
@@ -56,6 +60,16 @@ public class CoinSpawner : MonoBehaviour
 
         
         Instantiate(coinPrefab, spawnPos, Quaternion.identity);
+    }
+
+    public void DisableSpawning()
+    {
+        spawnerActive = false;
+    }
+
+    public void EnableSpawning()
+    {
+        spawnerActive = true;
     }
 
     public void SetSpawnRateMultiplier(float newSpawnRateMultiplier){

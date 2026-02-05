@@ -6,10 +6,13 @@ public class CheckpointMoveScript : MonoBehaviour
     bool alreadyStopped = false;
     float moveSpeed = 2.0f;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        Debug.Log("stoppedAtCenter: " + stoppedAtCenter);
+        Debug.Log("alreadyStopped: " + alreadyStopped);
+        Debug.Log("Position: " + transform.position);
     }
 
     // Update is called once per frame
@@ -28,6 +31,8 @@ public class CheckpointMoveScript : MonoBehaviour
                 stoppedAtCenter = true;
             }
         }
+
+
     }
 
 

@@ -12,6 +12,8 @@ public class PowerUpSpawnScript : MonoBehaviour
     private float timer = 0f;
     private float nextSpawnTime;
     private int totalWeight;
+
+    private bool spawnerActive = true;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,16 +41,28 @@ public class PowerUpSpawnScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        
-        if (timer >= nextSpawnTime)
-        {
-            SpawnPowerUp();
-            timer = 0f;
+        if(spawnerActive){
+            timer += Time.deltaTime;
             
-            nextSpawnTime = UnityEngine.Random.Range(minSpawnInterval, maxSpawnInterval);
+            if (timer >= nextSpawnTime)
+            {
+                SpawnPowerUp();
+                timer = 0f;
+                
+                nextSpawnTime = UnityEngine.Random.Range(minSpawnInterval, maxSpawnInterval);
+            }
         }
         
+    }
+
+    public void DisableSpawning()
+    {
+        spawnerActive = false;
+    }
+
+    public void EnableSpawning()
+    {
+        spawnerActive = true;
     }
     
     void SpawnPowerUp()

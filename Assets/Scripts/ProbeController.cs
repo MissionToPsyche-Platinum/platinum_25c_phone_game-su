@@ -16,6 +16,7 @@ public class ProbeController : MonoBehaviour
     [SerializeField] private float extraPadding = 0.1f; // Adjust value to keep entire probe from going offscreen
 
     public event EventHandler<EventArgs> OnTakeDamage;
+    public event EventHandler<EventArgs> OnCoinCollected ;
 
     public int coinAmount = 0;
         
@@ -136,6 +137,7 @@ public class ProbeController : MonoBehaviour
         {
             CoinBehavior coinBehaviorScript = collision.gameObject.GetComponent<CoinBehavior>();
             coinAmount += coinBehaviorScript.collect();
+            OnCoinCollected?.Invoke(this, EventArgs.Empty);
             Destroy(collision.gameObject);
         }
     }
@@ -163,7 +165,6 @@ public class ProbeController : MonoBehaviour
     {
         Debug.Log("started");
         this.gameObject.SetActive(true);
-        
     }
 
     public void SetMoveSpeed(float newMoveSpeed)

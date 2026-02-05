@@ -9,13 +9,16 @@ public class MenuNavigationButtons : MonoBehaviour
     [SerializeField] private Button startScreenButton;
     [SerializeField] private Button gameScreenButton;
     [SerializeField] private Button shopScreenButton;
+    [SerializeField] private Button statsScreenButton;
     [SerializeField] private Button backFromShopButton;
+    [SerializeField] private Button backFromStatsButton;
     [SerializeField] private AudioClip buttonSoundClip;
 
     public GameObject startScreenPanel;
     public GameObject gameScreenPanel;
     public GameObject settingsScreenPanel;
     public GameObject shopScreenPanel;
+    public GameObject statsScreenPanel;
     public GameObject checkpointSpawner;
 
     private CheckpointSpawnScript checkpointSpawnScript;
@@ -43,6 +46,15 @@ public class MenuNavigationButtons : MonoBehaviour
         {
             backFromShopButton.onClick.AddListener(() => BackFromShopAction());
         }
+        if (statsScreenButton != null)
+        {
+            statsScreenButton.onClick.AddListener((() => StatsScreenButtonAction()));
+        }
+
+        if (backFromStatsButton != null)
+        {
+            backFromStatsButton.onClick.AddListener((() => BackFromStatsAction()));
+        }
     }
 
     void Start()
@@ -54,6 +66,18 @@ public class MenuNavigationButtons : MonoBehaviour
         shopScreenPanel.SetActive(false);
     }
 
+    private void StatsScreenButtonAction()
+    {
+        SFXController.instance.PlaySoundFXClip(buttonSoundClip, transform, 1f);
+        SwitchPanels(startScreenPanel, statsScreenPanel);
+    }
+
+    private void BackFromStatsAction()
+    {
+        SFXController.instance.PlaySoundFXClip(buttonSoundClip, transform, 1f);
+        SwitchPanels(statsScreenPanel, startScreenPanel);
+    }
+    
     private void StartScreenButtonAction()
     {
         SFXController.instance.PlaySoundFXClip(buttonSoundClip, transform, 1f);

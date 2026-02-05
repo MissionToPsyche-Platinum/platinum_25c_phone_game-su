@@ -9,6 +9,8 @@ public class DebrisSpawnScript : MonoBehaviour
     public float maxSpawnInterval = 1.0f; // Maximum time between spawns
     private float timer = 0f;
     private float nextSpawnTime;
+
+    public event EventHandler<EventArgs> OnDebrisSpawned;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,6 +52,7 @@ public class DebrisSpawnScript : MonoBehaviour
         
         // Spawn the debris
         GameObject newDebris = Instantiate(debris, spawnPos, Quaternion.identity);
+        OnDebrisSpawned?.Invoke(this, EventArgs.Empty);
         
         // Random size
         float randomScale = Random.Range(0.3f, 2.0f);

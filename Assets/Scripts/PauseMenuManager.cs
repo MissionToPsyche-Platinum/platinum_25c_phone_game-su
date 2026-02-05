@@ -77,7 +77,7 @@ public class PauseMenuManager : MonoBehaviour
         }
 
         // Takes you back to the game screen (change later if main menu screen is added)
-        SceneManager.LoadScene("Game Screen");
+        GameStateManager.Instance.StopPlaying();
    }
 
     // Optional: Handle pause input action (for keyboard/gamepad)

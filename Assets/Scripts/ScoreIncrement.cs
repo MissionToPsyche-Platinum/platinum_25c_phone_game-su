@@ -45,6 +45,12 @@ public class ScoreIncrement : MonoBehaviour
     
     private void OnStartPlaying(object sender, EventArgs e)
     {
+        currentScore = 0;
         SetScoreMultiplier(1f);
+    }
+
+    public float GetCurrentScore()
+    {
+        return currentScore;
     }
 }

@@ -7185,7 +7185,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8687b823a4941e689cd2064739683d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::CheckpointSpawnScript
-  scoreIncrement: {fileID: 0}
+  scoreIncrement: {fileID: 631130228}
+  debrisSpawner: {fileID: 1384828550}
+  coinSpawner: {fileID: 1480618450}
+  powerUpSpawner: {fileID: 201524964}
   checkpoints:
   - {fileID: 3891233785764602438, guid: 3519526d962fb4371aba2e4054f6e61e, type: 3}
   - {fileID: 7361094799875311414, guid: 43dd97bb3690d4f9485a2dcd42c56d3b, type: 3}

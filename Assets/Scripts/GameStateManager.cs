@@ -23,6 +23,7 @@ public class GameStateManager : MonoBehaviour
     public GameState currentGameState = GameState.None;
     public GameStage gameStage = GameStage.None;
     public int totalCoins = 0;
+    private int coinMultiplier = 1;
     public event EventHandler<EventArgs> OnStartPlaying;
     public event EventHandler<EventArgs> OnStopPlaying;
 
@@ -51,7 +52,12 @@ public class GameStateManager : MonoBehaviour
 
     public void AddCoins(int amount)
     {
-        totalCoins += amount;
+        totalCoins += coinMultiplier * amount;
+    }
+
+    public void SetCoinMultiplier(int coinMultiplierVal)
+    {
+        coinMultiplier = coinMultiplierVal;
     }
 
     public int GetCoins()

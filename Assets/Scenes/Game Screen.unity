@@ -4901,6 +4901,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   scoreIncrement: {fileID: 631130230}
+  debrisSpawner: {fileID: 1384828550}
+  coinSpawner: {fileID: 1480618450}
   powerUpLengths:
   - 5
   - 5
@@ -10679,8 +10681,8 @@ SceneRoots:
   - {fileID: 1768696774}
   - {fileID: 1086168160}
   - {fileID: 1480618451}
-  - {fileID: 1384828552}
   - {fileID: 201524966}
+  - {fileID: 1384828552}
   - {fileID: 908402709}
   - {fileID: 602257834}
   - {fileID: 580264466}

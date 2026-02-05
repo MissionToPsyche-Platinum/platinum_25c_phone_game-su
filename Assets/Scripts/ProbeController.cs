@@ -99,7 +99,8 @@ public class ProbeController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Coin"))
         {
-            GameStateManager.Instance.AddCoins(1);
+            CoinBehavior coinScript = collision.gameObject.GetComponent<CoinBehavior>();
+            GameStateManager.Instance.AddCoins(coinScript.collect());
             Destroy(collision.gameObject);
         }
 
@@ -130,14 +131,6 @@ public class ProbeController : MonoBehaviour
         if (collision.gameObject.CompareTag("PowerUpHex"))
         {
             powerUpSystem.beginPowerUp(4);
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("Coin"))
-        {
-            CoinBehavior coinBehaviorScript = collision.gameObject.GetComponent<CoinBehavior>();
-            coinAmount += coinBehaviorScript.collect();
-            OnCoinCollected?.Invoke(this, EventArgs.Empty);
             Destroy(collision.gameObject);
         }
     }

@@ -11,6 +11,7 @@ public class DebrisSpawnScript : MonoBehaviour
     private float nextSpawnTime;
 
     public event EventHandler<EventArgs> OnDebrisSpawned;
+    private bool spawnerActive = true;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,14 +30,17 @@ public class DebrisSpawnScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        
-        if (timer >= nextSpawnTime)
+        if(spawnerActive)
         {
-            SpawnDebris();
-            timer = 0f;
+            timer += Time.deltaTime;
             
-            nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+            if (timer >= nextSpawnTime)
+            {
+                SpawnDebris();
+                timer = 0f;
+                
+                nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+            }
         }
         
     }
@@ -64,6 +68,16 @@ public class DebrisSpawnScript : MonoBehaviour
         {
             script.moveSpeed = Random.Range(2.0f, 8.0f);
         }
+    }
+
+    public void DisableSpawning()
+    {
+        spawnerActive = false;
+    }
+
+    public void EnableSpawning()
+    {
+        spawnerActive = true;
     }
 
     private void OnStartPlaying(object sender, EventArgs e)

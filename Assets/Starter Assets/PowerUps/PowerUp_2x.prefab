@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b196f738c7c2ef140876cff31e2ba62f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::DebrisMoveScript
-  moveSpeed: 2
+  moveSpeed: 1
 --- !u!50 &-9185188685802844730
 Rigidbody2D:
   serializedVersion: 5

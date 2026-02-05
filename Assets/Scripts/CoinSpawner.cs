@@ -14,6 +14,7 @@ public class CoinSpawner : MonoBehaviour
 
     private float timer = 0f;
     private float nextSpawnTime;
+    private float spawnRateMultiplier = 1f;
 
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class CoinSpawner : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >= nextSpawnTime)
+        if (timer >= nextSpawnTime / spawnRateMultiplier)
         {
             SpawnCoin();
             timer = 0f;
@@ -55,6 +56,10 @@ public class CoinSpawner : MonoBehaviour
 
         
         Instantiate(coinPrefab, spawnPos, Quaternion.identity);
+    }
+
+    public void SetSpawnRateMultiplier(float newSpawnRateMultiplier){
+        spawnRateMultiplier = newSpawnRateMultiplier;
     }
 
     private void OnStartPlaying(object sender, EventArgs e)

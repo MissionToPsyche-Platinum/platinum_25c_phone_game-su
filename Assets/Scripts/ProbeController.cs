@@ -11,7 +11,7 @@ public class ProbeController : MonoBehaviour
     private Vector2 minAllowedPosition;
     private Vector2 maxAllowedPosition;
 
-    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private AudioClip asteroidCollisionSoundClip;
     [SerializeField] private float extraPadding = 0.1f; // Adjust value to keep entire probe from going offscreen
 
@@ -21,6 +21,7 @@ public class ProbeController : MonoBehaviour
     public int coinAmount = 0;
         
     public bool HasCollided { get; private set; } = false;
+
     private void Awake() {
         coinAmount = 0;
         myInputActions = new InputSystem_Actions();
@@ -33,10 +34,13 @@ public class ProbeController : MonoBehaviour
     private void Start()
     {
         this.gameObject.SetActive(false);
-        GameStateManager.Instance.OnStartPlaying += OnStartPlaying; 
-        CalculateScreenBoundaries(); 
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        CalculateScreenBoundaries();
+
+        
+       
     }
-    
+
     // Calculates padding to add to keep probe fully on screen
     private void CalculateScreenBoundaries()
     {
@@ -158,6 +162,10 @@ public class ProbeController : MonoBehaviour
     {
         Debug.Log("started");
         this.gameObject.SetActive(true);
+        if (GameStateManager.Instance != null)
+        {
+            moveSpeed = 3f + (GameStateManager.Instance.speedLevel * 0.5f);
+        }
     }
 
     public void SetMoveSpeed(float newMoveSpeed)

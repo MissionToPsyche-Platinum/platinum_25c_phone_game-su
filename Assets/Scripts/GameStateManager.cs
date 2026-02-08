@@ -26,6 +26,9 @@ public class GameStateManager : MonoBehaviour
     public GameState currentGameState = GameState.None;
     public GameStage gameStage = GameStage.None;
     public int totalCoins = 0;
+    public int maxHealthLevel = 0;
+    public int armorLevel = 0;
+    public int speedLevel = 0;
     private int coinMultiplier = 1;
     public event EventHandler<EventArgs> OnStartPlaying;
     public event EventHandler<EventArgs> OnStopPlaying;
@@ -39,6 +42,7 @@ public class GameStateManager : MonoBehaviour
         }
 
         currentGameState = GameState.Menu;
+        totalCoins = 1000;
     }
 
     public void StartPlaying()

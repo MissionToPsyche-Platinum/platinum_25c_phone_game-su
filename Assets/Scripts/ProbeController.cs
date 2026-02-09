@@ -10,6 +10,7 @@ public class ProbeController : MonoBehaviour
     private PowerUpBehavior powerUpSystem;
     private Vector2 minAllowedPosition;
     private Vector2 maxAllowedPosition;
+    private Vector2 additionalForceVector;
 
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private AudioClip asteroidCollisionSoundClip;
@@ -19,6 +20,10 @@ public class ProbeController : MonoBehaviour
     public event EventHandler<EventArgs> OnCoinCollected;
 
     public int coinAmount = 0;
+
+    private bool gasActive = false;
+    public float gasActiveLength = 10f;
+    private float gasTimer = 0f;
         
     public bool HasCollided { get; private set; } = false;
 
@@ -36,7 +41,7 @@ public class ProbeController : MonoBehaviour
         this.gameObject.SetActive(false);
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
         CalculateScreenBoundaries();
-
+        additionalForceVector = new Vector3(0f, 0f, 0f);
         
        
     }
@@ -101,6 +106,17 @@ public class ProbeController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        if (collision.gameObject.CompareTag("Gas"))
+        {
+            //colliding with gas causes joystick direction to reverse
+            if(!gasActive){
+                gasActive = true;
+                moveSpeed *= -1f;
+            }
+            gasTimer = gasActiveLength;
+            Destroy(collision.gameObject);
+        }
+
         if (collision.gameObject.CompareTag("Coin"))
         {
             CoinBehavior coinScript = collision.gameObject.GetComponent<CoinBehavior>();
@@ -143,7 +159,15 @@ public class ProbeController : MonoBehaviour
         //set the position of this game object to that of the finger position
         
         // Debug.Log("Movement vector: " +  myInputActions.Player.Movement.ReadValue<Vector2>());
-        myRigidbody2D.linearVelocity = myInputActions.Player.Movement.ReadValue<Vector2>() * moveSpeed;
+        if(gasActive){
+            gasTimer -= Time.deltaTime;
+            if(gasTimer <= 0f){
+                gasActive = false;
+                moveSpeed *= -1f;
+            }
+        }
+
+        myRigidbody2D.linearVelocity = myInputActions.Player.Movement.ReadValue<Vector2>() * moveSpeed + additionalForceVector * Time.deltaTime;
     }
     
     // Used here so this happens at the very end of a frame as to not mess up linearVelocity calculation
@@ -156,6 +180,7 @@ public class ProbeController : MonoBehaviour
         viewPos.y = Mathf.Clamp(viewPos.y, minAllowedPosition.y, maxAllowedPosition.y);
 
         transform.position = viewPos;
+        GameStateManager.Instance.UpdateProbePosition(transform.position);
     }
 
     private void OnStartPlaying(object sender, EventArgs e)
@@ -171,5 +196,16 @@ public class ProbeController : MonoBehaviour
     public void SetMoveSpeed(float newMoveSpeed)
     {
         moveSpeed = newMoveSpeed;
+    }
+
+    //for additional forces that affect probe movement
+    public void SetForceVector(Vector2 newForce)
+    {
+        additionalForceVector = newForce;
+    }
+
+    public void Kill()
+    {
+        healthSystem.SetToZeroLives();
     }
 }

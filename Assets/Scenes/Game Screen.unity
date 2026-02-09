@@ -5217,6 +5217,7 @@ MonoBehaviour:
   asteroidCollisionSoundClip: {fileID: 8300000, guid: 97c7e8fc768c84a0c8d2282da7399e46, type: 3}
   extraPadding: 0.1
   coinAmount: 0
+  gasActiveLength: 10
 --- !u!212 &908402708
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5779,6 +5780,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007085645}
   m_CullTransparentMesh: 1
+--- !u!1 &1010679151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1010679153}
+  - component: {fileID: 1010679152}
+  m_Layer: 0
+  m_Name: GasSpawner
+  m_TagString: Gas
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1010679152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010679151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9738d64fc1ea4c30bc876921dbf1982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  gas: {fileID: 4640125419945621701, guid: fee4d6ac7ad344496814be23146542d6, type: 3}
+  minSpawnInterval: 10
+  maxSpawnInterval: 25
+--- !u!4 &1010679153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010679151}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 80.03477, y: 1197.4716, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1063932536
 GameObject:
   m_ObjectHideFlags: 0
@@ -7806,6 +7854,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437848277}
   m_CullTransparentMesh: 1
+--- !u!1 &1472010223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1472010225}
+  - component: {fileID: 1472010224}
+  m_Layer: 0
+  m_Name: BlackHoleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1472010224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472010223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235ef269ba64d4513a7abf8b86a40dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  blackHole: {fileID: 761228475169448685, guid: 689293671ca52442ca9db48eccadfb77, type: 3}
+  minSpawnInterval: 1
+  maxSpawnInterval: 5
+--- !u!4 &1472010225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472010223}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 80.03477, y: 1197.4716, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1480618450
 GameObject:
   m_ObjectHideFlags: 0
@@ -11319,3 +11414,5 @@ SceneRoots:
   - {fileID: 1384828552}
   - {fileID: 908402709}
   - {fileID: 580264466}
+  - {fileID: 1010679153}
+  - {fileID: 1472010225}

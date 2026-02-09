@@ -116,4 +116,9 @@ public class ProbeHealth : MonoBehaviour
     {
         damageActive = true;
     }
+
+    public void SetToZeroLives()
+    {
+        TakeDamage(currentHealth);
+    }
 }

@@ -30,6 +30,9 @@ public class GameStateManager : MonoBehaviour
     public int armorLevel = 0;
     public int speedLevel = 0;
     private int coinMultiplier = 1;
+
+    private Vector3 probePosition;
+
     public event EventHandler<EventArgs> OnStartPlaying;
     public event EventHandler<EventArgs> OnStopPlaying;
 
@@ -49,6 +52,16 @@ public class GameStateManager : MonoBehaviour
     {
         OnStartPlaying?.Invoke(this, EventArgs.Empty);
         currentGameState = GameState.Playing;
+    }
+
+    public void UpdateProbePosition(Vector3 newPosition)
+    {
+        probePosition = newPosition;
+    }
+
+    public Vector3 GetProbePosition()
+    {
+        return probePosition;
     }
 
     public void StopPlaying()
@@ -77,30 +90,36 @@ public class GameStateManager : MonoBehaviour
         switch(stage){
             case 0:
             gameStage = GameStage.None;
+            break;
             case 1:
             gameStage = GameStage.Earth;
+            break;
             case 2:
             gameStage = GameStage.Moon;
+            break;
             case 3:
             gameStage = GameStage.Mars;
+            break;
             case 4:
             gameStage = GameStage.Psyche;
+            break;
             default:
             gameStage = GameStage.None;
+            break;
         }
     }
 
     public int GetGameStage(){
         switch(gameStage){
-            case None:
+            case GameStage.None:
             return 0;
-            case Earth:
+            case GameStage.Earth:
             return 1;
-            case Moon:
+            case GameStage.Moon:
             return 2;
-            case Mars:
+            case GameStage.Mars:
             return 3;
-            case Psyche:
+            case GameStage.Psyche:
             return 4;
             default:
             return 0;

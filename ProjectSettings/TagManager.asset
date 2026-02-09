@@ -10,6 +10,8 @@ TagManager:
   - PowerUpStar
   - PowerUpHex
   - Coin
+  - Gas
+  - Debris
   layers:
   - Default
   - TransparentFX

@@ -76,6 +76,7 @@ public class CheckpointSpawnScript : MonoBehaviour
     {
         float currentScore = scoreSystem.GetCurrentScore();
         if(nextCheckpoint < numCheckpoints && currentScore >= checkpointScores[nextCheckpoint]){
+            GameStateManager.Instance.SetGameStage(0);
             debrisSpawnSystem.DisableSpawning();
             coinSpawnSystem.DisableSpawning();
             powerUpSpawnSystem.DisableSpawning();
@@ -89,6 +90,7 @@ public class CheckpointSpawnScript : MonoBehaviour
         }
 
         if(stopTimer <= 0.0f){
+            GameStateManager.Instance.SetGameStage(nextCheckpoint);
             resumeMovement(nextCheckpoint - 1);
             stopTimer = 7f;
             stopped = false;

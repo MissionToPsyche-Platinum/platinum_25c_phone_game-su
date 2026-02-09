@@ -71,4 +71,39 @@ public class GameStateManager : MonoBehaviour
     {
         return totalCoins;
     }
+
+    public void SetGameStage(int stage)
+    {
+        switch(stage){
+            case 0:
+            gameStage = GameStage.None;
+            case 1:
+            gameStage = GameStage.Earth;
+            case 2:
+            gameStage = GameStage.Moon;
+            case 3:
+            gameStage = GameStage.Mars;
+            case 4:
+            gameStage = GameStage.Psyche;
+            default:
+            gameStage = GameStage.None;
+        }
+    }
+
+    public int GetGameStage(){
+        switch(gameStage){
+            case None:
+            return 0;
+            case Earth:
+            return 1;
+            case Moon:
+            return 2;
+            case Mars:
+            return 3;
+            case Psyche:
+            return 4;
+            default:
+            return 0;
+        }
+    }
 }

@@ -3704,8 +3704,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScript::PauseMenuManager
   pauseButton: {fileID: 51430970}
   pauseMenuPanel: {fileID: 1501706911}
-  resumeButton: {fileID: 554672530}
-  quitButton: {fileID: 1722014406}
+  resumeButton: {fileID: 554672532}
+  quitButton: {fileID: 1722014407}
 --- !u!4 &724714303
 Transform:
   m_ObjectHideFlags: 0

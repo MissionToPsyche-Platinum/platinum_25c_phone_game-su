@@ -1608,72 +1608,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 265588173}
   m_CullTransparentMesh: 1
---- !u!1 &288812641
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 288812642}
-  - component: {fileID: 288812643}
-  m_Layer: 5
-  m_Name: Navigation Buttons
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &288812642
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288812641}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1966239434}
-  - {fileID: 546263885}
-  - {fileID: 1346822506}
-  - {fileID: 2011924871}
-  m_Father: {fileID: 693361282}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &288812643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288812641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19bf3bf3d814c5740a666d23c080eaf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StartScreenNavigationButtons
-  settingsScreenButton: {fileID: 546263886}
-  startScreenButton: {fileID: 1063932538}
-  gameScreenButton: {fileID: 1346822507}
-  shopScreenButton: {fileID: 1966239435}
-  statsScreenButton: {fileID: 2011924872}
-  backFromShopButton: {fileID: 10815564}
-  backFromStatsButton: {fileID: 1893911884}
-  buttonSoundClip: {fileID: 8300000, guid: 7f6dfd18f332c473c83920a860e7c0f1, type: 3}
-  startScreenPanel: {fileID: 693361281}
-  gameScreenPanel: {fileID: 881652874}
-  settingsScreenPanel: {fileID: 1885955886}
-  shopScreenPanel: {fileID: 1345099208}
-  statsScreenPanel: {fileID: 2037058231}
-  checkpointSpawner: {fileID: 1420386462}
 --- !u!1 &306093118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2759,7 +2693,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1712187094}
-  m_Father: {fileID: 288812642}
+  m_Father: {fileID: 693361282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3627,7 +3561,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1989937288}
-  - {fileID: 288812642}
+  - {fileID: 1966239434}
+  - {fileID: 546263885}
+  - {fileID: 1346822506}
+  - {fileID: 2011924871}
   m_Father: {fileID: 785719837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3706,6 +3643,8 @@ MonoBehaviour:
   pauseMenuPanel: {fileID: 1501706911}
   resumeButton: {fileID: 554672532}
   quitButton: {fileID: 1722014407}
+  isPaused: 0
+  playerInput: {fileID: 0}
 --- !u!4 &724714303
 Transform:
   m_ObjectHideFlags: 0
@@ -7503,7 +7442,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 859855118}
-  m_Father: {fileID: 288812642}
+  m_Father: {fileID: 693361282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7854,6 +7793,70 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437848277}
   m_CullTransparentMesh: 1
+--- !u!1 &1446112614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1446112616}
+  - component: {fileID: 1446112615}
+  m_Layer: 0
+  m_Name: MenuNavigationButtonsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1446112615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446112614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19bf3bf3d814c5740a666d23c080eaf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::MenuNavigationButtons
+  settingsScreenButton: {fileID: 546263886}
+  startScreenButton: {fileID: 1346822507}
+  gameScreenButton: {fileID: 1346822507}
+  shopScreenButton: {fileID: 1966239435}
+  statsScreenButton: {fileID: 2011924872}
+  backFromShopButton: {fileID: 10815564}
+  backFromStatsButton: {fileID: 1893911884}
+  backFromSettingsButton: {fileID: 1063932538}
+  pauseButton: {fileID: 51430972}
+  resumeButton: {fileID: 554672532}
+  quitButton: {fileID: 1722014407}
+  restartButton: {fileID: 0}
+  buttonSoundClip: {fileID: 8300000, guid: 7f6dfd18f332c473c83920a860e7c0f1, type: 3}
+  startScreenPanel: {fileID: 693361281}
+  gameScreenPanel: {fileID: 881652874}
+  settingsScreenPanel: {fileID: 1885955886}
+  shopScreenPanel: {fileID: 1345099208}
+  statsScreenPanel: {fileID: 2037058231}
+  pauseMenuPanel: {fileID: 1501706911}
+  checkpointSpawner: {fileID: 1420386462}
+--- !u!4 &1446112616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446112614}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 585, y: 1266, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1472010223
 GameObject:
   m_ObjectHideFlags: 0
@@ -9818,6 +9821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::GameOverPanelController
   restartGameButton: {fileID: 2139568965}
+  shopButton: {fileID: 0}
   gameOverPanel: {fileID: 1923588363}
 --- !u!1 &1927178909
 GameObject:
@@ -10036,7 +10040,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 647682038}
-  m_Father: {fileID: 288812642}
+  m_Father: {fileID: 693361282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10391,7 +10395,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Untitled Psyche Game
+  m_Text: 
 --- !u!222 &1989937290
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10432,7 +10436,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 942690134}
-  m_Father: {fileID: 288812642}
+  m_Father: {fileID: 693361282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11416,3 +11420,4 @@ SceneRoots:
   - {fileID: 580264466}
   - {fileID: 1010679153}
   - {fileID: 1472010225}
+  - {fileID: 1446112616}

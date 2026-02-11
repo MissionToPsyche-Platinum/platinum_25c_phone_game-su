@@ -3639,12 +3639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04354785fd4e04bdcae4858ac4824bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::PauseMenuManager
-  pauseButton: {fileID: 51430970}
-  pauseMenuPanel: {fileID: 1501706911}
-  resumeButton: {fileID: 554672532}
-  quitButton: {fileID: 1722014407}
-  isPaused: 0
-  playerInput: {fileID: 0}
 --- !u!4 &724714303
 Transform:
   m_ObjectHideFlags: 0
@@ -5204,7 +5198,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2016713904401210246, guid: 8edeccc65b0886e4db7b2a5bf741b6df, type: 3}
+  m_Sprite: {fileID: -5387105148290352533, guid: bee8667b43d5a48749536e135a4d9f6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

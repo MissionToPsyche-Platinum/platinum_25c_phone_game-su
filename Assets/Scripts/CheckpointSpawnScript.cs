@@ -26,6 +26,9 @@ public class CheckpointSpawnScript : MonoBehaviour
 
     private bool stopped = false;
 
+    public event EventHandler<EventArgs> OnCheckpointReached;
+    public event EventHandler<EventArgs> OnCheckpointPassed;
+
     private void Awake()
     {
         checkpointInstances = new GameObject[numCheckpoints];
@@ -62,10 +65,7 @@ public class CheckpointSpawnScript : MonoBehaviour
     public void resumeMovement(int index){
         CheckpointMoveScript moveScript = checkpointInstances[index].GetComponent<CheckpointMoveScript>();
         moveScript.resumeMovement();
-        debrisSpawnSystem.EnableSpawning();
-        coinSpawnSystem.EnableSpawning();
-        powerUpSpawnSystem.EnableSpawning();
-        scoreSystem.ResumeScore();
+        OnCheckpointPassed?.Invoke(this, EventArgs.Empty);
     }
     private void OnStartPlaying(object sender, EventArgs e)
     {
@@ -76,11 +76,8 @@ public class CheckpointSpawnScript : MonoBehaviour
     {
         float currentScore = scoreSystem.GetCurrentScore();
         if(nextCheckpoint < numCheckpoints && currentScore >= checkpointScores[nextCheckpoint]){
+            OnCheckpointReached?.Invoke(this, EventArgs.Empty);
             GameStateManager.Instance.SetGameStage(0);
-            debrisSpawnSystem.DisableSpawning();
-            coinSpawnSystem.DisableSpawning();
-            powerUpSpawnSystem.DisableSpawning();
-            scoreSystem.PauseScore();
             spawnCheckpoint(nextCheckpoint);
             stopped = true;
         }

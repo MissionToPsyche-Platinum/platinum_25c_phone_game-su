@@ -18,6 +18,8 @@ public class CoinSpawner : MonoBehaviour
 
     private bool spawnerActive = true;
 
+    CheckpointSpawnScript checkpointSpawnScript;
+
     private void Awake()
     {
     }
@@ -26,12 +28,20 @@ public class CoinSpawner : MonoBehaviour
     {
         nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
         this.gameObject.SetActive(false);
+
+        GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
+        checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
+        checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
+
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
     }
 
 
@@ -62,16 +72,6 @@ public class CoinSpawner : MonoBehaviour
         Instantiate(coinPrefab, spawnPos, Quaternion.identity);
     }
 
-    public void DisableSpawning()
-    {
-        spawnerActive = false;
-    }
-
-    public void EnableSpawning()
-    {
-        spawnerActive = true;
-    }
-
     public void SetSpawnRateMultiplier(float newSpawnRateMultiplier){
         spawnRateMultiplier = newSpawnRateMultiplier;
     }
@@ -79,5 +79,15 @@ public class CoinSpawner : MonoBehaviour
     private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
+    }
+
+    private void OnCheckpointReached(object sender, EventArgs e)
+    {
+        spawnerActive = false;
+    }
+
+    private void OnCheckpointPassed(object sender, EventArgs e)
+    {
+        spawnerActive = true;
     }
 }

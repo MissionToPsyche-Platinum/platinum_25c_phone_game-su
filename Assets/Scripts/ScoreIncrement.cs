@@ -14,14 +14,23 @@ public class ScoreIncrement : MonoBehaviour
     
     [SerializeField] private int finalScore; // Can be grabbed by other sections
 
+    CheckpointSpawnScript checkpointSpawnScript;
+
     private void Start()
     {
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+
+        GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
+        checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
+        checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
     }
 
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
     }
 
     public int FinalScore
@@ -57,13 +66,13 @@ public class ScoreIncrement : MonoBehaviour
     {
         return currentScore;
     }
-
-    public void PauseScore()
+    
+    private void OnCheckpointReached(object sender, EventArgs e)
     {
         scoreUpdate = false;
     }
 
-    public void ResumeScore()
+    private void OnCheckpointPassed(object sender, EventArgs e)
     {
         scoreUpdate = true;
     }

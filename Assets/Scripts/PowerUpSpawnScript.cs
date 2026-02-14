@@ -14,6 +14,8 @@ public class PowerUpSpawnScript : MonoBehaviour
     private int totalWeight;
 
     private bool spawnerActive = true;
+
+    CheckpointSpawnScript checkpointSpawnScript;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,6 +31,11 @@ public class PowerUpSpawnScript : MonoBehaviour
         for(int i = 0; i < powerUpSpawnWeights.Length; i++){
             totalWeight += powerUpSpawnWeights[i];
         }
+
+        GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
+        checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
+        checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
         
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
@@ -36,6 +43,8 @@ public class PowerUpSpawnScript : MonoBehaviour
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
     }
 
     // Update is called once per frame
@@ -53,16 +62,6 @@ public class PowerUpSpawnScript : MonoBehaviour
             }
         }
         
-    }
-
-    public void DisableSpawning()
-    {
-        spawnerActive = false;
-    }
-
-    public void EnableSpawning()
-    {
-        spawnerActive = true;
     }
     
     void SpawnPowerUp()
@@ -104,5 +103,15 @@ public class PowerUpSpawnScript : MonoBehaviour
     private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
+    }
+
+    private void OnCheckpointReached(object sender, EventArgs e)
+    {
+        spawnerActive = true;
+    }
+
+    private void OnCheckpointPassed(object sender, EventArgs e)
+    {
+        spawnerActive = true;
     }
 }

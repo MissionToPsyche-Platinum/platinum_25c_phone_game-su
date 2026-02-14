@@ -14,6 +14,8 @@ public class BlackHoleSpawnScript : MonoBehaviour
     public event EventHandler<EventArgs> OnBlackHoleSpawned;
     private bool spawnerActive;
     private bool hazardUnlocked;
+
+    CheckpointSpawnScript checkpointSpawnScript;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,12 +24,19 @@ public class BlackHoleSpawnScript : MonoBehaviour
         hazardUnlocked = false;
         spawnerActive = true;
 
+        GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
+        checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
+        checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
+
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
     }
 
 
@@ -80,18 +89,18 @@ public class BlackHoleSpawnScript : MonoBehaviour
         }
     }
 
-    public void DisableSpawning()
+    private void OnStartPlaying(object sender, EventArgs e)
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    private void OnCheckpointReached(object sender, EventArgs e)
     {
         spawnerActive = false;
     }
 
-    public void EnableSpawning()
+    private void OnCheckpointPassed(object sender, EventArgs e)
     {
         spawnerActive = true;
-    }
-
-    private void OnStartPlaying(object sender, EventArgs e)
-    {
-        this.gameObject.SetActive(true);
     }
 }

@@ -16,9 +16,18 @@ public class StarSpawnScript : MonoBehaviour
     private float nextSpawnTime;
     private int totalWeight;
 
+    private bool spawnerActive;
+
+    CheckpointSpawnScript checkpointSpawnScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
+        checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
+        checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
+
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
 
         //throw an error if powerUps and powerUpSpawnWeights are different sizes
@@ -47,26 +56,30 @@ public class StarSpawnScript : MonoBehaviour
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        
-        if (timer >= nextSpawnTime)
-        {
-            // Random position of spawn
-            Vector3 spawnPos = new Vector3(
-                UnityEngine.Random.Range(-2.0f, 2.0f),  
-                5f,                       
-                1f
-            );
-
-            SpawnStar(spawnPos);
-            timer = 0f;
+        if(spawnerActive){
+            timer += Time.deltaTime;
             
-            nextSpawnTime = UnityEngine.Random.Range(minSpawnInterval, maxSpawnInterval);
+            if (timer >= nextSpawnTime)
+            {
+                // Random position of spawn
+                Vector3 spawnPos = new Vector3(
+                    UnityEngine.Random.Range(-2.0f, 2.0f),  
+                    5f,                       
+                    1f
+                );
+                
+                SpawnStar(spawnPos);
+                timer = 0f;
+                
+                nextSpawnTime = UnityEngine.Random.Range(minSpawnInterval, maxSpawnInterval);
+            }
         }
         
     }
@@ -97,9 +110,20 @@ public class StarSpawnScript : MonoBehaviour
             script.moveSpeed = moveSpeed;
         }
     }
+
     private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
+    }
+
+    private void OnCheckpointReached(object sender, EventArgs e)
+    {
+        spawnerActive = false;
+    }
+
+    private void OnCheckpointPassed(object sender, EventArgs e)
+    {
+        spawnerActive = true;
     }
 
 

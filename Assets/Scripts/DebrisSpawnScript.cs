@@ -12,11 +12,18 @@ public class DebrisSpawnScript : MonoBehaviour
 
     public event EventHandler<EventArgs> OnDebrisSpawned;
     private bool spawnerActive = true;
+
+    CheckpointSpawnScript checkpointSpawnScript;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         this.gameObject.SetActive(false);
+
+        GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
+        checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
+        checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
         
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
@@ -24,6 +31,8 @@ public class DebrisSpawnScript : MonoBehaviour
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
     }
 
 
@@ -83,5 +92,15 @@ public class DebrisSpawnScript : MonoBehaviour
     private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
+    }
+
+    private void OnCheckpointReached(object sender, EventArgs e)
+    {
+        spawnerActive = false;
+    }
+
+    private void OnCheckpointPassed(object sender, EventArgs e)
+    {
+        spawnerActive = true;
     }
 }

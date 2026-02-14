@@ -66,6 +66,7 @@ public class CheckpointSpawnScript : MonoBehaviour
         CheckpointMoveScript moveScript = checkpointInstances[index].GetComponent<CheckpointMoveScript>();
         moveScript.resumeMovement();
         OnCheckpointPassed?.Invoke(this, EventArgs.Empty);
+        GameStateManager.Instance.SetGameStage(index + 2);
     }
     private void OnStartPlaying(object sender, EventArgs e)
     {
@@ -77,7 +78,6 @@ public class CheckpointSpawnScript : MonoBehaviour
         float currentScore = scoreSystem.GetCurrentScore();
         if(nextCheckpoint < numCheckpoints && currentScore >= checkpointScores[nextCheckpoint]){
             OnCheckpointReached?.Invoke(this, EventArgs.Empty);
-            GameStateManager.Instance.SetGameStage(0);
             spawnCheckpoint(nextCheckpoint);
             stopped = true;
         }

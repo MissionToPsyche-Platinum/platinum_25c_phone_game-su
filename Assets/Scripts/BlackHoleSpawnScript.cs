@@ -46,7 +46,7 @@ public class BlackHoleSpawnScript : MonoBehaviour
 
         //unlocks after the Moon
         if(!hazardUnlocked){
-            if(GameStateManager.Instance.GetGameStage() >= 4){
+            if(GameStateManager.Instance.GetGameStage() >= 5){
                 hazardUnlocked = true;
             }
         }

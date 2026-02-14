@@ -20,7 +20,8 @@ public class GameStateManager : MonoBehaviour
         Earth,
         Moon,
         Mars,
-        Psyche
+        Psyche,
+        Transition
     }
 
     public GameState currentGameState = GameState.None;
@@ -45,6 +46,7 @@ public class GameStateManager : MonoBehaviour
         }
 
         currentGameState = GameState.Menu;
+        gameStage = GameStage.Transition;
         totalCoins = 1000;
     }
 
@@ -92,15 +94,18 @@ public class GameStateManager : MonoBehaviour
             gameStage = GameStage.None;
             break;
             case 1:
-            gameStage = GameStage.Earth;
+            gameStage = GameStage.Transition;
             break;
             case 2:
-            gameStage = GameStage.Moon;
+            gameStage = GameStage.Earth;
             break;
             case 3:
-            gameStage = GameStage.Mars;
+            gameStage = GameStage.Moon;
             break;
             case 4:
+            gameStage = GameStage.Mars;
+            break;
+            case 5:
             gameStage = GameStage.Psyche;
             break;
             default:
@@ -113,14 +118,16 @@ public class GameStateManager : MonoBehaviour
         switch(gameStage){
             case GameStage.None:
             return 0;
-            case GameStage.Earth:
+            case GameStage.Transition:
             return 1;
-            case GameStage.Moon:
+            case GameStage.Earth:
             return 2;
-            case GameStage.Mars:
+            case GameStage.Moon:
             return 3;
-            case GameStage.Psyche:
+            case GameStage.Mars:
             return 4;
+            case GameStage.Psyche:
+            return 5;
             default:
             return 0;
         }

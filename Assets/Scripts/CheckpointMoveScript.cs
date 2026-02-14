@@ -27,6 +27,7 @@ public class CheckpointMoveScript : MonoBehaviour
             }
 
             if(transform.position.y < 0.0f && !alreadyStopped){
+                GameStateManager.Instance.SetGameStage(1);
                 alreadyStopped = true;
                 stoppedAtCenter = true;
             }

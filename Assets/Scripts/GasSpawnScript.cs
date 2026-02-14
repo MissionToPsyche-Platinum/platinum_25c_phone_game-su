@@ -45,7 +45,7 @@ public class GasSpawnScript : MonoBehaviour
 
         //unlocks after the Moon
         if(!hazardUnlocked){
-            if(GameStateManager.Instance.GetGameStage() >= 2){
+            if(GameStateManager.Instance.GetGameStage() >= 3){
                 hazardUnlocked = true;
             }
         }

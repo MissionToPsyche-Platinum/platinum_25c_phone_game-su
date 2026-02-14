@@ -9,20 +9,12 @@ public class DebrisMoveScript : MonoBehaviour
     bool homingAsteroid = false;
     private Vector3 velocityVector;
 
-    bool movementPaused = false;
-
-    CheckpointSpawnScript checkpointSpawnScript;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
-        checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
-        checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
-        checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
 
         //may spawn homing asteroid if at Mars or further
-        if(GameStateManager.Instance.GetGameStage() >= 3 && this.gameObject.CompareTag("Debris")){
+        if(GameStateManager.Instance.GetGameStage() >= 4 && this.gameObject.CompareTag("Debris")){
             float random = UnityEngine.Random.Range(0f, 1f);
             if(random <= homingProbability){
                 homingAsteroid = true;
@@ -34,16 +26,10 @@ public class DebrisMoveScript : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
-        checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if(!movementPaused){
+        if(!(GameStateManager.Instance.GetGameStage() == 1)){
             velocityVector = (Vector3.down * moveSpeed) * Time.deltaTime;
             if(homingAsteroid){
 
@@ -81,15 +67,5 @@ public class DebrisMoveScript : MonoBehaviour
     {
         Vector3 rotated = new Vector3(v.x * Mathf.Cos(radians) + v.y * Mathf.Sin(radians), v.x * -Mathf.Sin(radians) + v.y * Mathf.Cos(radians), v.z);
         return rotated;
-    }
-
-    private void OnCheckpointReached(object sender, EventArgs e)
-    {
-        movementPaused = true;
-    }
-
-    private void OnCheckpointPassed(object sender, EventArgs e)
-    {
-        movementPaused = false;
     }
 }

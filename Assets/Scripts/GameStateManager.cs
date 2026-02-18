@@ -34,9 +34,13 @@ public class GameStateManager : MonoBehaviour
 
     private Vector3 probePosition;
 
-    public event EventHandler<EventArgs> OnStartPlaying;
-    public event EventHandler<EventArgs> OnStopPlaying;
-    public event EventHandler<EventArgs> OnPausePlaying;
+    public class GameStateChangeEventArgs : EventArgs
+    {
+        public GameState PreviousState;
+    }
+    public event EventHandler<GameStateChangeEventArgs> OnStartPlaying;
+    public event EventHandler<GameStateChangeEventArgs> OnStopPlaying;
+    public event EventHandler<GameStateChangeEventArgs> OnPausePlaying;
 
     private void Awake()
     {
@@ -54,7 +58,10 @@ public class GameStateManager : MonoBehaviour
     public void EnterPlayingState()
     {
         Time.timeScale = 1f;
-        OnStartPlaying?.Invoke(this, EventArgs.Empty);
+        OnStartPlaying?.Invoke(this, new GameStateChangeEventArgs()
+        {
+            PreviousState = currentGameState
+        });
         currentGameState = GameState.Playing;
     }
 
@@ -71,14 +78,20 @@ public class GameStateManager : MonoBehaviour
     public void EnterMenuState()
     {
         Time.timeScale = 0f;
-        OnStopPlaying?.Invoke(this, EventArgs.Empty);
+        OnStopPlaying?.Invoke(this, new GameStateChangeEventArgs()
+        {
+            PreviousState = currentGameState
+        });
         currentGameState = GameState.Menu;
     }
 
     public void EnterPausedState()
     {
         Time.timeScale = 0f;
-        OnPausePlaying?.Invoke(this, EventArgs.Empty);
+        OnPausePlaying?.Invoke(this, new GameStateChangeEventArgs()
+        {
+            PreviousState = currentGameState
+        });
         currentGameState = GameState.Paused;
     }
 

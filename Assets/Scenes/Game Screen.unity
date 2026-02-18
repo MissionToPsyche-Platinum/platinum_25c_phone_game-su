@@ -7357,7 +7357,7 @@ GameObject:
   - component: {fileID: 1480618452}
   m_Layer: 0
   m_Name: CoinSpawner
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7394,7 +7394,7 @@ MonoBehaviour:
   - {fileID: 5103829902325286908, guid: 9e144750848564d948c598b2fa5d7fb6, type: 3}
   - {fileID: 1847062795176755155, guid: 5134d75f029e34d3fa362ed5dedffa9a, type: 3}
   coinValues: 010000000200000003000000
-  coinSpawnWeights: 100000000400000001000000
+  coinSpawnWeights: 100000009001000001000000
   minSpawnInterval: 3
   maxSpawnInterval: 10
   minY: -5

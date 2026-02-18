@@ -26,6 +26,18 @@ public class ProbeComponent : MonoBehaviour
             Debug.LogError("Tried to disable a component that is already disabled.");
         }
     }
+    
+    public void TryRepair()
+    {
+        if (isDisabled)
+        {
+            RepairComponent();
+        }
+        else
+        {
+            Debug.Log("Tried to repair a component that is already repaired. Skipping.");
+        }
+    }
 
     public bool GetIsDisabled()
     {

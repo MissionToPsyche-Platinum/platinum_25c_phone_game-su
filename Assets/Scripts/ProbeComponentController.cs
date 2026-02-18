@@ -13,11 +13,15 @@ public class ProbeComponentController : MonoBehaviour
     private void Start()
     {
         myProbeController.OnTakeDamage += HandleProbeTakeDamage;
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
     }
 
     private void OnDestroy()
     {
         myProbeController.OnTakeDamage -= HandleProbeTakeDamage;
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
     }
 
     private void HandleProbeTakeDamage(object sender, System.EventArgs e)
@@ -55,6 +59,23 @@ public class ProbeComponentController : MonoBehaviour
                 candidate.TryDisable();
                 break;
             }
+        }
+    }
+
+    private void OnStopPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
+    {
+        RepairAllComponents();
+    }
+    private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
+    {
+        RepairAllComponents();
+    }
+
+    public void RepairAllComponents()
+    {
+        foreach (ProbeComponent component in myProbeComponentDisablers)
+        {
+            component.TryRepair();
         }
     }
 }

@@ -18,7 +18,6 @@ public class CheckpointMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("stoppedAtCenter: " + stoppedAtCenter);
         if(!stoppedAtCenter){
             transform.position = transform.position + (Vector3.down * moveSpeed) * Time.deltaTime;
             Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);

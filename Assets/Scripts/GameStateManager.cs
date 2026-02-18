@@ -9,7 +9,7 @@ public class GameStateManager : MonoBehaviour
     //Fields for other scripts to reference
     public enum GameState {
         None,
-        Menu,
+        MainMenu,
         Playing,
         Paused,
     }
@@ -50,7 +50,7 @@ public class GameStateManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        currentGameState = GameState.Menu;
+        currentGameState = GameState.MainMenu;
         gameStage = GameStage.Transition;
         totalCoins = 1000;
     }
@@ -82,7 +82,7 @@ public class GameStateManager : MonoBehaviour
         {
             PreviousState = currentGameState
         });
-        currentGameState = GameState.Menu;
+        currentGameState = GameState.MainMenu;
     }
 
     public void EnterPausedState()

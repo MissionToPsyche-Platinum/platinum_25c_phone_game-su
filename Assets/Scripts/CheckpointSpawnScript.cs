@@ -67,8 +67,17 @@ public class CheckpointSpawnScript : MonoBehaviour
         OnCheckpointPassed?.Invoke(this, EventArgs.Empty);
         GameStateManager.Instance.SetGameStage(index + 2);
     }
-    private void OnStartPlaying(object sender, EventArgs e)
+    private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
+        if (e.PreviousState != GameStateManager.GameState.MainMenu)
+        {
+            //If we aren't starting the run, don't spawn the initial checkpoint
+            return;
+        }
+        
+        KillAllActiveCheckpoints();
+        
+        //Spawn the new checkpoint and make it move
         spawnCheckpoint(0);
         CheckpointMoveScript moveScript = checkpointInstances[0].GetComponent<CheckpointMoveScript>();
         moveScript.SetAlreadyStoppedAtCenter(true);
@@ -99,6 +108,17 @@ public class CheckpointSpawnScript : MonoBehaviour
             resumeMovement(nextCheckpoint - 1);
             stopTimer = 7f;
             stopped = false;
+        }
+    }
+
+    private void KillAllActiveCheckpoints()
+    {
+        foreach (GameObject checkpoint in checkpointInstances)
+        {
+            if (checkpoint != null)
+            {
+                Destroy(checkpoint);
+            }
         }
     }
 }

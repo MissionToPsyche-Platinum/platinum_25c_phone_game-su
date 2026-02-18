@@ -2862,6 +2862,10 @@ MonoBehaviour:
   maxHealthLevel: 0
   armorLevel: 0
   speedLevel: 0
+  startingProbePosition: {x: 0, y: -2, z: 0}
+  startingGameState: 0
+  startingScore: 0
+  startingHealth: 0
 --- !u!4 &602257834
 Transform:
   m_ObjectHideFlags: 0

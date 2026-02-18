@@ -32,6 +32,11 @@ public class GameStateManager : MonoBehaviour
     public int speedLevel = 0;
     private int coinMultiplier = 1;
 
+    public Vector3 startingProbePosition;
+    public GameState startingGameState;
+    public float startingScore;
+    public int startingHealth;
+
     private Vector3 probePosition;
 
     public class GameStateChangeEventArgs : EventArgs

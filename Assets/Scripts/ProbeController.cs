@@ -189,6 +189,8 @@ public class ProbeController : MonoBehaviour
     private void OnStartPlaying(object sender, EventArgs e)
     {
         // Debug.Log("ProbeController heard OnStartPlaying");
+        this.transform.position = GameStateManager.Instance.startingProbePosition;
+        
         this.gameObject.SetActive(true);
         if (GameStateManager.Instance != null)
         {

@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,6 +41,7 @@ public class ProbeController : MonoBehaviour
     {
         this.gameObject.SetActive(false);
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
         CalculateScreenBoundaries();
         additionalForceVector = new Vector3(0f, 0f, 0f);
         
@@ -76,6 +78,7 @@ public class ProbeController : MonoBehaviour
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
     }
 
     private void OnEnable()
@@ -185,12 +188,17 @@ public class ProbeController : MonoBehaviour
 
     private void OnStartPlaying(object sender, EventArgs e)
     {
-        Debug.Log("started");
+        // Debug.Log("ProbeController heard OnStartPlaying");
         this.gameObject.SetActive(true);
         if (GameStateManager.Instance != null)
         {
             moveSpeed = 3f + (GameStateManager.Instance.speedLevel * 0.5f);
         }
+    }
+    
+    private void OnStopPlaying(object sender, EventArgs e)
+    {
+        this.gameObject.SetActive(false);
     }
 
     public void SetMoveSpeed(float newMoveSpeed)

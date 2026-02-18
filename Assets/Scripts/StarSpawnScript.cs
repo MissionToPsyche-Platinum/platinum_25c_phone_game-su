@@ -29,6 +29,7 @@ public class StarSpawnScript : MonoBehaviour
         checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
 
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
 
         //throw an error if powerUps and powerUpSpawnWeights are different sizes
         if(starSprites.Length != starWeights.Length){
@@ -56,6 +57,7 @@ public class StarSpawnScript : MonoBehaviour
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
         checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
         checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
     }
@@ -114,6 +116,11 @@ public class StarSpawnScript : MonoBehaviour
     private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
+    }
+    
+    private void OnStopPlaying(object sender, EventArgs e)
+    {
+        this.gameObject.SetActive(false);
     }
 
     private void OnCheckpointReached(object sender, EventArgs e)

@@ -2534,7 +2534,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554672530}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3131,6 +3131,7 @@ GameObject:
   - component: {fileID: 693361282}
   - component: {fileID: 693361284}
   - component: {fileID: 693361283}
+  - component: {fileID: 693361285}
   m_Layer: 5
   m_Name: StartScreenPanel
   m_TagString: Untagged
@@ -3200,6 +3201,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693361281}
   m_CullTransparentMesh: 1
+--- !u!114 &693361285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693361281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 280d0d86c21b08f428977c0c4098ef1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  startScreenPanel: {fileID: 693361281}
+  gameScreenPanel: {fileID: 881652874}
+  shopScreenPanel: {fileID: 1345099208}
+  settingsScreenPanel: {fileID: 1885955886}
+  statsScreenPanel: {fileID: 2037058231}
+  startGameButton: {fileID: 1346822507}
+  shopScreenButton: {fileID: 1966239435}
+  statsScreenButton: {fileID: 2011924872}
+  settingsScreenButton: {fileID: 546263886}
 --- !u!1001 &728442012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3938,6 +3960,7 @@ RectTransform:
   m_Children:
   - {fileID: 693361282}
   - {fileID: 881652875}
+  - {fileID: 1501706912}
   - {fileID: 1885955887}
   - {fileID: 2037058232}
   - {fileID: 1923588364}
@@ -4411,13 +4434,14 @@ GameObject:
   - component: {fileID: 881652875}
   - component: {fileID: 881652877}
   - component: {fileID: 881652876}
+  - component: {fileID: 881652878}
   m_Layer: 5
   m_Name: GameScreenPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &881652875
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4431,7 +4455,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 51430971}
-  - {fileID: 1501706912}
   - {fileID: 1437848278}
   - {fileID: 631130229}
   - {fileID: 112710856}
@@ -4482,6 +4505,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 881652874}
   m_CullTransparentMesh: 1
+--- !u!114 &881652878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881652874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1316a714ca0d3e64195721ea399b8340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  gameScreenPanel: {fileID: 881652874}
+  pauseScreenPanel: {fileID: 1501706911}
+  pauseScreenButton: {fileID: 51430972}
 --- !u!1 &906023200
 GameObject:
   m_ObjectHideFlags: 0
@@ -6589,6 +6627,7 @@ GameObject:
   - component: {fileID: 1345099211}
   - component: {fileID: 1345099210}
   - component: {fileID: 1345099212}
+  - component: {fileID: 1345099213}
   m_Layer: 5
   m_Name: ShopScreenPanel
   m_TagString: Untagged
@@ -6677,6 +6716,21 @@ MonoBehaviour:
   armorUpgradeButton: {fileID: 60330547}
   speedUpgradeText: {fileID: 0}
   speedUpgradeButton: {fileID: 108848263}
+--- !u!114 &1345099213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345099208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e91825111284e54ebb9d690c0e7f4f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  shopScreenPanel: {fileID: 1345099208}
+  startScreenPanel: {fileID: 693361281}
+  backToMainMenuButton: {fileID: 10815564}
 --- !u!1 &1346822505
 GameObject:
   m_ObjectHideFlags: 0
@@ -7088,26 +7142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bf3bf3d814c5740a666d23c080eaf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::MenuNavigationButtons
-  settingsScreenButton: {fileID: 546263886}
-  startScreenButton: {fileID: 1346822507}
-  gameScreenButton: {fileID: 1346822507}
-  shopScreenButton: {fileID: 1966239435}
-  statsScreenButton: {fileID: 2011924872}
-  backFromShopButton: {fileID: 10815564}
-  backFromStatsButton: {fileID: 1893911884}
-  backFromSettingsButton: {fileID: 1063932538}
-  pauseButton: {fileID: 51430972}
-  resumeButton: {fileID: 554672532}
-  quitButton: {fileID: 1722014407}
-  restartButton: {fileID: 0}
   buttonSoundClip: {fileID: 8300000, guid: 7f6dfd18f332c473c83920a860e7c0f1, type: 3}
-  startScreenPanel: {fileID: 693361281}
-  gameScreenPanel: {fileID: 881652874}
-  settingsScreenPanel: {fileID: 1885955886}
-  shopScreenPanel: {fileID: 1345099208}
-  statsScreenPanel: {fileID: 2037058231}
-  pauseMenuPanel: {fileID: 1501706911}
-  checkpointSpawner: {fileID: 1420386462}
 --- !u!4 &1446112616
 Transform:
   m_ObjectHideFlags: 0
@@ -7307,6 +7342,7 @@ GameObject:
   - component: {fileID: 1501706912}
   - component: {fileID: 1501706914}
   - component: {fileID: 1501706913}
+  - component: {fileID: 1501706915}
   m_Layer: 5
   m_Name: PauseMenuPanel
   m_TagString: Untagged
@@ -7328,7 +7364,7 @@ RectTransform:
   m_Children:
   - {fileID: 554672531}
   - {fileID: 1722014410}
-  m_Father: {fileID: 881652875}
+  m_Father: {fileID: 785719837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7373,6 +7409,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501706911}
   m_CullTransparentMesh: 1
+--- !u!114 &1501706915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501706911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d450329a36be6d241914a1008f93643d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  startScreenPanel: {fileID: 693361281}
+  gameScreenPanel: {fileID: 881652874}
+  pauseScreenPanel: {fileID: 1501706911}
+  resumeButton: {fileID: 554672532}
+  quitButton: {fileID: 1722014407}
 --- !u!1 &1575349749 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1959336914139924646, guid: 1e56721aa69119442a02b44f099281fa, type: 3}
@@ -7491,7 +7544,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 803891938}
   m_HandleRect: {fileID: 803891937}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7692,7 +7745,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 673798373}
   m_HandleRect: {fileID: 673798372}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8186,7 +8239,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722014406}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8597,6 +8650,7 @@ GameObject:
   - component: {fileID: 1885955887}
   - component: {fileID: 1885955889}
   - component: {fileID: 1885955888}
+  - component: {fileID: 1885955890}
   m_Layer: 5
   m_Name: SettingsScreenPanel
   m_TagString: Untagged
@@ -8664,6 +8718,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885955886}
   m_CullTransparentMesh: 1
+--- !u!114 &1885955890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885955886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2775239acffb8746b0f09a98858fe3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  settingsScreenPanel: {fileID: 1885955886}
+  startScreenPanel: {fileID: 693361281}
+  backToMainMenuButton: {fileID: 1063932538}
 --- !u!1 &1893911882
 GameObject:
   m_ObjectHideFlags: 0
@@ -8950,8 +9019,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::GameOverPanelController
   restartGameButton: {fileID: 2139568965}
-  shopButton: {fileID: 0}
+  shopButton: {fileID: 1252795009}
   gameOverPanel: {fileID: 1923588363}
+  shopPanel: {fileID: 1345099208}
 --- !u!1 &1927178909
 GameObject:
   m_ObjectHideFlags: 0
@@ -9819,6 +9889,7 @@ GameObject:
   - component: {fileID: 2037058232}
   - component: {fileID: 2037058234}
   - component: {fileID: 2037058233}
+  - component: {fileID: 2037058235}
   m_Layer: 5
   m_Name: StatsScreenPanel
   m_TagString: Untagged
@@ -9886,6 +9957,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037058231}
   m_CullTransparentMesh: 1
+--- !u!114 &2037058235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037058231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f66e2866387064ab001096150977c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  statsScreenPanel: {fileID: 2037058231}
+  startScreenPanel: {fileID: 693361281}
+  backToMainMenuButton: {fileID: 1893911884}
 --- !u!1 &2139568963
 GameObject:
   m_ObjectHideFlags: 0

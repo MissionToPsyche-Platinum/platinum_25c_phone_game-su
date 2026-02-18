@@ -29,11 +29,13 @@ public class GasSpawnScript : MonoBehaviour
         checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
 
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
     }
 
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
         checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
         checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
     }
@@ -45,7 +47,7 @@ public class GasSpawnScript : MonoBehaviour
 
         //unlocks after the Moon
         if(!hazardUnlocked){
-            if(GameStateManager.Instance.GetGameStage() >= 3){
+            if(GameStateManager.Instance.GetGameStageInt() >= 3){
                 hazardUnlocked = true;
             }
         }
@@ -93,6 +95,10 @@ public class GasSpawnScript : MonoBehaviour
     private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
+    }
+    private void OnStopPlaying(object sender, EventArgs e)
+    {
+        this.gameObject.SetActive(false);
     }
 
     private void OnCheckpointReached(object sender, EventArgs e)

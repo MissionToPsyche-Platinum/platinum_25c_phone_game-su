@@ -30,11 +30,14 @@ public class BlackHoleSpawnScript : MonoBehaviour
         checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
 
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
     }
+
 
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
         checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
         checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
     }
@@ -46,7 +49,7 @@ public class BlackHoleSpawnScript : MonoBehaviour
 
         //unlocks after the Moon
         if(!hazardUnlocked){
-            if(GameStateManager.Instance.GetGameStage() >= 5){
+            if(GameStateManager.Instance.GetGameStageInt() >= 5){
                 hazardUnlocked = true;
             }
         }
@@ -92,6 +95,11 @@ public class BlackHoleSpawnScript : MonoBehaviour
     private void OnStartPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(true);
+    }
+    
+    private void OnStopPlaying(object sender, EventArgs e)
+    {
+        this.gameObject.SetActive(false);
     }
 
     private void OnCheckpointReached(object sender, EventArgs e)

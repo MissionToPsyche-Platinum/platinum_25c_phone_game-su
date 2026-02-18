@@ -11,7 +11,7 @@ public class GameStateManager : MonoBehaviour
         None,
         Menu,
         Playing,
-        DeathScreen
+        Paused,
     }
 
     public enum GameStage
@@ -36,6 +36,7 @@ public class GameStateManager : MonoBehaviour
 
     public event EventHandler<EventArgs> OnStartPlaying;
     public event EventHandler<EventArgs> OnStopPlaying;
+    public event EventHandler<EventArgs> OnPausePlaying;
 
     private void Awake()
     {
@@ -50,7 +51,7 @@ public class GameStateManager : MonoBehaviour
         totalCoins = 1000;
     }
 
-    public void StartPlaying()
+    public void EnterPlayingState()
     {
         OnStartPlaying?.Invoke(this, EventArgs.Empty);
         currentGameState = GameState.Playing;
@@ -66,10 +67,16 @@ public class GameStateManager : MonoBehaviour
         return probePosition;
     }
 
-    public void StopPlaying()
+    public void EnterMenuState()
     {
         OnStopPlaying?.Invoke(this, EventArgs.Empty);
         currentGameState = GameState.Menu;
+    }
+
+    public void EnterPausedState()
+    {
+        OnPausePlaying?.Invoke(this, EventArgs.Empty);
+        currentGameState = GameState.Paused;
     }
 
     public void AddCoins(int amount)
@@ -114,7 +121,7 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public int GetGameStage(){
+    public int GetGameStageInt(){
         switch(gameStage){
             case GameStage.None:
             return 0;

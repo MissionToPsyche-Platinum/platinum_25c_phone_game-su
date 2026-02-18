@@ -17,6 +17,24 @@ public class JoystickMover : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         defaultPosition = joystickBase.anchoredPosition;
     }
 
+    private void Start()
+    {
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
+
+        if (GameStateManager.Instance.currentGameState != GameStateManager.GameState.Playing)
+        {
+            DisableJoystick();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
+        
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         // convert screen position to position in canvas
@@ -40,4 +58,25 @@ public class JoystickMover : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         ExecuteEvents.Execute(joystickKnob.gameObject, eventData, ExecuteEvents.pointerUpHandler);
     }
+
+    public void DisableJoystick()
+    {
+        this.gameObject.SetActive(false);
+    }
+    
+    public void EnableJoystick()
+    {
+        this.gameObject.SetActive(true);
+    }
+    
+    private void OnStartPlaying(object sender, EventArgs e)
+    {
+        EnableJoystick();
+    }
+    private void OnStopPlaying(object sender, EventArgs e)
+    {
+        DisableJoystick();
+    }
+
+
 }

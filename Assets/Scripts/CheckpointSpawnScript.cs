@@ -72,7 +72,7 @@ public class CheckpointSpawnScript : MonoBehaviour
     {
         resumeMovement(0);
     }
-
+    
     void Update()
     {
         float currentScore = scoreSystem.GetCurrentScore();

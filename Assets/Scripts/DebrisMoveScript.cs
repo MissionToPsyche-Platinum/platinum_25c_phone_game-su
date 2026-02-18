@@ -14,7 +14,7 @@ public class DebrisMoveScript : MonoBehaviour
     {
 
         //may spawn homing asteroid if at Mars or further
-        if(GameStateManager.Instance.GetGameStage() >= 4 && this.gameObject.CompareTag("Debris")){
+        if(GameStateManager.Instance.GetGameStageInt() >= 4 && this.gameObject.CompareTag("Debris")){
             float random = UnityEngine.Random.Range(0f, 1f);
             if(random <= homingProbability){
                 homingAsteroid = true;
@@ -29,7 +29,7 @@ public class DebrisMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!(GameStateManager.Instance.GetGameStage() == 1)){
+        if(!(GameStateManager.Instance.GetGameStageInt() == 1)){
             velocityVector = (Vector3.down * moveSpeed) * Time.deltaTime;
             if(homingAsteroid){
 

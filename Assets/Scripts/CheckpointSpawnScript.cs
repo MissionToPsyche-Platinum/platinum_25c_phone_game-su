@@ -69,12 +69,6 @@ public class CheckpointSpawnScript : MonoBehaviour
     }
     private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
-        if (e.PreviousState != GameStateManager.GameState.MainMenu)
-        {
-            //If we aren't starting the run, don't spawn the initial checkpoint
-            return;
-        }
-        
         KillAllActiveCheckpoints();
         
         //Spawn the new checkpoint and make it move

@@ -33,7 +33,7 @@ public class GameStateManager : MonoBehaviour
     private int coinMultiplier = 1;
 
     public Vector3 startingProbePosition;
-    public GameState startingGameState;
+    public GameStage startingGameState;
     public float startingScore;
     public int startingHealth;
 

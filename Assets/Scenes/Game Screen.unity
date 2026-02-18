@@ -2863,7 +2863,7 @@ MonoBehaviour:
   armorLevel: 0
   speedLevel: 0
   startingProbePosition: {x: 0, y: -2, z: 0}
-  startingGameState: 1
+  startingGameStage: 1
   startingScore: 0
   startingHealth: 3
 --- !u!4 &602257834

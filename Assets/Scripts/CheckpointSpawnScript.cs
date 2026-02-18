@@ -71,11 +71,16 @@ public class CheckpointSpawnScript : MonoBehaviour
     {
         KillAllActiveCheckpoints();
         
+        //Default stuff for spawn logic
+        nextCheckpoint = (int)GameStateManager.Instance.startingGameStage - 1;
+        stopped = false;
+        stopTimer = 7f;
+        
         //Spawn the new checkpoint and make it move
-        spawnCheckpoint(0);
+        spawnCheckpoint((int)GameStateManager.Instance.startingGameStage - 1);
         CheckpointMoveScript moveScript = checkpointInstances[0].GetComponent<CheckpointMoveScript>();
         moveScript.SetAlreadyStoppedAtCenter(true);
-        resumeMovement(0);
+        resumeMovement((int)GameStateManager.Instance.startingGameStage - 1);
     }
     
     void Update()

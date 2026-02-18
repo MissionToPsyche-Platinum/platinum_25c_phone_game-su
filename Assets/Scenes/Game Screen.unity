@@ -7389,7 +7389,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700217065c8086a42b751994589de09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::CoinSpawner
-  coinPrefab: {fileID: 2843416048257331135, guid: f501adbc9cb896d4197e7436ea6cd2b8, type: 3}
+  coinPrefabs:
+  - {fileID: 6901600628307324799, guid: b8706ee15aea34c50a98f2f1cb3e799b, type: 3}
+  - {fileID: 5979266590099488571, guid: 9e144750848564d948c598b2fa5d7fb6, type: 3}
+  - {fileID: 1847062795176755155, guid: 5134d75f029e34d3fa362ed5dedffa9a, type: 3}
+  coinValues: 010000000200000003000000
+  coinSpawnWeights: 100000000400000001000000
   minSpawnInterval: 3
   maxSpawnInterval: 10
   minY: -5

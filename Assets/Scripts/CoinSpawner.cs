@@ -4,7 +4,11 @@ using Random = UnityEngine.Random;
 
 public class CoinSpawner : MonoBehaviour
 {
-    public GameObject coinPrefab;
+    [SerializeField] private GameObject[] coinPrefabs;
+    [SerializeField] private int[] coinValues;
+    [SerializeField] private int[] coinSpawnWeights;
+    private int totalWeight;
+
     public float minSpawnInterval = 3f;  
     public float maxSpawnInterval = 10f;  
     public float minY = -5f;             
@@ -22,10 +26,20 @@ public class CoinSpawner : MonoBehaviour
 
     private void Awake()
     {
+        
     }
 
     void Start()
     {
+        if(coinPrefabs.Length != coinSpawnWeights.Length){
+            throw new Exception("Number of power ups and power up spawn weights do not match.");
+        }
+
+        totalWeight = 0;
+        for(int i = 0; i < coinSpawnWeights.Length; i++){
+            totalWeight += coinSpawnWeights[i];
+        }
+
         nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
         this.gameObject.SetActive(false);
 
@@ -70,8 +84,19 @@ public class CoinSpawner : MonoBehaviour
             0f
         );
 
+        GameObject selectedCoin = coinPrefabs[coinPrefabs.Length - 1];
+        int randVal = UnityEngine.Random.Range(1, totalWeight); 
+        int currSum = 0;
+
+        for(int i = 0; i < 5; i++){
+            currSum += coinSpawnWeights[i];
+            if(randVal <= currSum){       
+                selectedCoin = coinPrefabs[i];
+                break;
+            }
+        }
         
-        Instantiate(coinPrefab, spawnPos, Quaternion.identity);
+        GameObject newCoin = Instantiate(selectedCoin, spawnPos, Quaternion.identity);
     }
 
     public void SetSpawnRateMultiplier(float newSpawnRateMultiplier){

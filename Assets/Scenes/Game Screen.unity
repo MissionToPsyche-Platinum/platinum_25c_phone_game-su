@@ -9296,6 +9296,7 @@ MonoBehaviour:
   restartGameButton: {fileID: 2139568965}
   shopButton: {fileID: 1252795009}
   gameOverPanel: {fileID: 1923588363}
+  gameScreenPanel: {fileID: 881652874}
   shopPanel: {fileID: 1345099208}
 --- !u!1 &1927178909
 GameObject:

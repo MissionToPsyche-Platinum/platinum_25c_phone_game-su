@@ -9,6 +9,7 @@ public class GameOverPanelController : MonoBehaviour
     [SerializeField] private Button restartGameButton;
     [SerializeField] private Button shopButton;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameScreenPanel;
     [SerializeField] private GameObject shopPanel;
 
     private void Awake()
@@ -31,7 +32,8 @@ public class GameOverPanelController : MonoBehaviour
     {
         MenuNavigationButtons.Instance.PlayButtonSound();
         // Reloads the scene to reset everything (consistent with your Pause Menu Restart)
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameStateManager.Instance.EnterPlayingState();
+        MenuNavigationButtons.Instance.SwitchPanels(gameOverPanel, gameScreenPanel);
     }
 
     public void ShopButtonClicked()

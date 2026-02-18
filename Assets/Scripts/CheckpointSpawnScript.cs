@@ -41,6 +41,7 @@ public class CheckpointSpawnScript : MonoBehaviour
         debrisSpawnSystem = debrisSpawner.GetComponent<DebrisSpawnScript>();
         coinSpawnSystem = coinSpawner.GetComponent<CoinSpawner>();
         powerUpSpawnSystem = powerUpSpawner.GetComponent<PowerUpSpawnScript>();
+        spawnCheckpoint(nextCheckpoint);
 
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }

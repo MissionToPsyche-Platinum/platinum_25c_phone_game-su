@@ -42,7 +42,6 @@ public class CheckpointSpawnScript : MonoBehaviour
         coinSpawnSystem = coinSpawner.GetComponent<CoinSpawner>();
         powerUpSpawnSystem = powerUpSpawner.GetComponent<PowerUpSpawnScript>();
 
-        spawnCheckpoint(0);
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
@@ -70,11 +69,20 @@ public class CheckpointSpawnScript : MonoBehaviour
     }
     private void OnStartPlaying(object sender, EventArgs e)
     {
+        spawnCheckpoint(0);
+        CheckpointMoveScript moveScript = checkpointInstances[0].GetComponent<CheckpointMoveScript>();
+        moveScript.SetAlreadyStoppedAtCenter(true);
         resumeMovement(0);
     }
     
     void Update()
     {
+        if (GameStateManager.Instance.currentGameState != GameStateManager.GameState.Playing)
+        {
+            //If the game isn't playing, then ignore this stuff
+            return;
+        }
+        
         float currentScore = scoreSystem.GetCurrentScore();
         if(nextCheckpoint < numCheckpoints && currentScore >= checkpointScores[nextCheckpoint]){
             OnCheckpointReached?.Invoke(this, EventArgs.Empty);

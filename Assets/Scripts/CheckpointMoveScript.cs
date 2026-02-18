@@ -3,7 +3,7 @@ using UnityEngine;
 public class CheckpointMoveScript : MonoBehaviour
 {
     bool stoppedAtCenter = false;
-    bool alreadyStopped = false;
+    bool alreadyStoppedAtCenter = false;
     float moveSpeed = 2.0f;
 
 
@@ -11,13 +11,14 @@ public class CheckpointMoveScript : MonoBehaviour
     void Start()
     {
         Debug.Log("stoppedAtCenter: " + stoppedAtCenter);
-        Debug.Log("alreadyStopped: " + alreadyStopped);
+        Debug.Log("alreadyStopped: " + alreadyStoppedAtCenter);
         Debug.Log("Position: " + transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("stoppedAtCenter: " + stoppedAtCenter);
         if(!stoppedAtCenter){
             transform.position = transform.position + (Vector3.down * moveSpeed) * Time.deltaTime;
             Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
@@ -26,14 +27,19 @@ public class CheckpointMoveScript : MonoBehaviour
                 Destroy(gameObject);
             }
 
-            if(transform.position.y < 0.0f && !alreadyStopped){
+            if(transform.position.y < 0.0f && !alreadyStoppedAtCenter){
                 GameStateManager.Instance.SetGameStage(1);
-                alreadyStopped = true;
+                alreadyStoppedAtCenter = true;
                 stoppedAtCenter = true;
             }
         }
 
 
+    }
+
+    public void SetAlreadyStoppedAtCenter(bool hasAlreadyStoppedAtCenter)
+    {
+        this.alreadyStoppedAtCenter = hasAlreadyStoppedAtCenter;
     }
 
 

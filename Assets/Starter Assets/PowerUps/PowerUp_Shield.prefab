@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1364822685005599357}
   - component: {fileID: -5421197843558849676}
   - component: {fileID: -2497442633767755094}
+  - component: {fileID: 8625035024494038628}
   m_Layer: 0
   m_Name: PowerUp_Shield
   m_TagString: PowerUpShield
@@ -106,6 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::DebrisMoveScript
   moveSpeed: 1
+  homingProbability: 0.2
+  homingAmount: 0.5
 --- !u!50 &-5421197843558849676
 Rigidbody2D:
   serializedVersion: 5
@@ -179,3 +182,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.9599996, y: 6.480633}
   m_EdgeRadius: 0
+--- !u!114 &8625035024494038628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3357609223072307667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameStart

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4271198201571681843}
   - component: {fileID: 6000641729693464402}
   - component: {fileID: -6261388684762827112}
+  - component: {fileID: -989037373161299997}
   m_Layer: 0
   m_Name: Debris
   m_TagString: Debris
@@ -156,3 +157,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9812570793740a4bbfef4e2a733a963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::AsteroidController
+--- !u!114 &-989037373161299997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8420540731902456465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameStart

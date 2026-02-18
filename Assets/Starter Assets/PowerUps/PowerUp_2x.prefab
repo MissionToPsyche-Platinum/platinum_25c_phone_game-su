@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2337895187373862899}
   - component: {fileID: -9185188685802844730}
   - component: {fileID: -3576660951213929948}
+  - component: {fileID: -783623923173824286}
   m_Layer: 0
   m_Name: PowerUp_2x
   m_TagString: PowerUp2x
@@ -106,6 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::DebrisMoveScript
   moveSpeed: 1
+  homingProbability: 0.2
+  homingAmount: 0.5
 --- !u!50 &-9185188685802844730
 Rigidbody2D:
   serializedVersion: 5
@@ -179,3 +182,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 12.199999, y: 7.4407268}
   m_EdgeRadius: 0
+--- !u!114 &-783623923173824286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768814781467460656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameStart

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4764837831656191051}
   - component: {fileID: 3762797567561868655}
   - component: {fileID: 6525226204662080095}
+  - component: {fileID: -7140693684203366818}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -127,3 +128,15 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &-7140693684203366818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5527915516165077426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameStart

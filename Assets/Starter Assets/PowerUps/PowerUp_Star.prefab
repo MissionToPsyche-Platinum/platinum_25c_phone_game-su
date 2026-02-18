@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4385009289562186013}
   - component: {fileID: 7800312742015090503}
   - component: {fileID: 265078084404684279}
+  - component: {fileID: 1113893358588543022}
   m_Layer: 0
   m_Name: PowerUp_Star
   m_TagString: PowerUpStar
@@ -106,6 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::DebrisMoveScript
   moveSpeed: 1
+  homingProbability: 0.2
+  homingAmount: 0.5
 --- !u!50 &7800312742015090503
 Rigidbody2D:
   serializedVersion: 5
@@ -179,3 +182,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 11.999999, y: 11.78115}
   m_EdgeRadius: 0
+--- !u!114 &1113893358588543022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6154391625889750010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameStart

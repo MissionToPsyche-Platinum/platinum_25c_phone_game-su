@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1375837836580849907}
   - component: {fileID: 4218984808547554847}
   - component: {fileID: 8964318052485057189}
+  - component: {fileID: 3360889605947897246}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -143,3 +144,15 @@ MonoBehaviour:
   lifetime: 3
   value: 1
   coinSoundClip: {fileID: 8300000, guid: 7aa6f528cee57446884cf415849ba444, type: 3}
+--- !u!114 &3360889605947897246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2843416048257331135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameStart

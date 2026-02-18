@@ -11,17 +11,19 @@ public class PauseScreenButtonsController : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button restartButton;
 
     private void Awake()
     {
         resumeButton.onClick.AddListener(ResumeButtonAction);
         quitButton.onClick.AddListener(QuitButtonAction);
+        restartButton.onClick.AddListener(RestartButtonAction);
         
     }
     private void ResumeButtonAction()
     {
         MenuNavigationButtons.Instance.PlayButtonSound();
-        GameStateManager.Instance.EnterPlayingState();
+        GameStateManager.Instance.ResumePlayingState();
         MenuNavigationButtons.Instance.SwitchPanels(pauseScreenPanel, gameScreenPanel);
     }
 
@@ -30,6 +32,13 @@ public class PauseScreenButtonsController : MonoBehaviour
         MenuNavigationButtons.Instance.PlayButtonSound();
         MenuNavigationButtons.Instance.SwitchPanels(pauseScreenPanel, startScreenPanel);
         GameStateManager.Instance.EnterMenuState();
+    }
+    
+    private void RestartButtonAction()
+    {
+        MenuNavigationButtons.Instance.PlayButtonSound();
+        GameStateManager.Instance.EnterPlayingState();
+        MenuNavigationButtons.Instance.SwitchPanels(pauseScreenPanel, gameScreenPanel);
     }
 
 }

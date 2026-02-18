@@ -55,16 +55,6 @@ public class GameStateManager : MonoBehaviour
         totalCoins = 1000;
     }
 
-    public void EnterPlayingState()
-    {
-        Time.timeScale = 1f;
-        OnStartPlaying?.Invoke(this, new GameStateChangeEventArgs()
-        {
-            PreviousState = currentGameState
-        });
-        currentGameState = GameState.Playing;
-    }
-
     public void UpdateProbePosition(Vector3 newPosition)
     {
         probePosition = newPosition;
@@ -73,6 +63,16 @@ public class GameStateManager : MonoBehaviour
     public Vector3 GetProbePosition()
     {
         return probePosition;
+    }
+
+    public void EnterPlayingState()
+    {
+        Time.timeScale = 1f;
+        OnStartPlaying?.Invoke(this, new GameStateChangeEventArgs()
+        {
+            PreviousState = currentGameState
+        });
+        currentGameState = GameState.Playing;
     }
 
     public void EnterMenuState()
@@ -93,6 +93,15 @@ public class GameStateManager : MonoBehaviour
             PreviousState = currentGameState
         });
         currentGameState = GameState.Paused;
+    }
+
+    /// <summary>
+    /// Method to enter playing state without invoking the OnStartPlaying event
+    /// </summary>
+    public void ResumePlayingState()
+    {
+        Time.timeScale = 1f;
+        currentGameState = GameState.Playing;
     }
 
     public void AddCoins(int amount)

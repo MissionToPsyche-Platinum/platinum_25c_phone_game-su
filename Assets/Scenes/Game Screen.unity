@@ -7391,7 +7391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScript::CoinSpawner
   coinPrefabs:
   - {fileID: 6901600628307324799, guid: b8706ee15aea34c50a98f2f1cb3e799b, type: 3}
-  - {fileID: 5979266590099488571, guid: 9e144750848564d948c598b2fa5d7fb6, type: 3}
+  - {fileID: 5103829902325286908, guid: 9e144750848564d948c598b2fa5d7fb6, type: 3}
   - {fileID: 1847062795176755155, guid: 5134d75f029e34d3fa362ed5dedffa9a, type: 3}
   coinValues: 010000000200000003000000
   coinSpawnWeights: 100000000400000001000000

@@ -12,12 +12,18 @@ public class ProbeHealth : MonoBehaviour
 
     void Start()
     {
-        
         damageActive = true;
         shieldActive = false;
 
+        
         if (GameStateManager.Instance != null)
         {
+            
+            int calculatedMaxHealth = 3 + GameStateManager.Instance.maxHealthLevel;
+
+            
+            GameStateManager.Instance.startingHealth = calculatedMaxHealth;
+
             maxHealth = GameStateManager.Instance.startingHealth;
             Debug.Log("Max health set to: " + maxHealth);
         }
@@ -29,7 +35,6 @@ public class ProbeHealth : MonoBehaviour
             gameOverPanel.SetActive(false);
         }
 
-        
         if (GameStateManager.Instance != null)
         {
             GameStateManager.Instance.OnStartPlaying += OnGameStart;
@@ -38,18 +43,20 @@ public class ProbeHealth : MonoBehaviour
 
     void OnDestroy()
     {
-        
         if (GameStateManager.Instance != null)
         {
             GameStateManager.Instance.OnStartPlaying -= OnGameStart;
         }
     }
 
-    void OnGameStart(object sender, EventArgs e)
+    void OnGameStart(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
-        
         if (GameStateManager.Instance != null)
         {
+            
+            int calculatedMaxHealth = 3 + GameStateManager.Instance.maxHealthLevel;
+            GameStateManager.Instance.startingHealth = calculatedMaxHealth;
+
             maxHealth = GameStateManager.Instance.startingHealth;
             currentHealth = maxHealth;
             Debug.Log("Max health set to: " + maxHealth);
@@ -63,11 +70,11 @@ public class ProbeHealth : MonoBehaviour
             
             if (!shieldActive && GameStateManager.Instance != null)
             {
-                int dodgeChance = GameStateManager.Instance.armorLevel * 10; 
+                int dodgeChance = GameStateManager.Instance.armorLevel * 10;
                 if (UnityEngine.Random.Range(0, 100) < dodgeChance)
                 {
                     Debug.Log("Damage dodged by armor!");
-                    return; 
+                    return;
                 }
             }
 

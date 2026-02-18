@@ -53,6 +53,7 @@ public class GameStateManager : MonoBehaviour
 
     public void EnterPlayingState()
     {
+        Time.timeScale = 1f;
         OnStartPlaying?.Invoke(this, EventArgs.Empty);
         currentGameState = GameState.Playing;
     }
@@ -69,12 +70,14 @@ public class GameStateManager : MonoBehaviour
 
     public void EnterMenuState()
     {
+        Time.timeScale = 0f;
         OnStopPlaying?.Invoke(this, EventArgs.Empty);
         currentGameState = GameState.Menu;
     }
 
     public void EnterPausedState()
     {
+        Time.timeScale = 0f;
         OnPausePlaying?.Invoke(this, EventArgs.Empty);
         currentGameState = GameState.Paused;
     }

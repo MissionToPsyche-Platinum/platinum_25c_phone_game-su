@@ -92,6 +92,7 @@ public class CoinSpawner : MonoBehaviour
             currSum += coinSpawnWeights[i];
             if(randVal <= currSum){       
                 selectedCoin = coinPrefabs[i];
+                selectedCoin.GetComponent<CoinBehavior>().value = coinValues[i];
                 break;
             }
         }

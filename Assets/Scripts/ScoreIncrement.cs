@@ -43,7 +43,7 @@ public class ScoreIncrement : MonoBehaviour
         if(scoreUpdate){
             currentScore += scorePerSecond * Time.deltaTime * scoreMultiplier;
             finalScore = Mathf.FloorToInt(currentScore);
-            scoreText.text = "Score: " + finalScore.ToString();
+            scoreText.text = finalScore.ToString();
         }
     }
 

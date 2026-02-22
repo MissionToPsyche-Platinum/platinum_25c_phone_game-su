@@ -9,7 +9,7 @@ public class CoinUI : MonoBehaviour
     {
         if (coinText != null && GameStateManager.Instance != null)
         {
-            coinText.text = "Coins: " + GameStateManager.Instance.GetCoins();
+            coinText.text = GameStateManager.Instance.GetCoins().ToString();
         }
     }
 }

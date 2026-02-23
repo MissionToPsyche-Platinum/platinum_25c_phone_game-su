@@ -37,6 +37,8 @@ public class GameStateManager : MonoBehaviour
     public float startingScore;
     public int startingHealth;
 
+    public int currentProbeSkin = 0;
+
     private Vector3 probePosition;
 
     public class GameStateChangeEventArgs : EventArgs
@@ -168,5 +170,15 @@ public class GameStateManager : MonoBehaviour
             default:
             return 0;
         }
+    }
+
+    public void SetProbeSkin(int skinIndex)
+    {
+        currentProbeSkin = skinIndex;
+    }
+
+    public int GetProbeSkin()
+    {
+        return currentProbeSkin;
     }
 }

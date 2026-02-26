@@ -196,6 +196,7 @@ public class ProbeController : MonoBehaviour
         {
             moveSpeed = 3f + (GameStateManager.Instance.speedLevel * 0.5f);
         }
+        ApplySkin();
     }
     
     private void OnStopPlaying(object sender, EventArgs e)
@@ -217,5 +218,26 @@ public class ProbeController : MonoBehaviour
     public void Kill()
     {
         healthSystem.SetToZeroLives();
+    }
+
+    void ApplySkin()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null && GameStateManager.Instance != null)
+        {
+            int skinIndex = GameStateManager.Instance.GetProbeSkin();
+
+            switch (skinIndex)
+            {
+                case 0:
+                    spriteRenderer.color = Color.white; // Default
+                    break;
+                case 1:
+                    spriteRenderer.color = Color.blue; // Blue
+                    break;
+            }
+
+            Debug.Log("Applied skin: " + skinIndex + ", Color: " + spriteRenderer.color);
+        }
     }
 }

@@ -3,6 +3,9 @@ using System;
 
 public class ProbeHealth : MonoBehaviour
 {
+    [SerializeField] private GameObject healthController;
+    private HealthUI healthUI;
+
     public int maxHealth = 3;
     public int currentHealth;
     public GameObject gameOverPanel;
@@ -14,7 +17,7 @@ public class ProbeHealth : MonoBehaviour
     {
         damageActive = true;
         shieldActive = false;
-
+        healthUI = healthController.GetComponent<HealthUI>();
         
         if (GameStateManager.Instance != null)
         {
@@ -90,6 +93,13 @@ public class ProbeHealth : MonoBehaviour
             }
             else
             {
+                if(currentHealth >= damage)
+                {
+                    healthUI.TakeDamage(damage);
+                } 
+                else{
+                    healthUI.TakeDamage(currentHealth);
+                }
                 currentHealth -= damage;
             }
         }

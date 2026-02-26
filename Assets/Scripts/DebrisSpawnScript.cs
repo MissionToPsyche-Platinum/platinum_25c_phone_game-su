@@ -7,6 +7,8 @@ public class DebrisSpawnScript : MonoBehaviour
     public GameObject debris;
     public float minSpawnInterval = 0.2f; 
     public float maxSpawnInterval = 0.5f;
+    public float minSize = 0.3f;
+    public float maxSize = 1f;
     private float timer = 0f;
     private float nextSpawnTime;
     private float gameTime = 0f; 
@@ -74,7 +76,7 @@ public class DebrisSpawnScript : MonoBehaviour
         OnDebrisSpawned?.Invoke(this, EventArgs.Empty);
 
         // Random size
-        float randomScale = Random.Range(0.3f, 2.0f);
+        float randomScale = Random.Range(minSize, maxSize);
         newDebris.transform.localScale = Vector3.one * randomScale;
 
         // Random speed with difficulty multiplier

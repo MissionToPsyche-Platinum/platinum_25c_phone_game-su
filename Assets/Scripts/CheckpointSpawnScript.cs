@@ -44,10 +44,12 @@ public class CheckpointSpawnScript : MonoBehaviour
         spawnCheckpoint(nextCheckpoint);
 
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
     }
 
     private void OnDestroy()
     {
+        GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
     }
 
@@ -82,6 +84,12 @@ public class CheckpointSpawnScript : MonoBehaviour
         CheckpointMoveScript moveScript = checkpointInstances[0].GetComponent<CheckpointMoveScript>();
         moveScript.SetAlreadyStoppedAtCenter(true);
         resumeMovement((int)GameStateManager.Instance.startingGameStage - 1);
+    }
+    
+    private void OnStopPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
+    {
+        KillAllActiveCheckpoints();
+        spawnCheckpoint((int)GameStateManager.Instance.startingGameStage - 1);
     }
     
     void Update()

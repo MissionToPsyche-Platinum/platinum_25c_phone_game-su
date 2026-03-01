@@ -74,7 +74,7 @@ public class CheckpointSpawnScript : MonoBehaviour
     {
         KillAllActiveCheckpoints();
         
-        //Default stuff for spawn logic
+        //Setting default stuff for spawn logic
         nextCheckpoint = (int)GameStateManager.Instance.startingGameStage - 1;
         stopped = false;
         stopTimer = 7f;
@@ -128,5 +128,25 @@ public class CheckpointSpawnScript : MonoBehaviour
                 Destroy(checkpoint);
             }
         }
+    }
+    
+    public int GetNextCheckpointScore()
+    {
+        if (nextCheckpoint >= numCheckpoints)
+        {
+            //There are no more checkpoints
+            return 99999999; //arbitrary impossible high number to reach, maybe change later
+        }
+        return checkpointScores[nextCheckpoint];
+    }
+
+    public int GetLastCheckpointScore()
+    {
+        if (nextCheckpoint - 1 <= 0)
+        {
+            //if the last checkpoint was earth or didn't exist
+            return 0;
+        }
+        return checkpointScores[nextCheckpoint - 1];
     }
 }

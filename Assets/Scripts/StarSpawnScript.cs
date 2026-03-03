@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
 
-
 public class StarSpawnScript : MonoBehaviour
 {
     public GameObject[] starSprites;   //list of all stars that can be spawned
@@ -16,6 +15,8 @@ public class StarSpawnScript : MonoBehaviour
     private float nextSpawnTime;
     private int totalWeight;
 
+    [SerializeField] private Transform starParent;
+
     private bool spawnerActive;
 
     CheckpointSpawnScript checkpointSpawnScript;
@@ -23,6 +24,12 @@ public class StarSpawnScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (starParent == null)
+        {
+            GameObject container = new GameObject("BackgroundStars");
+            starParent = container.transform;
+        }
+
         GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
         checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
         checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
@@ -32,21 +39,24 @@ public class StarSpawnScript : MonoBehaviour
         GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
 
         //throw an error if powerUps and powerUpSpawnWeights are different sizes
-        if(starSprites.Length != starWeights.Length){
+        if (starSprites.Length != starWeights.Length || starSprites.Length != starSpeeds.Length)
+        {
             throw new Exception("Number of power ups and power up spawn weights do not match.");
         }
 
         //calculate total of all weights provided
         totalWeight = 0;
-        for(int i = 0; i < starWeights.Length; i++){
+        for (int i = 0; i < starWeights.Length; i++)
+        {
             totalWeight += starWeights[i];
         }
 
-        for(int i = 0; i < initialSpawnCount; i++){
+        for (int i = 0; i < initialSpawnCount; i++)
+        {
 
             Vector3 spawnPos = new Vector3(
-                UnityEngine.Random.Range(-2.0f, 2.0f),  
-                UnityEngine.Random.Range(-5.0f, 5.0f),                       
+                UnityEngine.Random.Range(-2.0f, 2.0f),
+                UnityEngine.Random.Range(-5.0f, 5.0f),
                 1f
             );
 
@@ -65,46 +75,49 @@ public class StarSpawnScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(spawnerActive){
+        if (spawnerActive)
+        {
             timer += Time.deltaTime;
-            
+
             if (timer >= nextSpawnTime)
             {
                 // Random position of spawn
                 Vector3 spawnPos = new Vector3(
-                    UnityEngine.Random.Range(-2.0f, 2.0f),  
-                    5f,                       
+                    UnityEngine.Random.Range(-2.0f, 2.0f),
+                    5f,
                     1f
                 );
-                
+
                 SpawnStar(spawnPos);
                 timer = 0f;
-                
+
                 nextSpawnTime = UnityEngine.Random.Range(minSpawnInterval, maxSpawnInterval);
             }
         }
-        
+
     }
-    
+
     void SpawnStar(Vector3 spawnPos)
     {
         // Random sprite
         GameObject selectedSprite = starSprites[starSprites.Length - 1];
-        int randVal = UnityEngine.Random.Range(1, totalWeight); 
+        int randVal = UnityEngine.Random.Range(1, totalWeight);
         int currSum = 0;
 
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < starWeights.Length; i++)
+        {
             currSum += starWeights[i];
-            if(randVal <= currSum){             //checks if random value generated is between sum of first i-1 and first i weights
+            if (randVal <= currSum)
+            {
                 selectedSprite = starSprites[i];
                 moveSpeed = starSpeeds[i];
                 break;
             }
         }
-        
+
         // Spawn the star
-        GameObject newStar = Instantiate(selectedSprite, spawnPos, Quaternion.identity);
-        
+        GameObject newStar = Instantiate(selectedSprite, spawnPos, Quaternion.identity, starParent);
+
         // Random speed
         DebrisMoveScript script = newStar.GetComponent<DebrisMoveScript>();
         if (script != null)
@@ -117,7 +130,7 @@ public class StarSpawnScript : MonoBehaviour
     {
         this.gameObject.SetActive(true);
     }
-    
+
     private void OnStopPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(false);
@@ -132,6 +145,4 @@ public class StarSpawnScript : MonoBehaviour
     {
         spawnerActive = true;
     }
-
-
 }

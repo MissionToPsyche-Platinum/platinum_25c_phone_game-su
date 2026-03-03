@@ -17,6 +17,10 @@ public class StartScreenButtonsController : MonoBehaviour
     [SerializeField] private Button shopScreenButton;
     [SerializeField] private Button statsScreenButton;
     [SerializeField] private Button settingsScreenButton;
+    [SerializeField] private Button disclaimerButton;
+
+    [Header("Other")]
+    [SerializeField] private DisclaimerPanelController disclaimerPanel;
 
     private void Awake()
     {
@@ -24,6 +28,7 @@ public class StartScreenButtonsController : MonoBehaviour
         shopScreenButton.onClick.AddListener(ShopScreenButtonAction);
         statsScreenButton.onClick.AddListener(StatsScreenButtonAction);
         settingsScreenButton.onClick.AddListener(SettingsScreenButtonAction);
+        disclaimerButton.onClick.AddListener(DisclaimerButtonAction);
     }
 
     private void StartGameButtonAction()
@@ -52,5 +57,11 @@ public class StartScreenButtonsController : MonoBehaviour
         MenuNavigationButtons.Instance.PlayButtonSound();
         MenuNavigationButtons.Instance.SwitchPanels(startScreenPanel, settingsScreenPanel);
 
+    }
+
+    private void DisclaimerButtonAction()
+    {
+        disclaimerPanel.Show();
+        startScreenPanel.SetActive(false);
     }
 }

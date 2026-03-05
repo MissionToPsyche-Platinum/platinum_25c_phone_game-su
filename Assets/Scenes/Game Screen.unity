@@ -10396,11 +10396,11 @@ MonoBehaviour:
   coinValues: 010000000200000003000000
   coinSpawnWeights: 100000000400000001000000
   minSpawnInterval: 3
-  maxSpawnInterval: 10
-  minY: -5
+  maxSpawnInterval: 8
+  minY: -4.5
   maxY: 1
-  minX: -2.5
-  maxX: 2.5
+  minX: -2.1
+  maxX: 2.1
 --- !u!1 &1481731316
 GameObject:
   m_ObjectHideFlags: 0

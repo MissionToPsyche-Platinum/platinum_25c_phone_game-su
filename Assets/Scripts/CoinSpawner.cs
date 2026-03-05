@@ -10,11 +10,11 @@ public class CoinSpawner : MonoBehaviour
     private int totalWeight;
 
     public float minSpawnInterval = 3f;  
-    public float maxSpawnInterval = 10f;  
-    public float minY = -5f;             
+    public float maxSpawnInterval = 8f;  
+    public float minY = -4.5f;             
     public float maxY = 1f;              
-    public float minX = -2.5f;             
-    public float maxX = 2.5f;              
+    public float minX = -2.1f;             
+    public float maxX = 2.1f;              
 
     private float timer = 0f;
     private float nextSpawnTime;

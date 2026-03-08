@@ -4,11 +4,16 @@ using Random = UnityEngine.Random;
 
 public class DebrisSpawnScript : MonoBehaviour
 {
-    public GameObject debris;
+    //0 - standard, 1 - homing, 2 - exploding, 3 - duplicating, 4 - teleporting
+    public GameObject[] debrisTypes;
+    public int[] spawnWeights;
+    private int totalWeight = 0;
+
     public float minSpawnInterval = 0.2f; 
     public float maxSpawnInterval = 0.5f;
     public float minSize = 0.3f;
     public float maxSize = 1f;
+
     private float timer = 0f;
     private float nextSpawnTime;
     private float gameTime = 0f; 
@@ -30,6 +35,11 @@ public class DebrisSpawnScript : MonoBehaviour
         GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
 
         nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+
+        for(int i = 0; i < 5; i++)
+        {
+            totalWeight += spawnWeights[i];
+        }
     }
 
     private void OnDestroy()
@@ -71,8 +81,22 @@ public class DebrisSpawnScript : MonoBehaviour
             0f
         );
 
+        int debrisType = debrisTypes.Length - 1;
+        GameObject selectedDebris = debrisTypes[debrisType];
+        int randVal = UnityEngine.Random.Range(1, totalWeight); 
+        int currSum = 0;
+
+        for(int i = 0; i < 5; i++){
+            currSum += spawnWeights[i];
+            if(currSum >= randVal){             //checks if random value generated is between sum of first i-1 and first i weights
+                selectedDebris = debrisTypes[i];
+                debrisType = i;
+                break;
+            }
+        }
+        
         // Spawn the debris
-        GameObject newDebris = Instantiate(debris, spawnPos, Quaternion.identity);
+        GameObject newDebris = Instantiate(selectedDebris, spawnPos, Quaternion.identity);
         OnDebrisSpawned?.Invoke(this, EventArgs.Empty);
 
         // Random size
@@ -84,7 +108,9 @@ public class DebrisSpawnScript : MonoBehaviour
         if (script != null)
         {
             float baseSpeed = Random.Range(2.0f, 8.0f);
-            script.moveSpeed = baseSpeed * difficultyMultiplier; // 1% faster per second
+            script.velocity = baseSpeed * difficultyMultiplier * Vector3.down; // 1% faster per second
+            script.type = debrisType;
+            script.debrisScale = randomScale;
         }
     }
 

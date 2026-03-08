@@ -93,7 +93,7 @@ public class ProbeController : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.GetComponent<AsteroidController>() != null)
+        if (collision.gameObject.CompareTag("Debris"))
         {
             //if the collided object is asteroid
             Debug.Log("Collision with asteroid!");

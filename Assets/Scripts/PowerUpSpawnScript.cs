@@ -10,6 +10,8 @@ public class PowerUpSpawnScript : MonoBehaviour
 
     public float minSpawnInterval = 10f; // Minimum time between spawns
     public float maxSpawnInterval = 15f; // Maximum time between spawns
+    public float minSpeed;
+    public float maxSpeed;
     private float timer = 0f;
     private float nextSpawnTime;
     private int totalWeight;
@@ -99,7 +101,7 @@ public class PowerUpSpawnScript : MonoBehaviour
         DebrisMoveScript script = newPowerUp.GetComponent<DebrisMoveScript>();
         if (script != null)
         {
-            script.moveSpeed = UnityEngine.Random.Range(2.0f, 8.0f);
+            script.velocity = Vector3.down * UnityEngine.Random.Range(minSpeed, maxSpeed);
         }
     }
     

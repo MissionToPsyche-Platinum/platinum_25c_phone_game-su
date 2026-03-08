@@ -122,7 +122,7 @@ public class StarSpawnScript : MonoBehaviour
         DebrisMoveScript script = newStar.GetComponent<DebrisMoveScript>();
         if (script != null)
         {
-            script.moveSpeed = moveSpeed;
+            script.velocity = Vector3.down * moveSpeed;
         }
     }
 

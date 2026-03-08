@@ -1,24 +1,25 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class SettingsScreenButtonController : MonoBehaviour
 {
     [Header("Panels Can Switch To")]
     [SerializeField] private GameObject settingsScreenPanel;
     [SerializeField] private GameObject startScreenPanel;
-    
+
     [Header("Buttons")]
-    [SerializeField] private Button backToMainMenuButton;
+    [SerializeField] private Button openSettingsButton;
 
     private void Awake()
     {
-        backToMainMenuButton.onClick.AddListener(BackButtonAction);
+        openSettingsButton.onClick.AddListener(OpenSettingsAction);
     }
 
-    private void BackButtonAction()
+    private void OpenSettingsAction()
     {
         MenuNavigationButtons.Instance.PlayButtonSound();
-        MenuNavigationButtons.Instance.SwitchPanels(settingsScreenPanel, startScreenPanel);
+        SettingsScreenController controller = settingsScreenPanel.GetComponent<SettingsScreenController>();
+        controller.SetPreviousPanel(startScreenPanel);
+        MenuNavigationButtons.Instance.SwitchPanels(startScreenPanel, settingsScreenPanel);
     }
 }

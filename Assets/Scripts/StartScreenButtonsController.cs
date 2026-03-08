@@ -55,8 +55,9 @@ public class StartScreenButtonsController : MonoBehaviour
     private void SettingsScreenButtonAction()
     {
         MenuNavigationButtons.Instance.PlayButtonSound();
+        SettingsScreenController controller = settingsScreenPanel.GetComponent<SettingsScreenController>();
+        controller.SetPreviousPanel(startScreenPanel);
         MenuNavigationButtons.Instance.SwitchPanels(startScreenPanel, settingsScreenPanel);
-
     }
 
     private void DisclaimerButtonAction()

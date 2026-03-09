@@ -10,9 +10,7 @@ public class CheckpointMoveScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("stoppedAtCenter: " + stoppedAtCenter);
-        Debug.Log("alreadyStopped: " + alreadyStoppedAtCenter);
-        Debug.Log("Position: " + transform.position);
+        
     }
 
     // Update is called once per frame

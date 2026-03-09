@@ -47,28 +47,22 @@ public class PowerUpBehavior : MonoBehaviour
             switch(index) 
             {
                 case 0: //Hyperspace
-                    Debug.Log("Collision with Hyperspace power up");
                     healthSystem.DisableDamage();
                     scoreSystem.ScaleScoreRate(hyperspaceScoreScale);
                     break;
                 case 1: //Shield
-                    Debug.Log("Collision with Shield power up");
                     healthSystem.AddShield(shieldHealth);
                     break;
                 case 2: //2x
-                    Debug.Log("Collision with 2x power up");
                     GameStateManager.Instance.SetCoinMultiplier(coinMultiplier);
                     break;
                 case 3: //Star
-                    Debug.Log("Collision with Star power up");
                     debrisSpawnSystem.DisableSpawning();
                     break;
                 default:
-                    Debug.Log("Invalid index given to beginPowerUp()");
                     break;
             }
         } else {
-            Debug.Log("Collision with Hex power up");
             ultimateProgress += 1;
             if(ultimateProgress == 5){
                 powerUpsActive[index] = true;
@@ -85,30 +79,24 @@ public class PowerUpBehavior : MonoBehaviour
         switch(index) 
         {
             case 0:
-                Debug.Log("Ending Hyperspace power up");
                 scoreSystem.ScaleScoreRate(1 / hyperspaceScoreScale);
                 healthSystem.EnableDamage();
                 break;
             case 1:
-            Debug.Log("Ending Shield power up");
                 healthSystem.RemoveShield();
                 break;
             case 2:
-                Debug.Log("Ending 2x power up");
                 GameStateManager.Instance.SetCoinMultiplier(1);
                 break;
             case 3:
-                Debug.Log("Ending Star power up");
                 debrisSpawnSystem.EnableSpawning();
                 break;
             case 4:
-                Debug.Log("Ending Hex power up");
                 debrisSpawnSystem.EnableSpawning();
                 coinSpawnSystem.SetSpawnRateMultiplier(1f);
                 ultimateProgress = 0;
                 break;
             default:
-                Debug.Log("Invalid index given to endPowerUp()");
                 break;
         }
     }

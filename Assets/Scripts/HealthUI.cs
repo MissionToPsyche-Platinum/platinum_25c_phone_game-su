@@ -46,7 +46,6 @@ public class HealthUI : MonoBehaviour
         {
             Vector3 spawnPos = new Vector3(xMin, hpPosY, 0f);
             hpInstances[i] = Instantiate(healthPoint, spawnPos, Quaternion.identity);
-            Debug.Log("Spawning HP at " + xMin + ", " + hpPosY);
             hpPosY += hpHeight + spacing;
         }
     }

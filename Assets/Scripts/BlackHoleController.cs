@@ -67,7 +67,6 @@ public class BlackHoleController : MonoBehaviour
         Vector3 directionVector = transform.position - probePosition;
         float distance = directionVector.magnitude;
         if(distance < minDistance){
-            Debug.Log("Absorbed by black hole");
             probeController.Kill();
             distance = 1f;
         }

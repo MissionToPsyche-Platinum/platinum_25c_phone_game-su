@@ -28,7 +28,6 @@ public class ProbeHealth : MonoBehaviour
             GameStateManager.Instance.startingHealth = calculatedMaxHealth;
 
             maxHealth = GameStateManager.Instance.startingHealth;
-            Debug.Log("Max health set to: " + maxHealth);
         }
 
         currentHealth = maxHealth;
@@ -62,7 +61,6 @@ public class ProbeHealth : MonoBehaviour
 
             maxHealth = GameStateManager.Instance.startingHealth;
             currentHealth = maxHealth;
-            Debug.Log("Max health set to: " + maxHealth);
         }
     }
 
@@ -76,7 +74,6 @@ public class ProbeHealth : MonoBehaviour
                 int dodgeChance = GameStateManager.Instance.armorLevel * 10;
                 if (UnityEngine.Random.Range(0, 100) < dodgeChance)
                 {
-                    Debug.Log("Damage dodged by armor!");
                     return;
                 }
             }
@@ -84,10 +81,8 @@ public class ProbeHealth : MonoBehaviour
             if (shieldActive)
             {
                 shieldHealth -= damage;
-                Debug.Log("Shield damaged");
                 if (shieldHealth <= 0)
                 {
-                    Debug.Log("Shield broken");
                     shieldActive = false;
                 }
             }
@@ -108,7 +103,6 @@ public class ProbeHealth : MonoBehaviour
         {
             currentHealth = 0;
             gameOverPanel.gameObject.SetActive(true);
-            Debug.Log("Game Over!");
         }
     }
 

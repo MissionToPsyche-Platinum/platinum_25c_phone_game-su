@@ -74,13 +74,13 @@ public class PowerUpSpawnScript : MonoBehaviour
         // Random position of spawn
         Vector3 spawnPos = new Vector3(
             UnityEngine.Random.Range(-2.0f, 2.0f),  
-            10f,                       
+            UnityEngine.Random.Range(0f, 4f),                       
             0f
         );
 
         // Random power up
         GameObject selectedPowerUp = powerUps[powerUps.Length - 1];
-        int randVal = UnityEngine.Random.Range(1, totalWeight); 
+        int randVal = UnityEngine.Random.Range(1, totalWeight + 1); 
         int currSum = 0;
 
         for(int i = 0; i < 5; i++){
@@ -93,16 +93,6 @@ public class PowerUpSpawnScript : MonoBehaviour
         
         // Spawn the power up
         GameObject newPowerUp = Instantiate(selectedPowerUp, spawnPos, Quaternion.identity);
-
-        // Scale power up
-        newPowerUp.transform.localScale = Vector3.one * 0.1f;
-        
-        // Random speed
-        DebrisMoveScript script = newPowerUp.GetComponent<DebrisMoveScript>();
-        if (script != null)
-        {
-            script.velocity = Vector3.down * UnityEngine.Random.Range(minSpeed, maxSpeed);
-        }
     }
     
     private void OnStartPlaying(object sender, EventArgs e)

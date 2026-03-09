@@ -101,7 +101,7 @@ public class StarSpawnScript : MonoBehaviour
     {
         // Random sprite
         GameObject selectedSprite = starSprites[starSprites.Length - 1];
-        int randVal = UnityEngine.Random.Range(1, totalWeight);
+        int randVal = UnityEngine.Random.Range(1, totalWeight + 1);
         int currSum = 0;
 
         for (int i = 0; i < starWeights.Length; i++)

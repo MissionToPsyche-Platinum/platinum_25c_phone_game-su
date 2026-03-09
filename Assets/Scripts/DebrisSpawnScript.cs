@@ -83,7 +83,7 @@ public class DebrisSpawnScript : MonoBehaviour
 
         int debrisType = debrisTypes.Length - 1;
         GameObject selectedDebris = debrisTypes[debrisType];
-        int randVal = UnityEngine.Random.Range(1, totalWeight); 
+        int randVal = UnityEngine.Random.Range(1, totalWeight + 1); 
         int currSum = 0;
 
         for(int i = 0; i < 5; i++){

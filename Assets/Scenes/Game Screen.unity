@@ -4454,7 +4454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::ScoreIncrement
   scoreText: {fileID: 112710857}
-  finalScoreText: {fileID: 0}
+  finalScoreText: {fileID: 1912035134}
   scorePerSecond: 10
   scoreMultiplier: 1
   finalScore: 0

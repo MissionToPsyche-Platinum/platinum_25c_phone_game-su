@@ -4,7 +4,9 @@ using System;
 public class ProbeHealth : MonoBehaviour
 {
     [SerializeField] private GameObject healthController;
+    [SerializeField] private GameObject scoreSystem;
     private HealthUI healthUI;
+    private ScoreIncrement score;
 
     public int maxHealth = 3;
     public int currentHealth;
@@ -18,6 +20,7 @@ public class ProbeHealth : MonoBehaviour
         damageActive = true;
         shieldActive = false;
         healthUI = healthController.GetComponent<HealthUI>();
+        score = scoreSystem.GetComponent<ScoreIncrement>();
         
         if (GameStateManager.Instance != null)
         {
@@ -103,6 +106,7 @@ public class ProbeHealth : MonoBehaviour
         {
             currentHealth = 0;
             gameOverPanel.gameObject.SetActive(true);
+            score.PauseScore();
         }
     }
 

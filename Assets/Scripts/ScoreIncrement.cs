@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreIncrement : MonoBehaviour
 {
     public Text scoreText;
+    public TMP_Text finalScoreText;
     public float scorePerSecond = 10f; // Modify to change score per second
     
     private float currentScore;
@@ -65,6 +67,12 @@ public class ScoreIncrement : MonoBehaviour
     public float GetCurrentScore()
     {
         return currentScore;
+    }
+
+    public void PauseScore()
+    {
+        scoreUpdate = false;
+        finalScoreText.SetText(scoreText.text);
     }
     
     private void OnCheckpointReached(object sender, EventArgs e)

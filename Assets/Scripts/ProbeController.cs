@@ -108,17 +108,6 @@ public class ProbeController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.CompareTag("Gas"))
-        {
-            //colliding with gas causes joystick direction to reverse
-            if(!gasActive){
-                gasActive = true;
-                moveSpeed *= -1f;
-            }
-            gasTimer = gasActiveLength;
-            Destroy(collision.gameObject);
-        }
-
         if (collision.gameObject.CompareTag("Coin"))
         {
             CoinBehavior coinScript = collision.gameObject.GetComponent<CoinBehavior>();

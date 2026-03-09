@@ -14,7 +14,7 @@ public class CheckpointSpawnScript : MonoBehaviour
     private GameObject[] checkpointInstances;
 
     private const int numCheckpoints = 4;
-    private float checkpointZ = 0.9f;
+    private float checkpointZ = 0.9f; //z-coord of checkpoints for layering with other visuals
 
     private int nextCheckpoint = 0;
     float stopTimer = 7f;
@@ -61,7 +61,6 @@ public class CheckpointSpawnScript : MonoBehaviour
         checkpointInstances[index] = Instantiate(checkpoints[index], spawnPos, Quaternion.identity);
         checkpointInstances[index].transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
         nextCheckpoint += 1;
-        Debug.Log("Spawning checkpoint " + index);
     }
 
     public void resumeMovement(int index){

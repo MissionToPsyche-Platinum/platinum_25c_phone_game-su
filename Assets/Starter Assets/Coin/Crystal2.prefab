@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7662627515333906290, guid: d9f813c4431a645369b2250118d9710c, type: 3}
+  m_Sprite: {fileID: -201618898938958817, guid: 691d19016e19f498fb00f3d377019569, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -141,5 +141,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::CoinBehavior
   lifetime: 3
-  value: 1
+  value: 2
   coinSoundClip: {fileID: 8300000, guid: 7aa6f528cee57446884cf415849ba444, type: 3}

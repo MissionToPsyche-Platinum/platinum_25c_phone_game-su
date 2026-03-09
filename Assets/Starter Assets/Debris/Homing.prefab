@@ -162,4 +162,4 @@ MonoBehaviour:
   activationY: 0.5
   explodingFragments: []
   numFragments: 0
-  homingAmount: 0.5
+  homingAmount: 0.01

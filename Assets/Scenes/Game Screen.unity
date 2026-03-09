@@ -10100,7 +10100,7 @@ MonoBehaviour:
   - {fileID: 4854028936632854818, guid: 31c4fdb5ae7e04a4f966de34e0cdf0fc, type: 3}
   - {fileID: 5079796556950102654, guid: 4096a806567a04c81a56662435b054f8, type: 3}
   - {fileID: 4483468297061941246, guid: a4594d7885c744bf9ae833379b3266bf, type: 3}
-  spawnWeights: 0000000000000000010000000100000001000000
+  spawnWeights: 0100000001000000010000000100000001000000
   minSpawnInterval: 1
   maxSpawnInterval: 4
   minSize: 0.2
@@ -10628,7 +10628,7 @@ MonoBehaviour:
   - {fileID: 5103829902325286908, guid: 9e144750848564d948c598b2fa5d7fb6, type: 3}
   - {fileID: 1847062795176755155, guid: 5134d75f029e34d3fa362ed5dedffa9a, type: 3}
   coinValues: 010000000200000003000000
-  coinSpawnWeights: 100000000400000001000000
+  coinSpawnWeights: 010000000100000001000000
   minSpawnInterval: 3
   maxSpawnInterval: 8
   minY: -4.5

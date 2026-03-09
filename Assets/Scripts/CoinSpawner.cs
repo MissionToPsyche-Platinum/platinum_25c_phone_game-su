@@ -85,7 +85,7 @@ public class CoinSpawner : MonoBehaviour
         );
 
         GameObject selectedCoin = coinPrefabs[coinPrefabs.Length - 1];
-        int randVal = UnityEngine.Random.Range(1, totalWeight); 
+        int randVal = UnityEngine.Random.Range(1, totalWeight + 1); 
         int currSum = 0;
 
         for(int i = 0; i < 5; i++){

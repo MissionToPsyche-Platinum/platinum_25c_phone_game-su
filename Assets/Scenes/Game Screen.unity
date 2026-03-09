@@ -4454,7 +4454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::ScoreIncrement
   scoreText: {fileID: 112710857}
-  finalScoreText: {fileID: 1912035134}
+  finalScoreText: {fileID: 0}
   scorePerSecond: 10
   scoreMultiplier: 1
   finalScore: 0
@@ -6891,12 +6891,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ba1f819b0ba8244b357d4e72dc8254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::ProbeComponentController
-  myProbeComponentDisablers:
+  myProbeDebuffs:
+  - {fileID: 908402717}
   - {fileID: 908402715}
   - {fileID: 908402716}
-  - {fileID: 908402717}
   myProbeController: {fileID: 908402707}
-  chanceToDisableComponentOnDamage: 1
+  chanceToDebuffOnDamage: 0.3
 --- !u!114 &908402715
 MonoBehaviour:
   m_ObjectHideFlags: 0

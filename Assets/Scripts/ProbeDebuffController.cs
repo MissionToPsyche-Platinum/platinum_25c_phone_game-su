@@ -4,11 +4,11 @@ using UnityEngine;
 using System.Linq;
 using Random = UnityEngine.Random;
 
-public class ProbeComponentController : MonoBehaviour
+public class ProbeDebuffController : MonoBehaviour
 {
-    [SerializeField] private List<ProbeComponent> myProbeComponentDisablers;
+    [SerializeField] private List<ProbeDebuff> myProbeDebuffs;
     [SerializeField] private ProbeController myProbeController;
-    [SerializeField] private float chanceToDisableComponentOnDamage = 0.3f;
+    [SerializeField] private float chanceToDebuffOnDamage = 0.3f;
 
     private void Start()
     {
@@ -26,16 +26,16 @@ public class ProbeComponentController : MonoBehaviour
 
     private void HandleProbeTakeDamage(object sender, System.EventArgs e)
     {
-        if (Random.value <= chanceToDisableComponentOnDamage)
+        if (Random.value <= chanceToDebuffOnDamage)
         {
-            DisableRandomComponent();
+            EnableRandomDebuff();
         }
     }
 
-    public void DisableRandomComponent()
+    public void EnableRandomDebuff()
     {
         //Get all candidates that are not disabled and have a positive weight
-        List<ProbeComponent> candidates = myProbeComponentDisablers.
+        List<ProbeDebuff> candidates = myProbeDebuffs.
                 Where(d => !d.GetIsDisabled() && d.GetWeight() > 0f).ToList();
 
         if (candidates.Count == 0)
@@ -51,7 +51,7 @@ public class ProbeComponentController : MonoBehaviour
         float cumulative = 0f;
 
         //Randomly select a candidate based on weight
-        foreach (ProbeComponent candidate in candidates)
+        foreach (ProbeDebuff candidate in candidates)
         {
             cumulative += candidate.GetWeight();
             if (randomTargetWeight <= cumulative)
@@ -64,18 +64,18 @@ public class ProbeComponentController : MonoBehaviour
 
     private void OnStopPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
-        RepairAllComponents();
+        RepairAllDebuffs();
     }
     private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
-        RepairAllComponents();
+        RepairAllDebuffs();
     }
 
-    public void RepairAllComponents()
+    public void RepairAllDebuffs()
     {
-        foreach (ProbeComponent component in myProbeComponentDisablers)
+        foreach (ProbeDebuff debuff in myProbeDebuffs)
         {
-            component.TryRepair();
+            debuff.TryRepair();
         }
     }
 }

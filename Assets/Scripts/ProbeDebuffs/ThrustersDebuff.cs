@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ThrustersComponent : ProbeComponent
+public class ThrustersDebuff : ProbeDebuff
 {
     [SerializeField] private ProbeController myProbeController;
     [SerializeField] private GameObject thrusterSmokeEffect;
@@ -14,17 +14,17 @@ public class ThrustersComponent : ProbeComponent
         thrusterSmokeEffect.SetActive(false);
     }
 
-    protected override void DisableComponent()
+    protected override void EnableDebuff()
     {
-        base.DisableComponent();
+        base.EnableDebuff();
         thrusterSmokeEffect.SetActive(true);
         SFXController.instance.PlaySoundFXClip(thrusterBreakingSoundEffect, this.transform, 1f);
         myProbeController.SetMoveSpeed(brokenMovementSpeed);
     }
 
-    protected override void RepairComponent()
+    protected override void RepairDebuff()
     {
-        base.RepairComponent();
+        base.RepairDebuff();
         thrusterSmokeEffect.SetActive(false);
         myProbeController.SetMoveSpeed(4f);
     }

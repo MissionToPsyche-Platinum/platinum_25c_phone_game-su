@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScreenComponent : ProbeComponent
+public class ScreenDebuff : ProbeDebuff
 {
     [SerializeField] private GameObject crackedScreenPanel;
     [SerializeField] private AudioClip crackedScreenSoundEffect;
@@ -17,17 +17,17 @@ public class ScreenComponent : ProbeComponent
         crackedScreenPanel.SetActive(false);
     }
 
-    protected override void DisableComponent()
+    protected override void EnableDebuff()
     {
-        base.DisableComponent();
-        Debug.Log("Disabling screen component");
+        base.EnableDebuff();
+        Debug.Log("Enabling screen debuff");
         SFXController.instance.PlaySoundFXClip(crackedScreenSoundEffect, crackedScreenPanel.transform, 1f);
         ShowCrackedScreen();
     }
 
-    protected override void RepairComponent()
+    protected override void RepairDebuff()
     {
-        base.RepairComponent();
+        base.RepairDebuff();
         HideCrackedScreen();
     }
     
@@ -79,6 +79,6 @@ public class ScreenComponent : ProbeComponent
         crackedScreenImage.color = crackedScreenImageColor;
         HideCrackedScreen();
         fadeCoroutine = null;
-        RepairComponent();
+        RepairDebuff();
     }
 }

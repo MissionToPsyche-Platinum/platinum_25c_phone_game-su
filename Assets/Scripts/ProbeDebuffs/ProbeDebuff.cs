@@ -1,16 +1,16 @@
 using UnityEngine;
 
 //Base class for all probe components
-public class ProbeComponent : MonoBehaviour
+public class ProbeDebuff : MonoBehaviour
 {
     private bool isDisabled = false;
     [SerializeField] private float weight;
-    protected virtual void DisableComponent()
+    protected virtual void EnableDebuff()
     {
         isDisabled = true;
     }
 
-    protected virtual void RepairComponent()
+    protected virtual void RepairDebuff()
     {
         isDisabled = false;
     }
@@ -19,11 +19,11 @@ public class ProbeComponent : MonoBehaviour
     {
         if (!isDisabled)
         {
-            DisableComponent();
+            EnableDebuff();
         }
         else
         {
-            Debug.LogError("Tried to disable a component that is already disabled.");
+            Debug.LogError("Tried to enable a debuff that is already enabled.");
         }
     }
     
@@ -31,11 +31,11 @@ public class ProbeComponent : MonoBehaviour
     {
         if (isDisabled)
         {
-            RepairComponent();
+            RepairDebuff();
         }
         else
         {
-            Debug.Log("Tried to repair a component that is already repaired. Skipping.");
+            Debug.Log("Tried to repair a debuff that is already repaired. Skipping.");
         }
     }
 

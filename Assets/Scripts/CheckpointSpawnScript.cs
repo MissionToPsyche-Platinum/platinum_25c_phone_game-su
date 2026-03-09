@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class CheckpointSpawnScript : MonoBehaviour
@@ -11,6 +13,9 @@ public class CheckpointSpawnScript : MonoBehaviour
 
     public GameObject[] checkpoints;
     public int[] checkpointScores;
+    public string[] checkpointMessages;
+
+    [SerializeField] private TMP_Text messageText;
     private GameObject[] checkpointInstances;
 
     private const int numCheckpoints = 4;
@@ -66,8 +71,38 @@ public class CheckpointSpawnScript : MonoBehaviour
     public void resumeMovement(int index){
         CheckpointMoveScript moveScript = checkpointInstances[index].GetComponent<CheckpointMoveScript>();
         moveScript.resumeMovement();
+        HideMessage();
         OnCheckpointPassed?.Invoke(this, EventArgs.Empty);
         GameStateManager.Instance.SetGameStage(index + 2);
+    }
+
+    private void ShowMessage(int index)
+    {
+        if (messageText == null || index >= checkpointMessages.Length) return;
+        messageText.text = checkpointMessages[index];
+        StopAllCoroutines();
+        StartCoroutine(FadeText(0f, 1f));
+    }
+
+    private void HideMessage()
+    {
+        if (messageText == null) return;
+        StopAllCoroutines();
+        StartCoroutine(FadeText(messageText.alpha, 0f));
+    }
+
+    private IEnumerator FadeText(float from, float to)
+    {
+        messageText.gameObject.SetActive(true);
+        float elapsed = 0f;
+        while (elapsed < 2f)
+        {
+            elapsed += Time.deltaTime;
+            messageText.alpha = Mathf.Lerp(from, to, elapsed / 2f);
+            yield return null;
+        }
+        messageText.alpha = to;
+        if (to == 0f) messageText.gameObject.SetActive(false);
     }
     private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
@@ -102,6 +137,7 @@ public class CheckpointSpawnScript : MonoBehaviour
         float currentScore = scoreSystem.GetCurrentScore();
         if(nextCheckpoint < numCheckpoints && currentScore >= checkpointScores[nextCheckpoint]){
             OnCheckpointReached?.Invoke(this, EventArgs.Empty);
+            ShowMessage(nextCheckpoint);
             spawnCheckpoint(nextCheckpoint);
             stopped = true;
         }

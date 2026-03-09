@@ -181,4 +181,9 @@ public class GameStateManager : MonoBehaviour
     {
         return currentProbeSkin;
     }
+
+    public void ResetCurrentRun()
+    {
+        gameStage = GameStage.Earth;
+    }
 }

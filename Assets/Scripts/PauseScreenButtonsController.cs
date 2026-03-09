@@ -32,8 +32,35 @@ public class PauseScreenButtonsController : MonoBehaviour
     private void QuitButtonAction()
     {
         MenuNavigationButtons.Instance.PlayButtonSound();
+        CleanupGameObjects();
+        gameScreenPanel.SetActive(false);
+        GameStateManager.Instance.ResetCurrentRun();
         MenuNavigationButtons.Instance.SwitchPanels(pauseScreenPanel, startScreenPanel);
         GameStateManager.Instance.EnterMenuState();
+    }
+
+    private void CleanupGameObjects()
+    {
+        // Destroy all debris
+        DebrisMoveScript[] allDebris = FindObjectsOfType<DebrisMoveScript>();
+        foreach (DebrisMoveScript debris in allDebris)
+        {
+            Destroy(debris.gameObject);
+        }
+
+        // Destroy all coins from last run
+        CoinBehavior[] allCoins = FindObjectsOfType<CoinBehavior>();
+        foreach (CoinBehavior coin in allCoins)
+        {
+            Destroy(coin.gameObject);
+        }
+
+        
+        HealthUI healthUI = FindObjectOfType<HealthUI>();
+        if (healthUI != null)
+        {
+            Destroy(healthUI.gameObject);
+        }
     }
 
     private void RestartButtonAction()

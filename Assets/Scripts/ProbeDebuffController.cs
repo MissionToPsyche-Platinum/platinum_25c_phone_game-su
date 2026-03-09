@@ -7,19 +7,19 @@ using Random = UnityEngine.Random;
 public class ProbeDebuffController : MonoBehaviour
 {
     [SerializeField] private List<ProbeDebuff> myProbeDebuffs;
-    [SerializeField] private ProbeController myProbeController;
+    [SerializeField] private ProbeCollisionHandler myProbeCollisionHandler;
     [SerializeField] private float chanceToDebuffOnDamage = 0.3f;
 
     private void Start()
     {
-        myProbeController.OnTakeDamage += HandleProbeTakeDamage;
+        myProbeCollisionHandler.OnTakeDamage += HandleProbeTakeDamage;
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
     }
 
     private void OnDestroy()
     {
-        myProbeController.OnTakeDamage -= HandleProbeTakeDamage;
+        myProbeCollisionHandler.OnTakeDamage -= HandleProbeTakeDamage;
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
     }

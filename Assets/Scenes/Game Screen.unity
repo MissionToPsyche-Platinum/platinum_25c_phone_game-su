@@ -3814,7 +3814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d79b1fb34cc39549bb218732cc0690b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::StatsManager
-  myProbeController: {fileID: 908402707}
+  myProbeCollisionHandler: {fileID: 908402718}
   myDebrisSpawnScript: {fileID: 1384828551}
   myScoreIncrement: {fileID: 631130230}
   coinsCollected: 0
@@ -6677,6 +6677,7 @@ GameObject:
   - component: {fileID: 908402717}
   - component: {fileID: 908402715}
   - component: {fileID: 908402716}
+  - component: {fileID: 908402718}
   m_Layer: 0
   m_Name: Probe
   m_TagString: Untagged
@@ -6697,7 +6698,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   moveSpeed: 4
-  asteroidCollisionSoundClip: {fileID: 8300000, guid: 97c7e8fc768c84a0c8d2282da7399e46, type: 3}
   extraPadding: 0.1
   coinAmount: 0
   gasActiveLength: 10
@@ -6895,7 +6895,7 @@ MonoBehaviour:
   - {fileID: 908402717}
   - {fileID: 908402715}
   - {fileID: 908402716}
-  myProbeController: {fileID: 908402707}
+  myProbeCollisionHandler: {fileID: 908402718}
   chanceToDebuffOnDamage: 0.3
 --- !u!114 &908402715
 MonoBehaviour:
@@ -6946,6 +6946,19 @@ MonoBehaviour:
   thrusterSmokeEffect: {fileID: 1395823866}
   thrusterBreakingSoundEffect: {fileID: 8300000, guid: 174cf2803c4fd124d839a555f9fd50f1, type: 3}
   brokenMovementSpeed: 2.5
+--- !u!114 &908402718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908402706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45964abae61626c46865547ea1cfd41a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  asteroidCollisionSoundClip: {fileID: 8300000, guid: 97c7e8fc768c84a0c8d2282da7399e46, type: 3}
 --- !u!1 &956121857
 GameObject:
   m_ObjectHideFlags: 0

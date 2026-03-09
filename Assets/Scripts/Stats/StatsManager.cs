@@ -4,7 +4,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class StatsManager : MonoBehaviour
 {
-    [SerializeField] private ProbeController myProbeController;
+    [SerializeField] private ProbeCollisionHandler myProbeCollisionHandler;
     [SerializeField] private DebrisSpawnScript myDebrisSpawnScript;
     [SerializeField] private ScoreIncrement myScoreIncrement;
     
@@ -24,8 +24,8 @@ public class StatsManager : MonoBehaviour
 
     private void Start()
     {
-        myProbeController.OnCoinCollected += OnCoinCollected;
-        myProbeController.OnTakeDamage += OnTakeDamage;
+        myProbeCollisionHandler.OnCoinCollected += OnCoinCollected;
+        myProbeCollisionHandler.OnTakeDamage += OnTakeDamage;
         
         myDebrisSpawnScript.OnDebrisSpawned += OnDebrisSpawned;
     }

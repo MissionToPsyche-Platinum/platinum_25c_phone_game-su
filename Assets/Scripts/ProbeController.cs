@@ -8,17 +8,13 @@ public class ProbeController : MonoBehaviour
     private InputSystem_Actions myInputActions;
     private Rigidbody2D myRigidbody2D;
     private ProbeHealth healthSystem;
-    private PowerUpBehavior powerUpSystem;
     private Vector2 minAllowedPosition;
     private Vector2 maxAllowedPosition;
     private Vector2 additionalForceVector;
 
     [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private AudioClip asteroidCollisionSoundClip;
     [SerializeField] private float extraPadding = 0.1f; // Adjust value to keep entire probe from going offscreen
 
-    public event EventHandler<EventArgs> OnTakeDamage;
-    public event EventHandler<EventArgs> OnCoinCollected;
 
     public int coinAmount = 0;
 
@@ -26,7 +22,6 @@ public class ProbeController : MonoBehaviour
     public float gasActiveLength = 10f;
     private float gasTimer = 0f;
         
-    public bool HasCollided { get; private set; } = false;
 
     private void Awake() {
         coinAmount = 0;
@@ -34,7 +29,6 @@ public class ProbeController : MonoBehaviour
         myRigidbody2D = GetComponent<Rigidbody2D>();
 
         healthSystem = GetComponent<ProbeHealth>();
-        powerUpSystem = GetComponent<PowerUpBehavior>();
     }
 
     private void Start()
@@ -91,60 +85,6 @@ public class ProbeController : MonoBehaviour
         myInputActions.Player.Disable();
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Debris"))
-        {
-            //if the collided object is asteroid
-            HasCollided = true;
-            SFXController.instance.PlaySoundFXClip(asteroidCollisionSoundClip, transform, 1f);
-            // Take damage
-            if (healthSystem != null)
-            {
-                healthSystem.TakeDamage(1);
-                OnTakeDamage?.Invoke(this, EventArgs.Empty);
-            }
-            // Destroy the debris/asteroid
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("Coin"))
-        {
-            CoinBehavior coinScript = collision.gameObject.GetComponent<CoinBehavior>();
-            GameStateManager.Instance.AddCoins(coinScript.collect());
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("PowerUpHyperspace"))
-        {
-            powerUpSystem.beginPowerUp(0);
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("PowerUpShield"))
-        {
-            powerUpSystem.beginPowerUp(1);
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("PowerUp2x"))
-        {
-            powerUpSystem.beginPowerUp(2);
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("PowerUpStar"))
-        {
-            powerUpSystem.beginPowerUp(3);
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("PowerUpHex"))
-        {
-            powerUpSystem.beginPowerUp(4);
-            Destroy(collision.gameObject);
-        }
-    }
 
     private void FixedUpdate() {
         //set the position of this game object to that of the finger position

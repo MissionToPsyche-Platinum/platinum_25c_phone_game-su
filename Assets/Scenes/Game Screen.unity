@@ -6926,6 +6926,7 @@ MonoBehaviour:
   weight: 9999
   crackedScreenPanel: {fileID: 1956583459}
   crackedScreenSoundEffect: {fileID: 8300000, guid: 7f5d64ffe1699794282c3d4240fc20e0, type: 3}
+  fadeDuration: 4
 --- !u!114 &908402717
 MonoBehaviour:
   m_ObjectHideFlags: 0

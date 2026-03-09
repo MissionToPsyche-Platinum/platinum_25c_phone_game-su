@@ -19,13 +19,6 @@ public class GameOverPanelController : MonoBehaviour
 
         if (shopButton != null)
             shopButton.onClick.AddListener(ShopButtonClicked);
-
-        // Ensure the visual panel is hidden at the start
-        if (gameOverPanel != null)
-            gameOverPanel.SetActive(false);
-        
-        // Also ensure the main object is hidden if this script is on the root
-        this.gameObject.SetActive(false);
     }
 
     public void RestartGameButtonClicked()

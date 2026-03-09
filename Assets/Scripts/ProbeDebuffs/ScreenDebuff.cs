@@ -54,6 +54,11 @@ public class ScreenDebuff : ProbeDebuff
     
     private void FadeCrackedScreen()
     {
+        if (!this.gameObject.activeSelf)
+        {
+            return;
+        }
+        
         if (fadeCoroutine != null)
             StopCoroutine(fadeCoroutine);
 
@@ -68,6 +73,12 @@ public class ScreenDebuff : ProbeDebuff
 
         while (elapsed < fadeDuration)
         {
+            //if probe was deactivated mid fade
+            if (!this.gameObject.activeSelf)
+            {
+                yield break;
+            }
+            
             //Slowly fade the alpha to 0
             elapsed += Time.deltaTime;
             crackedScreenImageColor.a = 1f - Mathf.Clamp01(elapsed / fadeDuration);

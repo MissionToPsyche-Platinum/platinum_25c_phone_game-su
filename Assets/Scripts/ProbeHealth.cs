@@ -107,6 +107,7 @@ public class ProbeHealth : MonoBehaviour
             currentHealth = 0;
             gameOverPanel.gameObject.SetActive(true);
             score.PauseScore();
+            GameStateManager.Instance.EnterMenuState();
         }
     }
 

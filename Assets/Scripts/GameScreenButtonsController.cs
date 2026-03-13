@@ -17,6 +17,15 @@ public class GameScreenButtonsController : MonoBehaviour
         pauseScreenButton.onClick.AddListener(PauseButtonAction);
     }
 
+    private void Start(){
+        GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
+    }
+
+    private void OnStopPlaying(object sender, EventArgs e)
+    {
+        this.gameObject.SetActive(false);
+    }
+
     private void PauseButtonAction()
     {
         MenuNavigationButtons.Instance.PlayButtonSound();

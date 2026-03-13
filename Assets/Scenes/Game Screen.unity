@@ -10569,8 +10569,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   blackHole: {fileID: 761228475169448685, guid: 689293671ca52442ca9db48eccadfb77, type: 3}
-  minSpawnInterval: 1
-  maxSpawnInterval: 5
+  minSpawnInterval: 9999999
+  maxSpawnInterval: 10000000
 --- !u!4 &1472010225
 Transform:
   m_ObjectHideFlags: 0

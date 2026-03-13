@@ -60,7 +60,7 @@ public class BlackHoleSpawnScript : MonoBehaviour
             
             if (timer >= nextSpawnTime)
             {
-                SpawnBlackHole();
+                //SpawnBlackHole();
                 timer = 0f;
                 
                 nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);

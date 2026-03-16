@@ -5,6 +5,8 @@ public class ProbeCollisionHandler : MonoBehaviour
 {
     private ProbeHealth healthSystem;
     private PowerUpBehavior powerUpSystem;
+    private bool hasDisplayedAsteroidPopup;
+    [SerializeField] private GameObject asteroidPopupPrefab;
 
     [SerializeField] private AudioClip asteroidCollisionSoundClip;
 
@@ -17,6 +19,7 @@ public class ProbeCollisionHandler : MonoBehaviour
     {
         healthSystem = GetComponent<ProbeHealth>();
         powerUpSystem = GetComponent<PowerUpBehavior>();
+        hasDisplayedAsteroidPopup = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -33,6 +36,8 @@ public class ProbeCollisionHandler : MonoBehaviour
             }
             // Destroy the debris/asteroid
             Destroy(collision.gameObject);
+            
+            PopupManager.Instance.DisplayPopup(asteroidPopupPrefab, 5f);
         }
 
         if (collision.gameObject.CompareTag("Coin"))

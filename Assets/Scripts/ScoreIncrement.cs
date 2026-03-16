@@ -21,6 +21,12 @@ public class ScoreIncrement : MonoBehaviour
     private void Start()
     {
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        
+        if (GameStateManager.Instance.currentGameState == GameStateManager.GameState.Playing)
+        {
+            //If OnStartPlaying was fired before we could subscribe to it, still respond to it
+            OnStartPlaying(this, EventArgs.Empty);
+        }
 
         GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
         checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();

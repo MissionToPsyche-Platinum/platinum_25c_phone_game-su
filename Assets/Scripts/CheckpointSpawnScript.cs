@@ -60,7 +60,8 @@ public class CheckpointSpawnScript : MonoBehaviour
 
     public void spawnCheckpoint(int index){
         Vector3 spawnPos = new Vector3(0.0f, 0.00f, checkpointZ);
-        if(index != 0){
+        if(index != (int)GameStateManager.Instance.startingGameStage - 1){
+            //if the checkpoint being spawned isn't the initial one
             spawnPos.Set(0.0f, 8.0f, checkpointZ);
         }
         checkpointInstances[index] = Instantiate(checkpoints[index], spawnPos, Quaternion.identity);
@@ -115,7 +116,7 @@ public class CheckpointSpawnScript : MonoBehaviour
         
         //Spawn the new checkpoint and make it move
         spawnCheckpoint((int)GameStateManager.Instance.startingGameStage - 1);
-        CheckpointMoveScript moveScript = checkpointInstances[0].GetComponent<CheckpointMoveScript>();
+        CheckpointMoveScript moveScript = checkpointInstances[(int)GameStateManager.Instance.startingGameStage - 1].GetComponent<CheckpointMoveScript>();
         moveScript.SetAlreadyStoppedAtCenter(true);
         resumeMovement((int)GameStateManager.Instance.startingGameStage - 1);
     }

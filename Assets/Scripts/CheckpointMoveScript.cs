@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CheckpointMoveScript : MonoBehaviour
 {
-    bool stoppedAtCenter = false;
+    bool currentlyStoppedAtCenter = false;
     bool alreadyStoppedAtCenter = false;
     float moveSpeed = 2.0f;
 
@@ -17,7 +17,7 @@ public class CheckpointMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!stoppedAtCenter){
+        if(!currentlyStoppedAtCenter){
             transform.position = transform.position + (Vector3.down * moveSpeed) * Time.deltaTime;
             Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
             if (screenPos.y < -0.1f) // Slightly below screen
@@ -28,7 +28,7 @@ public class CheckpointMoveScript : MonoBehaviour
             if(transform.position.y < 0.0f && !alreadyStoppedAtCenter){
                 GameStateManager.Instance.SetGameStage(1);
                 alreadyStoppedAtCenter = true;
-                stoppedAtCenter = true;
+                currentlyStoppedAtCenter = true;
             }
         }
 
@@ -42,6 +42,6 @@ public class CheckpointMoveScript : MonoBehaviour
 
 
     public void resumeMovement(){
-        stoppedAtCenter = false;
+        currentlyStoppedAtCenter = false;
     }
 }

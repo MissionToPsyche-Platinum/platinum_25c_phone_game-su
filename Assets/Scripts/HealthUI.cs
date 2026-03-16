@@ -24,11 +24,24 @@ public class HealthUI : MonoBehaviour
 
     void Awake()
     {
-        hpInstances = new GameObject[maxHealth];
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
     }
 
     void Start()
     {
+
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
+    }
+
+    private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
+    {
+        hpInstances = new GameObject[maxHealth];
         nextHPToDelete = maxHealth - 1;
         hpWidth = xMax - xMin;
         hpHeight =((yMax - yMin) - spacing * (float)(maxHealth - 1)) / (float)maxHealth;
@@ -48,6 +61,15 @@ public class HealthUI : MonoBehaviour
             hpInstances[i] = Instantiate(healthPoint, spawnPos, Quaternion.identity);
             hpPosY += hpHeight + spacing;
         }
+    }
+
+    private void OnStopPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
+    {
+        while(nextHPToDelete > 0){
+            RemoveHP();
+        }
+        RemoveHP();
+        
     }
 
     void Update()

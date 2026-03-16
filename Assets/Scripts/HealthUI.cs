@@ -58,8 +58,28 @@ public class HealthUI : MonoBehaviour
         for(int i = 0; i < maxHealth; i++)
         {
             Vector3 spawnPos = new Vector3(xMin, hpPosY, 0f);
-            hpInstances[i] = Instantiate(healthPoint, spawnPos, Quaternion.identity);
+            hpInstances[i] = Instantiate(healthPoint, spawnPos, Quaternion.identity, transform);
             hpPosY += hpHeight + spacing;
+        }
+
+        LeftHandedManager.OnLeftHandedChanged += ApplyMirror;
+        ApplyMirror(LeftHandedManager.IsLeftHanded);
+    }
+
+    private void OnDestroy()
+    {
+        LeftHandedManager.OnLeftHandedChanged -= ApplyMirror;
+    }
+
+    private void ApplyMirror(bool isLeftHanded)
+    {
+        float mirroredX = -(xMin);
+        for (int i = 0; i < maxHealth; i++)
+        {
+            if (hpInstances[i] == null) continue;
+            Vector3 pos = hpInstances[i].transform.position;
+            pos.x = isLeftHanded ? mirroredX : xMin;
+            hpInstances[i].transform.position = pos;
         }
     }
 
@@ -84,7 +104,7 @@ public class HealthUI : MonoBehaviour
             RemoveHP();
         }
     }
-    
+
     void RemoveHP()
     {
         Destroy(hpInstances[nextHPToDelete]);

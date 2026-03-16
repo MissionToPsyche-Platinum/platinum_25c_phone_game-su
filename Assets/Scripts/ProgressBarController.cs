@@ -28,7 +28,7 @@ public class ProgressBarController : MonoBehaviour
 
     private void CheckpointSpawnScript_OnCheckpointPassed(object sender, EventArgs e)
     {
-        Debug.Log("ProgressBar heard OnCheckopintPassed");
+        // Debug.Log("ProgressBar heard OnCheckopintPassed");
         progressBar.value = 0;
         progressBar.minValue = checkpointSpawnScript.GetLastCheckpointScore();
         progressBar.maxValue = checkpointSpawnScript.GetNextCheckpointScore();

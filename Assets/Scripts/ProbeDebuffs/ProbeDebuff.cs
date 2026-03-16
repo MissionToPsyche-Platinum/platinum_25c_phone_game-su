@@ -35,7 +35,7 @@ public class ProbeDebuff : MonoBehaviour
         }
         else
         {
-            Debug.Log("Tried to repair a debuff that is already repaired. Skipping.");
+            // Debug.Log("Tried to repair a debuff that is already repaired. Skipping.");
         }
     }
 

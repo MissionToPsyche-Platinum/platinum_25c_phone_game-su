@@ -1807,6 +1807,7 @@ GameObject:
   - component: {fileID: 150133146}
   - component: {fileID: 150133147}
   - component: {fileID: 150133148}
+  - component: {fileID: 150133149}
   m_Layer: 5
   m_Name: ColorBlindSettings
   m_TagString: Untagged
@@ -1835,7 +1836,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 650, y: 350}
+  m_SizeDelta: {x: 650, y: 650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &150133147
 MonoBehaviour:
@@ -1866,6 +1867,20 @@ MonoBehaviour:
   protanopiaToggle: {fileID: 1462086041}
   deuteranopiaToggle: {fileID: 732707394}
   tritanopiaToggle: {fileID: 2123023217}
+--- !u!114 &150133149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150133145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &172594158
 GameObject:
   m_ObjectHideFlags: 0
@@ -3978,7 +3993,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 551798899}
-  - component: {fileID: 551798900}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -4007,18 +4021,6 @@ RectTransform:
   m_AnchoredPosition: {x: -387, y: -602.7}
   m_SizeDelta: {x: 620, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &551798900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551798898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc1e4882f38b11e4cabe6a96be324966, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GameScript::HorizontalMirrorUI
 --- !u!1 &553082229
 GameObject:
   m_ObjectHideFlags: 0
@@ -11775,6 +11777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1460708652}
+  - component: {fileID: 1460708653}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -11804,6 +11807,18 @@ RectTransform:
   m_AnchoredPosition: {x: -279.7, y: 800}
   m_SizeDelta: {x: 375, y: 187.5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1460708653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460708651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1e4882f38b11e4cabe6a96be324966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::HorizontalMirrorUI
 --- !u!1 &1462086039
 GameObject:
   m_ObjectHideFlags: 0
@@ -12696,6 +12711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1585517978}
+  - component: {fileID: 1585517979}
   m_Layer: 5
   m_Name: Coins
   m_TagString: Untagged
@@ -12724,6 +12740,18 @@ RectTransform:
   m_AnchoredPosition: {x: -405.3, y: 618.2}
   m_SizeDelta: {x: 318.5952, y: 179.26611}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1585517979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585517977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1e4882f38b11e4cabe6a96be324966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::HorizontalMirrorUI
 --- !u!1 &1600278737
 GameObject:
   m_ObjectHideFlags: 0
@@ -15628,6 +15656,7 @@ GameObject:
   - component: {fileID: 1982306612}
   - component: {fileID: 1982306614}
   - component: {fileID: 1982306613}
+  - component: {fileID: 1982306615}
   m_Layer: 5
   m_Name: LeftHandedToggle
   m_TagString: Untagged
@@ -15653,7 +15682,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -590}
   m_SizeDelta: {x: 650, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1982306613
@@ -15717,6 +15746,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &1982306615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982306611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 1
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: 80
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &1988052227
 GameObject:
   m_ObjectHideFlags: 0

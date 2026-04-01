@@ -37,6 +37,7 @@ public class HealthUI : MonoBehaviour
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
+        LeftHandedManager.OnLeftHandedChanged -= ApplyMirror;
     }
 
     private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
@@ -64,11 +65,6 @@ public class HealthUI : MonoBehaviour
 
         LeftHandedManager.OnLeftHandedChanged += ApplyMirror;
         ApplyMirror(LeftHandedManager.IsLeftHanded);
-    }
-
-    private void OnDestroy()
-    {
-        LeftHandedManager.OnLeftHandedChanged -= ApplyMirror;
     }
 
     private void ApplyMirror(bool isLeftHanded)

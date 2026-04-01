@@ -1,6 +1,49 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+
+struct DebrisSpawnInfo {
+    int type;
+    float scale;
+    float initialX;
+    float initialY;
+    float moveSpeed;
+
+    public DebrisSpawnInfo(int debrisType, float size, float xPos, float yPos, float speed)
+    {
+        type = debrisType;
+        scale = size;
+        initialX = xPos;
+        initialY = yPos;
+        moveSpeed = speed;
+    }
+
+    public int GetType()
+    {
+        return type;
+    }
+
+    public float GetScale()
+    {
+        return scale;
+    }
+
+    public float GetPosX()
+    {
+        return initialX;
+    }
+
+    public float GetPosY()
+    {
+        return initialY;
+    }
+
+    public float GetSpeed()
+    {
+        return moveSpeed;
+    }
+};
 
 public class DebrisSpawnScript : MonoBehaviour
 {
@@ -17,7 +60,64 @@ public class DebrisSpawnScript : MonoBehaviour
     private float timer = 0f;
     private float nextSpawnTime;
     private float gameTime = 0f; 
-    private float difficultyMultiplier = 1f; 
+    private float difficultyMultiplier = 1f;
+
+    private List<List<DebrisSpawnInfo>> obstacleTiles = new List<List<DebrisSpawnInfo>>();
+
+    /*
+        Arrays below are used to initialize the obstacleTiles list
+
+        Each line of each array below must have the same number of elements
+        Value of -1 is used to delineate different lines in types array, 0 is used for consistency in other arrays
+
+        Each entry (apart from line delineators) correspond to one obstacle attribute value, a single GameObject
+        Each line corresponds to attribute values for one obstacle tile, an assortment of debris GameObjects
+        Matching indices correspond to different attributes of the same GameObject
+    */
+    private int[] types = 
+    {
+        0, 0, 0, -1,
+        0, 0, 0, -1,
+        0, -1, 
+        0, -1, 
+        0
+    };
+
+    private float[] scales = 
+    {
+        0.3f, 0.3f, 0.1f, 0f,
+        0.4f, 0.4f, 0.4f, 0f,
+        0.5f, 0f,
+        0.5f, 0f,
+        0.5f
+    };
+
+    private float[] xPositions = 
+    {
+        -1.5f, 1.5f, 0f, 0f,
+        -1.5f, 0f, 1.5f, 0f,
+        -1f, 0f, 
+        0f, 0f, 
+        1f
+    };
+
+    private float[] yPositions = 
+    {
+        10f, 10f, 15f, 0f,
+        10f, 10f, 10f, 0f,
+        10f, 0f,
+        10f, 0f,
+        10f
+    };
+
+    private float[] speeds = 
+    {
+        3f, 3f, 6f, 0f,
+        3f, 3f, 3f, 0f,
+        3f, 0f, 
+        3f, 0f, 
+        3f
+    };
 
     public event EventHandler<EventArgs> OnDebrisSpawned;
     private bool spawnerActive = true;
@@ -40,6 +140,31 @@ public class DebrisSpawnScript : MonoBehaviour
         {
             totalWeight += spawnWeights[i];
         }
+
+        if(types.Length != scales.Length || types.Length != xPositions.Length || types.Length != yPositions.Length || types.Length != speeds.Length)
+        {
+            Debug.Log(types.Length);
+            Debug.Log(scales.Length);
+            Debug.Log(xPositions.Length);
+            Debug.Log(yPositions.Length);
+            Debug.Log(speeds.Length);
+            throw new Exception("Obstacle tile attribute array lengths do not match");
+        } else {
+            int currIndex = 0;
+            while(currIndex < types.Length)
+            {
+                List<DebrisSpawnInfo> newList = new List<DebrisSpawnInfo>();
+                while(currIndex < types.Length && types[currIndex] != -1)
+                {
+                    DebrisSpawnInfo newSpawnInfo = new DebrisSpawnInfo(types[currIndex], scales[currIndex], xPositions[currIndex], yPositions[currIndex], speeds[currIndex]);
+                    newList.Add(newSpawnInfo);
+                    currIndex++;
+                }
+                currIndex++;
+                obstacleTiles.Add(newList);
+            }
+        }
+
     }
 
     private void OnDestroy()
@@ -65,9 +190,46 @@ public class DebrisSpawnScript : MonoBehaviour
 
             if (timer >= adjustedSpawnTime)
             {
-                SpawnDebris();
+                SpawnTile();
+                //SpawnDebris();
                 timer = 0f;
                 nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+            }
+        }
+    }
+
+    void SpawnTile(){
+        int chosenTile = Random.Range(0, obstacleTiles.Count);
+        List<DebrisSpawnInfo> spawnInfos = obstacleTiles[chosenTile];
+        for(int i = 0; i < spawnInfos.Count; i++){
+            DebrisSpawnInfo spawnInfo = spawnInfos[i];
+
+            // Spawn Position
+            Vector3 spawnPos = new Vector3(
+                spawnInfo.GetPosX(),
+                spawnInfo.GetPosY(),
+                0f
+            );
+
+            int debrisType = spawnInfo.GetType();
+            GameObject selectedDebris = debrisTypes[debrisType];
+    
+            // Spawn the debris
+            GameObject newDebris = Instantiate(selectedDebris, spawnPos, Quaternion.identity);
+            OnDebrisSpawned?.Invoke(this, EventArgs.Empty);
+
+            // Size
+            float scale = spawnInfo.GetScale();
+            newDebris.transform.localScale = Vector3.one * scale;
+
+            // Speed with difficulty multiplier
+            DebrisMoveScript script = newDebris.GetComponent<DebrisMoveScript>();
+            if (script != null)
+            {
+                float baseSpeed = spawnInfo.GetSpeed();
+                script.velocity = baseSpeed * difficultyMultiplier * Vector3.down; // 1% faster per second
+                script.type = debrisType;
+                script.debrisScale = scale;
             }
         }
     }

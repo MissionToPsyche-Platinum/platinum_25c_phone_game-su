@@ -62,7 +62,8 @@ public class DebrisSpawnScript : MonoBehaviour
     private float gameTime = 0f; 
     private float difficultyMultiplier = 1f;
 
-    private List<List<DebrisSpawnInfo>> obstacleTiles = new List<List<DebrisSpawnInfo>>();
+    private float tileSpawnProbability = 0.5f;
+    private List<List<DebrisSpawnInfo>>[] obstacleTiles;
 
     /*
         Arrays below are used to initialize the obstacleTiles list
@@ -76,17 +77,17 @@ public class DebrisSpawnScript : MonoBehaviour
     */
     private int[] types = 
     {
-        0, 0, 0, -1,
-        0, 0, 0, -1,
-        0, -1, 
-        0, -1, 
-        0
+        1, 1, -1,           //one homing above another
+        0, 0, 0, -1,        //two medium standards on the sides, one smaller standard in the middle
+        0, -1,              //standard on the left
+        0, -1,              //standard on the right
+        0                   //standard in middle
     };
 
     private float[] scales = 
     {
+        0.3f, 0.3f, 0f,
         0.3f, 0.3f, 0.1f, 0f,
-        0.4f, 0.4f, 0.4f, 0f,
         0.5f, 0f,
         0.5f, 0f,
         0.5f
@@ -94,8 +95,8 @@ public class DebrisSpawnScript : MonoBehaviour
 
     private float[] xPositions = 
     {
+        0f, 0f, 0f,
         -1.5f, 1.5f, 0f, 0f,
-        -1.5f, 0f, 1.5f, 0f,
         -1f, 0f, 
         0f, 0f, 
         1f
@@ -103,8 +104,8 @@ public class DebrisSpawnScript : MonoBehaviour
 
     private float[] yPositions = 
     {
+        10f, 12f, 0f,
         10f, 10f, 15f, 0f,
-        10f, 10f, 10f, 0f,
         10f, 0f,
         10f, 0f,
         10f
@@ -112,12 +113,16 @@ public class DebrisSpawnScript : MonoBehaviour
 
     private float[] speeds = 
     {
+        5f, 5f, 0f,
         3f, 3f, 6f, 0f,
-        3f, 3f, 3f, 0f,
         3f, 0f, 
         3f, 0f, 
         3f
     };
+
+    private int[] sets = {1, 1, 0, 0, 0};
+
+    private float[] setSpawnProbabilities = {0.75f, 0.175f, 0.075f};
 
     public event EventHandler<EventArgs> OnDebrisSpawned;
     private bool spawnerActive = true;
@@ -141,6 +146,11 @@ public class DebrisSpawnScript : MonoBehaviour
             totalWeight += spawnWeights[i];
         }
 
+        obstacleTiles = new List<List<DebrisSpawnInfo>>[3];
+        for(int i = 0; i < 3; i++){
+            obstacleTiles[i] = new List<List<DebrisSpawnInfo>>();
+        }
+
         if(types.Length != scales.Length || types.Length != xPositions.Length || types.Length != yPositions.Length || types.Length != speeds.Length)
         {
             Debug.Log(types.Length);
@@ -151,6 +161,7 @@ public class DebrisSpawnScript : MonoBehaviour
             throw new Exception("Obstacle tile attribute array lengths do not match");
         } else {
             int currIndex = 0;
+            int setIndex = 0;
             while(currIndex < types.Length)
             {
                 List<DebrisSpawnInfo> newList = new List<DebrisSpawnInfo>();
@@ -161,7 +172,12 @@ public class DebrisSpawnScript : MonoBehaviour
                     currIndex++;
                 }
                 currIndex++;
-                obstacleTiles.Add(newList);
+                if(setIndex < sets.Length){
+                    obstacleTiles[sets[setIndex]].Add(newList);
+                } else {
+                    throw new Exception("Number of assigned sets does not match number of sets given");
+                }
+                setIndex++;
             }
         }
 
@@ -190,8 +206,15 @@ public class DebrisSpawnScript : MonoBehaviour
 
             if (timer >= adjustedSpawnTime)
             {
-                SpawnTile();
-                //SpawnDebris();
+                float spawnType = Random.Range(0f, 1f);
+                if(spawnType <= tileSpawnProbability)
+                {
+                    SpawnTile();
+                } 
+                else 
+                {
+                    SpawnDebris();
+                }
                 timer = 0f;
                 nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
             }
@@ -199,8 +222,25 @@ public class DebrisSpawnScript : MonoBehaviour
     }
 
     void SpawnTile(){
-        int chosenTile = Random.Range(0, obstacleTiles.Count);
-        List<DebrisSpawnInfo> spawnInfos = obstacleTiles[chosenTile];
+
+        float seed = Random.Range(0f, 1f);
+        int chosenTileSet = -1;
+        float currTotal = setSpawnProbabilities[0];
+        for(int i = 0; i < setSpawnProbabilities.Length - 1; i++)
+        {
+            if(seed < currTotal)
+            {
+                chosenTileSet = i;
+                break;
+            }
+            currTotal += setSpawnProbabilities[i + 1];
+        }
+        if(chosenTileSet == -1){
+            chosenTileSet = setSpawnProbabilities.Length - 1;
+        }
+
+        int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count);
+        List<DebrisSpawnInfo> spawnInfos = obstacleTiles[chosenTileSet][chosenTile];
         for(int i = 0; i < spawnInfos.Count; i++){
             DebrisSpawnInfo spawnInfo = spawnInfos[i];
 

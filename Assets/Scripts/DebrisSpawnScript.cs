@@ -120,7 +120,7 @@ public class DebrisSpawnScript : MonoBehaviour
         3f
     };
 
-    private int[] sets = {1, 1, 0, 0, 0};
+    private int[] sets = {1, 1, 0, 0, 0}; //difficulty rating, 0 is easiest, 2 is hardest
 
     private float[] setSpawnProbabilities = {0.75f, 0.175f, 0.075f};
 

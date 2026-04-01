@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8368366474824931469}
   - component: {fileID: 1441241140351380367}
-  - component: {fileID: 4165949595523134610}
+  - component: {fileID: 8625220925540555344}
   m_Layer: 0
   m_Name: Star
   m_TagString: Untagged
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4165949595523134610
+--- !u!114 &8625220925540555344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2433061985418147921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b196f738c7c2ef140876cff31e2ba62f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4eb192cf4356e42e8b7b89def7106103, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GameScript::DebrisMoveScript
-  moveSpeed: 0.5
+  m_EditorClassIdentifier: GameScript::StarMoveScript
+  velocity: {x: 0, y: -5, z: 0}

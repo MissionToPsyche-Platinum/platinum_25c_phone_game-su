@@ -119,7 +119,7 @@ public class StarSpawnScript : MonoBehaviour
         GameObject newStar = Instantiate(selectedSprite, spawnPos, Quaternion.identity, starParent);
 
         // Random speed
-        DebrisMoveScript script = newStar.GetComponent<DebrisMoveScript>();
+        StarMoveScript script = newStar.GetComponent<StarMoveScript>();
         if (script != null)
         {
             script.velocity = Vector3.down * moveSpeed;

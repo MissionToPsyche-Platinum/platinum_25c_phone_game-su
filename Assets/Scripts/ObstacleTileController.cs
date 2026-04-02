@@ -70,7 +70,7 @@ public class ObstacleTileController : MonoBehaviour
     };
 
     private List<List<DebrisSpawnInfo>>[] obstacleTiles;
-    bool tileTestMode = false;
+    bool tileTestMode = true;
 
     /*
         Arrays below are used to initialize the obstacleTiles list
@@ -86,6 +86,7 @@ public class ObstacleTileController : MonoBehaviour
     //asteroid type (see above)
     private int[] types = 
     {
+        0, 0, 1, -1,        //two medium standards on the sides, one smaller homing in the middle
         0, 0, -1,           //2 spinning standards
         0, 0, 0, 0, 0, -1,  //5 standards in an X shape
         1, 1, -1,           //one homing above another
@@ -98,6 +99,7 @@ public class ObstacleTileController : MonoBehaviour
     //asteroid size
     private float[] scales = 
     {
+        0.3f, 0.3f, 0.1f, 0f,
         0.2f, 0.2f, 0f,
         0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0f,
         0.3f, 0.3f, 0f,
@@ -110,6 +112,7 @@ public class ObstacleTileController : MonoBehaviour
     //starting x position of asteroids
     private float[] xPositions = 
     {
+        -1.5f, 1.5f, 0f, 0f,
         -1f, 1f, 0f,
         -1.5f, 1.5f, 0f, -1.5f, 1.5f, 0f,
         0f, 0f, 0f,
@@ -122,6 +125,7 @@ public class ObstacleTileController : MonoBehaviour
     //starting y position of asteroids
     private float[] yPositions = 
     {
+        10f, 10f, 15f, 0f,
         10f, 10f, 0f,
         10f, 10f, 13, 16, 16f, 0f,
         10f, 12f, 0f,
@@ -135,6 +139,7 @@ public class ObstacleTileController : MonoBehaviour
     //point for asteroids to revolve around as they fall
     private float[] rotations = 
     {
+        0f, 0f, 0f, 0f,
         0f, 10f, 0.2f,
         0f, 0f, 0f,
         0f, 0f, 0f,
@@ -147,6 +152,7 @@ public class ObstacleTileController : MonoBehaviour
     //asteroid move speed
     private float[] speeds = 
     {
+        3f, 3f, 6f, 0f,
         3f, 3f, 0f,
         3f, 3f, 3f, 3f, 3f, 0f,
         5f, 5f, 0f,
@@ -157,7 +163,7 @@ public class ObstacleTileController : MonoBehaviour
     };
 
     //difficulty rating, 0 is easiest, 2 is hardest, 3 for testing tiles
-    private int[] sets = {1, 1, 1, 1, 0, 0, 0}; 
+    private int[] sets = {3, 1, 1, 1, 1, 0, 0, 0}; 
 
     //chance of getting a tile from each set
     private float[] setSpawnProbabilities = {0.75f, 0.175f, 0.075f};

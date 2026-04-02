@@ -64,6 +64,7 @@ public class DebrisSpawnScript : MonoBehaviour
 
     private float tileSpawnProbability = 0.5f;
     private List<List<DebrisSpawnInfo>>[] obstacleTiles;
+    bool tileTestMode = false;
 
     /*
         Arrays below are used to initialize the obstacleTiles list
@@ -77,6 +78,7 @@ public class DebrisSpawnScript : MonoBehaviour
     */
     private int[] types = 
     {
+        0, 0, 0, 0, 0, -1,  //5 standards in an X shape
         1, 1, -1,           //one homing above another
         0, 0, 0, -1,        //two medium standards on the sides, one smaller standard in the middle
         0, -1,              //standard on the left
@@ -86,6 +88,7 @@ public class DebrisSpawnScript : MonoBehaviour
 
     private float[] scales = 
     {
+        0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0f,
         0.3f, 0.3f, 0f,
         0.3f, 0.3f, 0.1f, 0f,
         0.5f, 0f,
@@ -95,6 +98,7 @@ public class DebrisSpawnScript : MonoBehaviour
 
     private float[] xPositions = 
     {
+        -1.5f, 1.5f, 0f, -1.5f, 1.5f, 0f,
         0f, 0f, 0f,
         -1.5f, 1.5f, 0f, 0f,
         -1f, 0f, 
@@ -104,6 +108,7 @@ public class DebrisSpawnScript : MonoBehaviour
 
     private float[] yPositions = 
     {
+        10f, 10f, 13, 16, 16f, 0f,
         10f, 12f, 0f,
         10f, 10f, 15f, 0f,
         10f, 0f,
@@ -113,6 +118,7 @@ public class DebrisSpawnScript : MonoBehaviour
 
     private float[] speeds = 
     {
+        3f, 3f, 3f, 3f, 3f, 0f,
         5f, 5f, 0f,
         3f, 3f, 6f, 0f,
         3f, 0f, 
@@ -120,7 +126,7 @@ public class DebrisSpawnScript : MonoBehaviour
         3f
     };
 
-    private int[] sets = {1, 1, 0, 0, 0}; //difficulty rating, 0 is easiest, 2 is hardest
+    private int[] sets = {1, 1, 1, 0, 0, 0}; //difficulty rating, 0 is easiest, 2 is hardest, 3 for testing tiles
 
     private float[] setSpawnProbabilities = {0.75f, 0.175f, 0.075f};
 
@@ -146,8 +152,8 @@ public class DebrisSpawnScript : MonoBehaviour
             totalWeight += spawnWeights[i];
         }
 
-        obstacleTiles = new List<List<DebrisSpawnInfo>>[3];
-        for(int i = 0; i < 3; i++){
+        obstacleTiles = new List<List<DebrisSpawnInfo>>[4];
+        for(int i = 0; i < 4; i++){
             obstacleTiles[i] = new List<List<DebrisSpawnInfo>>();
         }
 
@@ -207,7 +213,7 @@ public class DebrisSpawnScript : MonoBehaviour
             if (timer >= adjustedSpawnTime)
             {
                 float spawnType = Random.Range(0f, 1f);
-                if(spawnType <= tileSpawnProbability)
+                if(spawnType <= tileSpawnProbability || tileTestMode)
                 {
                     SpawnTile();
                 } 
@@ -226,7 +232,7 @@ public class DebrisSpawnScript : MonoBehaviour
         float seed = Random.Range(0f, 1f);
         int chosenTileSet = -1;
         float currTotal = setSpawnProbabilities[0];
-        for(int i = 0; i < setSpawnProbabilities.Length - 1; i++)
+        for(int i = 0; i < setSpawnProbabilities.Length - 2; i++)
         {
             if(seed < currTotal)
             {
@@ -235,11 +241,17 @@ public class DebrisSpawnScript : MonoBehaviour
             }
             currTotal += setSpawnProbabilities[i + 1];
         }
-        if(chosenTileSet == -1){
-            chosenTileSet = setSpawnProbabilities.Length - 1;
+        if(chosenTileSet == -1)
+        {
+            chosenTileSet = setSpawnProbabilities.Length - 2;
         }
 
-        int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count);
+        if(tileTestMode)
+        {
+            chosenTileSet = 3;
+        }
+
+        int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count - 1);
         List<DebrisSpawnInfo> spawnInfos = obstacleTiles[chosenTileSet][chosenTile];
         for(int i = 0; i < spawnInfos.Count; i++){
             DebrisSpawnInfo spawnInfo = spawnInfos[i];
@@ -268,6 +280,7 @@ public class DebrisSpawnScript : MonoBehaviour
             {
                 float baseSpeed = spawnInfo.GetSpeed();
                 script.velocity = baseSpeed * difficultyMultiplier * Vector3.down; // 1% faster per second
+                script.rotationSpeed = Random.Range(0.05f, 0.4f);
                 script.type = debrisType;
                 script.debrisScale = scale;
             }
@@ -311,6 +324,7 @@ public class DebrisSpawnScript : MonoBehaviour
         {
             float baseSpeed = Random.Range(2.0f, 8.0f);
             script.velocity = baseSpeed * difficultyMultiplier * Vector3.down; // 1% faster per second
+            script.rotationSpeed = Random.Range(0.05f, 0.4f);
             script.type = debrisType;
             script.debrisScale = randomScale;
         }

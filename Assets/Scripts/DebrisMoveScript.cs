@@ -1,12 +1,17 @@
 using UnityEngine;
 using System;
 
+using Random = UnityEngine.Random;
+
 public class DebrisMoveScript : MonoBehaviour
 {
     public Vector3 velocity = new Vector3(0f, -5f, 0f);
     public float rotationSpeed = 1f;
     public int type = 0;
     public float debrisScale;
+
+    public Vector3 pivotPoint;
+    public float revSpeed;
 
     private float currRotation = 0f;
 
@@ -27,6 +32,7 @@ public class DebrisMoveScript : MonoBehaviour
     void Start()
     {
         velocityScaled = velocity * Time.deltaTime;
+        rotationSpeed = Random.Range(0.05f, 0.4f);
     }
 
     // Update is called once per frame
@@ -66,8 +72,10 @@ public class DebrisMoveScript : MonoBehaviour
 
         if(!(GameStateManager.Instance.GetGameStageInt() == 1)){
             transform.position = transform.position + velocityScaled;
+            pivotPoint = pivotPoint + velocityScaled;
             currRotation += Time.deltaTime * rotationSpeed;
             transform.Rotate(0f, 0f, 360f * Time.deltaTime * rotationSpeed);
+            transform.RotateAround(pivotPoint, Vector3.forward, revSpeed * Time.deltaTime * 360);
             if (hasAppeared && (screenPos.y < -0.1f || screenPos.y > 1.1f || screenPos.x < -0.1f || screenPos.x > 1.1f)) // Slightly off screen
             {
                 Destroy(gameObject);
@@ -119,6 +127,7 @@ public class DebrisMoveScript : MonoBehaviour
                 if (script != null)
                 {
                     Vector3 offset = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0f);
+                    script.rotationSpeed = 0f;
                     script.velocity = velocity + offset;
                     script.type = 0;
                 }

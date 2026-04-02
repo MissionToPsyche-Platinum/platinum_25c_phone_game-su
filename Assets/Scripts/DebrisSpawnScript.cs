@@ -4,19 +4,26 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 struct DebrisSpawnInfo {
+
     int type;
     float scale;
     float initialX;
     float initialY;
     float moveSpeed;
+    float pivotX;
+    float pivotY;
+    float revolutionSpeed;
 
-    public DebrisSpawnInfo(int debrisType, float size, float xPos, float yPos, float speed)
+    public DebrisSpawnInfo(int debrisType, float size, float xPos, float yPos, float speed, float pivotXPos, float pivotYPos, float revSpeed)
     {
         type = debrisType;
         scale = size;
         initialX = xPos;
         initialY = yPos;
         moveSpeed = speed;
+        pivotX = pivotXPos;
+        pivotY = pivotYPos;
+        revolutionSpeed = revSpeed;
     }
 
     public int GetType()
@@ -43,6 +50,21 @@ struct DebrisSpawnInfo {
     {
         return moveSpeed;
     }
+
+    public float GetPivotX()
+    {
+        return pivotX;
+    }
+
+    public float GetPivotY()
+    {
+        return pivotY;
+    }
+
+    public float GetRevSpeed()
+    {
+        return revolutionSpeed;
+    }
 };
 
 public class DebrisSpawnScript : MonoBehaviour
@@ -62,9 +84,9 @@ public class DebrisSpawnScript : MonoBehaviour
     private float gameTime = 0f; 
     private float difficultyMultiplier = 1f;
 
-    private float tileSpawnProbability = 0.5f;
+    private float tileSpawnProbability = 0.5f;      //chance of premade tile spawning instead of random spawn
     private List<List<DebrisSpawnInfo>>[] obstacleTiles;
-    bool tileTestMode = false;
+    bool tileTestMode = true;
 
     /*
         Arrays below are used to initialize the obstacleTiles list
@@ -76,8 +98,11 @@ public class DebrisSpawnScript : MonoBehaviour
         Each line corresponds to attribute values for one obstacle tile, an assortment of debris GameObjects
         Matching indices correspond to different attributes of the same GameObject
     */
+
+    //asteroid type (see above)
     private int[] types = 
     {
+        0, 0, -1,           //2 spinning standards
         0, 0, 0, 0, 0, -1,  //5 standards in an X shape
         1, 1, -1,           //one homing above another
         0, 0, 0, -1,        //two medium standards on the sides, one smaller standard in the middle
@@ -86,8 +111,10 @@ public class DebrisSpawnScript : MonoBehaviour
         0                   //standard in middle
     };
 
+    //asteroid size
     private float[] scales = 
     {
+        0.2f, 0.2f, 0f,
         0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0f,
         0.3f, 0.3f, 0f,
         0.3f, 0.3f, 0.1f, 0f,
@@ -96,8 +123,10 @@ public class DebrisSpawnScript : MonoBehaviour
         0.5f
     };
 
+    //starting x position of asteroids
     private float[] xPositions = 
     {
+        -1f, 1f, 0f,
         -1.5f, 1.5f, 0f, -1.5f, 1.5f, 0f,
         0f, 0f, 0f,
         -1.5f, 1.5f, 0f, 0f,
@@ -106,8 +135,10 @@ public class DebrisSpawnScript : MonoBehaviour
         1f
     };
 
+    //starting y position of asteroids
     private float[] yPositions = 
     {
+        10f, 10f, 0f,
         10f, 10f, 13, 16, 16f, 0f,
         10f, 12f, 0f,
         10f, 10f, 15f, 0f,
@@ -116,8 +147,23 @@ public class DebrisSpawnScript : MonoBehaviour
         10f
     };
 
+    //pivotX, pivotY, revolutions per second
+    //point for asteroids to revolve around as they fall
+    private float[] rotations = 
+    {
+        0f, 10f, 0.2f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f
+    };
+
+    //asteroid move speed
     private float[] speeds = 
     {
+        3f, 3f, 0f,
         3f, 3f, 3f, 3f, 3f, 0f,
         5f, 5f, 0f,
         3f, 3f, 6f, 0f,
@@ -126,8 +172,10 @@ public class DebrisSpawnScript : MonoBehaviour
         3f
     };
 
-    private int[] sets = {1, 1, 1, 0, 0, 0}; //difficulty rating, 0 is easiest, 2 is hardest, 3 for testing tiles
+    //difficulty rating, 0 is easiest, 2 is hardest, 3 for testing tiles
+    private int[] sets = {3, 1, 1, 1, 0, 0, 0}; 
 
+    //chance of getting a tile from each set
     private float[] setSpawnProbabilities = {0.75f, 0.175f, 0.075f};
 
     public event EventHandler<EventArgs> OnDebrisSpawned;
@@ -173,7 +221,7 @@ public class DebrisSpawnScript : MonoBehaviour
                 List<DebrisSpawnInfo> newList = new List<DebrisSpawnInfo>();
                 while(currIndex < types.Length && types[currIndex] != -1)
                 {
-                    DebrisSpawnInfo newSpawnInfo = new DebrisSpawnInfo(types[currIndex], scales[currIndex], xPositions[currIndex], yPositions[currIndex], speeds[currIndex]);
+                    DebrisSpawnInfo newSpawnInfo = new DebrisSpawnInfo(types[currIndex], scales[currIndex], xPositions[currIndex], yPositions[currIndex], speeds[currIndex], rotations[setIndex * 3], rotations[setIndex * 3 + 1], rotations[setIndex * 3 + 2]);
                     newList.Add(newSpawnInfo);
                     currIndex++;
                 }
@@ -283,6 +331,8 @@ public class DebrisSpawnScript : MonoBehaviour
                 script.rotationSpeed = Random.Range(0.05f, 0.4f);
                 script.type = debrisType;
                 script.debrisScale = scale;
+                script.pivotPoint = new Vector3(spawnInfo.GetPivotX(), spawnInfo.GetPivotY(), 0f);
+                script.revSpeed = spawnInfo.GetRevSpeed();
             }
         }
     }

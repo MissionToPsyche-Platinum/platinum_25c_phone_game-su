@@ -5324,7 +5324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &693361282
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9163,7 +9163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1203054310
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12130,7 +12130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: 0.000011444}
+  m_AnchoredPosition: {x: -0.000015259, y: 122}
   m_SizeDelta: {x: 916.022, y: 401.431}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1483704438
@@ -12153,15 +12153,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The work is a result of the Psyche Student Collaborations component of
-    NASA''s Psyche Mission https://psyche.asu.edu. "Psyche: A Journey to a Metal
-    World" [Contract number XXXXX] is part of the NASA Discovery Program mission
-    to solar system targets. Trade names and trademarks of ASU and NASA are used
-    in this work for identification only. Their usage does not constitute an official
-    endorsement, either expressed or implied, by Arizona State University or National
-    Aeronautics and Space Administration. The content is solely the responsibility
+  m_text: "This work was created in partial fulfillment of Seattle University Capstone
+    Course \u201CCPSC 4870-90: Software Eng & Project Dev I-III\u2033. The work is
+    a result of the Psyche Student Collaborations component of NASA\u2019s Psyche
+    Mission (https://psyche.ssl.berkeley.edu/). \u201CPsyche: A Journey to a Metal
+    World\u201D [Contract number NNM16AA09C] is part of the NASA Discovery Program
+    mission to solar system targets. Trade names and trademarks of ASU and NASA are
+    used in this work for identification only. Their usage does not constitute an
+    official endorsement, either expressed or implied, by Arizona State University
+    or National Aeronautics and Space Administration. The content is solely the responsibility
     of the authors and does not necessarily represent the official views of ASU or
-    NASA.'
+    NASA."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

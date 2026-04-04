@@ -70,7 +70,7 @@ public class ObstacleTileController : MonoBehaviour
     };
 
     private List<List<DebrisSpawnInfo>>[] obstacleTiles;
-    bool tileTestMode = true;
+    bool tileTestMode = false;
 
     /*
         Arrays below are used to initialize the obstacleTiles list
@@ -163,7 +163,7 @@ public class ObstacleTileController : MonoBehaviour
     };
 
     //difficulty rating, 0 is easiest, 2 is hardest, 3 for testing tiles
-    private int[] sets = {3, 1, 1, 1, 1, 0, 0, 0}; 
+    private int[] sets = {1, 1, 1, 1, 1, 0, 0, 0}; 
 
     //chance of getting a tile from each set
     private float[] setSpawnProbabilities = {0.75f, 0.175f, 0.075f};

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1613984233873083763}
   - component: {fileID: 4757630566345165528}
   - component: {fileID: 2412797809879352858}
+  - component: {fileID: -2279924936431528790}
+  - component: {fileID: 9040614470650666014}
   m_Layer: 5
   m_Name: AsteroidPopup
   m_TagString: Untagged
@@ -77,6 +79,30 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-2279924936431528790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584545617896392102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e091dde7ea4ffb4e9f4074d25b76354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameQuit
+--- !u!114 &9040614470650666014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584545617896392102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameStart
 --- !u!1 &4264218607683229791
 GameObject:
   m_ObjectHideFlags: 0

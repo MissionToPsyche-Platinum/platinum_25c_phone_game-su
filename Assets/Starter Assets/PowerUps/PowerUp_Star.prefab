@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 265078084404684279}
   - component: {fileID: 1113893358588543022}
   - component: {fileID: 4838024789647706310}
+  - component: {fileID: -5461429749270573584}
   m_Layer: 0
   m_Name: PowerUp_Star
   m_TagString: PowerUpStar
@@ -163,3 +164,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9673ae47a0b44f24abdb880f8e9d4d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &-5461429749270573584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6154391625889750010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e091dde7ea4ffb4e9f4074d25b76354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameQuit

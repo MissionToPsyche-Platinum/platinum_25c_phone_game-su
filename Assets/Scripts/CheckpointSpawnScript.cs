@@ -67,14 +67,21 @@ public class CheckpointSpawnScript : MonoBehaviour
         }
         checkpointInstances[index] = Instantiate(checkpoints[index], spawnPos, Quaternion.identity);
         checkpointInstances[index].transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+        int capturedIndex = index;
+        CheckpointMoveScript moveScriptRef = checkpointInstances[index].GetComponent<CheckpointMoveScript>();
+        moveScriptRef.OnExitedScreen += () => HandleCheckpointExited(capturedIndex);
         nextCheckpoint += 1;
+    }
+
+    private void HandleCheckpointExited(int index)
+    {
+        OnCheckpointPassed?.Invoke(this, EventArgs.Empty);
     }
 
     public void resumeMovement(int index){
         CheckpointMoveScript moveScript = checkpointInstances[index].GetComponent<CheckpointMoveScript>();
         moveScript.resumeMovement();
         HideMessage();
-        OnCheckpointPassed?.Invoke(this, EventArgs.Empty);
         GameStateManager.Instance.SetGameStage(index + 2);
     }
 

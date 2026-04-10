@@ -70,16 +70,14 @@ public class DebrisMoveScript : MonoBehaviour
             hasAppeared = true;
         }
 
-        if(!(GameStateManager.Instance.GetGameStageInt() == 1)){
-            transform.position = transform.position + velocityScaled;
-            pivotPoint = pivotPoint + velocityScaled;
-            currRotation += Time.deltaTime * rotationSpeed;
-            transform.Rotate(0f, 0f, 360f * Time.deltaTime * rotationSpeed);
-            transform.RotateAround(pivotPoint, Vector3.forward, revSpeed * Time.deltaTime * 360);
-            if (hasAppeared && (screenPos.y < -0.1f || screenPos.y > 1.1f || screenPos.x < -0.1f || screenPos.x > 1.1f)) // Slightly off screen
-            {
-                Destroy(gameObject);
-            }
+        transform.position = transform.position + velocityScaled;
+        pivotPoint = pivotPoint + velocityScaled;
+        currRotation += Time.deltaTime * rotationSpeed;
+        transform.Rotate(0f, 0f, 360f * Time.deltaTime * rotationSpeed);
+        transform.RotateAround(pivotPoint, Vector3.forward, revSpeed * Time.deltaTime * 360);
+        if (hasAppeared && (screenPos.y < -0.1f || screenPos.y > 1.1f || screenPos.x < -0.1f || screenPos.x > 1.1f)) // Slightly off screen
+        {
+            Destroy(gameObject);
         }
     }
 

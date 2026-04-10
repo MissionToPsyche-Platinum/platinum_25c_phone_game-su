@@ -16,12 +16,10 @@ public class StarMoveScript : MonoBehaviour
     {
         Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
 
-        if(!(GameStateManager.Instance.GetGameStageInt() == 1)){
-            transform.position += velocity * Time.deltaTime;
-            if (screenPos.y < -0.1f) // Slightly below screen
-            {
-                Destroy(gameObject);
-            }
+        transform.position += velocity * Time.deltaTime;
+        if (screenPos.y < -0.1f) // Slightly below screen
+        {
+            Destroy(gameObject);
         }
     }
 }

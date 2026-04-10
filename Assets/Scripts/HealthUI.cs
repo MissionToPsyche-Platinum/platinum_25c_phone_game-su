@@ -5,9 +5,9 @@ public class HealthUI : MonoBehaviour
 {
 
     public GameObject healthPoint;
+    [SerializeField] RectTransform container;
     private GameObject[] hpInstances;
-    private int nextHPToDelete;
-    public int maxHealth;
+    private int currentHP;
 
     public float spacing;
 
@@ -28,11 +28,6 @@ public class HealthUI : MonoBehaviour
         GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
     }
 
-    void Start()
-    {
-
-    }
-
     private void OnDestroy()
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
@@ -42,55 +37,34 @@ public class HealthUI : MonoBehaviour
 
     private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
-        hpInstances = new GameObject[maxHealth];
-        nextHPToDelete = maxHealth - 1;
-        hpWidth = xMax - xMin;
-        hpHeight =((yMax - yMin) - spacing * (float)(maxHealth - 1)) / (float)maxHealth;
+        currentHP = GameStateManager.Instance.startingHealth;
+        if (currentHP <= 0) return;
 
-        //check if spacing and hpHeight values fit in bounding box
-        float maxSpacing = ((yMax - yMin) - minHPHeight * (float)maxHealth) / (float)(maxHealth - 1);
-        spacing = hpHeight <= 0 ? maxSpacing : spacing;
-        hpHeight = hpHeight <= 0 ? minHPHeight : hpHeight;
+        hpInstances = new GameObject[currentHP];
 
-        float hpPosY = yMin;
-
-        RectTransform rectTransform = healthPoint.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(0.5f, 0.5f);
-        for(int i = 0; i < maxHealth; i++)
-        {
-            Vector3 spawnPos = new Vector3(xMin, hpPosY, 0f);
-            hpInstances[i] = Instantiate(healthPoint, spawnPos, Quaternion.identity, transform);
-            hpPosY += hpHeight + spacing;
-        }
+        for (int i = 0; i < currentHP; i++)
+            hpInstances[i] = Instantiate(healthPoint, container);
 
         LeftHandedManager.OnLeftHandedChanged += ApplyMirror;
         ApplyMirror(LeftHandedManager.IsLeftHanded);
     }
-
     private void ApplyMirror(bool isLeftHanded)
     {
-        float mirroredX = -(xMin);
-        for (int i = 0; i < maxHealth; i++)
-        {
-            if (hpInstances[i] == null) continue;
-            Vector3 pos = hpInstances[i].transform.position;
-            pos.x = isLeftHanded ? mirroredX : xMin;
-            hpInstances[i].transform.position = pos;
-        }
+        Vector2 pos = container.anchoredPosition;
+        pos.x = isLeftHanded ? Mathf.Abs(pos.x) : -Mathf.Abs(pos.x);
+        container.anchoredPosition = pos;
     }
 
     private void OnStopPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
-        while(nextHPToDelete > 0){
-            RemoveHP();
+        if (hpInstances == null) return;
+        foreach (var hp in hpInstances)
+        {
+            if (hp != null) Destroy(hp);
         }
-        RemoveHP();
-        
-    }
-
-    void Update()
-    {
-
+        hpInstances = null;
+        currentHP = 0;
+        LeftHandedManager.OnLeftHandedChanged -= ApplyMirror;
     }
 
     public void TakeDamage(int damage)
@@ -103,10 +77,9 @@ public class HealthUI : MonoBehaviour
 
     void RemoveHP()
     {
-        Destroy(hpInstances[nextHPToDelete]);
-        if(nextHPToDelete > 0)
-        {
-            nextHPToDelete--;
-        }
+        if (currentHP <= 0) return;
+        currentHP--;
+        Destroy(hpInstances[currentHP]);
+        hpInstances[currentHP] = null;
     }
 }

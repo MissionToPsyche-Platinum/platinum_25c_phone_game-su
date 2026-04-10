@@ -48,6 +48,10 @@ public class PopupManager : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
+            if (rect == null)
+            {
+                yield break;
+            }
             elapsed += Time.deltaTime;
             float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
             rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, Mathf.Lerp(from, to, t));

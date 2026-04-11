@@ -16,6 +16,10 @@ public class CheckpointSpawnScript : MonoBehaviour
     public string[] checkpointMessages;
 
     [SerializeField] private TMP_Text messageText;
+
+    [SerializeField] private GameObject moonArrivalPopupPrefab;
+    [SerializeField] private GameObject marsArrivalPopupPrefab;
+    [SerializeField] private GameObject psycheArrivalPopupPrefab;
     private GameObject[] checkpointInstances;
 
     private const int numCheckpoints = 4;
@@ -145,10 +149,15 @@ public class CheckpointSpawnScript : MonoBehaviour
         
         float currentScore = scoreSystem.GetCurrentScore();
         if(nextCheckpoint < numCheckpoints && currentScore >= checkpointScores[nextCheckpoint]){
+            int arrivedIndex = nextCheckpoint;
             OnCheckpointReached?.Invoke(this, EventArgs.Empty);
             ShowMessage(nextCheckpoint);
             spawnCheckpoint(nextCheckpoint);
             stopped = true;
+
+            GameObject[] stagePopups = { null, moonArrivalPopupPrefab, marsArrivalPopupPrefab, psycheArrivalPopupPrefab };
+            if (arrivedIndex >= 1 && arrivedIndex <= 3 && stagePopups[arrivedIndex] != null)
+                PopupManager.Instance.DisplayPopup(stagePopups[arrivedIndex], 6f);
         }
 
         if(stopped){

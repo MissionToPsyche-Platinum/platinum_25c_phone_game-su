@@ -25,20 +25,33 @@ public class PopupManager : MonoBehaviour
         StartCoroutine(PopupRoutine(popupPrefab, displayDuration));
     }
 
+    private float GetTopSafeAreaOffset()
+    {
+        float topInsetPixels = Screen.height - Screen.safeArea.yMax;
+        if (topInsetPixels <= 0f) return 0f;
+        Canvas canvas = gameScreenPanel.GetComponentInParent<Canvas>();
+        if (canvas == null) return 0f;
+        return topInsetPixels / canvas.scaleFactor;
+    }
+
     private IEnumerator PopupRoutine(GameObject popupPrefab, float displayDuration)
     {
-        // Spawn at top of panel
+        // Spawn at top of panel, shifted down past the notch
         GameObject popup = Instantiate(popupPrefab, gameScreenPanel);
         RectTransform rect = popup.GetComponent<RectTransform>();
 
-        rect.anchoredPosition = Vector2.zero;
+        float safeOffset = GetTopSafeAreaOffset();
+        float hiddenY = -safeOffset;
+        float visibleY = -(slideDistance + safeOffset);
 
-        yield return StartCoroutine(SlideY(rect, 0f, -slideDistance, slideDuration));
+        rect.anchoredPosition = new Vector2(0f, hiddenY);
+
+        yield return StartCoroutine(SlideY(rect, hiddenY, visibleY, slideDuration));
 
         //wait and let the popup chill on screen
         yield return new WaitForSeconds(displayDuration);
 
-        yield return StartCoroutine(SlideY(rect, -slideDistance, 0f, slideDuration));
+        yield return StartCoroutine(SlideY(rect, visibleY, hiddenY, slideDuration));
 
         Destroy(popup);
     }

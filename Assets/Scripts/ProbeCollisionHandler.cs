@@ -37,7 +37,11 @@ public class ProbeCollisionHandler : MonoBehaviour
             // Destroy the debris/asteroid
             Destroy(collision.gameObject);
             
-            PopupManager.Instance.DisplayPopup(asteroidPopupPrefab, 5f);
+            if (!hasDisplayedAsteroidPopup)
+            {
+                hasDisplayedAsteroidPopup = true;
+                PopupManager.Instance.DisplayPopup(asteroidPopupPrefab, 5f);
+            }
         }
 
         if (collision.gameObject.CompareTag("Coin"))

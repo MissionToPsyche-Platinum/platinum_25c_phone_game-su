@@ -7941,6 +7941,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScript::ProbeHealth
   healthController: {fileID: 1752418543}
   scoreSystem: {fileID: 631130228}
+  lowHealthPopupPrefab: {fileID: 100, guid: 320edae929a24e14391996f765377a85, type: 3}
   maxHealth: 3
   currentHealth: 0
   gameOverPanel: {fileID: 1923588363}
@@ -7967,6 +7968,11 @@ MonoBehaviour:
   - 5
   powerUpStartSoundClip: {fileID: 8300000, guid: ac92d166844444a008a978f865f520ca, type: 3}
   powerUpEndSoundClip: {fileID: 8300000, guid: 36cbf5200f423450e99bd827fdd52cf3, type: 3}
+  hyperspacePopupPrefab: {fileID: 100, guid: 85f13748d7158a6428250cdeac8837c3, type: 3}
+  shieldPopupPrefab: {fileID: 100, guid: 3ce574d72193e0341bb98d8fba9202b1, type: 3}
+  twoXCoinsPopupPrefab: {fileID: 100, guid: edb36cd507783954f819b6cd4c14e4b6, type: 3}
+  starPopupPrefab: {fileID: 100, guid: 66807e1a2852e524fbcd32efa5c29d50, type: 3}
+  hexPopupPrefab: {fileID: 100, guid: aff8336fd0ddf8448aaa6a23d25f3cdf, type: 3}
 --- !u!114 &908402714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12092,6 +12098,9 @@ MonoBehaviour:
   - Mars
   - Psyche
   messageText: {fileID: 1544722308}
+  moonArrivalPopupPrefab: {fileID: 100, guid: c722bfa4815a9c04eaa8176e467a75ed, type: 3}
+  marsArrivalPopupPrefab: {fileID: 100, guid: 80bacab3006ed9d42b58be52a2f3ba4b, type: 3}
+  psycheArrivalPopupPrefab: {fileID: 100, guid: 58f34831c9035014da2415f94122831d, type: 3}
 --- !u!4 &1420386464
 Transform:
   m_ObjectHideFlags: 0
@@ -15591,6 +15600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1893530574}
   - component: {fileID: 1893530573}
+  - component: {fileID: 1893530575}
   m_Layer: 0
   m_Name: PopupManager
   m_TagString: Untagged
@@ -15628,6 +15638,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1893530575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893530572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54659be0819c5ed43a110abbaf8e156d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::TipManager
+  tipPopupPrefabs:
+  - {fileID: 100, guid: 009d1e4b848280f4c97743c4108cd396, type: 3}
+  - {fileID: 100, guid: ba052ca81b44c9f499268a4b459752d8, type: 3}
+  - {fileID: 100, guid: 2b3b6eccbbe94c246926e61fc18ad0f4, type: 3}
 --- !u!1 &1893911882
 GameObject:
   m_ObjectHideFlags: 0

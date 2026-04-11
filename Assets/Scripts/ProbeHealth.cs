@@ -8,17 +8,21 @@ public class ProbeHealth : MonoBehaviour
     private HealthUI healthUI;
     private ScoreIncrement score;
 
+    [SerializeField] private GameObject lowHealthPopupPrefab;
+
     public int maxHealth = 3;
     public int currentHealth;
     public GameObject gameOverPanel;
     private bool damageActive;
     private bool shieldActive;
     private int shieldHealth;
+    private bool hasShownLowHealthWarning;
 
     void Start()
     {
         damageActive = true;
         shieldActive = false;
+        hasShownLowHealthWarning = false;
         healthUI = healthController.GetComponent<HealthUI>();
         score = scoreSystem.GetComponent<ScoreIncrement>();
         
@@ -65,6 +69,7 @@ public class ProbeHealth : MonoBehaviour
             maxHealth = GameStateManager.Instance.startingHealth;
             currentHealth = maxHealth;
         }
+        hasShownLowHealthWarning = false;
     }
 
     public void TakeDamage(int damage)
@@ -100,6 +105,12 @@ public class ProbeHealth : MonoBehaviour
                 }
                 currentHealth -= damage;
             }
+        }
+
+        if (currentHealth == 1 && !hasShownLowHealthWarning && lowHealthPopupPrefab != null)
+        {
+            hasShownLowHealthWarning = true;
+            PopupManager.Instance.DisplayPopup(lowHealthPopupPrefab, 4f);
         }
 
         if (currentHealth <= 0)

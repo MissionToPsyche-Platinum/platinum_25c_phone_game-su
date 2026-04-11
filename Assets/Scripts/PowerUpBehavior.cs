@@ -12,6 +12,12 @@ public class PowerUpBehavior : MonoBehaviour
     [SerializeField] private AudioClip powerUpStartSoundClip;
     [SerializeField] private AudioClip powerUpEndSoundClip;
 
+    [SerializeField] private GameObject hyperspacePopupPrefab;
+    [SerializeField] private GameObject shieldPopupPrefab;
+    [SerializeField] private GameObject twoXCoinsPopupPrefab;
+    [SerializeField] private GameObject starPopupPrefab;
+    [SerializeField] private GameObject hexPopupPrefab;
+
     private ProbeHealth healthSystem;
     private ScoreIncrement scoreSystem;
     private DebrisSpawnScript debrisSpawnSystem;
@@ -44,20 +50,24 @@ public class PowerUpBehavior : MonoBehaviour
         if(index != 4){
             powerUpsActive[index] = true;
             powerUpTimers[index] = powerUpLengths[index];
-            switch(index) 
+            switch(index)
             {
                 case 0: //Hyperspace
                     healthSystem.DisableDamage();
                     scoreSystem.ScaleScoreRate(hyperspaceScoreScale);
+                    if (hyperspacePopupPrefab != null) PopupManager.Instance.DisplayPopup(hyperspacePopupPrefab, 3f);
                     break;
                 case 1: //Shield
                     healthSystem.AddShield(shieldHealth);
+                    if (shieldPopupPrefab != null) PopupManager.Instance.DisplayPopup(shieldPopupPrefab, 3f);
                     break;
                 case 2: //2x
                     GameStateManager.Instance.SetCoinMultiplier(coinMultiplier);
+                    if (twoXCoinsPopupPrefab != null) PopupManager.Instance.DisplayPopup(twoXCoinsPopupPrefab, 3f);
                     break;
                 case 3: //Star
                     debrisSpawnSystem.DisableSpawning();
+                    if (starPopupPrefab != null) PopupManager.Instance.DisplayPopup(starPopupPrefab, 3f);
                     break;
                 default:
                     break;
@@ -69,6 +79,7 @@ public class PowerUpBehavior : MonoBehaviour
                 powerUpTimers[index] = powerUpLengths[index];
                 debrisSpawnSystem.DisableSpawning();
                 coinSpawnSystem.SetSpawnRateMultiplier(ultimateCoinSpawnIncrease);
+                if (hexPopupPrefab != null) PopupManager.Instance.DisplayPopup(hexPopupPrefab, 3f);
             }
         }
     }

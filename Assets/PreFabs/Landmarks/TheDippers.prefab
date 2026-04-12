@@ -1,0 +1,173 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3691443941826363168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3483170451998742569}
+  - component: {fileID: 8660555497649894769}
+  m_Layer: 0
+  m_Name: TheDippers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3483170451998742569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691443941826363168}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5716704903295794465}
+  - {fileID: 6582691191921064136}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8660555497649894769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691443941826363168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe2da1048fc67344b79cf9eee7a1950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::MoveDownScript
+  velocity: {x: 0, y: -0.8, z: 0}
+--- !u!1001 &5108171032243591604
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3483170451998742569}
+    m_Modifications:
+    - target: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9849433
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.17287798
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -19.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136905691502780287, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+      propertyPath: m_Name
+      value: TheLittleDipper
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+--- !u!4 &6582691191921064136 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2141941827612041596, guid: e068493d9ad67b44388ac8becc759b24, type: 3}
+  m_PrefabInstance: {fileID: 5108171032243591604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7495521134130807509
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3483170451998742569}
+    m_Modifications:
+    - target: {fileID: 1193465897778225744, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_Name
+      value: TheBigDipper
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9627991
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.27021852
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -31.355
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+--- !u!4 &5716704903295794465 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2832940156613378036, guid: daa0dc9deddab4d4b8d8f9c0b156745a, type: 3}
+  m_PrefabInstance: {fileID: 7495521134130807509}
+  m_PrefabAsset: {fileID: 0}

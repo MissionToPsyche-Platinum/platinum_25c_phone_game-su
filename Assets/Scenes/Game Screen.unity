@@ -1660,6 +1660,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112710855}
   m_CullTransparentMesh: 1
+--- !u!1 &128683200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 128683202}
+  - component: {fileID: 128683201}
+  m_Layer: 0
+  m_Name: LandmarkSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &128683201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128683200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ba0aaf369c10c48bb44b208e038521, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::LandmarkSpawner
+  landmarks:
+  - prefab: {fileID: 5554854112474469277, guid: 8cfbe29dee05b464fb65be61863848d6, type: 3}
+    triggerScore: 20
+    spawnYOffset: 2
+    spawnX: -1
+  - prefab: {fileID: 525565986268334686, guid: 801654f1b07310b4893de92d09979683, type: 3}
+    triggerScore: 120
+    spawnYOffset: 2
+    spawnX: 1
+  - prefab: {fileID: 3691443941826363168, guid: 51b04bcb9a84c66478b2011e1fa7a48c, type: 3}
+    triggerScore: 220
+    spawnYOffset: 2
+    spawnX: 2
+  myScoreIncrement: {fileID: 631130230}
+--- !u!4 &128683202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128683200}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.108680226, y: 0.108680226, z: 0.108680226}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &139939410
 GameObject:
   m_ObjectHideFlags: 0
@@ -18298,6 +18356,7 @@ SceneRoots:
   - {fileID: 1086168160}
   - {fileID: 1480618451}
   - {fileID: 201524966}
+  - {fileID: 128683202}
   - {fileID: 1384828552}
   - {fileID: 908402709}
   - {fileID: 580264466}

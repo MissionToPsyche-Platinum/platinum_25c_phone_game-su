@@ -77,6 +77,10 @@ public class CheckpointSpawnScript : MonoBehaviour
         nextCheckpoint += 1;
     }
 
+    public int GetCheckpointScore(int index){
+        return checkpointScores[index];
+    }
+
     private void HandleCheckpointExited(int index)
     {
         OnCheckpointPassed?.Invoke(this, EventArgs.Empty);

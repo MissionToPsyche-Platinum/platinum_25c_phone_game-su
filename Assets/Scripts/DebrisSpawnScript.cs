@@ -5,10 +5,19 @@ using Random = UnityEngine.Random;
 
 public class DebrisSpawnScript : MonoBehaviour
 {
+    [SerializeField] private GameObject scoreIncrement;
+
     //0 - standard, 1 - homing, 2 - exploding, 3 - duplicating, 4 - teleporting
     public GameObject[] debrisTypes;
-    public int[] spawnWeights;
-    private int totalWeight = 0;
+    public float[] spawnWeights;
+
+    private float[,] spawnWeightsAtCheckpoints = 
+    {
+        {1f, 0f, 0f, 0f, 0f},           //spawn probabilities at Earth checkpoint
+        {1f, 0f, 0f, 0f, 0f},           //spawn probabilities at Moon checkpoint
+        {0.7f, 0.2f, 0.1f, 0f, 0f},     //spawn probabilities at Mars checkpoint
+        {0.4f, 0.3f, 0.15f, 0.15f, 0f}, //spawn probabilities at Psyche checkpoint
+    };
 
     public float minSpawnInterval = 0.2f; 
     public float maxSpawnInterval = 0.5f;
@@ -27,6 +36,8 @@ public class DebrisSpawnScript : MonoBehaviour
     private bool spawnerActive = true;
     CheckpointSpawnScript checkpointSpawnScript;
 
+    private ScoreIncrement scoreSystem;
+
     void Start()
     {
         this.gameObject.SetActive(false);
@@ -38,15 +49,11 @@ public class DebrisSpawnScript : MonoBehaviour
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
 
+        scoreSystem = scoreIncrement.GetComponent<ScoreIncrement>();
+
         nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
 
-        for(int i = 0; i < 5; i++)
-        {
-            totalWeight += spawnWeights[i];
-        }
-
         tileController = this.gameObject.GetComponent<ObstacleTileController>();
-
     }
 
     private void OnDestroy()
@@ -84,6 +91,38 @@ public class DebrisSpawnScript : MonoBehaviour
                 timer = 0f;
                 nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
             }
+        }
+    }
+
+    void updateSpawnProbabilities(){
+        int gameStage = GameStateManager.Instance.GetGameStageInt();
+        float score = (float)scoreSystem.GetCurrentScore();
+
+        if(gameStage < 2){                          //not at a checkpoint, invalid
+            Array.Fill(spawnWeights, 0f);
+        } else if(gameStage >= 5){                  //spawn weights have stopped changing, constant at last checkpoint's probabilities
+            for(int i = 0; i < 5; i++){
+                spawnWeights[i] = spawnWeightsAtCheckpoints[3, i];
+            }
+        } else {
+            float distanceBetweenCheckpoints = checkpointSpawnScript.GetCheckpointScore(gameStage - 1) - checkpointSpawnScript.GetCheckpointScore(gameStage - 2);
+            float initialCheckpointScore = checkpointSpawnScript.GetCheckpointScore(gameStage - 2);
+            float progress = (score - initialCheckpointScore) / distanceBetweenCheckpoints;     //percentage of the way to the next checkpoint
+
+            //linear interpolation between probabilities at previous and next checkpoint
+            for(int i = 0; i < 5; i++){
+                spawnWeights[i] = (spawnWeightsAtCheckpoints[gameStage - 1, i] - spawnWeightsAtCheckpoints[gameStage - 2, i]) * progress + spawnWeightsAtCheckpoints[gameStage - 2, i];
+            }
+        }
+
+        //ensure that weights add to 1
+        if(gameStage >= 2){
+            float sum = 0f;
+            for(int i = 0; i < 5; i++){
+                sum += spawnWeights[i];
+            }
+
+            spawnWeights[0] -= (sum - 1f);
         }
     }
 
@@ -134,10 +173,15 @@ public class DebrisSpawnScript : MonoBehaviour
             0f
         );
 
+        updateSpawnProbabilities();
+        for(int i = 0; i < 5; i++){
+            Debug.Log(spawnWeights[i]);
+        }
+
         int debrisType = debrisTypes.Length - 1;
         GameObject selectedDebris = debrisTypes[debrisType];
-        int randVal = UnityEngine.Random.Range(1, totalWeight + 1); 
-        int currSum = 0;
+        float randVal = UnityEngine.Random.Range(0f, 1f); 
+        float currSum = 0;
 
         for(int i = 0; i < 5; i++){
             currSum += spawnWeights[i];

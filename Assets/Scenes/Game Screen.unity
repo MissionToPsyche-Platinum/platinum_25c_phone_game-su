@@ -11901,13 +11901,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31ce49aa628b694ea2a6addcec2311e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  scoreIncrement: {fileID: 631130228}
   debrisTypes:
   - {fileID: 8420540731902456465, guid: 76cdbca5218d6f64e8d462c2619fcf97, type: 3}
   - {fileID: 1882154104652252273, guid: 862825457e3fd4bcbbdaebb65a82fa24, type: 3}
   - {fileID: 4854028936632854818, guid: 31c4fdb5ae7e04a4f966de34e0cdf0fc, type: 3}
   - {fileID: 5079796556950102654, guid: 4096a806567a04c81a56662435b054f8, type: 3}
   - {fileID: 4483468297061941246, guid: a4594d7885c744bf9ae833379b3266bf, type: 3}
-  spawnWeights: 0100000001000000010000000100000001000000
+  spawnWeights:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
   minSpawnInterval: 1
   maxSpawnInterval: 4
   minSize: 0.2

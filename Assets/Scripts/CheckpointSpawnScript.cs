@@ -163,17 +163,6 @@ public class CheckpointSpawnScript : MonoBehaviour
             if (arrivedIndex >= 1 && arrivedIndex <= 3 && stagePopups[arrivedIndex] != null)
                 PopupManager.Instance.DisplayPopup(stagePopups[arrivedIndex], 6f);
         }
-
-        if(stopped){
-            stopTimer -= Time.deltaTime;
-        }
-
-        if(stopTimer <= 0.0f){
-            GameStateManager.Instance.SetGameStage(nextCheckpoint);
-            resumeMovement(nextCheckpoint - 1);
-            stopTimer = 7f;
-            stopped = false;
-        }
     }
 
     private void KillAllActiveCheckpoints()

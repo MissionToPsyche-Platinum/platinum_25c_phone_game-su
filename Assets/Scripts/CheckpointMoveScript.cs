@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using TMPro;
 using System;
 
 public class CheckpointMoveScript : MonoBehaviour
@@ -10,10 +12,13 @@ public class CheckpointMoveScript : MonoBehaviour
 
 
 
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -31,6 +36,11 @@ public class CheckpointMoveScript : MonoBehaviour
             if(transform.position.y < 0.0f && !alreadyStoppedAtCenter){
                 alreadyStoppedAtCenter = true;
                 currentlyStoppedAtCenter = true;
+            }
+        } else {
+            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            {
+                resumeMovement();
             }
         }
 

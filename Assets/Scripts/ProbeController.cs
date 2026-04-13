@@ -11,6 +11,9 @@ public class ProbeController : MonoBehaviour
     private Vector2 minAllowedPosition;
     private Vector2 maxAllowedPosition;
     private Vector2 additionalForceVector;
+    private float _lateralMultiplier = 1f;
+    private float _visionMultiplier  = 1f;
+    private float _baseCameraSize;
 
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float extraPadding = 0.1f; // Adjust value to keep entire probe from going offscreen
@@ -34,6 +37,7 @@ public class ProbeController : MonoBehaviour
     private void Start()
     {
         this.gameObject.SetActive(false);
+        _baseCameraSize = Camera.main.orthographicSize;
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
         CalculateScreenBoundaries();
@@ -67,6 +71,15 @@ public class ProbeController : MonoBehaviour
 
         maxAllowedPosition.x = maxScreen.x - playerHalfWidth - extraPadding;
         maxAllowedPosition.y = maxScreen.y - playerHalfHeight - extraPadding;
+
+        // Navigation Camera: expand movement bounds outward from center
+        if (_visionMultiplier != 1f)
+        {
+            float cy = (minAllowedPosition.y + maxAllowedPosition.y) * 0.5f;
+            float hh = (maxAllowedPosition.y - minAllowedPosition.y) * 0.5f;
+            minAllowedPosition.y = cy - hh * _visionMultiplier;
+            maxAllowedPosition.y = cy + hh * _visionMultiplier;
+        }
     }
 
     private void OnDestroy()
@@ -98,7 +111,9 @@ public class ProbeController : MonoBehaviour
             }
         }
 
-        myRigidbody2D.linearVelocity = myInputActions.Player.Movement.ReadValue<Vector2>() * moveSpeed + additionalForceVector * Time.deltaTime;
+        Vector2 input = myInputActions.Player.Movement.ReadValue<Vector2>();
+        Vector2 scaledInput = new Vector2(input.x * _lateralMultiplier, input.y) * moveSpeed;
+        myRigidbody2D.linearVelocity = scaledInput + additionalForceVector * Time.deltaTime;
     }
     
     // Used here so this happens at the very end of a frame as to not mess up linearVelocity calculation
@@ -118,11 +133,18 @@ public class ProbeController : MonoBehaviour
     {
         // Debug.Log("ProbeController heard OnStartPlaying");
         this.transform.position = GameStateManager.Instance.startingProbePosition;
-        
+
         this.gameObject.SetActive(true);
         if (GameStateManager.Instance != null)
         {
             moveSpeed = 3f + (GameStateManager.Instance.speedLevel * 0.5f);
+        }
+        if (ComponentManager.Instance != null)
+        {
+            _lateralMultiplier = ComponentManager.Instance.GetLateralSpeedMultiplier();
+            _visionMultiplier  = ComponentManager.Instance.GetVisionMultiplier();
+            Camera.main.orthographicSize = _baseCameraSize * _visionMultiplier;
+            CalculateScreenBoundaries();
         }
         ApplySkin();
     }
@@ -130,11 +152,17 @@ public class ProbeController : MonoBehaviour
     private void OnStopPlaying(object sender, EventArgs e)
     {
         this.gameObject.SetActive(false);
+        Camera.main.orthographicSize = _baseCameraSize;
     }
 
     public void SetMoveSpeed(float newMoveSpeed)
     {
         moveSpeed = newMoveSpeed;
+    }
+
+    public void SetLateralSpeedMultiplier(float m)
+    {
+        _lateralMultiplier = m;
     }
 
     //for additional forces that affect probe movement

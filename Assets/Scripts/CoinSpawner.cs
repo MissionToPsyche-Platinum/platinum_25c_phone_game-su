@@ -18,7 +18,8 @@ public class CoinSpawner : MonoBehaviour
 
     private float timer = 0f;
     private float nextSpawnTime;
-    private float spawnRateMultiplier = 1f;
+    private float spawnRateMultiplier = 1f;          // set by power-ups (e.g. Hex ultimate)
+    private float _componentSpawnMultiplier = 1f;    // set by components (Gamma Ray, X-band)
 
     private bool spawnerActive = true;
 
@@ -66,7 +67,7 @@ public class CoinSpawner : MonoBehaviour
         if(spawnerActive){
             timer += Time.deltaTime;
 
-            if (timer >= nextSpawnTime / spawnRateMultiplier)
+            if (timer >= nextSpawnTime / (spawnRateMultiplier * _componentSpawnMultiplier))
             {
                 SpawnCoin();
                 timer = 0f;
@@ -102,6 +103,11 @@ public class CoinSpawner : MonoBehaviour
 
     public void SetSpawnRateMultiplier(float newSpawnRateMultiplier){
         spawnRateMultiplier = newSpawnRateMultiplier;
+    }
+
+    public void SetComponentSpawnMultiplier(float m)
+    {
+        _componentSpawnMultiplier = m;
     }
 
     private void OnStartPlaying(object sender, EventArgs e)

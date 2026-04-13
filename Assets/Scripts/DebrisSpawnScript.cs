@@ -30,6 +30,7 @@ public class DebrisSpawnScript : MonoBehaviour
     private float difficultyMultiplier = 1f;
 
     private float tileSpawnProbability = 0.5f;      //chance of premade tile spawning instead of random spawn
+    private float _spawnIntervalMultiplier = 1f;    //component modifier: >1 means longer interval (fewer spawns)
     ObstacleTileController tileController;
 
     public event EventHandler<EventArgs> OnDebrisSpawned;
@@ -75,7 +76,7 @@ public class DebrisSpawnScript : MonoBehaviour
             timer += Time.deltaTime;
 
             
-            float adjustedSpawnTime = nextSpawnTime / difficultyMultiplier;
+            float adjustedSpawnTime = nextSpawnTime * _spawnIntervalMultiplier / difficultyMultiplier;
 
             if (timer >= adjustedSpawnTime)
             {
@@ -210,6 +211,11 @@ public class DebrisSpawnScript : MonoBehaviour
             script.type = debrisType;
             script.debrisScale = randomScale;
         }
+    }
+
+    public void SetSpawnIntervalMultiplier(float m)
+    {
+        _spawnIntervalMultiplier = m;
     }
 
     public void DisableSpawning()

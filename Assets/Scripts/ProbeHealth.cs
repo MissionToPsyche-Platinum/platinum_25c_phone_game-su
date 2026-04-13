@@ -144,6 +144,14 @@ public class ProbeHealth : MonoBehaviour
         damageActive = true;
     }
 
+    public void RegenHP(int amount)
+    {
+        if (currentHealth >= maxHealth) return;
+        int gain = Mathf.Min(amount, maxHealth - currentHealth);
+        healthUI.AddHP(gain);
+        currentHealth += gain;
+    }
+
     public void SetToZeroLives()
     {
         TakeDamage(currentHealth);

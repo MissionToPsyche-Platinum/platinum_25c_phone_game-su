@@ -31,6 +31,8 @@ public class DebrisMoveScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (ComponentManager.Instance != null)
+            velocity *= ComponentManager.Instance.GetDebrisSpeedMultiplier();
         velocityScaled = velocity * Time.deltaTime;
         rotationSpeed = Random.Range(0.05f, 0.4f);
     }

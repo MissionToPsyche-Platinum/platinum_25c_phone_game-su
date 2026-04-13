@@ -82,4 +82,14 @@ public class HealthUI : MonoBehaviour
         Destroy(hpInstances[currentHP]);
         hpInstances[currentHP] = null;
     }
+
+    public void AddHP(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            if (currentHP >= hpInstances.Length) break;
+            hpInstances[currentHP] = Instantiate(healthPoint, container);
+            currentHP++;
+        }
+    }
 }

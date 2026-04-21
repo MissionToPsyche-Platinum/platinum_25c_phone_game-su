@@ -18,6 +18,8 @@ public class CheckpointMoveScript : MonoBehaviour
     {
         GameObject checkpointSpawner = GameObject.Find("CheckpointSpawner");
         checkpointSpawnScript = checkpointSpawner.GetComponent<CheckpointSpawnScript>();
+
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
     }
 
     // Update is called once per frame
@@ -39,7 +41,7 @@ public class CheckpointMoveScript : MonoBehaviour
                 checkpointSpawnScript.pauseMovement();
             }
         } else {
-            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            if (GameStateManager.Instance.GetGameStageInt() >= 2 && Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
             {
                 resumeMovement();
             }
@@ -58,5 +60,9 @@ public class CheckpointMoveScript : MonoBehaviour
         currentlyStoppedAtCenter = false;
         checkpointSpawnScript.resumeMovement(GameStateManager.Instance.GetGameStageInt() - 1);
         GameStateManager.Instance.SetGameStage(GameStateManager.Instance.GetGameStageInt() + 1);
+    }
+
+    private void OnStartPlaying(object Sender, EventArgs e){
+        resumeMovement();
     }
 }

@@ -19290,6 +19290,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4947792885775206082, guid: 529606bd5da0f4b01a4439fbe5ed29f0, type: 3}
+      propertyPath: fragmentSpreadSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8607791023139143149, guid: 529606bd5da0f4b01a4439fbe5ed29f0, type: 3}
       propertyPath: m_Name
       value: Frag_0_1
@@ -19307,6 +19311,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1372778207403998062, guid: aae474a5fb4f14a2e9294e577ba60c69, type: 3}
+      propertyPath: fragmentSpreadSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2604327167385823044, guid: aae474a5fb4f14a2e9294e577ba60c69, type: 3}
       propertyPath: m_LocalPosition.x
       value: 38.33041
@@ -19651,6 +19659,10 @@ PrefabInstance:
     - target: {fileID: 504654715481999166, guid: f1c1feb447bdd4853b602614373ed612, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770843218938539832, guid: f1c1feb447bdd4853b602614373ed612, type: 3}
+      propertyPath: fragmentSpreadSpeed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5868264827804270479, guid: f1c1feb447bdd4853b602614373ed612, type: 3}
       propertyPath: m_Name

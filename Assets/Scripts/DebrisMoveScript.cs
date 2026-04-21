@@ -25,6 +25,7 @@ public class DebrisMoveScript : MonoBehaviour
     [SerializeField] private int numFragments;
 
     [SerializeField] private float homingAmount = 0.5f;
+    [SerializeField] private float fragmentSpreadSpeed = 2f;
 
     private Vector3 velocityScaled;
 
@@ -126,9 +127,10 @@ public class DebrisMoveScript : MonoBehaviour
                 DebrisMoveScript script = newDebris.GetComponent<DebrisMoveScript>();
                 if (script != null)
                 {
-                    Vector3 offset = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0f);
-                    script.rotationSpeed = 0f;
-                    script.velocity = velocity + offset;
+                    float baseAngle = transform.eulerAngles.z;
+                    float fragmentAngle = (baseAngle + (360f / numFragments) * i) * Mathf.Deg2Rad;
+                    Vector3 outward = new Vector3(Mathf.Cos(fragmentAngle), Mathf.Sin(fragmentAngle), 0f);
+                    script.velocity = velocity + outward * fragmentSpreadSpeed;
                     script.type = 0;
                 }
             }

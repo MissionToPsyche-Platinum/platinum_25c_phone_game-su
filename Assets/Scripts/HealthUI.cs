@@ -38,12 +38,16 @@ public class HealthUI : MonoBehaviour
     private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
         currentHP = GameStateManager.Instance.startingHealth;
+        Debug.Log(currentHP);
         if (currentHP <= 0) return;
 
         hpInstances = new GameObject[currentHP];
 
         for (int i = 0; i < currentHP; i++)
+        {
+            Debug.Log("Adding " + i + "'th health");
             hpInstances[i] = Instantiate(healthPoint, container);
+        }
 
         LeftHandedManager.OnLeftHandedChanged += ApplyMirror;
         ApplyMirror(LeftHandedManager.IsLeftHanded);

@@ -71,6 +71,7 @@ public class ShopUpgrades : MonoBehaviour
         {
             GameStateManager.Instance.AddCoins(-cost);
             GameStateManager.Instance.maxHealthLevel += 1;
+            GameStateManager.Instance.startingHealth += 1;
 
             Debug.Log("Health upgraded! Level: " + GameStateManager.Instance.maxHealthLevel);
             UpdateUI();

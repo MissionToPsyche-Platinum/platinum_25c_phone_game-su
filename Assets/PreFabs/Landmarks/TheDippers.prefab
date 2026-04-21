@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3483170451998742569}
-  - component: {fileID: 8660555497649894769}
+  - component: {fileID: -5051095436448433872}
   m_Layer: 0
   m_Name: TheDippers
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 6582691191921064136}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8660555497649894769
+--- !u!114 &-5051095436448433872
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,10 +43,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3691443941826363168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe2da1048fc67344b79cf9eee7a1950, type: 3}
+  m_Script: {fileID: 11500000, guid: 4eb192cf4356e42e8b7b89def7106103, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GameScript::MoveDownScript
-  velocity: {x: 0, y: -0.8, z: 0}
+  m_EditorClassIdentifier: GameScript::StarMoveScript
+  velocity: {x: 0, y: -0.7, z: 0}
 --- !u!1001 &5108171032243591604
 PrefabInstance:
   m_ObjectHideFlags: 0

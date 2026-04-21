@@ -2,52 +2,51 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class CheckpointChooser : MonoBehaviour
 {
-    [SerializeField] private TMP_Dropdown stageDropdown;
 
     [SerializeField] private List<CheckpointEntry> selectableStages = new  List<CheckpointEntry>();
 
+    [SerializeField] private Button leftButton;
+    [SerializeField] private Button rightButton;
+
+    [SerializeField] GameObject checkpointSpawner;
+
+    private CheckpointSpawnScript checkpointSpawnScript;
+
+    private int index = 0;
+
     void Start()
     {
-        PopulateDropdown();
-        RestoreLastSelection();
+        leftButton.onClick.AddListener(OnLeftButtonPressed);
+        rightButton.onClick.AddListener(OnRightButtonPressed);
 
-        stageDropdown.onValueChanged.AddListener(OnDropdownChanged);
+        checkpointSpawnScript = checkpointSpawner.GetComponent<CheckpointSpawnScript>();
     }
 
-    private void PopulateDropdown()
+    void OnDestroy()
     {
-        stageDropdown.ClearOptions();
-
-        List<string> options = new List<string>();
-        foreach (CheckpointEntry stage in selectableStages)
-            options.Add(stage.stage.ToString());
-
-        stageDropdown.AddOptions(options);
+        leftButton.onClick.RemoveListener(OnLeftButtonPressed);
+        rightButton.onClick.RemoveListener(OnRightButtonPressed);
     }
 
-    private void RestoreLastSelection()
-    {
-        // Default to whatever stage GameStateManager already has stored
-        GameStateManager.GameStage current = GameStateManager.Instance.startingGameStage;
+    private void OnLeftButtonPressed(){
+        index = index > 0 ? (index - 1) % selectableStages.Count : selectableStages.Count - 1;
 
-        for (int i = 0; i < selectableStages.Count; i++)
-        {
-            if (selectableStages[i].stage == current)
-            {
-                stageDropdown.value = i;
-                break;
-            }
-        }
-    }
-
-    private void OnDropdownChanged(int index)
-    {
         GameStateManager.Instance.startingGameStage = selectableStages[index].stage;
         GameStateManager.Instance.startingScore = selectableStages[index].startingScore;
+        checkpointSpawnScript.DecrementStartingCheckpoint();
+    }
+
+    private void OnRightButtonPressed(){
+        index = (index + 1) % selectableStages.Count;
+
+        GameStateManager.Instance.startingGameStage = selectableStages[index].stage;
+        GameStateManager.Instance.startingScore = selectableStages[index].startingScore;
+        checkpointSpawnScript.IncrementStartingCheckpoint();
     }
 }
 

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4865598656768902040}
-  - component: {fileID: 1858989360240173164}
   - component: {fileID: -7505815118223123837}
+  - component: {fileID: 7271663720330476435}
   m_Layer: 0
   m_Name: SourthernCross
   m_TagString: Untagged
@@ -38,19 +38,6 @@ Transform:
   - {fileID: 4469325186099699472}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1858989360240173164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525565986268334686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe2da1048fc67344b79cf9eee7a1950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GameScript::MoveDownScript
-  velocity: {x: 0, y: -0.5, z: 0}
 --- !u!114 &-7505815118223123837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +50,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::DestroyOnGameStart
+--- !u!114 &7271663720330476435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525565986268334686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb192cf4356e42e8b7b89def7106103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::StarMoveScript
+  velocity: {x: 0, y: -0.7, z: 0}
 --- !u!1 &2373298492547178023
 GameObject:
   m_ObjectHideFlags: 0

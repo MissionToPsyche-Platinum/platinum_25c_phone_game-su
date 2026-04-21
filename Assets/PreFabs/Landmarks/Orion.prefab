@@ -1157,8 +1157,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5065255448358657700}
-  - component: {fileID: 215186437277224002}
   - component: {fileID: 5817486941082774955}
+  - component: {fileID: 4983603441613212215}
   m_Layer: 0
   m_Name: Orion
   m_TagString: Untagged
@@ -1200,19 +1200,6 @@ Transform:
   - {fileID: 3472944881079251706}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &215186437277224002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5554854112474469277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe2da1048fc67344b79cf9eee7a1950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GameScript::MoveDownScript
-  velocity: {x: 0, y: -0.7, z: 0}
 --- !u!114 &5817486941082774955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,6 +1212,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::DestroyOnGameStart
+--- !u!114 &4983603441613212215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554854112474469277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb192cf4356e42e8b7b89def7106103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::StarMoveScript
+  velocity: {x: 0, y: -0.7, z: 0}
 --- !u!1 &6193355358088625136
 GameObject:
   m_ObjectHideFlags: 0

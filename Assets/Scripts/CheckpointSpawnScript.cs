@@ -26,7 +26,6 @@ public class CheckpointSpawnScript : MonoBehaviour
     private float checkpointZ = 0.9f; //z-coord of checkpoints for layering with other visuals
 
     private int nextCheckpoint = 0;
-    float stopTimer = 7f;
 
     private ScoreIncrement scoreSystem;
     private DebrisSpawnScript debrisSpawnSystem;
@@ -35,8 +34,13 @@ public class CheckpointSpawnScript : MonoBehaviour
 
     private bool stopped = false;
 
+    //for spawners, when the checkpoint is on or off screen
     public event EventHandler<EventArgs> OnCheckpointReached;
     public event EventHandler<EventArgs> OnCheckpointPassed;
+
+    //for movement of background elements, when the actual checkpoint stops moving
+    public event EventHandler<EventArgs> OnCheckpointStopped;
+    public event EventHandler<EventArgs> OnCheckpointResumed;
 
     private void Awake()
     {
@@ -51,6 +55,7 @@ public class CheckpointSpawnScript : MonoBehaviour
         coinSpawnSystem = coinSpawner.GetComponent<CoinSpawner>();
         powerUpSpawnSystem = powerUpSpawner.GetComponent<PowerUpSpawnScript>();
         nextCheckpoint = (int)GameStateManager.Instance.startingGameStage - 1;
+
         spawnCheckpoint(nextCheckpoint);
 
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
@@ -72,8 +77,7 @@ public class CheckpointSpawnScript : MonoBehaviour
         checkpointInstances[index] = Instantiate(checkpoints[index], spawnPos, Quaternion.identity);
         checkpointInstances[index].transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
         int capturedIndex = index;
-        CheckpointMoveScript moveScriptRef = checkpointInstances[index].GetComponent<CheckpointMoveScript>();
-        moveScriptRef.OnExitedScreen += () => HandleCheckpointExited(capturedIndex);
+        
         nextCheckpoint += 1;
     }
 
@@ -81,16 +85,14 @@ public class CheckpointSpawnScript : MonoBehaviour
         return checkpointScores[index];
     }
 
-    private void HandleCheckpointExited(int index)
+    public void HandleCheckpointExited()
     {
         OnCheckpointPassed?.Invoke(this, EventArgs.Empty);
     }
 
     public void resumeMovement(int index){
-        CheckpointMoveScript moveScript = checkpointInstances[index].GetComponent<CheckpointMoveScript>();
-        moveScript.resumeMovement();
+        OnCheckpointResumed?.Invoke(this, EventArgs.Empty);
         HideMessage();
-        GameStateManager.Instance.SetGameStage(index + 2);
     }
 
     private void ShowMessage(int index)
@@ -128,7 +130,6 @@ public class CheckpointSpawnScript : MonoBehaviour
         //Setting default stuff for spawn logic
         nextCheckpoint = (int)GameStateManager.Instance.startingGameStage - 1;
         stopped = false;
-        stopTimer = 7f;
         
         //Spawn the new checkpoint and make it move
         spawnCheckpoint((int)GameStateManager.Instance.startingGameStage - 1);
@@ -194,5 +195,9 @@ public class CheckpointSpawnScript : MonoBehaviour
             return 0;
         }
         return checkpointScores[nextCheckpoint - 1];
+    }
+
+    public void pauseMovement(){
+        OnCheckpointStopped?.Invoke(this, EventArgs.Empty);
     }
 }

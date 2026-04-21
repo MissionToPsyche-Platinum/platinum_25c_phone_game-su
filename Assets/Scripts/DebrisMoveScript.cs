@@ -29,6 +29,8 @@ public class DebrisMoveScript : MonoBehaviour
 
     private Vector3 velocityScaled;
 
+    CheckpointSpawnScript checkpointSpawnScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,6 +38,14 @@ public class DebrisMoveScript : MonoBehaviour
             velocity *= ComponentManager.Instance.GetDebrisSpeedMultiplier();
         velocityScaled = velocity * Time.deltaTime;
         rotationSpeed = Random.Range(0.05f, 0.4f);
+
+        GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
+        checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
+        checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
+    }
+
+    void OnDestroy(){
+        checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
     }
 
     // Update is called once per frame
@@ -173,5 +183,9 @@ public class DebrisMoveScript : MonoBehaviour
     {
         Vector3 rotated = new Vector3(v.x * Mathf.Cos(radians) + v.y * Mathf.Sin(radians), v.x * -Mathf.Sin(radians) + v.y * Mathf.Cos(radians), v.z);
         return rotated;
+    }
+
+    private void OnCheckpointReached(object sender, EventArgs e){
+        Destroy(gameObject);
     }
 }

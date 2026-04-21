@@ -32,8 +32,8 @@ public class StarSpawnScript : MonoBehaviour
 
         GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
         checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
-        checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
-        checkpointSpawnScript.OnCheckpointPassed += OnCheckpointPassed;
+        checkpointSpawnScript.OnCheckpointStopped += OnCheckpointStopped;
+        checkpointSpawnScript.OnCheckpointResumed += OnCheckpointResumed;
 
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
@@ -68,8 +68,8 @@ public class StarSpawnScript : MonoBehaviour
     {
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
-        checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
-        checkpointSpawnScript.OnCheckpointPassed -= OnCheckpointPassed;
+        checkpointSpawnScript.OnCheckpointStopped -= OnCheckpointStopped;
+        checkpointSpawnScript.OnCheckpointResumed -= OnCheckpointResumed;
     }
 
     // Update is called once per frame
@@ -136,12 +136,12 @@ public class StarSpawnScript : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void OnCheckpointReached(object sender, EventArgs e)
+    private void OnCheckpointStopped(object sender, EventArgs e)
     {
         spawnerActive = false;
     }
 
-    private void OnCheckpointPassed(object sender, EventArgs e)
+    private void OnCheckpointResumed(object sender, EventArgs e)
     {
         spawnerActive = true;
     }

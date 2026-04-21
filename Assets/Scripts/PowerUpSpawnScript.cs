@@ -106,7 +106,7 @@ public class PowerUpSpawnScript : MonoBehaviour
 
     private void OnCheckpointReached(object sender, EventArgs e)
     {
-        spawnerActive = true;
+        spawnerActive = false;
     }
 
     private void OnCheckpointPassed(object sender, EventArgs e)

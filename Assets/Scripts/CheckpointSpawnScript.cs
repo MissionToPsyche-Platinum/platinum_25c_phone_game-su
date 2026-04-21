@@ -26,6 +26,7 @@ public class CheckpointSpawnScript : MonoBehaviour
     private float checkpointZ = 0.9f; //z-coord of checkpoints for layering with other visuals
 
     private int nextCheckpoint = 0;
+    private int startingCheckpoint = (int)GameStateManager.Instance.startingGameStage - 1;
 
     private ScoreIncrement scoreSystem;
     private DebrisSpawnScript debrisSpawnSystem;
@@ -54,12 +55,30 @@ public class CheckpointSpawnScript : MonoBehaviour
         debrisSpawnSystem = debrisSpawner.GetComponent<DebrisSpawnScript>();
         coinSpawnSystem = coinSpawner.GetComponent<CoinSpawner>();
         powerUpSpawnSystem = powerUpSpawner.GetComponent<PowerUpSpawnScript>();
-        nextCheckpoint = (int)GameStateManager.Instance.startingGameStage - 1;
+        nextCheckpoint = startingCheckpoint;
 
-        spawnCheckpoint(nextCheckpoint);
+        spawnCheckpoint(nextCheckpoint, true);
 
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
+    }
+
+    public void IncrementStartingCheckpoint(){
+        if(GameStateManager.Instance.GetGameStageInt() < 2){
+            startingCheckpoint = (startingCheckpoint + 1) % numCheckpoints;
+            nextCheckpoint = startingCheckpoint;
+            KillAllActiveCheckpoints();
+            spawnCheckpoint(nextCheckpoint, true);
+        }
+    }
+
+    public void DecrementStartingCheckpoint(){
+        if(GameStateManager.Instance.GetGameStageInt() < 2){
+            startingCheckpoint = startingCheckpoint > 0 ? startingCheckpoint - 1 : numCheckpoints - 1;
+            nextCheckpoint = startingCheckpoint;
+            KillAllActiveCheckpoints();
+            spawnCheckpoint(nextCheckpoint, true);
+        }
     }
 
     private void OnDestroy()
@@ -68,9 +87,9 @@ public class CheckpointSpawnScript : MonoBehaviour
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
     }
 
-    public void spawnCheckpoint(int index){
+    public void spawnCheckpoint(int index, bool spawnAtCenter = false){
         Vector3 spawnPos = new Vector3(0.0f, 0.00f, checkpointZ);
-        if(index != (int)GameStateManager.Instance.startingGameStage - 1){
+        if(!spawnAtCenter){
             //if the checkpoint being spawned isn't the initial one
             spawnPos.Set(0.0f, 8.0f, checkpointZ);
         }
@@ -128,14 +147,14 @@ public class CheckpointSpawnScript : MonoBehaviour
         KillAllActiveCheckpoints();
         
         //Setting default stuff for spawn logic
-        nextCheckpoint = (int)GameStateManager.Instance.startingGameStage - 1;
+        nextCheckpoint = startingCheckpoint;
         stopped = false;
         
         //Spawn the new checkpoint and make it move
-        spawnCheckpoint((int)GameStateManager.Instance.startingGameStage - 1);
-        CheckpointMoveScript moveScript = checkpointInstances[(int)GameStateManager.Instance.startingGameStage - 1].GetComponent<CheckpointMoveScript>();
+        spawnCheckpoint(nextCheckpoint, true);
+        CheckpointMoveScript moveScript = checkpointInstances[startingCheckpoint].GetComponent<CheckpointMoveScript>();
         moveScript.SetAlreadyStoppedAtCenter(true);
-        resumeMovement((int)GameStateManager.Instance.startingGameStage - 1);
+        resumeMovement(startingCheckpoint);
     }
     
     private void OnStopPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)

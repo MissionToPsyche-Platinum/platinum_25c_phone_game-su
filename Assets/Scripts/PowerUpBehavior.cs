@@ -49,7 +49,7 @@ public class PowerUpBehavior : MonoBehaviour
 
         if(index != 4){
             powerUpsActive[index] = true;
-            powerUpTimers[index] = powerUpLengths[index];
+            powerUpTimers[index] = powerUpLengths[index] * PowerUpUpgradeManager.Instance.GetDurationMultiplier(index);
             switch(index)
             {
                 case 0: //Hyperspace
@@ -76,7 +76,7 @@ public class PowerUpBehavior : MonoBehaviour
             ultimateProgress += 1;
             if(ultimateProgress == 5){
                 powerUpsActive[index] = true;
-                powerUpTimers[index] = powerUpLengths[index];
+                powerUpTimers[index] = powerUpLengths[index] * PowerUpUpgradeManager.Instance.GetDurationMultiplier(index);
                 debrisSpawnSystem.DisableSpawning();
                 coinSpawnSystem.SetSpawnRateMultiplier(ultimateCoinSpawnIncrease);
                 if (hexPopupPrefab != null) PopupManager.Instance.DisplayPopup(hexPopupPrefab, 3f);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 using Random = UnityEngine.Random;
 
@@ -29,6 +30,8 @@ public class DebrisMoveScript : MonoBehaviour
 
     private Vector3 velocityScaled;
 
+    private GameObject teleportGhost;
+
     CheckpointSpawnScript checkpointSpawnScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,6 +49,7 @@ public class DebrisMoveScript : MonoBehaviour
 
     void OnDestroy(){
         checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
+        if (teleportGhost != null) Destroy(teleportGhost);
     }
 
     // Update is called once per frame
@@ -173,10 +177,88 @@ public class DebrisMoveScript : MonoBehaviour
     {
         velocityScaled = velocity * Time.deltaTime;
         Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
-        if(!activated && Mathf.Abs(screenPos.y - activationY) <= 0.01f){
+        if(!activated && screenPos.y <= activationY){
             activated = true;
-            transform.position = new Vector3(UnityEngine.Random.Range(-2f, 2f), UnityEngine.Random.Range(-3f, 3f), 0f);
+            Vector3 destination = new Vector3(Random.Range(-2f, 2f), Random.Range(-3f, 3f), 0f);
+            StartCoroutine(TeleportSequence(destination));
         }
+    }
+
+    private IEnumerator TeleportSequence(Vector3 destination)
+    {
+        float totalDuration = 1.5f;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Color originalColor = sr != null ? sr.color : Color.white;
+
+        teleportGhost = CreateTeleportGhost(destination);
+
+        float elapsed = 0f;
+        float flashTimer = 0f;
+        bool flashState = true;
+
+        while (elapsed < totalDuration)
+        {
+            elapsed += Time.deltaTime;
+            flashTimer += Time.deltaTime;
+
+            float t = elapsed / totalDuration;
+            float flashInterval = Mathf.Lerp(0.2f, 0.05f, t);
+
+            if (flashTimer >= flashInterval)
+            {
+                flashTimer = 0f;
+                flashState = !flashState;
+
+                if (sr != null)
+                    sr.color = flashState ? Color.white : new Color(1f, 0.2f, 0.2f, 1f);
+
+                if (teleportGhost != null)
+                {
+                    SpriteRenderer ghostSr = teleportGhost.GetComponent<SpriteRenderer>();
+                    if (ghostSr != null)
+                        ghostSr.color = new Color(1f, 0f, 0f, flashState ? 0.6f : 0.15f);
+                }
+            }
+
+            yield return null;
+        }
+
+        if (sr != null) sr.color = originalColor;
+        if (teleportGhost != null) { Destroy(teleportGhost); teleportGhost = null; }
+
+        transform.position = destination;
+    }
+
+    private GameObject CreateTeleportGhost(Vector3 position)
+    {
+        int texSize = 64;
+        int radius = texSize / 2;
+        Texture2D tex = new Texture2D(texSize, texSize, TextureFormat.RGBA32, false);
+        Color[] pixels = new Color[texSize * texSize];
+        for (int y = 0; y < texSize; y++)
+        {
+            for (int x = 0; x < texSize; x++)
+            {
+                float dist = Mathf.Sqrt((x - radius) * (x - radius) + (y - radius) * (y - radius));
+                pixels[y * texSize + x] = dist <= radius ? new Color(1f, 0f, 0f, 0.5f) : Color.clear;
+            }
+        }
+        tex.SetPixels(pixels);
+        tex.Apply();
+
+        Sprite circleSprite = Sprite.Create(tex, new Rect(0, 0, texSize, texSize), new Vector2(0.5f, 0.5f), 100f);
+
+        GameObject ghost = new GameObject("TeleportGhost");
+        ghost.transform.position = position;
+        ghost.transform.localScale = transform.localScale;
+
+        SpriteRenderer ghostSr = ghost.AddComponent<SpriteRenderer>();
+        ghostSr.sprite = circleSprite;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null) { ghostSr.sortingLayerName = sr.sortingLayerName; ghostSr.sortingOrder = sr.sortingOrder; }
+        ghostSr.color = new Color(1f, 0f, 0f, 0.5f);
+
+        return ghost;
     }
 
     private Vector3 rotate(Vector3 v, float radians)

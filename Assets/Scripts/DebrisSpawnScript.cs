@@ -11,12 +11,12 @@ public class DebrisSpawnScript : MonoBehaviour
     public GameObject[] debrisTypes;
     public float[] spawnWeights;
 
-    private float[,] spawnWeightsAtCheckpoints = 
+    private float[,] spawnWeightsAtCheckpoints =
     {
-        {1f, 0f, 0f, 0f, 0f},           //spawn probabilities at Earth checkpoint
-        {1f, 0f, 0f, 0f, 0f},           //spawn probabilities at Moon checkpoint
-        {0.7f, 0.2f, 0.1f, 0f, 0f},     //spawn probabilities at Mars checkpoint
-        {0.4f, 0.3f, 0.15f, 0.15f, 0f}, //spawn probabilities at Psyche checkpoint
+        {1f, 0f, 0f, 0f, 0f},                //spawn probabilities at Earth checkpoint
+        {1f, 0f, 0f, 0f, 0f},                //spawn probabilities at Moon checkpoint
+        {0.7f, 0.2f, 0.1f, 0f, 0f},          //spawn probabilities at Mars checkpoint
+        {0.35f, 0.25f, 0.15f, 0.15f, 0.1f},  //spawn probabilities at Psyche checkpoint
     };
 
     public float minSpawnInterval = 0.2f; 

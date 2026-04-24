@@ -10,8 +10,6 @@ public class StartScreenButtonsController : MonoBehaviour
     [SerializeField] private GameObject shopScreenPanel;
     [SerializeField] private GameObject settingsScreenPanel;
     [SerializeField] private GameObject statsScreenPanel;
-    [SerializeField] private GameObject componentsScreenPanel;
-
 
     [Header(("Buttons"))]
     [SerializeField] private Button startGameButton;
@@ -19,7 +17,6 @@ public class StartScreenButtonsController : MonoBehaviour
     [SerializeField] private Button statsScreenButton;
     [SerializeField] private Button settingsScreenButton;
     [SerializeField] private Button disclaimerButton;
-    [SerializeField] private Button componentsScreenButton;
 
     [Header("Other")]
     [SerializeField] private DisclaimerPanelController disclaimerPanel;
@@ -31,7 +28,6 @@ public class StartScreenButtonsController : MonoBehaviour
         statsScreenButton.onClick.AddListener(StatsScreenButtonAction);
         settingsScreenButton.onClick.AddListener(SettingsScreenButtonAction);
         disclaimerButton.onClick.AddListener(DisclaimerButtonAction);
-        componentsScreenButton.onClick.AddListener(ComponentsScreenButtonAction);
     }
 
     private void StartGameButtonAction()
@@ -61,12 +57,6 @@ public class StartScreenButtonsController : MonoBehaviour
         SettingsScreenController controller = settingsScreenPanel.GetComponent<SettingsScreenController>();
         controller.SetPreviousPanel(startScreenPanel);
         MenuNavigationButtons.Instance.SwitchPanels(startScreenPanel, settingsScreenPanel);
-    }
-
-    private void ComponentsScreenButtonAction()
-    {
-        MenuNavigationButtons.Instance.PlayButtonSound();
-        MenuNavigationButtons.Instance.SwitchPanels(startScreenPanel, componentsScreenPanel);
     }
 
     private void DisclaimerButtonAction()

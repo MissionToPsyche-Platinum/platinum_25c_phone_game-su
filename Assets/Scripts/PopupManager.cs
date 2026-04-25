@@ -9,6 +9,7 @@ public class PopupManager : MonoBehaviour
     [SerializeField] private RectTransform gameScreenPanel;
     [SerializeField] private float slideDistance = 150f;
     [SerializeField] private float slideDuration = 0.4f;
+    [SerializeField] private float fadeDuration = 0.3f;
 
     private void Awake()
     {
@@ -23,6 +24,28 @@ public class PopupManager : MonoBehaviour
     public void DisplayPopup(GameObject popupPrefab, float displayDuration)
     {
         StartCoroutine(PopupRoutine(popupPrefab, displayDuration));
+    }
+
+    public void DisplayCenteredPopup(GameObject popupPrefab, float displayDuration)
+    {
+        StartCoroutine(CenteredPopupRoutine(popupPrefab, displayDuration));
+    }
+
+    public GameObject DisplayFullScreenPopup(GameObject popupPrefab)
+    {
+        GameObject popup = Instantiate(popupPrefab, gameScreenPanel);
+        RectTransform rect = popup.GetComponent<RectTransform>();
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+        rect.anchoredPosition = Vector2.zero;
+
+        CanvasGroup cg = popup.GetComponent<CanvasGroup>();
+        if (cg == null) cg = popup.AddComponent<CanvasGroup>();
+        cg.alpha = 0f;
+        StartCoroutine(FadeCanvasGroup(cg, 0f, 1f, fadeDuration));
+        return popup;
     }
 
     private float GetTopSafeAreaOffset()
@@ -54,6 +77,42 @@ public class PopupManager : MonoBehaviour
         yield return StartCoroutine(SlideY(rect, visibleY, hiddenY, slideDuration));
 
         Destroy(popup);
+    }
+
+    private IEnumerator CenteredPopupRoutine(GameObject popupPrefab, float displayDuration)
+    {
+        GameObject popup = Instantiate(popupPrefab, gameScreenPanel);
+        RectTransform rect = popup.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0.5f, 0.5f);
+        rect.anchorMax = new Vector2(0.5f, 0.5f);
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = Vector2.zero;
+
+        CanvasGroup cg = popup.GetComponent<CanvasGroup>();
+        if (cg == null) cg = popup.AddComponent<CanvasGroup>();
+        cg.alpha = 0f;
+        cg.blocksRaycasts = false;
+        cg.interactable = false;
+
+        yield return StartCoroutine(FadeCanvasGroup(cg, 0f, 1f, fadeDuration));
+        yield return new WaitForSeconds(displayDuration);
+        yield return StartCoroutine(FadeCanvasGroup(cg, 1f, 0f, fadeDuration));
+
+        Destroy(popup);
+    }
+
+    private IEnumerator FadeCanvasGroup(CanvasGroup cg, float from, float to, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            if (cg == null) yield break;
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
+            cg.alpha = Mathf.Lerp(from, to, t);
+            yield return null;
+        }
+        if (cg != null) cg.alpha = to;
     }
 
     private IEnumerator SlideY(RectTransform rect, float from, float to, float duration)

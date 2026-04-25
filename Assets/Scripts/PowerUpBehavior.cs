@@ -55,31 +55,31 @@ public class PowerUpBehavior : MonoBehaviour
                 case 0: //Hyperspace
                     healthSystem.DisableDamage();
                     scoreSystem.ScaleScoreRate(hyperspaceScoreScale);
-                    if (hyperspacePopupPrefab != null) PopupManager.Instance.DisplayPopup(hyperspacePopupPrefab, 3f);
+                    if (hyperspacePopupPrefab != null) PopupManager.Instance.DisplayCenteredPopup(hyperspacePopupPrefab, 2f);
                     break;
                 case 1: //Shield
                     healthSystem.AddShield(shieldHealth);
-                    if (shieldPopupPrefab != null) PopupManager.Instance.DisplayPopup(shieldPopupPrefab, 3f);
+                    if (shieldPopupPrefab != null) PopupManager.Instance.DisplayCenteredPopup(shieldPopupPrefab, 2f);
                     break;
                 case 2: //2x
                     GameStateManager.Instance.SetCoinMultiplier(coinMultiplier);
-                    if (twoXCoinsPopupPrefab != null) PopupManager.Instance.DisplayPopup(twoXCoinsPopupPrefab, 3f);
+                    if (twoXCoinsPopupPrefab != null) PopupManager.Instance.DisplayCenteredPopup(twoXCoinsPopupPrefab, 2f);
                     break;
                 case 3: //Star
                     debrisSpawnSystem.DisableSpawning();
-                    if (starPopupPrefab != null) PopupManager.Instance.DisplayPopup(starPopupPrefab, 3f);
+                    if (starPopupPrefab != null) PopupManager.Instance.DisplayCenteredPopup(starPopupPrefab, 2f);
                     break;
                 default:
                     break;
             }
         } else {
             ultimateProgress += 1;
+            if (hexPopupPrefab != null) PopupManager.Instance.DisplayCenteredPopup(hexPopupPrefab, 2f);
             if(ultimateProgress == 5){
                 powerUpsActive[index] = true;
                 powerUpTimers[index] = powerUpLengths[index] * PowerUpUpgradeManager.Instance.GetDurationMultiplier(index);
                 debrisSpawnSystem.DisableSpawning();
                 coinSpawnSystem.SetSpawnRateMultiplier(ultimateCoinSpawnIncrease);
-                if (hexPopupPrefab != null) PopupManager.Instance.DisplayPopup(hexPopupPrefab, 3f);
             }
         }
     }

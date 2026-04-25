@@ -175,13 +175,23 @@ public class CheckpointSpawnScript : MonoBehaviour
         if(nextCheckpoint < numCheckpoints && currentScore >= checkpointScores[nextCheckpoint]){
             int arrivedIndex = nextCheckpoint;
             OnCheckpointReached?.Invoke(this, EventArgs.Empty);
-            ShowMessage(nextCheckpoint);
             spawnCheckpoint(nextCheckpoint);
             stopped = true;
 
             GameObject[] stagePopups = { null, moonArrivalPopupPrefab, marsArrivalPopupPrefab, psycheArrivalPopupPrefab };
             if (arrivedIndex >= 1 && arrivedIndex <= 3 && stagePopups[arrivedIndex] != null)
-                PopupManager.Instance.DisplayPopup(stagePopups[arrivedIndex], 6f);
+            {
+                GameObject popupInstance = PopupManager.Instance.DisplayFullScreenPopup(stagePopups[arrivedIndex]);
+                CheckpointIntroPopup intro = popupInstance.GetComponent<CheckpointIntroPopup>();
+                if (intro != null)
+                {
+                    intro.OnDismissed += () => resumeMovement(arrivedIndex);
+                }
+            }
+            else
+            {
+                ShowMessage(nextCheckpoint);
+            }
         }
     }
 

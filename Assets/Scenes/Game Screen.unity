@@ -17909,6 +17909,7 @@ MonoBehaviour:
   gameScreenPanel: {fileID: 881652875}
   slideDistance: 200
   slideDuration: 0.4
+  fadeDuration: 0.3
 --- !u!4 &1893530574
 Transform:
   m_ObjectHideFlags: 0

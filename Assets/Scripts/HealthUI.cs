@@ -45,7 +45,7 @@ public class HealthUI : MonoBehaviour
 
         for (int i = 0; i < currentHP; i++)
         {
-            Debug.Log("Adding " + i + "'th health");
+            // Debug.Log("Adding " + i + "'th health");
             hpInstances[i] = Instantiate(healthPoint, container);
         }
 

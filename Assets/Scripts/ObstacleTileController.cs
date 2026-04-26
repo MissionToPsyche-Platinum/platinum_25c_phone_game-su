@@ -93,7 +93,22 @@ public class ObstacleTileController : MonoBehaviour
         0, 0, 0, -1,        //two medium standards on the sides, one smaller standard in the middle
         0, -1,              //standard on the left
         0, -1,              //standard on the right
-        0                   //standard in middle
+        0,                   //standard in middle
+        2, 0, 2, -1,        //exploding on sides, standard in middle
+        3, 3, -1,           //two duplicators side by side
+        0, 1, 0, -1,        //homing sandwiched between standards
+        4, 0, -1,           //teleporter left, standard right
+        2, 2, 2, -1,        //three exploding in a row
+        0, 3, 0, -1,        //duplicator flanked by standards
+        1, 4, 1, -1,        //teleporter in middle, homings on sides
+        2, 1, -1,           //exploding above, homing below
+        0, 0, 0, 0, 0, -1,  //5 fast standards in a V shape
+        3, 0, 3, -1,        //duplicators on sides, standard center
+        4, 4, -1,           //two teleporters
+        2, 3, -1,           //exploding left, duplicating right
+        1, 1, 4, -1,        //two homings with a teleporter
+        0, 2, 0, 0, -1,     //exploder surrounded by standards
+        4                   //single teleporter center
     };
 
     //asteroid size
@@ -106,7 +121,22 @@ public class ObstacleTileController : MonoBehaviour
         0.3f, 0.3f, 0.1f, 0f,
         0.5f, 0f,
         0.5f, 0f,
-        0.5f
+        0.5f,
+        0.3f, 0.2f, 0.3f, 0f,
+        0.3f, 0.3f, 0f,
+        0.25f, 0.2f, 0.25f, 0f,
+        0.3f, 0.3f, 0f,
+        0.25f, 0.25f, 0.25f, 0f,
+        0.3f, 0.25f, 0.3f, 0f,
+        0.25f, 0.3f, 0.25f, 0f,
+        0.3f, 0.2f, 0f,
+        0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0f,
+        0.3f, 0.2f, 0.3f, 0f,
+        0.35f, 0.35f, 0f,
+        0.3f, 0.3f, 0f,
+        0.2f, 0.2f, 0.3f, 0f,
+        0.25f, 0.3f, 0.25f, 0.25f, 0f,
+        0.4f,
     };
 
     //starting x position of asteroids
@@ -119,7 +149,22 @@ public class ObstacleTileController : MonoBehaviour
         -1.5f, 1.5f, 0f, 0f,
         -1f, 0f, 
         0f, 0f, 
-        1f
+        1f,
+        -1.5f, 0f, 1.5f, 0f,
+        -1f, 1f, 0f,
+        -1.5f, 0f, 1.5f, 0f,
+        -1f, 1f, 0f,
+        -1.5f, 0f, 1.5f, 0f,
+        -1.5f, 0f, 1.5f, 0f,
+        -1.5f, 0f, 1.5f, 0f,
+        -1f, 1f, 0f,
+        -2f, -1f, 0f, 1f, 2f, 0f,
+        -1.5f, 0f, 1.5f, 0f,
+        -1f, 1f, 0f,
+        -1f, 1f, 0f,
+        -1.5f, 0f, 1.5f, 0f,
+        -1.5f, 0f, 1.5f, 0f, 0f,
+        0f,
     };
 
     //starting y position of asteroids
@@ -132,7 +177,22 @@ public class ObstacleTileController : MonoBehaviour
         10f, 10f, 15f, 0f,
         10f, 0f,
         10f, 0f,
-        10f
+        10f,
+        10f, 10f, 10f, 0f,
+        10f, 10f, 0f,
+        10f, 13f, 10f, 0f,
+        10f, 10f, 0f,
+        10f, 10f, 10f, 0f,
+        10f, 13f, 10f, 0f,
+        10f, 13f, 10f, 0f,
+        12f, 10f, 0f,
+        10f, 10f, 10f, 12f, 12f, 0f,
+        10f, 13f, 10f, 0f,
+        10f, 10f, 0f,
+        10f, 10f, 0f,
+        10f, 13f, 10f, 0f,
+        10f, 13f, 10f, 16f, 0f,
+        10f,
     };
 
     //pivotX, pivotY, revolutions per second
@@ -143,6 +203,21 @@ public class ObstacleTileController : MonoBehaviour
         0f, 10f, 0.2f,
         0f, 0f, 0f,
         0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 12f, 0.2f,
+        0f, 10f, 0.25f,
         0f, 0f, 0f,
         0f, 0f, 0f,
         0f, 0f, 0f,
@@ -159,11 +234,26 @@ public class ObstacleTileController : MonoBehaviour
         3f, 3f, 6f, 0f,
         3f, 0f, 
         3f, 0f, 
-        3f
+        3f,
+        4f, 3f, 4f, 0f,
+        4f, 4f, 0f,
+        3f, 5f, 3f, 0f,
+        4f, 3f, 0f,
+        4f, 4f, 4f, 0f,
+        3f, 4f, 3f, 0f,
+        3f, 4f, 3f, 0f,
+        4f, 5f, 0f,
+        3f, 3f, 3f, 3f, 3f, 0f,
+        4f, 3f, 4f, 0f,
+        4f, 4f, 0f,
+        4f, 5f, 0f,
+        5f, 5f, 4f, 0f,
+        3f, 4f, 3f, 3f, 0f,
+        4f
     };
 
     //difficulty rating, 0 is easiest, 2 is hardest, 3 for testing tiles
-    private int[] sets = {1, 1, 1, 1, 1, 0, 0, 0}; 
+    private int[] sets = {1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 2, 1, 2, 1, 0, 1, 2, 2, 2, 1, 2}; 
 
     //chance of getting a tile from each set
     private float[] setSpawnProbabilities = {0.75f, 0.175f, 0.075f};

@@ -26,7 +26,7 @@ public class CheckpointSpawnScript : MonoBehaviour
     private float checkpointZ = 0.9f; //z-coord of checkpoints for layering with other visuals
 
     private int nextCheckpoint = 0;
-    private int startingCheckpoint = (int)GameStateManager.Instance.startingGameStage - 1;
+    private int startingCheckpoint;
 
     private ScoreIncrement scoreSystem;
     private DebrisSpawnScript debrisSpawnSystem;
@@ -55,7 +55,7 @@ public class CheckpointSpawnScript : MonoBehaviour
         debrisSpawnSystem = debrisSpawner.GetComponent<DebrisSpawnScript>();
         coinSpawnSystem = coinSpawner.GetComponent<CoinSpawner>();
         powerUpSpawnSystem = powerUpSpawner.GetComponent<PowerUpSpawnScript>();
-        nextCheckpoint = startingCheckpoint;
+        nextCheckpoint = (int)GameStateManager.Instance.startingGameStage - 1;
 
         spawnCheckpoint(nextCheckpoint, true);
 

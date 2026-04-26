@@ -81,34 +81,54 @@ public class ObstacleTileController : MonoBehaviour
         Each entry (apart from line delineators) correspond to one obstacle attribute value, a single GameObject
         Each line corresponds to attribute values for one obstacle tile, an assortment of debris GameObjects
         Matching indices correspond to different attributes of the same GameObject
+
+        Arrays are spaced into groups of 10 for readability
     */
 
     //asteroid type (see above)
     private int[] types = 
     {
-        0, 0, 1, -1,        //two medium standards on the sides, one smaller homing in the middle
-        0, 0, -1,           //2 spinning standards
-        0, 0, 0, 0, 0, -1,  //5 standards in an X shape
-        1, 1, -1,           //one homing above another
-        0, 0, 0, -1,        //two medium standards on the sides, one smaller standard in the middle
-        0, -1,              //standard on the left
-        0, -1,              //standard on the right
-        0,                   //standard in middle
-        2, 0, 2, -1,        //exploding on sides, standard in middle
-        3, 3, -1,           //two duplicators side by side
-        0, 1, 0, -1,        //homing sandwiched between standards
-        4, 0, -1,           //teleporter left, standard right
-        2, 2, 2, -1,        //three exploding in a row
-        0, 3, 0, -1,        //duplicator flanked by standards
-        1, 4, 1, -1,        //teleporter in middle, homings on sides
-        2, 1, -1,           //exploding above, homing below
-        0, 0, 0, 0, 0, -1,  //5 fast standards in a V shape
-        3, 0, 3, -1,        //duplicators on sides, standard center
-        4, 4, -1,           //two teleporters
-        2, 3, -1,           //exploding left, duplicating right
-        1, 1, 4, -1,        //two homings with a teleporter
-        0, 2, 0, 0, -1,     //exploder surrounded by standards
-        4                   //single teleporter center
+        0, 0, 1, -1,                        //two medium standards on the sides, one smaller homing in the middle
+        0, 0, -1,                           //2 spinning standards
+        0, 0, 0, 0, 0, -1,                  //5 standards in an X shape
+        1, 1, -1,                           //one homing above another
+        0, 0, 0, -1,                        //two medium standards on the sides, one smaller standard in the middle
+        0, -1,                              //standard on the left
+        0, -1,                              //standard on the right
+        0, -1,                              //standard in middle
+        2, 0, 2, -1,                        //exploding on sides, standard in middle
+        3, 3, -1,                           //two duplicators side by side
+
+        0, 1, 0, -1,                        //homing sandwiched between standards
+        4, 0, -1,                           //teleporter left, standard right
+        2, 2, 2, -1,                        //three exploding in a row
+        0, 3, 0, -1,                        //duplicator flanked by standards
+        1, 4, 1, -1,                        //teleporter in middle, homings on sides
+        2, 1, -1,                           //exploding above, homing below
+        0, 0, 0, 0, 0, -1,                  //5 fast standards in a V shape
+        3, 0, 3, -1,                        //duplicators on sides, standard center
+        4, 4, -1,                           //two teleporters
+        2, 3, -1,                           //exploding left, duplicating right
+
+        1, 1, 4, -1,                        //two homings with a teleporter
+        0, 2, 0, 0, -1,                     //exploder surrounded by standards
+        4, -1,                              //single teleporter center
+        0, 0, 0, -1,                        //standards with concentric orbits
+        1, -1,                              //single homing
+        0, 0, 0, 0, 0, -1,                  //random fast standards (variation 1)
+        0, 0, 0, 0, 0, -1,                  //random fast standards (variation 2)
+        1, 0, 2, 0, 3, 0, 4, 0, -1,         //ring of all types
+        2, 0, -1,                           //exploding with standard in the middle
+        3, 3, -1,                           //duplicating on left and right with offset heights
+
+        2, 1, -1,                           //exploding followed by homing
+        4, 4, 4, 4, -1,                     //4 teleports in a horizontal line
+        0, 0, 0, -1,                        //rotating triangle of standards
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1,   //diagonal path of standards
+        0, 4, 0, -1,                        //large teleporter with small standards on sides
+        1, 1, 1, -1,                        //homing on left, right, middle with offset heights
+        2, -1,                              //single exploding center
+        0, 0, 0, 0, -1                      //2 overlapping pairs of standards rotating
     };
 
     //asteroid size
@@ -121,9 +141,10 @@ public class ObstacleTileController : MonoBehaviour
         0.3f, 0.3f, 0.1f, 0f,
         0.5f, 0f,
         0.5f, 0f,
-        0.5f,
+        0.5f, 0f,
         0.3f, 0.2f, 0.3f, 0f,
         0.3f, 0.3f, 0f,
+
         0.25f, 0.2f, 0.25f, 0f,
         0.3f, 0.3f, 0f,
         0.25f, 0.25f, 0.25f, 0f,
@@ -134,9 +155,26 @@ public class ObstacleTileController : MonoBehaviour
         0.3f, 0.2f, 0.3f, 0f,
         0.35f, 0.35f, 0f,
         0.3f, 0.3f, 0f,
+
         0.2f, 0.2f, 0.3f, 0f,
         0.25f, 0.3f, 0.25f, 0.25f, 0f,
-        0.4f,
+        0.4f, 0f,
+        0.3f, 0.2f, 0.1f, 0f,
+        0.4f, 0f,
+        0.25f, 0.3f, 0.2f, 0.4f, 0.3f, 0f,
+        0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0f,
+        0.25f, 0.25f, 0.25f, 0.25f, 0.25f, 0.25f, 0.25f, 0.25f, 0f,
+        0.5f, 0.25f, 0f,
+        0.4f, 0.4f, 0f, 
+
+        0.5f, 0.3f, 0f,
+        0.25f, 0.25f, 0.25f, 0.25f, 0f,
+        0.25f, 0.25f, 0.25f, 0f,
+        0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0f,
+        0.1f, 0.4f, 0.1f, 0f,
+        0.4f, 0.4f, 0.4f, 0f,
+        0.5f, 0f,
+        0.25f, 0.25f, 0.25f, 0.25f, 0f
     };
 
     //starting x position of asteroids
@@ -149,9 +187,10 @@ public class ObstacleTileController : MonoBehaviour
         -1.5f, 1.5f, 0f, 0f,
         -1f, 0f, 
         0f, 0f, 
-        1f,
+        1f, 0f,
         -1.5f, 0f, 1.5f, 0f,
         -1f, 1f, 0f,
+
         -1.5f, 0f, 1.5f, 0f,
         -1f, 1f, 0f,
         -1.5f, 0f, 1.5f, 0f,
@@ -162,9 +201,26 @@ public class ObstacleTileController : MonoBehaviour
         -1.5f, 0f, 1.5f, 0f,
         -1f, 1f, 0f,
         -1f, 1f, 0f,
+
         -1.5f, 0f, 1.5f, 0f,
         -1.5f, 0f, 1.5f, 0f, 0f,
-        0f,
+        0f, 0f,
+        0f, 0.75f, -1.5f, 0f,
+        0f, 0f,
+        0.5f, 0f, 1.3f, -1.3f, -0.4f, 0f,
+        -0.8f, 1.4f, 0f, 0.4f, -1.4f, 0f,
+        0f, 1.061f, 1.5f, 1.061f, 0f, -1.061f, -1.5f, -1.061f, 0f,
+        0f, 0f, 0f,
+        -1.2f, 1.2f, 0f,
+
+        0f, 0f, 0f,
+        -1.5f, -0.5f, 0.5f, 1.5f, 0f,
+        -0.5f, 0.5f, 0f, 0f,
+        -1.5f, 0.5f, -1.25f, 0.75f, -1f, 1f, -0.75f, 1.25f, -0.5f, 1.5f, 0f,
+        -1.25f, 0f, 1.25f, 0f,
+        -1.25f, 0f, 1.25f, 0f,
+        0f, 0f, 
+        -1.5f, 0.5f, 1.5f, 3.5f, 0f
     };
 
     //starting y position of asteroids
@@ -177,9 +233,10 @@ public class ObstacleTileController : MonoBehaviour
         10f, 10f, 15f, 0f,
         10f, 0f,
         10f, 0f,
-        10f,
+        10f, 0f,
         10f, 10f, 10f, 0f,
         10f, 10f, 0f,
+
         10f, 13f, 10f, 0f,
         10f, 10f, 0f,
         10f, 10f, 10f, 0f,
@@ -190,38 +247,161 @@ public class ObstacleTileController : MonoBehaviour
         10f, 13f, 10f, 0f,
         10f, 10f, 0f,
         10f, 10f, 0f,
+
         10f, 13f, 10f, 0f,
         10f, 13f, 10f, 16f, 0f,
-        10f,
+        10f, 0f,
+        10f, 10f, 10f, 0f,
+        10f, 0f,
+        10f, 14f, 18f, 22f, 26f, 30f,
+        10f, 14f, 18f, 22f, 26f, 30f,
+        13.5f, 13.061f, 12f, 11.939f, 10.5f, 11.939f, 12f, 13.061f, 0f,
+        10f, 10f, 0f,
+        10f, 15f, 0f,
+
+        10f, 20f, 0f,
+        10f, 10f, 10f, 10f, 0f,
+        0f, 0f, 0.86602f, 0f,
+        10f, 10f, 12f, 12f, 14f, 14f, 16f, 16f, 18f, 18f, 0f,
+        10f, 10f, 10f, 0f,
+        10f, 18f, 14f, 0f,
+        10f, 0f,
+        10f, 10f, 10f, 10f, 0f
     };
 
-    //pivotX, pivotY, revolutions per second
-    //point for asteroids to revolve around as they fall
-    private float[] rotations = 
+    private float[] pivotXs = 
     {
         0f, 0f, 0f, 0f,
-        0f, 10f, 0.2f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 
+        0f, 0f, 
+        0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
         0f, 0f, 0f,
         0f, 0f, 0f,
+
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f,
         0f, 0f, 0f,
+
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0.5f, -0.5f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, -1.5f, 0f, 1.5f, 0f
+    };
+
+    private float[] pivotYs = 
+    {
+        0f, 0f, 0f, 0f,
+        10f, 10f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 
+        0f, 0f, 
+        0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        12f, 12f, 12f, 0f,
+        10f, 10f, 0f,
+
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f,
+        10f, 10f, 10f, 0f,
+        0f, 0f, 
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+
         0f, 0f, 0f,
         0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0.86602f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, 10f, 0f, 10f, 0f
+    };
+
+    private float[] revSpeeds = 
+    {
+        0f, 0f, 0f, 0f,
+        0.2f, 0.2f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 
+        0f, 0f, 
+        0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0.2f, 0.2f, 0.2f, 0f,
+        0.25f, 0.25f, 0f,
+        0f, 0f, 0f,
+
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, 0.6f, -1f, 0f,
+        0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f,
         0f, 0f, 0f,
+
         0f, 0f, 0f,
-        0f, 0f, 0f,
-        0f, 0f, 0f,
-        0f, 0f, 0f,
-        0f, 0f, 0f,
-        0f, 0f, 0f,
-        0f, 0f, 0f,
-        0f, 12f, 0.2f,
-        0f, 10f, 0.25f,
-        0f, 0f, 0f,
-        0f, 0f, 0f,
-        0f, 0f, 0f,
-        0f, 0f, 0f
+        0f, 0f, 0f, 0f, 0f,
+        1f, 1f, 1f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, 0.8f, 0f, 0.6f, 0f
     };
 
     //asteroid move speed
@@ -234,9 +414,10 @@ public class ObstacleTileController : MonoBehaviour
         3f, 3f, 6f, 0f,
         3f, 0f, 
         3f, 0f, 
-        3f,
+        3f, 0f,
         4f, 3f, 4f, 0f,
         4f, 4f, 0f,
+
         3f, 5f, 3f, 0f,
         4f, 3f, 0f,
         4f, 4f, 4f, 0f,
@@ -247,13 +428,35 @@ public class ObstacleTileController : MonoBehaviour
         4f, 3f, 4f, 0f,
         4f, 4f, 0f,
         4f, 5f, 0f,
+
         5f, 5f, 4f, 0f,
         3f, 4f, 3f, 3f, 0f,
-        4f
+        4f, 0f,
+        3f, 3f, 3f, 0f,
+        3f, 0f,
+        5f, 5f, 5f, 5f, 5f, 0f,
+        5f, 5f, 5f, 5f, 5f, 0f,
+        3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 0f,
+        3f, 3f, 0f,
+        3f, 3f, 0f,
+
+        3f, 6f, 0f,
+        2f, 2f, 2f, 2f, 0f,
+        3f, 3f, 3f, 0f,
+        2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 0f,
+        3f, 3f, 3f, 0f,
+        4f, 4f, 4f, 0f,
+        3f, 0f,
+        2f, 2f, 2f, 2f, 0f
     };
 
     //difficulty rating, 0 is easiest, 2 is hardest, 3 for testing tiles
-    private int[] sets = {1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 2, 1, 2, 1, 0, 1, 2, 2, 2, 1, 2}; 
+    private int[] sets = {
+        1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 
+        1, 1, 2, 1, 2, 1, 0, 1, 2, 2, 
+        2, 1, 2, 0, 0, 2, 2, 2, 1, 1, 
+        1, 2, 1, 2, 1, 2, 1, 2
+    }; 
 
     //chance of getting a tile from each set
     private float[] setSpawnProbabilities = {0.75f, 0.175f, 0.075f};
@@ -265,13 +468,17 @@ public class ObstacleTileController : MonoBehaviour
             obstacleTiles[i] = new List<List<DebrisSpawnInfo>>();
         }
 
-        if(types.Length != scales.Length || types.Length != xPositions.Length || types.Length != yPositions.Length || types.Length != speeds.Length)
+        if(types.Length != scales.Length || types.Length != xPositions.Length || types.Length != yPositions.Length || types.Length != speeds.Length 
+            || types.Length != pivotXs.Length || types.Length != pivotYs.Length || types.Length != revSpeeds.Length)
         {
             Debug.Log(types.Length);
             Debug.Log(scales.Length);
             Debug.Log(xPositions.Length);
             Debug.Log(yPositions.Length);
             Debug.Log(speeds.Length);
+            Debug.Log(pivotXs.Length);
+            Debug.Log(pivotYs.Length);
+            Debug.Log(revSpeeds.Length);
             throw new Exception("Obstacle tile attribute array lengths do not match");
         } else {
             int currIndex = 0;
@@ -281,7 +488,7 @@ public class ObstacleTileController : MonoBehaviour
                 List<DebrisSpawnInfo> newList = new List<DebrisSpawnInfo>();
                 while(currIndex < types.Length && types[currIndex] != -1)
                 {
-                    DebrisSpawnInfo newSpawnInfo = new DebrisSpawnInfo(types[currIndex], scales[currIndex], xPositions[currIndex], yPositions[currIndex], speeds[currIndex], rotations[setIndex * 3], rotations[setIndex * 3 + 1], rotations[setIndex * 3 + 2]);
+                    DebrisSpawnInfo newSpawnInfo = new DebrisSpawnInfo(types[currIndex], scales[currIndex], xPositions[currIndex], yPositions[currIndex], speeds[currIndex], pivotXs[currIndex], pivotYs[currIndex], revSpeeds[currIndex]);
                     newList.Add(newSpawnInfo);
                     currIndex++;
                 }
@@ -331,7 +538,10 @@ public class ObstacleTileController : MonoBehaviour
             chosenTileSet = 3;
         }
 
-        int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count - 1);
+        Debug.Log(obstacleTiles[chosenTileSet].Count);
+        int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count);
+        Debug.Log(chosenTileSet);
+        Debug.Log(chosenTile);
         List<DebrisSpawnInfo> spawnInfos = obstacleTiles[chosenTileSet][chosenTile];
         return spawnInfos;
     }

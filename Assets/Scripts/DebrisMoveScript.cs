@@ -81,17 +81,18 @@ public class DebrisMoveScript : MonoBehaviour
             break;
         }
 
-        Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
+        currRotation += Time.deltaTime * rotationSpeed;
+        transform.Rotate(0f, 0f, 180f / (float)Math.PI * Time.deltaTime * rotationSpeed);
+        transform.RotateAround(pivotPoint, Vector3.forward, revSpeed * Time.deltaTime * 180f / (float)Math.PI);
+        transform.position = transform.position + velocityScaled;
+        pivotPoint = pivotPoint + velocityScaled;
 
+        Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
+        
         if(!hasAppeared && (screenPos.x >= 0f && screenPos.x <= 1f && screenPos.y >= 0f && screenPos.y <= 1f)){
             hasAppeared = true;
         }
 
-        transform.position = transform.position + velocityScaled;
-        pivotPoint = pivotPoint + velocityScaled;
-        currRotation += Time.deltaTime * rotationSpeed;
-        transform.Rotate(0f, 0f, 360f * Time.deltaTime * rotationSpeed);
-        transform.RotateAround(pivotPoint, Vector3.forward, revSpeed * Time.deltaTime * 360);
         if (hasAppeared && (screenPos.y < -0.1f || screenPos.y > 1.1f || screenPos.x < -0.1f || screenPos.x > 1.1f)) // Slightly off screen
         {
             Destroy(gameObject);

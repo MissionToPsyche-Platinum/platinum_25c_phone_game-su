@@ -68,6 +68,8 @@ public class ProbeHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (DebugManager.Instance != null && DebugManager.Instance.GodModeEnabled) return;
+
         if (damageActive)
         {
             

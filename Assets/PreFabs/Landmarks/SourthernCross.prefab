@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4865598656768902040}
   - component: {fileID: -7505815118223123837}
   - component: {fileID: 7271663720330476435}
+  - component: {fileID: -905909483932042822}
   m_Layer: 0
   m_Name: SourthernCross
   m_TagString: Untagged
@@ -63,6 +64,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::StarMoveScript
   velocity: {x: 0, y: -0.4, z: 0}
+--- !u!114 &-905909483932042822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525565986268334686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e091dde7ea4ffb4e9f4074d25b76354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameQuit
 --- !u!1 &2373298492547178023
 GameObject:
   m_ObjectHideFlags: 0

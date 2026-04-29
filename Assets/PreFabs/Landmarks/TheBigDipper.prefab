@@ -294,6 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2832940156613378036}
   - component: {fileID: 5396148966893582400}
+  - component: {fileID: -9189474419595089286}
   m_Layer: 0
   m_Name: TheBigDipper
   m_TagString: Untagged
@@ -336,6 +337,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::DestroyOnGameStart
+--- !u!114 &-9189474419595089286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193465897778225744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e091dde7ea4ffb4e9f4074d25b76354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameQuit
 --- !u!1 &1513941300630110240
 GameObject:
   m_ObjectHideFlags: 0

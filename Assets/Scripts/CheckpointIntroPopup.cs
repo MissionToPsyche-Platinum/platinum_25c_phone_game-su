@@ -33,7 +33,7 @@ public class CheckpointIntroPopup : MonoBehaviour
         {
             tapped = true;
         }
-        if (!tapped && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        if (!tapped && Mouse.current.leftButton.wasPressedThisFrame)
         {
             tapped = true;
         }
@@ -42,6 +42,7 @@ public class CheckpointIntroPopup : MonoBehaviour
 
     public void Dismiss()
     {
+        // Debug.Log("Dismiss called");
         if (dismissing) return;
         dismissing = true;
         StartCoroutine(FadeOutAndDestroy());

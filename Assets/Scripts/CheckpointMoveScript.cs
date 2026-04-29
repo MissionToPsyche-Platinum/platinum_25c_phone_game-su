@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System;
+using NUnit.Framework.Constraints;
 
 public class CheckpointMoveScript : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CheckpointMoveScript : MonoBehaviour
     public event Action OnExitedScreen;
     bool currentlyStoppedAtCenter = false;
     bool alreadyStoppedAtCenter = false;
+    private bool hasContinued = false; 
     float moveSpeed = 2.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,6 +22,13 @@ public class CheckpointMoveScript : MonoBehaviour
         checkpointSpawnScript = checkpointSpawner.GetComponent<CheckpointSpawnScript>();
 
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+        checkpointSpawnScript.OnCheckpointResumed += CheckpointSpawnScript_OnCheckpointResumed;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+        checkpointSpawnScript.OnCheckpointResumed -= CheckpointSpawnScript_OnCheckpointResumed;
     }
 
     // Update is called once per frame
@@ -35,18 +44,17 @@ public class CheckpointMoveScript : MonoBehaviour
                 Destroy(gameObject);
             }
 
-            if(transform.position.y < 0.0f && !alreadyStoppedAtCenter){
+            if(transform.position.y < 0.0f && !alreadyStoppedAtCenter && !hasContinued){
                 alreadyStoppedAtCenter = true;
                 currentlyStoppedAtCenter = true;
                 checkpointSpawnScript.pauseMovement();
             }
         } else {
-            if (GameStateManager.Instance.GetGameStageInt() >= 2 && Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
-            {
-                resumeMovement();
-            }
+            // if (GameStateManager.Instance.GetGameStageInt() >= 2 && Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            // {
+            //     resumeMovement();
+            // }
         }
-
 
     }
 
@@ -57,12 +65,18 @@ public class CheckpointMoveScript : MonoBehaviour
 
 
     public void resumeMovement(){
+        // Debug.Log("CheckpointMoveScript::resumeMovement()");
         currentlyStoppedAtCenter = false;
-        checkpointSpawnScript.resumeMovement(GameStateManager.Instance.GetGameStageInt() - 1);
+        hasContinued = true;
         GameStateManager.Instance.SetGameStage(GameStateManager.Instance.GetGameStageInt() + 1);
     }
 
     private void OnStartPlaying(object Sender, EventArgs e){
+        resumeMovement();
+    }
+
+    private void CheckpointSpawnScript_OnCheckpointResumed(object sender, EventArgs e)
+    {
         resumeMovement();
     }
 }

@@ -538,10 +538,10 @@ public class ObstacleTileController : MonoBehaviour
             chosenTileSet = 3;
         }
 
-        Debug.Log(obstacleTiles[chosenTileSet].Count);
+        // Debug.Log(obstacleTiles[chosenTileSet].Count);
         int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count);
-        Debug.Log(chosenTileSet);
-        Debug.Log(chosenTile);
+        // Debug.Log(chosenTileSet);
+        // Debug.Log(chosenTile);
         List<DebrisSpawnInfo> spawnInfos = obstacleTiles[chosenTileSet][chosenTile];
         return spawnInfos;
     }

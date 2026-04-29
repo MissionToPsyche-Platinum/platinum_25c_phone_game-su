@@ -27,7 +27,7 @@ public class StarMoveScript : MonoBehaviour
     void Update()
     {
         // Debug.Log("movementActive: " + movementActive + ", velocity: " + velocity);
-        if(movementActive && GameStateManager.Instance.GetGameStageInt() != 1){
+        if(movementActive){
             //if the stars aren't told to stop, and the game stage isn't in transition
             Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
 

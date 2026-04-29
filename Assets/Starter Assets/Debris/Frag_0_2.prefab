@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7618627983309490742}
   - component: {fileID: 2136355390305026389}
   - component: {fileID: 2770843218938539832}
+  - component: {fileID: 5815906811062142059}
+  - component: {fileID: 6454640899299772242}
   m_Layer: 0
   m_Name: Frag_0_2
   m_TagString: Debris
@@ -130,7 +132,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.65, y: 6.37}
+    oldSize: {x: 10, y: 10}
     newSize: {x: 6.65, y: 6.37}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -157,9 +159,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::DebrisMoveScript
   velocity: {x: 0, y: -5, z: 0}
+  rotationSpeed: 1
   type: 0
   debrisScale: 1
+  pivotPoint: {x: 0, y: 0, z: 0}
+  revSpeed: 0
   activationY: 0
   explodingFragments: []
   numFragments: 0
   homingAmount: 0.5
+  fragmentSpreadSpeed: 2
+--- !u!114 &5815906811062142059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5868264827804270479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e091dde7ea4ffb4e9f4074d25b76354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameQuit
+--- !u!114 &6454640899299772242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5868264827804270479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameStart

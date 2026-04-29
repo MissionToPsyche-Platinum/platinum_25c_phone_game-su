@@ -33,6 +33,7 @@ public class GameOverPanelController : MonoBehaviour
     {
         MenuNavigationButtons.Instance.PlayButtonSound();
         this.gameObject.SetActive(false);
+        GameStateManager.Instance.EnterMenuState();
         MenuNavigationButtons.Instance.SwitchPanels(gameOverPanel, shopPanel);
     }
 }

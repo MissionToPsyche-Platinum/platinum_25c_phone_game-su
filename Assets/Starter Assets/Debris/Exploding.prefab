@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3996984361925276973}
   - component: {fileID: 1106409334388028697}
   - component: {fileID: 1040699744569926553}
+  - component: {fileID: -6430494255733693060}
+  - component: {fileID: 8329231192822705317}
   m_Layer: 0
   m_Name: Exploding
   m_TagString: Debris
@@ -157,8 +159,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::DebrisMoveScript
   velocity: {x: 0, y: -5, z: 0}
+  rotationSpeed: 1
   type: 2
   debrisScale: 1
+  pivotPoint: {x: 0, y: 0, z: 0}
+  revSpeed: 0
   activationY: 0.5
   explodingFragments:
   - {fileID: 4221136308547318587, guid: aae474a5fb4f14a2e9294e577ba60c69, type: 3}
@@ -166,3 +171,28 @@ MonoBehaviour:
   - {fileID: 5868264827804270479, guid: f1c1feb447bdd4853b602614373ed612, type: 3}
   numFragments: 3
   homingAmount: 0.5
+  fragmentSpreadSpeed: 2
+--- !u!114 &-6430494255733693060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4854028936632854818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e091dde7ea4ffb4e9f4074d25b76354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameQuit
+--- !u!114 &8329231192822705317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4854028936632854818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameStart

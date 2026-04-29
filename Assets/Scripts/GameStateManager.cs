@@ -48,6 +48,7 @@ public class GameStateManager : MonoBehaviour
     public event EventHandler<GameStateChangeEventArgs> OnStartPlaying;
     public event EventHandler<GameStateChangeEventArgs> OnStopPlaying;
     public event EventHandler<GameStateChangeEventArgs> OnPausePlaying;
+    public event EventHandler<EventArgs> OnEnterMainMenu;
 
     private void Awake()
     {
@@ -90,6 +91,7 @@ public class GameStateManager : MonoBehaviour
             PreviousState = currentGameState
         });
         currentGameState = GameState.MainMenu;
+        OnEnterMainMenu?.Invoke(this, EventArgs.Empty);
     }
 
     public void EnterPausedState()

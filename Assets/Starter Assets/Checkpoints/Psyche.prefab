@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1017433974335664527}
   - component: {fileID: 5687956378132045183}
   - component: {fileID: -3699861387136945689}
+  - component: {fileID: 288275773847812529}
   m_Layer: 0
   m_Name: Psyche
   m_TagString: Untagged
@@ -103,3 +104,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea677cf1b36044d65af2e04933bf3826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &288275773847812529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4652785462984765883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e091dde7ea4ffb4e9f4074d25b76354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::DestroyOnGameQuit

@@ -41,6 +41,8 @@ public class HealthUI : MonoBehaviour
         Debug.Log(currentHP);
         if (currentHP <= 0) return;
 
+        ClearHPVisual();
+        
         hpInstances = new GameObject[currentHP];
 
         for (int i = 0; i < currentHP; i++)
@@ -94,6 +96,15 @@ public class HealthUI : MonoBehaviour
             if (currentHP >= hpInstances.Length) break;
             hpInstances[currentHP] = Instantiate(healthPoint, container);
             currentHP++;
+        }
+    }
+
+    
+    private void ClearHPVisual()
+    {
+        foreach (Transform child in container.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 }

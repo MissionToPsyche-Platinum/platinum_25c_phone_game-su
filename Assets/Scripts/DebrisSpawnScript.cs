@@ -175,9 +175,9 @@ public class DebrisSpawnScript : MonoBehaviour
         );
 
         updateSpawnProbabilities();
-        for(int i = 0; i < 5; i++){
-            Debug.Log(spawnWeights[i]);
-        }
+        // for(int i = 0; i < 5; i++){
+        //     Debug.Log(spawnWeights[i]);
+        // }
 
         int debrisType = debrisTypes.Length - 1;
         GameObject selectedDebris = debrisTypes[debrisType];

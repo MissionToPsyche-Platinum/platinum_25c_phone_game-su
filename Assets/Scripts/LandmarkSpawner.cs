@@ -76,7 +76,7 @@ public class LandmarkSpawner : MonoBehaviour
         spawned.name = $"{entry.prefab.name}_score{entry.triggerScore}";
 
         alreadySpawnedLandmarks.Add(index);
-        Debug.Log($"LandmarkSpawner: Spawned '{entry.prefab.name}' at score {entry.triggerScore}");
+        // Debug.Log($"LandmarkSpawner: Spawned '{entry.prefab.name}' at score {entry.triggerScore}");
     }
     
     private void GameStateManager_OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)

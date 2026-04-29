@@ -187,7 +187,7 @@ public class CheckpointSpawnScript : MonoBehaviour
                 if (intro != null)
                 {
                     intro.OnDismissed += () => resumeMovement(arrivedIndex);
-                    Debug.Log("resumeMovement subscribed to pop up dismissal");
+                    // Debug.Log("resumeMovement subscribed to pop up dismissal");
                 }
             }
             else

@@ -67,6 +67,8 @@ public class ScoreIncrement : MonoBehaviour
     private void OnStartPlaying(object sender, EventArgs e)
     {
         currentScore = GameStateManager.Instance.startingScore;
+        finalScore = Mathf.FloorToInt(currentScore);
+        scoreText.text = finalScore.ToString();
         float componentMultiplier = ComponentManager.Instance != null ? ComponentManager.Instance.GetScoreMultiplier() : 1f;
         SetScoreMultiplier(componentMultiplier);
     }

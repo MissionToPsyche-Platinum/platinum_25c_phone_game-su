@@ -26,7 +26,9 @@ public class StarMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(movementActive && GameStateManager.Instance.GetGameStageInt() >= 2){
+        // Debug.Log("movementActive: " + movementActive + ", velocity: " + velocity);
+        if(movementActive && GameStateManager.Instance.GetGameStageInt() != 1){
+            //if the stars aren't told to stop, and the game stage isn't in transition
             Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
 
             transform.position += velocity * Time.deltaTime;
@@ -40,10 +42,12 @@ public class StarMoveScript : MonoBehaviour
     private void OnCheckpointStopped(object sender, EventArgs e)
     {
         movementActive = false;
+        // Debug.Log("Star stopped moving");
     }
 
     private void OnCheckpointResumed(object sender, EventArgs e)
     {
         movementActive = true;
+        // Debug.Log("Star resumed moving");
     }
 }

@@ -8053,6 +8053,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1956583460}
   - {fileID: 1544722307}
   - {fileID: 1203054310}
   - {fileID: 693361282}
@@ -8062,7 +8063,6 @@ RectTransform:
   - {fileID: 2037058232}
   - {fileID: 1923588364}
   - {fileID: 1345099209}
-  - {fileID: 1956583460}
   - {fileID: 631589899}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9538,7 +9538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ad5bc73522031438d0edc3956048f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::ScreenComponent
-  weight: 9999
+  weight: 5
   crackedScreenPanel: {fileID: 1956583459}
   crackedScreenSoundEffect: {fileID: 8300000, guid: 7f5d64ffe1699794282c3d4240fc20e0, type: 3}
   fadeDuration: 4

@@ -19,8 +19,8 @@ public class DebrisSpawnScript : MonoBehaviour
         {0.35f, 0.25f, 0.15f, 0.15f, 0.1f},  //spawn probabilities at Psyche checkpoint
     };
 
-    public float minSpawnInterval = 0.2f; 
-    public float maxSpawnInterval = 0.5f;
+    public float minSpawnInterval = 0f; 
+    public float maxSpawnInterval = 0.2f;
     public float minSize = 0.3f;
     public float maxSize = 1f;
 
@@ -28,6 +28,8 @@ public class DebrisSpawnScript : MonoBehaviour
     private float nextSpawnTime;
     private float gameTime = 0f; 
     private float difficultyMultiplier = 1f;
+
+    int numActiveAsteroids = 0;
 
     private float tileSpawnProbability = 0.5f;      //chance of premade tile spawning instead of random spawn
     private float _spawnIntervalMultiplier = 1f;    //component modifier: >1 means longer interval (fewer spawns)
@@ -67,7 +69,7 @@ public class DebrisSpawnScript : MonoBehaviour
 
     void Update()
     {
-        if (spawnerActive)
+        if (spawnerActive && numActiveAsteroids == 0)
         {
             
             gameTime += Time.deltaTime;
@@ -145,6 +147,7 @@ public class DebrisSpawnScript : MonoBehaviour
             // Spawn the debris
             GameObject newDebris = Instantiate(selectedDebris, spawnPos, Quaternion.identity);
             OnDebrisSpawned?.Invoke(this, EventArgs.Empty);
+            numActiveAsteroids++;
 
             // Size
             float scale = spawnInfo.GetScale();
@@ -196,6 +199,7 @@ public class DebrisSpawnScript : MonoBehaviour
         // Spawn the debris
         GameObject newDebris = Instantiate(selectedDebris, spawnPos, Quaternion.identity);
         OnDebrisSpawned?.Invoke(this, EventArgs.Empty);
+        numActiveAsteroids++;
 
         // Random size
         float randomScale = Random.Range(minSize, maxSize);
@@ -226,6 +230,12 @@ public class DebrisSpawnScript : MonoBehaviour
     public void EnableSpawning()
     {
         spawnerActive = true;
+    }
+
+    public void decrementAsteroidCount(){
+        if(numActiveAsteroids > 0){
+            numActiveAsteroids--;
+        }
     }
 
     private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)

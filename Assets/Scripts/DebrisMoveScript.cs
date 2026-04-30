@@ -33,6 +33,7 @@ public class DebrisMoveScript : MonoBehaviour
     private GameObject teleportGhost;
 
     CheckpointSpawnScript checkpointSpawnScript;
+    DebrisSpawnScript debrisSpawnScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,11 +46,15 @@ public class DebrisMoveScript : MonoBehaviour
         GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
         checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
         checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
+
+        GameObject debrisSpawn = GameObject.Find("DebrisSpawner");
+        debrisSpawnScript = debrisSpawn.GetComponent<DebrisSpawnScript>();
     }
 
     void OnDestroy(){
         checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
         if (teleportGhost != null) Destroy(teleportGhost);
+        debrisSpawnScript.decrementAsteroidCount();
     }
 
     // Update is called once per frame

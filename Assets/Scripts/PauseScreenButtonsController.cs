@@ -42,21 +42,21 @@ public class PauseScreenButtonsController : MonoBehaviour
     private void CleanupGameObjects()
     {
         // Destroy all debris
-        DebrisMoveScript[] allDebris = FindObjectsOfType<DebrisMoveScript>();
+        DebrisMoveScript[] allDebris = FindObjectsByType<DebrisMoveScript>(FindObjectsSortMode.None);
         foreach (DebrisMoveScript debris in allDebris)
         {
             Destroy(debris.gameObject);
         }
 
         // Destroy all coins from last run
-        CoinBehavior[] allCoins = FindObjectsOfType<CoinBehavior>();
+        CoinBehavior[] allCoins = FindObjectsByType<CoinBehavior>(FindObjectsSortMode.None);
         foreach (CoinBehavior coin in allCoins)
         {
             Destroy(coin.gameObject);
         }
 
-        
-        HealthUI healthUI = FindObjectOfType<HealthUI>();
+        HealthUI[] healthUIs = FindObjectsByType<HealthUI>(FindObjectsSortMode.None);
+        HealthUI healthUI = healthUIs.Length > 0 ? healthUIs[0] : null;
         if (healthUI != null)
         {
             Destroy(healthUI.gameObject);

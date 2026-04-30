@@ -10667,7 +10667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 30.3188, y: 125.8197}
+  m_AnchoredPosition: {x: 30.318848, y: 125.819824}
   m_SizeDelta: {x: -139.0051, y: -803.5865}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1069773292
@@ -19018,7 +19018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   settingsScreenPanel: {fileID: 1885955886}
   startScreenPanel: {fileID: 693361281}
-  openSettingsButton: {fileID: 0}
+  openSettingsButton: {fileID: 546263886}
 --- !u!114 &1885955891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22830,7 +22830,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 367.67612, y: -80.99936}
+  m_AnchoredPosition: {x: 367.67615, y: -80.99927}
   m_SizeDelta: {x: 665.3511, y: 183.0869}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6523351190800251663

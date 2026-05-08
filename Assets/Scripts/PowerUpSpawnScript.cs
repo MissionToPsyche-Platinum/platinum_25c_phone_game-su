@@ -80,19 +80,12 @@ public class PowerUpSpawnScript : MonoBehaviour
 
         // Random power up
         GameObject selectedPowerUp = powerUps[powerUps.Length - 1];
-        float[] effectiveWeights = new float[powerUpSpawnWeights.Length];
-        float effectiveTotalWeight = 0f;
-        for (int i = 0; i < powerUpSpawnWeights.Length; i++)
-        {
-            effectiveWeights[i] = powerUpSpawnWeights[i] * PowerUpUpgradeManager.Instance.GetSpawnMultiplier(i);
-            effectiveTotalWeight += effectiveWeights[i];
-        }
 
-        float randVal = UnityEngine.Random.Range(0f, effectiveTotalWeight);
+        float randVal = UnityEngine.Random.Range(0f, totalWeight);
         float currSum = 0f;
         for (int i = 0; i < powerUpSpawnWeights.Length; i++)
         {
-            currSum += effectiveWeights[i];
+            currSum += powerUpSpawnWeights[i];
             if (randVal <= currSum)
             {
                 selectedPowerUp = powerUps[i];

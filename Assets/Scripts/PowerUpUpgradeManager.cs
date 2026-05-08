@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PowerUpUpgradeManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PowerUpUpgradeManager : MonoBehaviour
         "Hyperspace", "Shield", "2x Coins", "Star", "Hex"
     };
 
-    public const int MaxLevel = 10;
+    public const int MaxLevel = 5;
 
     private int[] _levels = new int[5];
 
@@ -22,9 +23,8 @@ public class PowerUpUpgradeManager : MonoBehaviour
 
     public int GetLevel(int i) => _levels[i];
     public bool IsMaxed(int i) => _levels[i] >= MaxLevel;
-    public int GetUpgradeCost(int i) => 10 * (_levels[i] + 1);
-    public float GetSpawnMultiplier(int i) => 1f + (_levels[i] * 0.1f);
-    public float GetDurationMultiplier(int i) => 1f + (_levels[i] * 0.1f);
+    public int GetUpgradeCost(int i) => 10 * (int)Math.Pow(2, _levels[i]);
+    public float GetDuration(int i) => (_levels[i] + 1f) * 5f;
 
     public bool TryUpgrade(int i)
     {

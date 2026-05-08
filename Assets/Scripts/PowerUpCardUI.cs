@@ -4,11 +4,13 @@ using UnityEngine.UI;
 public class PowerUpCardUI : MonoBehaviour
 {
     [SerializeField] private Text nameText;
-    [SerializeField] private Text levelText;
+    [SerializeField] private Text durationText;
     [SerializeField] private Text statsText;
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Text buttonLabel;
     [SerializeField] private Image cardBackground;
+
+    [SerializeField] private GameObject[] levelIcons;
 
     [Header("Card Colors")]
     [SerializeField] private Color defaultColor = new Color(0.75f, 0.75f, 1.00f, 1f);
@@ -29,11 +31,16 @@ public class PowerUpCardUI : MonoBehaviour
         var pm = PowerUpUpgradeManager.Instance;
         int level = pm.GetLevel(_index);
         bool maxed = pm.IsMaxed(_index);
-        int spawnBonus = level * 10;
-        int durationBonus = level * 10;
 
-        levelText.text = maxed ? "Level MAX" : "Level " + level + " / 10";
-        statsText.text = "+" + spawnBonus + "% spawn  |  +" + durationBonus + "% duration";
+        for(int i = 0; i < 5; i++){
+            levelIcons[i].SetActive(false);
+        }
+
+        for(int i = 0; i < level; i++){
+            levelIcons[i].SetActive(true);
+        }
+
+        durationText.text = (level + 1) * 5 + " sec";
 
         if (maxed)
         {
@@ -44,7 +51,7 @@ public class PowerUpCardUI : MonoBehaviour
         else
         {
             int cost = pm.GetUpgradeCost(_index);
-            buttonLabel.text = "Upgrade (" + cost + " coins)";
+            buttonLabel.text = "" + cost;
             upgradeButton.interactable = GameStateManager.Instance.GetCoins() >= cost;
             if (cardBackground != null) cardBackground.color = defaultColor;
         }

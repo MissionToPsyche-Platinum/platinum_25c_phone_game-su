@@ -29,6 +29,8 @@ public class PowerUpBehavior : MonoBehaviour
     private int ultimateProgress = 0;
     private float ultimateCoinSpawnIncrease = 20f;
 
+    private int[] powerUpDurations;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,7 +51,7 @@ public class PowerUpBehavior : MonoBehaviour
 
         if(index != 4){
             powerUpsActive[index] = true;
-            powerUpTimers[index] = powerUpLengths[index] * PowerUpUpgradeManager.Instance.GetDurationMultiplier(index);
+            powerUpTimers[index] = PowerUpUpgradeManager.Instance.GetDuration(index);
             switch(index)
             {
                 case 0: //Hyperspace
@@ -77,7 +79,7 @@ public class PowerUpBehavior : MonoBehaviour
             if (hexPopupPrefab != null) PopupManager.Instance.DisplayCenteredPopup(hexPopupPrefab, 2f);
             if(ultimateProgress == 5){
                 powerUpsActive[index] = true;
-                powerUpTimers[index] = powerUpLengths[index] * PowerUpUpgradeManager.Instance.GetDurationMultiplier(index);
+                powerUpTimers[index] = powerUpLengths[index] * PowerUpUpgradeManager.Instance.GetDuration(index);
                 debrisSpawnSystem.DisableSpawning();
                 coinSpawnSystem.SetSpawnRateMultiplier(ultimateCoinSpawnIncrease);
             }

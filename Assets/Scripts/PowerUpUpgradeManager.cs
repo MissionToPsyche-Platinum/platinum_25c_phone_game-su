@@ -7,7 +7,7 @@ public class PowerUpUpgradeManager : MonoBehaviour
 
     public static readonly string[] Names =
     {
-        "Hyperspace", "Shield", "2x Coins", "Star", "Hex"
+        "Hyperspace", "Force Field", "R.U.M.", "Shockwave", "Laser Drill"
     };
 
     public const int MaxLevel = 5;

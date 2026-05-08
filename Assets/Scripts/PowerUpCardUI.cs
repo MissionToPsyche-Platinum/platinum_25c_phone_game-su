@@ -9,12 +9,13 @@ public class PowerUpCardUI : MonoBehaviour
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Text buttonLabel;
     [SerializeField] private Image cardBackground;
+    [SerializeField] private GameObject coinIcon;
 
     [SerializeField] private GameObject[] levelIcons;
 
     [Header("Card Colors")]
-    [SerializeField] private Color defaultColor = new Color(0.75f, 0.75f, 1.00f, 1f);
-    [SerializeField] private Color maxedColor   = new Color(1.00f, 0.84f, 0.00f, 1f);
+    [SerializeField] private Color defaultColor = new Color(1.0f, 1.0f, 1.00f, 1f);
+    [SerializeField] private Color maxedColor   = new Color(0.5f, 0.5f, 0.5f, 1f);
 
     private int _index;
 
@@ -38,6 +39,12 @@ public class PowerUpCardUI : MonoBehaviour
 
         for(int i = 0; i < level; i++){
             levelIcons[i].SetActive(true);
+        }
+
+        if(maxed){
+            coinIcon.SetActive(false);
+        } else {
+            coinIcon.SetActive(true);
         }
 
         durationText.text = (level + 1) * 5 + " sec";

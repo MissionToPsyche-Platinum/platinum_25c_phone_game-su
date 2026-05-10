@@ -22,10 +22,13 @@ public class HealthUI : MonoBehaviour
 
     private float minHPHeight = 0.1f;
 
+    private RectTransform _healthRoot;
+
     void Awake()
     {
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
+        _healthRoot = transform.parent.GetComponent<RectTransform>();
     }
 
     private void OnDestroy()
@@ -56,9 +59,9 @@ public class HealthUI : MonoBehaviour
     }
     private void ApplyMirror(bool isLeftHanded)
     {
-        Vector2 pos = container.anchoredPosition;
+        Vector2 pos = _healthRoot.anchoredPosition;
         pos.x = isLeftHanded ? Mathf.Abs(pos.x) : -Mathf.Abs(pos.x);
-        container.anchoredPosition = pos;
+        _healthRoot.anchoredPosition = pos;
     }
 
     private void OnStopPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)

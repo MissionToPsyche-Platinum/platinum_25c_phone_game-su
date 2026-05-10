@@ -34,6 +34,7 @@ public class CheckpointSpawnScript : MonoBehaviour
     private PowerUpSpawnScript powerUpSpawnSystem;
 
     private bool stopped = false;
+    private int pendingPopupIndex = -1;
 
     //for spawners, when the checkpoint is on or off screen
     public event EventHandler<EventArgs> OnCheckpointReached;
@@ -188,13 +189,7 @@ public class CheckpointSpawnScript : MonoBehaviour
             GameObject[] stagePopups = { null, moonArrivalPopupPrefab, marsArrivalPopupPrefab, psycheArrivalPopupPrefab };
             if (arrivedIndex >= 1 && arrivedIndex <= 3 && stagePopups[arrivedIndex] != null)
             {
-                GameObject popupInstance = PopupManager.Instance.DisplayFullScreenPopup(stagePopups[arrivedIndex]);
-                CheckpointIntroPopup intro = popupInstance.GetComponent<CheckpointIntroPopup>();
-                if (intro != null)
-                {
-                    intro.OnDismissed += () => resumeMovement(arrivedIndex);
-                    // Debug.Log("resumeMovement subscribed to pop up dismissal");
-                }
+                pendingPopupIndex = arrivedIndex;
             }
             else
             {
@@ -236,5 +231,18 @@ public class CheckpointSpawnScript : MonoBehaviour
 
     public void pauseMovement(){
         OnCheckpointStopped?.Invoke(this, EventArgs.Empty);
+
+        if (pendingPopupIndex >= 0)
+        {
+            int arrivedIndex = pendingPopupIndex;
+            pendingPopupIndex = -1;
+            GameObject[] stagePopups = { null, moonArrivalPopupPrefab, marsArrivalPopupPrefab, psycheArrivalPopupPrefab };
+            GameObject popupInstance = PopupManager.Instance.DisplayFullScreenPopup(stagePopups[arrivedIndex]);
+            CheckpointIntroPopup intro = popupInstance.GetComponent<CheckpointIntroPopup>();
+            if (intro != null)
+            {
+                intro.OnDismissed += () => resumeMovement(arrivedIndex);
+            }
+        }
     }
 }

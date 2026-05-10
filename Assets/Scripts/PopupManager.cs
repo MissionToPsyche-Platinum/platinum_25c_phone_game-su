@@ -10,6 +10,7 @@ public class PopupManager : MonoBehaviour
     [SerializeField] private float slideDistance = 150f;
     [SerializeField] private float slideDuration = 0.4f;
     [SerializeField] private float fadeDuration = 0.3f;
+    private const float growDuration = 1f;
 
     private void Awake()
     {
@@ -44,8 +45,28 @@ public class PopupManager : MonoBehaviour
         CanvasGroup cg = popup.GetComponent<CanvasGroup>();
         if (cg == null) cg = popup.AddComponent<CanvasGroup>();
         cg.alpha = 0f;
-        StartCoroutine(FadeCanvasGroup(cg, 0f, 1f, fadeDuration));
+        popup.transform.localScale = Vector3.zero;
+        StartCoroutine(GrowFromCenter(cg, popup.transform, growDuration));
         return popup;
+    }
+
+    private IEnumerator GrowFromCenter(CanvasGroup cg, Transform popupTransform, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            if (cg == null) yield break;
+            elapsed += Time.unscaledDeltaTime;
+            float raw = Mathf.Clamp01(elapsed / duration);
+            // ease-out: overshoot then settle
+            float t = raw;
+            cg.alpha = t;
+            if (popupTransform != null)
+                popupTransform.localScale = Vector3.one * t;
+            yield return null;
+        }
+        if (cg != null) cg.alpha = 1f;
+        if (popupTransform != null) popupTransform.localScale = Vector3.one;
     }
 
     private float GetTopSafeAreaOffset()

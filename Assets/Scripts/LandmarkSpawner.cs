@@ -75,6 +75,12 @@ public class LandmarkSpawner : MonoBehaviour
         GameObject spawned = Instantiate(entry.prefab, spawnPos, Quaternion.identity);
         spawned.name = $"{entry.prefab.name}_score{entry.triggerScore}";
 
+        StarMoveScript script = spawned.GetComponent<StarMoveScript>();
+        if (script != null)
+        {
+            script.isLandmark = true;
+        }
+
         alreadySpawnedLandmarks.Add(index);
         // Debug.Log($"LandmarkSpawner: Spawned '{entry.prefab.name}' at score {entry.triggerScore}");
     }

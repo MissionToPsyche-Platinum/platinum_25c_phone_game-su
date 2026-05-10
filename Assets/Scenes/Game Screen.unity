@@ -16507,7 +16507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1345099209
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25864,6 +25864,17 @@ MonoBehaviour:
   - 0.5
   - 1
   - 2
+  flashRanges:
+  - 0
+  - 1
+  - 0.3
+  - 1
+  - 0.6
+  - 1
+  - 0.8
+  - 1
+  - 0.9
+  - 1
   minSpawnInterval: 0.2
   maxSpawnInterval: 1
   initialSpawnCount: 50

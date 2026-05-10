@@ -6,6 +6,7 @@ public class StarSpawnScript : MonoBehaviour
     public GameObject[] starSprites;   //list of all stars that can be spawned
     public int[] starWeights; //chance of each star spawned (Ex: chance of starSprites[i] spawning is starWeights[i] / sum(starWeights))
     public float[] starSpeeds; //make closer stars move faster for parallax effect
+    public float[] flashRanges;
 
     public float minSpawnInterval = 0.1f; // Minimum time between spawns
     public float maxSpawnInterval = 0.5f; // Maximum time between spawns
@@ -104,6 +105,8 @@ public class StarSpawnScript : MonoBehaviour
         int randVal = UnityEngine.Random.Range(1, totalWeight + 1);
         int currSum = 0;
 
+        int selectedIndex = 0;
+
         for (int i = 0; i < starWeights.Length; i++)
         {
             currSum += starWeights[i];
@@ -111,6 +114,7 @@ public class StarSpawnScript : MonoBehaviour
             {
                 selectedSprite = starSprites[i];
                 moveSpeed = starSpeeds[i];
+                selectedIndex = i;
                 break;
             }
         }
@@ -123,6 +127,9 @@ public class StarSpawnScript : MonoBehaviour
         if (script != null)
         {
             script.velocity = Vector3.down * moveSpeed;
+            script.alphaFlashSpeed = UnityEngine.Random.Range(5, 10);
+            script.minAlpha = flashRanges[selectedIndex * 2];
+            script.maxAlpha = flashRanges[selectedIndex * 2 + 1];
         }
     }
 

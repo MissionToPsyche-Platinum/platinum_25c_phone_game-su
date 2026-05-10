@@ -11,10 +11,12 @@ public class StarSpawnScript : MonoBehaviour
     public float minSpawnInterval = 0.1f; // Minimum time between spawns
     public float maxSpawnInterval = 0.5f; // Maximum time between spawns
     public int initialSpawnCount;
+    public int gridColumns = 6;
     private float moveSpeed;
     private float timer = 0f;
     private float nextSpawnTime;
     private int totalWeight;
+    private int nextColumn = 0;
 
     [SerializeField] private Transform starParent;
 
@@ -52,15 +54,18 @@ public class StarSpawnScript : MonoBehaviour
             totalWeight += starWeights[i];
         }
 
+        int rows = Mathf.CeilToInt((float)initialSpawnCount / gridColumns);
+        float cellW = 4f / gridColumns;
+        float cellH = 10f / rows;
         for (int i = 0; i < initialSpawnCount; i++)
         {
-
+            int col = i % gridColumns;
+            int row = i / gridColumns;
             Vector3 spawnPos = new Vector3(
-                UnityEngine.Random.Range(-2.0f, 2.0f),
-                UnityEngine.Random.Range(-5.0f, 5.0f),
+                -2f + cellW * col + UnityEngine.Random.Range(0f, cellW),
+                -5f + cellH * row + UnityEngine.Random.Range(0f, cellH),
                 1f
             );
-
             SpawnStar(spawnPos);
         }
     }
@@ -82,12 +87,13 @@ public class StarSpawnScript : MonoBehaviour
 
             if (timer >= nextSpawnTime)
             {
-                // Random position of spawn
+                float cellW = 4f / gridColumns;
                 Vector3 spawnPos = new Vector3(
-                    UnityEngine.Random.Range(-2.0f, 2.0f),
+                    -2f + cellW * nextColumn + UnityEngine.Random.Range(0f, cellW),
                     5f,
                     1f
                 );
+                nextColumn = (nextColumn + 1) % gridColumns;
 
                 SpawnStar(spawnPos);
                 timer = 0f;

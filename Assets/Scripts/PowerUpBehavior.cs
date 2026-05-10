@@ -79,7 +79,7 @@ public class PowerUpBehavior : MonoBehaviour
             if (hexPopupPrefab != null) PopupManager.Instance.DisplayCenteredPopup(hexPopupPrefab, 2f);
             if(ultimateProgress == 5){
                 powerUpsActive[index] = true;
-                powerUpTimers[index] = powerUpLengths[index] * PowerUpUpgradeManager.Instance.GetDuration(index);
+                powerUpTimers[index] = PowerUpUpgradeManager.Instance.GetDuration(index);
                 debrisSpawnSystem.DisableSpawning();
                 coinSpawnSystem.SetSpawnRateMultiplier(ultimateCoinSpawnIncrease);
             }

@@ -28,7 +28,7 @@ public class ProbeHealth : MonoBehaviour
         
         if (GameStateManager.Instance != null)
         {
-            maxHealth = GameStateManager.Instance.startingHealth;
+            maxHealth = GameStateManager.Instance.startingHealth + ProbeUpgradeManager.Instance.GetHealthBonus();
         }
 
         currentHealth = maxHealth;
@@ -75,7 +75,7 @@ public class ProbeHealth : MonoBehaviour
             
             if (!shieldActive && GameStateManager.Instance != null)
             {
-                int dodgeChance = GameStateManager.Instance.armorLevel * 10;
+                int dodgeChance = ProbeUpgradeManager.Instance.GetDodgeChance();
                 if (UnityEngine.Random.Range(0, 100) < dodgeChance)
                 {
                     return;

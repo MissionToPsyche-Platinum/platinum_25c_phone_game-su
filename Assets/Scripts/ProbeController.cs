@@ -20,10 +20,6 @@ public class ProbeController : MonoBehaviour
 
 
     public int coinAmount = 0;
-
-    private bool gasActive = false;
-    public float gasActiveLength = 10f;
-    private float gasTimer = 0f;
         
 
     private void Awake() {
@@ -103,17 +99,10 @@ public class ProbeController : MonoBehaviour
         //set the position of this game object to that of the finger position
         
         // Debug.Log("Movement vector: " +  myInputActions.Player.Movement.ReadValue<Vector2>());
-        if(gasActive){
-            gasTimer -= Time.deltaTime;
-            if(gasTimer <= 0f){
-                gasActive = false;
-                moveSpeed *= -1f;
-            }
-        }
 
         Vector2 input = myInputActions.Player.Movement.ReadValue<Vector2>();
-        Vector2 scaledInput = new Vector2(input.x * _lateralMultiplier, input.y) * moveSpeed;
-        myRigidbody2D.linearVelocity = scaledInput + additionalForceVector * Time.deltaTime;
+        Vector2 scaledInput = new Vector2(input.x * _lateralMultiplier, input.y) * moveSpeed * ProbeUpgradeManager.Instance.GetSpeedMultiplier();
+        myRigidbody2D.linearVelocity = scaledInput;
     }
     
     // Used here so this happens at the very end of a frame as to not mess up linearVelocity calculation

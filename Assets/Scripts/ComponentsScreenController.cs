@@ -27,7 +27,7 @@ public class ComponentsScreenController : MonoBehaviour
         foreach (var card in cards)
             card.Refresh();
 
-        coinDisplay.text = "Coins: " + GameStateManager.Instance.GetCoins();
+        coinDisplay.text = "" + GameStateManager.Instance.GetCoins();
 
         int left  = ComponentManager.Instance.GetEquippedLeft();
         int right = ComponentManager.Instance.GetEquippedRight();

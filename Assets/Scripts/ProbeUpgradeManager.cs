@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class ProbeUpgradeManager : MonoBehaviour
 {
@@ -26,7 +25,11 @@ public class ProbeUpgradeManager : MonoBehaviour
 
     public int GetLevel(int i) => _levels[i];
     public bool IsMaxed(int i) => _levels[i] >= MaxLevel;
-    public int GetUpgradeCost(int i) => 10 * (int)Math.Pow(2, _levels[i]);
+    public int GetUpgradeCost(int i)
+    {
+        if (i == 2) return 10 + (_levels[i] * 10);
+        return 5 + (_levels[i] * 5);
+    }
 
     public float GetSpeedMultiplier() => Mathf.Pow(1.2f, _levels[0]);
     public int GetHealthBonus() => _levels[1];

@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class PowerUpUpgradeManager : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class PowerUpUpgradeManager : MonoBehaviour
 
     public int GetLevel(int i) => _levels[i];
     public bool IsMaxed(int i) => _levels[i] >= MaxLevel;
-    public int GetUpgradeCost(int i) => 10 * (int)Math.Pow(2, _levels[i]);
+    public int GetUpgradeCost(int i) => 3 + (_levels[i] * 3);
     public float GetDuration(int i) => (_levels[i] + 1f) * 5f;
 
     public bool TryUpgrade(int i)

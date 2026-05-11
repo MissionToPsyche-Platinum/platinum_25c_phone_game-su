@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class ShopUpgrades : MonoBehaviour
 {
+    private const int MaxLevel = 5;
+
     [Header("Health Upgrade")]
     public Text healthUpgradeText;
     public Button healthUpgradeButton;
@@ -49,7 +51,7 @@ public class ShopUpgrades : MonoBehaviour
 
     int GetHealthCost()
     {
-        return 3 + GameStateManager.Instance.maxHealthLevel;
+        return 10 + (GameStateManager.Instance.maxHealthLevel * 10);
     }
 
     int GetArmorCost()
@@ -59,11 +61,12 @@ public class ShopUpgrades : MonoBehaviour
 
     int GetSpeedCost()
     {
-        return 3 + GameStateManager.Instance.speedLevel;
+        return 10 + (GameStateManager.Instance.speedLevel * 10);
     }
 
     void BuyHealthUpgrade()
     {
+        if (GameStateManager.Instance.maxHealthLevel >= MaxLevel) return;
         int cost = GetHealthCost();
         int currentCoins = GameStateManager.Instance.GetCoins();
 
@@ -84,6 +87,7 @@ public class ShopUpgrades : MonoBehaviour
 
     void BuyArmorUpgrade()
     {
+        if (GameStateManager.Instance.armorLevel >= MaxLevel) return;
         int cost = GetArmorCost();
         int currentCoins = GameStateManager.Instance.GetCoins();
 
@@ -103,6 +107,7 @@ public class ShopUpgrades : MonoBehaviour
 
     void BuySpeedUpgrade()
     {
+        if (GameStateManager.Instance.speedLevel >= MaxLevel) return;
         int cost = GetSpeedCost();
         int currentCoins = GameStateManager.Instance.GetCoins();
 
@@ -124,40 +129,44 @@ public class ShopUpgrades : MonoBehaviour
     {
         int currentCoins = GameStateManager.Instance.GetCoins();
 
-        
+
         if (healthUpgradeText != null)
         {
-            int cost = GetHealthCost();
+            bool healthMaxed = GameStateManager.Instance.maxHealthLevel >= MaxLevel;
             healthUpgradeText.text = "Max Health +" + GameStateManager.Instance.maxHealthLevel +
-                                     "\nCost: " + cost + " coins";
+                                     (healthMaxed ? "\nMAXED" : "\nCost: " + GetHealthCost() + " coins");
         }
         if (healthUpgradeButton != null)
         {
-            healthUpgradeButton.interactable = (currentCoins >= GetHealthCost());
+            bool healthMaxed = GameStateManager.Instance.maxHealthLevel >= MaxLevel;
+            healthUpgradeButton.interactable = !healthMaxed && (currentCoins >= GetHealthCost());
         }
 
-        
+
         if (armorUpgradeText != null)
         {
-            int cost = GetArmorCost();
+            bool armorMaxed = GameStateManager.Instance.armorLevel >= MaxLevel;
             int armorChance = GameStateManager.Instance.armorLevel * 10;
-            armorUpgradeText.text = "Armor (" + armorChance + "% dodge)\nCost: " + cost + " coins";
+            armorUpgradeText.text = "Armor (" + armorChance + "% dodge)" +
+                                    (armorMaxed ? "\nMAXED" : "\nCost: " + GetArmorCost() + " coins");
         }
         if (armorUpgradeButton != null)
         {
-            armorUpgradeButton.interactable = (currentCoins >= GetArmorCost());
+            bool armorMaxed = GameStateManager.Instance.armorLevel >= MaxLevel;
+            armorUpgradeButton.interactable = !armorMaxed && (currentCoins >= GetArmorCost());
         }
 
-        
+
         if (speedUpgradeText != null)
         {
-            int cost = GetSpeedCost();
+            bool speedMaxed = GameStateManager.Instance.speedLevel >= MaxLevel;
             speedUpgradeText.text = "Speed +" + GameStateManager.Instance.speedLevel +
-                                   "\nCost: " + cost + " coins";
+                                   (speedMaxed ? "\nMAXED" : "\nCost: " + GetSpeedCost() + " coins");
         }
         if (speedUpgradeButton != null)
         {
-            speedUpgradeButton.interactable = (currentCoins >= GetSpeedCost());
+            bool speedMaxed = GameStateManager.Instance.speedLevel >= MaxLevel;
+            speedUpgradeButton.interactable = !speedMaxed && (currentCoins >= GetSpeedCost());
         }
     }
 }

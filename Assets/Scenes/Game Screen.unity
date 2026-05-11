@@ -12013,7 +12013,8 @@ MonoBehaviour:
   extraPadding: 0.1
   knockbackStrength: 10
   knockbackDecayRate: 7
-  probeControlLoss: 0.5
+  probeControlLoss: 0.1
+  controlRecoveryLerpSpeed: 1
   coinAmount: 0
 --- !u!212 &908402708
 SpriteRenderer:
@@ -12180,7 +12181,7 @@ MonoBehaviour:
   - {fileID: 908402715}
   - {fileID: 908402716}
   myProbeCollisionHandler: {fileID: 908402718}
-  chanceToDebuffOnDamage: 0.3
+  chanceToDebuffOnDamage: 0.15
 --- !u!114 &908402715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12242,7 +12243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45964abae61626c46865547ea1cfd41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  asteroidPopupPrefab: {fileID: 3584545617896392102, guid: 8968017a1cf34f04fb6b9fa83b90fe39, type: 3}
   asteroidCollisionSoundClip: {fileID: 8300000, guid: 97c7e8fc768c84a0c8d2282da7399e46, type: 3}
 --- !u!114 &908402719
 MonoBehaviour:
@@ -17951,7 +17951,7 @@ MonoBehaviour:
   - {fileID: 7361094799875311414, guid: 43dd97bb3690d4f9485a2dcd42c56d3b, type: 3}
   - {fileID: 6422277008596452717, guid: 809863cc2b4dd41c998aa5c016069920, type: 3}
   - {fileID: 4652785462984765883, guid: 2f756627e0de54fd5943cffb9ae3a379, type: 3}
-  checkpointScores: 0000000064000000c80000002c010000
+  checkpointScores: 000000002c010000e8030000d0070000
   checkpointMessages:
   - Earth
   - Moon
@@ -28199,15 +28199,15 @@ MonoBehaviour:
     displayName: Earth
     isLocked: 0
   - stage: 2
-    startingScore: 100
+    startingScore: 300
     displayName: The Moon
     isLocked: 0
   - stage: 3
-    startingScore: 200
+    startingScore: 1000
     displayName: Mars
     isLocked: 0
   - stage: 4
-    startingScore: 300
+    startingScore: 2000
     displayName: 16 Psyche
     isLocked: 0
   leftButton: {fileID: 1373602323}

@@ -9,7 +9,6 @@ public class ProbeCollisionHandler : MonoBehaviour
     private PowerUpBehavior powerUpSystem;
     private CameraShake cameraShakeScript;
     private bool hasDisplayedAsteroidPopup;
-    [SerializeField] private GameObject asteroidPopupPrefab;
 
     [SerializeField] private AudioClip asteroidCollisionSoundClip;
 
@@ -82,12 +81,6 @@ public class ProbeCollisionHandler : MonoBehaviour
             
             StartCoroutine(cameraShakeScript.Shake(.3f, 1f));
             StartCoroutine(HitEffectRoutine());
-            
-            if (!hasDisplayedAsteroidPopup)
-            {
-                hasDisplayedAsteroidPopup = true;
-                PopupManager.Instance.DisplayPopup(asteroidPopupPrefab, 5f);
-            }
         }
 
         if (collision.gameObject.CompareTag("Coin"))
@@ -130,7 +123,7 @@ public class ProbeCollisionHandler : MonoBehaviour
     
     private IEnumerator HitEffectRoutine()
     {
-        yield return StartCoroutine(FreezeFrame(.15f));
+        yield return StartCoroutine(FreezeFrame(.25f));
 
         if (blinkCoroutine != null)
             StopCoroutine(blinkCoroutine);

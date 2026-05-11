@@ -32,7 +32,7 @@ public class ComponentsScreenController : MonoBehaviour
         int left  = ComponentManager.Instance.GetEquippedLeft();
         int right = ComponentManager.Instance.GetEquippedRight();
 
-        equippedLeftText.text  = left  == -1 ? "Left Slot: None"  : "Left: "  + ComponentManager.Names[left];
-        equippedRightText.text = right == -1 ? "Right Slot: None" : "Right: " + ComponentManager.Names[right];
+        // equippedLeftText.text  = left  == -1 ? "Left Slot: None"  : "Left: "  + ComponentManager.Names[left];
+        // equippedRightText.text = right == -1 ? "Right Slot: None" : "Right: " + ComponentManager.Names[right];
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProbeCollisionHandler : MonoBehaviour
 {
+    private ProbeController probeController;
     private ProbeHealth healthSystem;
     private PowerUpBehavior powerUpSystem;
     private CameraShake cameraShakeScript;
@@ -27,7 +28,23 @@ public class ProbeCollisionHandler : MonoBehaviour
         powerUpSystem = GetComponent<PowerUpBehavior>();
         cameraShakeScript = GetComponent<CameraShake>();
         probeSprite = GetComponent<SpriteRenderer>();
+        probeController = GetComponent<ProbeController>();
         hasDisplayedAsteroidPopup = false;
+    }
+
+    private void Start()
+    {
+        GameStateManager.Instance.OnStartPlaying += GameStateManager_OnStartPlaying;
+    }
+
+    private void GameStateManager_OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
+    {
+        justGotHit = false;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= GameStateManager_OnStartPlaying;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -48,9 +65,21 @@ public class ProbeCollisionHandler : MonoBehaviour
                 healthSystem.TakeDamage(1);
                 OnTakeDamage?.Invoke(this, EventArgs.Empty);
             }
+            
+            if (probeController != null)
+            {
+                probeController.ApplyKnockback(collision.transform.position);
+            }
+            
             // Destroy the debris/asteroid
             Destroy(collision.gameObject);
 
+
+            if (!gameObject.activeInHierarchy)
+            {
+                return;
+            }
+            
             StartCoroutine(cameraShakeScript.Shake(.3f, 1f));
             StartCoroutine(HitEffectRoutine());
             

@@ -17,6 +17,8 @@ public class ProbeController : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float extraPadding = 0.1f; // Adjust value to keep entire probe from going offscreen
+    [SerializeField] private float knockbackStrength = 7f;
+    [SerializeField] private float knockbackDecayRate = 12f;
 
 
     public int coinAmount = 0;
@@ -96,13 +98,19 @@ public class ProbeController : MonoBehaviour
 
 
     private void FixedUpdate() {
-        //set the position of this game object to that of the finger position
-        
         // Debug.Log("Movement vector: " +  myInputActions.Player.Movement.ReadValue<Vector2>());
 
         Vector2 input = myInputActions.Player.Movement.ReadValue<Vector2>();
         Vector2 scaledInput = new Vector2(input.x * _lateralMultiplier, input.y) * moveSpeed * ProbeUpgradeManager.Instance.GetSpeedMultiplier();
-        myRigidbody2D.linearVelocity = scaledInput;
+        
+        myRigidbody2D.linearVelocity = scaledInput + additionalForceVector;
+
+        additionalForceVector *= Mathf.Exp(-knockbackDecayRate * Time.fixedDeltaTime);
+
+        if (additionalForceVector.sqrMagnitude < 0.0001f)
+        {
+            additionalForceVector = Vector2.zero;
+        }
     }
     
     // Used here so this happens at the very end of a frame as to not mess up linearVelocity calculation
@@ -116,6 +124,12 @@ public class ProbeController : MonoBehaviour
 
         transform.position = viewPos;
         GameStateManager.Instance.UpdateProbePosition(transform.position);
+    }
+    
+    public void ApplyKnockback(Vector2 hitSourcePosition)
+    {
+        Vector2 direction = ((Vector2)transform.position - hitSourcePosition).normalized;
+        additionalForceVector = direction * knockbackStrength;
     }
 
     private void OnStartPlaying(object sender, EventArgs e)

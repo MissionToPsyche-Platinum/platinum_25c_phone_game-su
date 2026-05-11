@@ -12011,6 +12011,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   moveSpeed: 4
   extraPadding: 0.1
+  knockbackForce: 15
+  knockbackDuration: 0.2
   coinAmount: 0
 --- !u!212 &908402708
 SpriteRenderer:

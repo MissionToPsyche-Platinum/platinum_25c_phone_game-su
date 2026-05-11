@@ -12,6 +12,8 @@ public class CheckpointChooser : MonoBehaviour
 
     [SerializeField] private Button leftButton;
     [SerializeField] private Button rightButton;
+    [SerializeField] private TextMeshProUGUI displayName;
+    [SerializeField] private Image lockSprite;
 
     [SerializeField] GameObject checkpointSpawner;
 
@@ -38,6 +40,8 @@ public class CheckpointChooser : MonoBehaviour
 
         GameStateManager.Instance.startingGameStage = selectableStages[index].stage;
         GameStateManager.Instance.startingScore = selectableStages[index].startingScore;
+        SetDisplayText(selectableStages[index].displayName);
+        SetLockSprite(selectableStages[index].isLocked);
         checkpointSpawnScript.DecrementStartingCheckpoint();
     }
 
@@ -46,7 +50,19 @@ public class CheckpointChooser : MonoBehaviour
 
         GameStateManager.Instance.startingGameStage = selectableStages[index].stage;
         GameStateManager.Instance.startingScore = selectableStages[index].startingScore;
+        SetDisplayText(selectableStages[index].displayName);
+        SetLockSprite(selectableStages[index].isLocked);
         checkpointSpawnScript.IncrementStartingCheckpoint();
+    }
+
+    private void SetDisplayText(string displayText)
+    {
+        displayName.text = displayText;
+    }
+
+    private void SetLockSprite(bool isLocked)
+    {
+        lockSprite.gameObject.SetActive(isLocked);
     }
 }
 
@@ -55,4 +71,6 @@ public class CheckpointEntry
 {
     public GameStateManager.GameStage stage;
     public float startingScore;
+    public string displayName;
+    public bool isLocked;
 }

@@ -19,7 +19,9 @@ public class ProbeController : MonoBehaviour
     [SerializeField] private float extraPadding = 0.1f; // Adjust value to keep entire probe from going offscreen
     [SerializeField] private float knockbackStrength = 7f;
     [SerializeField] private float knockbackDecayRate = 12f;
-
+    [SerializeField] private float probeControlLoss = 1f;
+    [SerializeField] private float controlRecoveryLerpSpeed = 6f;
+    private float currentControlMultiplier = 1f;
 
     public int coinAmount = 0;
         
@@ -101,15 +103,26 @@ public class ProbeController : MonoBehaviour
         // Debug.Log("Movement vector: " +  myInputActions.Player.Movement.ReadValue<Vector2>());
 
         Vector2 input = myInputActions.Player.Movement.ReadValue<Vector2>();
-        Vector2 scaledInput = new Vector2(input.x * _lateralMultiplier, input.y) * moveSpeed * ProbeUpgradeManager.Instance.GetSpeedMultiplier();
+        Vector2 scaledInput = new Vector2(input.x * _lateralMultiplier, input.y) * moveSpeed * ProbeUpgradeManager.Instance.GetSpeedMultiplier() * currentControlMultiplier;
         
         myRigidbody2D.linearVelocity = scaledInput + additionalForceVector;
 
+        //slowly lower the knockback's force
         additionalForceVector *= Mathf.Exp(-knockbackDecayRate * Time.fixedDeltaTime);
-
         if (additionalForceVector.sqrMagnitude < 0.0001f)
         {
             additionalForceVector = Vector2.zero;
+        }
+        
+        //slowly give the probe back control
+        currentControlMultiplier = Mathf.Lerp(
+            currentControlMultiplier,
+            1f,
+            controlRecoveryLerpSpeed * Time.fixedDeltaTime
+        );
+        if (Mathf.Abs(currentControlMultiplier - 1f) < 0.001f)
+        {
+            currentControlMultiplier = 1f;
         }
     }
     
@@ -150,6 +163,9 @@ public class ProbeController : MonoBehaviour
             CalculateScreenBoundaries();
         }
         ApplySkin();
+
+        additionalForceVector = Vector2.zero;
+        currentControlMultiplier = 1f;
     }
     
     private void OnStopPlaying(object sender, EventArgs e)

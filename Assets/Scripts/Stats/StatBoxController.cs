@@ -7,8 +7,9 @@ public abstract class StatBoxController : MonoBehaviour
 {
     [SerializeField] private protected Sprite checkmarkImage;
     [SerializeField] private Sprite xImage;
-    
+
     [SerializeField] private protected TextMeshProUGUI displayedText;
+    [SerializeField] private protected TextMeshProUGUI valueText;
     [SerializeField] private Image checkOrX;
 
     private void OnEnable()

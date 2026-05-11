@@ -11989,6 +11989,7 @@ GameObject:
   - component: {fileID: 908402715}
   - component: {fileID: 908402716}
   - component: {fileID: 908402718}
+  - component: {fileID: 908402719}
   m_Layer: 0
   m_Name: Probe
   m_TagString: Untagged
@@ -12276,6 +12277,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   asteroidPopupPrefab: {fileID: 3584545617896392102, guid: 8968017a1cf34f04fb6b9fa83b90fe39, type: 3}
   asteroidCollisionSoundClip: {fileID: 8300000, guid: 97c7e8fc768c84a0c8d2282da7399e46, type: 3}
+--- !u!114 &908402719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908402706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f23886c3485854abe27d02290bc07a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::CameraShake
+  camera: {fileID: 1866544368}
 --- !u!1 &920565508
 GameObject:
   m_ObjectHideFlags: 0

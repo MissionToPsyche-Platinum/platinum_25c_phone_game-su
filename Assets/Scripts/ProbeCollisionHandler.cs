@@ -1,14 +1,20 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class ProbeCollisionHandler : MonoBehaviour
 {
     private ProbeHealth healthSystem;
     private PowerUpBehavior powerUpSystem;
+    private CameraShake cameraShakeScript;
     private bool hasDisplayedAsteroidPopup;
     [SerializeField] private GameObject asteroidPopupPrefab;
 
     [SerializeField] private AudioClip asteroidCollisionSoundClip;
+
+    private Coroutine blinkCoroutine;
+    private SpriteRenderer probeSprite;
+    private bool justGotHit = false;
 
     public event EventHandler<EventArgs> OnTakeDamage;
     public event EventHandler<EventArgs> OnCoinCollected;
@@ -19,6 +25,8 @@ public class ProbeCollisionHandler : MonoBehaviour
     {
         healthSystem = GetComponent<ProbeHealth>();
         powerUpSystem = GetComponent<PowerUpBehavior>();
+        cameraShakeScript = GetComponent<CameraShake>();
+        probeSprite = GetComponent<SpriteRenderer>();
         hasDisplayedAsteroidPopup = false;
     }
 
@@ -26,7 +34,13 @@ public class ProbeCollisionHandler : MonoBehaviour
         if (collision.gameObject.CompareTag("Debris"))
         {
             //if the collided object is asteroid
+            if (justGotHit)
+            {
+                return;
+            }
+
             HasCollided = true;
+            justGotHit = true;
             SFXController.instance.PlaySoundFXClip(asteroidCollisionSoundClip, transform, 1f);
             // Take damage
             if (healthSystem != null)
@@ -36,6 +50,9 @@ public class ProbeCollisionHandler : MonoBehaviour
             }
             // Destroy the debris/asteroid
             Destroy(collision.gameObject);
+
+            StartCoroutine(cameraShakeScript.Shake(.3f, 1f));
+            StartCoroutine(HitEffectRoutine());
             
             if (!hasDisplayedAsteroidPopup)
             {
@@ -80,5 +97,46 @@ public class ProbeCollisionHandler : MonoBehaviour
             powerUpSystem.beginPowerUp(4);
             Destroy(collision.gameObject);
         }
+    }
+    
+    private IEnumerator HitEffectRoutine()
+    {
+        yield return StartCoroutine(FreezeFrame(.15f));
+
+        if (blinkCoroutine != null)
+            StopCoroutine(blinkCoroutine);
+
+        blinkCoroutine = StartCoroutine(BlinkAfterHit(2f, 0.1f));
+    }
+
+    public IEnumerator FreezeFrame(float duration)
+    {
+        float originalTimeScale = Time.timeScale;
+        Time.timeScale = 0f;
+
+        yield return new WaitForSecondsRealtime(duration);
+
+        Time.timeScale = originalTimeScale;
+    }
+
+    private IEnumerator BlinkAfterHit(float totalDuration, float blinkInterval)
+    {
+        if (probeSprite == null)
+        {
+            justGotHit = false;
+            yield break;
+        }
+        float elapsed = 0f;
+
+        while (elapsed < totalDuration)
+        {
+            probeSprite.enabled = !probeSprite.enabled;
+            yield return new WaitForSecondsRealtime(blinkInterval);
+            elapsed += blinkInterval;
+        }
+
+        probeSprite.enabled = true;
+        justGotHit = false;
+        blinkCoroutine = null;
     }
 }

@@ -85,7 +85,12 @@ public class ObstacleTileController : MonoBehaviour
         Arrays are spaced into groups of 10 for readability
     */
 
-    //asteroid type (see above)
+    //asteroid type
+    //0 - standard
+    //1 - homing
+    //2 - exploding
+    //3 - duplicating
+    //4 - teleporting
     private int[] types = 
     {
         0, 0, 1, -1,                        //two medium standards on the sides, one smaller homing in the middle
@@ -604,6 +609,7 @@ public class ObstacleTileController : MonoBehaviour
         2, 1, 0
     }; 
 
+
     //chance of getting a tile from each set
     private float[] setSpawnProbabilities = {0.75f, 0.175f, 0.075f};
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -662,33 +668,52 @@ public class ObstacleTileController : MonoBehaviour
 
     public List<DebrisSpawnInfo> GetRandomTile()
     {
-        float seed = Random.Range(0f, 1f);
-        int chosenTileSet = -1;
-        float currTotal = setSpawnProbabilities[0];
-        for(int i = 0; i < setSpawnProbabilities.Length - 2; i++)
-        {
-            if(seed < currTotal)
+        bool validTileFound = false;
+        List<DebrisSpawnInfo> spawnInfos = new List<DebrisSpawnInfo>();
+        while(!validTileFound){
+            float seed = Random.Range(0f, 1f);
+            int chosenTileSet = -1;
+            float currTotal = setSpawnProbabilities[0];
+            for(int i = 0; i < setSpawnProbabilities.Length - 2; i++)
             {
-                chosenTileSet = i;
-                break;
+                if(seed < currTotal)
+                {
+                    chosenTileSet = i;
+                    break;
+                }
+                currTotal += setSpawnProbabilities[i + 1];
             }
-            currTotal += setSpawnProbabilities[i + 1];
-        }
-        if(chosenTileSet == -1)
-        {
-            chosenTileSet = setSpawnProbabilities.Length - 2;
-        }
+            if(chosenTileSet == -1)
+            {
+                chosenTileSet = setSpawnProbabilities.Length - 2;
+            }
 
-        if(tileTestMode)
-        {
-            chosenTileSet = 3;
-        }
+            if(tileTestMode)
+            {
+                chosenTileSet = 3;
+            }
 
-        // Debug.Log(obstacleTiles[chosenTileSet].Count);
-        int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count);
-        // Debug.Log(chosenTileSet);
-        // Debug.Log(chosenTile);
-        List<DebrisSpawnInfo> spawnInfos = obstacleTiles[chosenTileSet][chosenTile];
+            // Debug.Log(obstacleTiles[chosenTileSet].Count);
+            int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count);
+    
+            // Debug.Log(chosenTileSet);
+            // Debug.Log(chosenTile);
+            spawnInfos = obstacleTiles[chosenTileSet][chosenTile];
+
+
+            //ensure spawned debris are of unlocked types
+            validTileFound = true;
+            for(int i = 0; i < spawnInfos.Count; i++){
+                if(
+                    (spawnInfos[i].GetType() == 1 && GameStateManager.Instance.GetGameStageInt() < 3) ||
+                    ((spawnInfos[i].GetType() == 2 || spawnInfos[i].GetType() == 3) && GameStateManager.Instance.GetGameStageInt() < 4) ||
+                    (spawnInfos[i].GetType() == 4 && GameStateManager.Instance.GetGameStageInt() < 5)
+                )
+                {
+                    validTileFound = false;
+                }
+            }
+        }
         return spawnInfos;
     }
 }

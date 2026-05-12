@@ -39,6 +39,10 @@ public class GameStateManager : MonoBehaviour
 
     public int currentProbeSkin = 0;
 
+    public bool moonUnlocked = false;
+    public bool marsUnlocked = false;
+    public bool psycheUnlocked = false;
+
     private Vector3 probePosition;
 
     public class GameStateChangeEventArgs : EventArgs
@@ -172,6 +176,42 @@ public class GameStateManager : MonoBehaviour
             default:
             return 0;
         }
+    }
+
+    public bool IsStageUnlocked(GameStage stage)
+    {
+        switch (stage)
+        {
+            case GameStage.Moon: return moonUnlocked;
+            case GameStage.Mars: return marsUnlocked;
+            case GameStage.Psyche: return psycheUnlocked;
+            default: return true;
+        }
+    }
+
+    public int GetStageUnlockCost(GameStage stage)
+    {
+        switch (stage)
+        {
+            case GameStage.Moon: return 20;
+            case GameStage.Mars: return 40;
+            case GameStage.Psyche: return 60;
+            default: return 0;
+        }
+    }
+
+    public bool TryUnlockStage(GameStage stage)
+    {
+        int cost = GetStageUnlockCost(stage);
+        if (totalCoins < cost) return false;
+        AddCoins(-cost);
+        switch (stage)
+        {
+            case GameStage.Moon: moonUnlocked = true; break;
+            case GameStage.Mars: marsUnlocked = true; break;
+            case GameStage.Psyche: psycheUnlocked = true; break;
+        }
+        return true;
     }
 
     public void SetProbeSkin(int skinIndex)

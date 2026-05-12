@@ -70,7 +70,7 @@ public class ObstacleTileController : MonoBehaviour
     };
 
     private List<List<DebrisSpawnInfo>>[] obstacleTiles;
-    bool tileTestMode = false;
+    bool tileTestMode = true;
 
     /*
         Arrays below are used to initialize the obstacleTiles list
@@ -85,7 +85,12 @@ public class ObstacleTileController : MonoBehaviour
         Arrays are spaced into groups of 10 for readability
     */
 
-    //asteroid type (see above)
+    //asteroid type
+    //0 - standard
+    //1 - homing
+    //2 - exploding
+    //3 - duplicating
+    //4 - teleporting
     private int[] types = 
     {
         0, 0, 1, -1,                        //two medium standards on the sides, one smaller homing in the middle
@@ -128,7 +133,31 @@ public class ObstacleTileController : MonoBehaviour
         0, 4, 0, -1,                        //large teleporter with small standards on sides
         1, 1, 1, -1,                        //homing on left, right, middle with offset heights
         2, -1,                              //single exploding center
-        0, 0, 0, 0, -1                      //2 overlapping pairs of standards rotating
+        0, 0, 0, 0, -1,                     //2 overlapping pairs of standards rotating
+        1, 2, 1, -1,                        //homing-exploding-homing flank
+        3, 3, 3, -1,                        //diagonal stair of duplicators
+
+        2, -1,                              //single exploding slightly off-center
+        0, 0, 0, 0, 0, 0, -1,               //wide wall of six standards
+        1, -1,                              //single large slow homing
+        4, 4, -1,                           //offset teleporter pair
+        2, 2, 2, -1,                        //triple exploding wide spread
+        0, 0, 0, 0, -1,                     //four standards orbiting center
+        1, 1, 1, 1, -1,                     //slow homing diagonal barrage
+        0, 2, 0, 1, -1,                     //standard, exploding, standard, homing
+        0, -1,                              //single wide standard slight offset
+        3, 0, 3, -1,                        //duplicator pair with standard center
+
+        4, -1,                              //single spinning teleporter
+        1, 1, -1,                           //two homings stacked
+        3, -1,                              //easy single duplicator
+        0, 0, 0, 0, 0, -1,                  //debris cluster
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1,   //field 1
+        0, 0, 0, 0, 0, 0, 0, -1,            //field 2
+        2, 2, 2, 2, 2, -1,                  //minefield
+        0, 0, 0, 1, -1,                     //field with homing
+        0, 0, 0, 0, 0, 0, 0, 0, -1,         //field of small standards
+        1, 1, 1, -1                         //3 homings
     };
 
     //asteroid size
@@ -174,7 +203,31 @@ public class ObstacleTileController : MonoBehaviour
         0.1f, 0.4f, 0.1f, 0f,
         0.4f, 0.4f, 0.4f, 0f,
         0.5f, 0f,
-        0.25f, 0.25f, 0.25f, 0.25f, 0f
+        0.25f, 0.25f, 0.25f, 0.25f, 0f,
+        0.25f, 0.3f, 0.25f, 0f,
+        0.25f, 0.25f, 0.25f, 0f,
+
+        0.5f, 0f,
+        0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0f,
+        0.6f, 0f,
+        0.3f, 0.3f, 0f,
+        0.25f, 0.25f, 0.25f, 0f,
+        0.2f, 0.2f, 0.2f, 0.2f, 0f,
+        0.2f, 0.2f, 0.2f, 0.2f, 0f,
+        0.25f, 0.3f, 0.25f, 0.2f, 0f,
+        0.4f, 0f,
+        0.3f, 0.2f, 0.3f, 0f,
+
+        0.4f, 0f,
+        0.25f, 0.25f, 0f,
+        0.3f, 0f,
+        0.05f, 0.1f, 0.15f, 0.1f, 0.07f, 0f,
+        0.05f, 0.05f, 0.1f, 0.1f, 0.15f, 0.2f, 0.2f, 0.3f, 0.3f, 0.4f, 0f,
+        0.2f, 0.11f, 0.4f, 0.267f, 0.44f, 0.267f, 0.133f, 0f,
+        0.4f, 0.1f, 0.1f, 0.1f, 0.4f, 0f,
+        0.5f, 0.5f, 0.2f, 0.1f, 0f,
+        0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0f,
+        0.3f, 0.4f, 0.3f, 0f
     };
 
     //starting x position of asteroids
@@ -220,7 +273,31 @@ public class ObstacleTileController : MonoBehaviour
         -1.25f, 0f, 1.25f, 0f,
         -1.25f, 0f, 1.25f, 0f,
         0f, 0f, 
-        -1.5f, 0.5f, 1.5f, 3.5f, 0f
+        -1.5f, 0.5f, 1.5f, 3.5f, 0f,
+        -1.5f, 0f, 1.5f, 0f,
+        -1f, 0f, 1f, 0f,
+
+        -1f, 0f,
+        -2f, -1.2f, -0.4f, 0.4f, 1.2f, 2f, 0f,
+        0f, 0f,
+        -1.5f, 1.5f, 0f,
+        -2f, 0f, 2f, 0f,
+        -0.5f, 0.5f, 0.5f, -0.5f, 0f,
+        -1.5f, -0.5f, 0.5f, 1.5f, 0f,
+        0f, -1.5f, 0f, 1.5f, 0f,
+        0.5f, 0f,
+        -1f, 0f, 1f, 0f,
+
+        0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f,
+        0f, 0.6f, -0.4f, -1.2f, 1f, 0f,
+        -2f, 0.5f, -1.5f, 1.5f, 0f, 0.75f, -1f,2f, 1f, -0.5f, 0f,
+        -2f, -1.8f, -0.5f, -0.2f, 1.8f, 2f, 1.8f, 0f,
+        -2f, -1.5f, 1.5f, 1.8f, 2f, 0f,
+        -2f, 0f, 1.5f, 2f, 0f,
+        -2f, -1.3f, -1f, 0f, 1f, 1.4f, 1.8f, 2f, 0f,
+        -1.5f, 0f, 1.5f, 0f
     };
 
     //starting y position of asteroids
@@ -266,10 +343,34 @@ public class ObstacleTileController : MonoBehaviour
         10f, 10f, 10f, 0f,
         10f, 18f, 14f, 0f,
         10f, 0f,
-        10f, 10f, 10f, 10f, 0f
+        10f, 10f, 10f, 10f, 0f,
+        10f, 10f, 10f, 0f,
+        10f, 14f, 18f, 0f,
+
+        10f, 0f,
+        10f, 10f, 10f, 10f, 10f, 10f, 0f,
+        10f, 0f,
+        10f, 14f, 0f,
+        10f, 12f, 10f, 0f,
+        10f, 10f, 11f, 11f, 0f,
+        10f, 13f, 16f, 19f, 0f,
+        8f, 11f, 14f, 11f, 0f,
+        10f, 0f,
+        10f, 12f, 10f, 0f,
+
+        10f, 0f,
+        10f, 14f, 0f,
+        10f, 0f,
+        10f, 10.1f, 10.2f, 10.1f, 10.3f, 0f,
+        10f, 10.5f, 12f, 11f, 14f, 16f, 16f, 18f, 20f, 18f, 0f,
+        11.5f, 17.3f, 14.5f, 8.6f, 10f, 6f, 8f, 0f,
+        13f, 19f, 11f, 20f, 17f, 0f,
+        16f, 15f, 11.5f, 19f, 0f,
+        18f, 11.5f, 14.2f, 17f, 11f, 15.5f, 13.2f, 19f, 0f,
+        10f, 10f, 10f, 0f
     };
 
-    private float[] pivotXs = 
+    private float[] pivotXs =
     {
         0f, 0f, 0f, 0f,
         0f, 0f, 0f,
@@ -311,10 +412,34 @@ public class ObstacleTileController : MonoBehaviour
         0f, 0f, 0f, 0f,
         0f, 0f, 0f, 0f,
         0f, 0f,
-        0f, -1.5f, 0f, 1.5f, 0f
+        0f, -1.5f, 0f, 1.5f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+
+        0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, 0f, 0f, 0f,
+
+        0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f
     };
 
-    private float[] pivotYs = 
+    private float[] pivotYs =
     {
         0f, 0f, 0f, 0f,
         10f, 10f, 0f,
@@ -356,10 +481,34 @@ public class ObstacleTileController : MonoBehaviour
         0f, 0f, 0f, 0f,
         0f, 0f, 0f, 0f,
         0f, 0f,
-        0f, 10f, 0f, 10f, 0f
+        0f, 10f, 0f, 10f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+
+        0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        10.5f, 10.5f, 10.5f, 10.5f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, 0f, 0f, 0f,
+
+        10f, 0f,
+        0f, 0f, 0f,
+        0f, 0f,
+        10f, 10f, 10f, 10f, 10f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f
     };
 
-    private float[] revSpeeds = 
+    private float[] revSpeeds =
     {
         0f, 0f, 0f, 0f,
         0.2f, 0.2f, 0f,
@@ -401,7 +550,31 @@ public class ObstacleTileController : MonoBehaviour
         0f, 0f, 0f, 0f,
         0f, 0f, 0f, 0f,
         0f, 0f,
-        0f, 0.8f, 0f, 0.6f, 0f
+        0f, 0.8f, 0f, 0.6f, 0f,
+        0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+
+        0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, 0f, 0f,
+        0f, 0f, 0f, 0f,
+        0.5f, 0.5f, 0.5f, 0.5f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f,
+        0f, 0f, 0f, 0f,
+
+        0.5f, 0f,
+        0f, 0f, 0f,
+        0f, 0f,
+        0f, 1f, 0.8f, 0.3f, 1.5f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 
+        0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f
     };
 
     //asteroid move speed
@@ -447,7 +620,32 @@ public class ObstacleTileController : MonoBehaviour
         3f, 3f, 3f, 0f,
         4f, 4f, 4f, 0f,
         3f, 0f,
-        2f, 2f, 2f, 2f, 0f
+        2f, 2f, 2f, 2f, 0f,
+        4f, 3f, 4f, 0f,
+        3f, 3f, 3f, 0f,
+
+        3f, 0f,
+        4f, 4f, 4f, 4f, 4f, 4f, 0f,
+        2f, 0f,
+        4f, 4f, 0f,
+        3f, 3f, 3f, 0f,
+        3f, 3f, 3f, 3f, 0f,
+        3f, 3f, 3f, 3f, 0f,
+        3f, 3f, 3f, 3f, 0f,
+        3f, 0f,
+        4f, 4f, 4f, 0f,
+
+        3f, 0f,
+        4f, 4f, 0f,
+        3f, 0f,
+
+        3f, 3f, 3f, 3f, 3f, 0f,
+        3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 0f,
+        3f, 3f, 3f, 3f, 3f, 3f, 3f, 0f,
+        3f, 3f, 3f, 3f, 3f, 0f,
+        3f, 3f, 3f, 3f, 0f,
+        3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 0f,
+        0f, 0f, 0f, 0f
     };
 
     //difficulty rating, 0 is easiest, 2 is hardest, 3 for testing tiles
@@ -455,8 +653,11 @@ public class ObstacleTileController : MonoBehaviour
         1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 
         1, 1, 2, 1, 2, 1, 0, 1, 2, 2, 
         2, 1, 2, 0, 0, 2, 2, 2, 1, 1, 
-        1, 2, 1, 2, 1, 2, 1, 2
+        1, 2, 1, 2, 1, 2, 1, 2, 2, 2,
+        0, 2, 1, 2, 2, 1, 2, 2, 0, 1,
+        2, 1, 0, 0, 2, 2, 2, 2, 2, 1
     }; 
+
 
     //chance of getting a tile from each set
     private float[] setSpawnProbabilities = {0.75f, 0.175f, 0.075f};
@@ -516,33 +717,53 @@ public class ObstacleTileController : MonoBehaviour
 
     public List<DebrisSpawnInfo> GetRandomTile()
     {
-        float seed = Random.Range(0f, 1f);
-        int chosenTileSet = -1;
-        float currTotal = setSpawnProbabilities[0];
-        for(int i = 0; i < setSpawnProbabilities.Length - 2; i++)
-        {
-            if(seed < currTotal)
+        bool validTileFound = false;
+        List<DebrisSpawnInfo> spawnInfos = new List<DebrisSpawnInfo>();
+        while(!validTileFound){
+            float seed = Random.Range(0f, 1f);
+            int chosenTileSet = -1;
+            float currTotal = setSpawnProbabilities[0];
+            for(int i = 0; i < setSpawnProbabilities.Length - 2; i++)
             {
-                chosenTileSet = i;
-                break;
+                if(seed < currTotal)
+                {
+                    chosenTileSet = i;
+                    break;
+                }
+                currTotal += setSpawnProbabilities[i + 1];
             }
-            currTotal += setSpawnProbabilities[i + 1];
-        }
-        if(chosenTileSet == -1)
-        {
-            chosenTileSet = setSpawnProbabilities.Length - 2;
-        }
+            if(chosenTileSet == -1)
+            {
+                chosenTileSet = setSpawnProbabilities.Length - 2;
+            }
 
-        if(tileTestMode)
-        {
-            chosenTileSet = 3;
-        }
+            if(tileTestMode)
+            {
+                chosenTileSet = 3;
+            }
 
-        // Debug.Log(obstacleTiles[chosenTileSet].Count);
-        int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count);
-        // Debug.Log(chosenTileSet);
-        // Debug.Log(chosenTile);
-        List<DebrisSpawnInfo> spawnInfos = obstacleTiles[chosenTileSet][chosenTile];
+            // Debug.Log(obstacleTiles[chosenTileSet].Count);
+            int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count);
+    
+            // Debug.Log(chosenTileSet);
+            // Debug.Log(chosenTile);
+            spawnInfos = obstacleTiles[chosenTileSet][chosenTile];
+
+
+            //ensure spawned debris are of unlocked types
+            validTileFound = true;
+            for(int i = 0; i < spawnInfos.Count; i++){
+                if(
+                    (spawnInfos[i].GetType() == 1 && GameStateManager.Instance.GetGameStageInt() < 3) ||
+                    ((spawnInfos[i].GetType() == 2 || spawnInfos[i].GetType() == 3) && GameStateManager.Instance.GetGameStageInt() < 4) ||
+                    (spawnInfos[i].GetType() == 4 && GameStateManager.Instance.GetGameStageInt() < 5)
+                )
+                {
+                    validTileFound = false;
+                }
+            }
+            if(tileTestMode) validTileFound = true;
+        }
         return spawnInfos;
     }
 }

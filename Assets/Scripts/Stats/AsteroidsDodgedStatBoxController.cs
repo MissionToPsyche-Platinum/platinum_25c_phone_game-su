@@ -5,7 +5,16 @@ public class AsteroidsDodgedStatBoxController : StatBoxController
 
     protected override void SetAppropriateVisual()
     {
-        displayedText.text = "Asteroids Dodged: " + StatsManager.instance.asteroidsDodged.ToString();
+        string value = StatsManager.instance.asteroidsDodged.ToString();
+        if (valueText != null)
+        {
+            displayedText.text = "Asteroids Dodged";
+            valueText.text = value;
+        }
+        else
+        {
+            displayedText.text = "Asteroids Dodged: " + value;
+        }
         ShowNothingOnImage();
     }
 }

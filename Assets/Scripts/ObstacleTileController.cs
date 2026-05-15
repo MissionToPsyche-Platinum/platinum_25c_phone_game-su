@@ -11,18 +11,16 @@ public class ObstacleTileController : MonoBehaviour
         float scale;
         float initialX;
         float initialY;
-        float moveSpeed;
         float pivotX;
         float pivotY;
         float revolutionSpeed;
 
-        public DebrisSpawnInfo(int debrisType, float size, float xPos, float yPos, float speed, float pivotXPos, float pivotYPos, float revSpeed)
+        public DebrisSpawnInfo(int debrisType, float size, float xPos, float yPos, float pivotXPos, float pivotYPos, float revSpeed)
         {
             type = debrisType;
             scale = size;
             initialX = xPos;
             initialY = yPos;
-            moveSpeed = speed;
             pivotX = pivotXPos;
             pivotY = pivotYPos;
             revolutionSpeed = revSpeed;
@@ -48,11 +46,6 @@ public class ObstacleTileController : MonoBehaviour
             return initialY;
         }
 
-        public float GetSpeed()
-        {
-            return moveSpeed;
-        }
-
         public float GetPivotX()
         {
             return pivotX;
@@ -70,7 +63,7 @@ public class ObstacleTileController : MonoBehaviour
     };
 
     private List<List<DebrisSpawnInfo>>[] obstacleTiles;
-    bool tileTestMode = true;
+    bool tileTestMode = false;
 
     /*
         Arrays below are used to initialize the obstacleTiles list
@@ -338,7 +331,7 @@ public class ObstacleTileController : MonoBehaviour
 
         10f, 20f, 0f,
         10f, 10f, 10f, 10f, 0f,
-        0f, 0f, 0.86602f, 0f,
+        10f, 10f, 10.86602f, 0f,
         10f, 10f, 12f, 12f, 14f, 14f, 16f, 16f, 18f, 18f, 0f,
         10f, 10f, 10f, 0f,
         10f, 18f, 14f, 0f,
@@ -577,76 +570,6 @@ public class ObstacleTileController : MonoBehaviour
         0f, 0f, 0f, 0f
     };
 
-    //asteroid move speed
-    private float[] speeds = 
-    {
-        3f, 3f, 6f, 0f,
-        3f, 3f, 0f,
-        3f, 3f, 3f, 3f, 3f, 0f,
-        5f, 5f, 0f,
-        3f, 3f, 6f, 0f,
-        3f, 0f, 
-        3f, 0f, 
-        3f, 0f,
-        4f, 3f, 4f, 0f,
-        4f, 4f, 0f,
-
-        3f, 5f, 3f, 0f,
-        4f, 3f, 0f,
-        4f, 4f, 4f, 0f,
-        3f, 4f, 3f, 0f,
-        3f, 4f, 3f, 0f,
-        4f, 5f, 0f,
-        3f, 3f, 3f, 3f, 3f, 0f,
-        4f, 3f, 4f, 0f,
-        4f, 4f, 0f,
-        4f, 5f, 0f,
-
-        5f, 5f, 4f, 0f,
-        3f, 4f, 3f, 3f, 0f,
-        4f, 0f,
-        3f, 3f, 3f, 0f,
-        3f, 0f,
-        5f, 5f, 5f, 5f, 5f, 0f,
-        5f, 5f, 5f, 5f, 5f, 0f,
-        3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 0f,
-        3f, 3f, 0f,
-        3f, 3f, 0f,
-
-        3f, 6f, 0f,
-        2f, 2f, 2f, 2f, 0f,
-        3f, 3f, 3f, 0f,
-        2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 0f,
-        3f, 3f, 3f, 0f,
-        4f, 4f, 4f, 0f,
-        3f, 0f,
-        2f, 2f, 2f, 2f, 0f,
-        4f, 3f, 4f, 0f,
-        3f, 3f, 3f, 0f,
-
-        3f, 0f,
-        4f, 4f, 4f, 4f, 4f, 4f, 0f,
-        2f, 0f,
-        4f, 4f, 0f,
-        3f, 3f, 3f, 0f,
-        3f, 3f, 3f, 3f, 0f,
-        3f, 3f, 3f, 3f, 0f,
-        3f, 3f, 3f, 3f, 0f,
-        3f, 0f,
-        4f, 4f, 4f, 0f,
-
-        3f, 0f,
-        4f, 4f, 0f,
-        3f, 0f,
-
-        3f, 3f, 3f, 3f, 3f, 0f,
-        3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 0f,
-        3f, 3f, 3f, 3f, 3f, 3f, 3f, 0f,
-        3f, 3f, 3f, 3f, 3f, 0f,
-        3f, 3f, 3f, 3f, 0f,
-        3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 0f,
-        0f, 0f, 0f, 0f
-    };
 
     //difficulty rating, 0 is easiest, 2 is hardest, 3 for testing tiles
     private int[] sets = {
@@ -669,14 +592,13 @@ public class ObstacleTileController : MonoBehaviour
             obstacleTiles[i] = new List<List<DebrisSpawnInfo>>();
         }
 
-        if(types.Length != scales.Length || types.Length != xPositions.Length || types.Length != yPositions.Length || types.Length != speeds.Length 
+        if(types.Length != scales.Length || types.Length != xPositions.Length || types.Length != yPositions.Length
             || types.Length != pivotXs.Length || types.Length != pivotYs.Length || types.Length != revSpeeds.Length)
         {
             Debug.Log(types.Length);
             Debug.Log(scales.Length);
             Debug.Log(xPositions.Length);
             Debug.Log(yPositions.Length);
-            Debug.Log(speeds.Length);
             Debug.Log(pivotXs.Length);
             Debug.Log(pivotYs.Length);
             Debug.Log(revSpeeds.Length);
@@ -689,7 +611,7 @@ public class ObstacleTileController : MonoBehaviour
                 List<DebrisSpawnInfo> newList = new List<DebrisSpawnInfo>();
                 while(currIndex < types.Length && types[currIndex] != -1)
                 {
-                    DebrisSpawnInfo newSpawnInfo = new DebrisSpawnInfo(types[currIndex], scales[currIndex], xPositions[currIndex], yPositions[currIndex], speeds[currIndex], pivotXs[currIndex], pivotYs[currIndex], revSpeeds[currIndex]);
+                    DebrisSpawnInfo newSpawnInfo = new DebrisSpawnInfo(types[currIndex], scales[currIndex], xPositions[currIndex], yPositions[currIndex], pivotXs[currIndex], pivotYs[currIndex], revSpeeds[currIndex]);
                     newList.Add(newSpawnInfo);
                     currIndex++;
                 }
@@ -745,8 +667,8 @@ public class ObstacleTileController : MonoBehaviour
             // Debug.Log(obstacleTiles[chosenTileSet].Count);
             int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count);
     
-            // Debug.Log(chosenTileSet);
-            // Debug.Log(chosenTile);
+            Debug.Log(chosenTileSet);
+            Debug.Log(chosenTile);
             spawnInfos = obstacleTiles[chosenTileSet][chosenTile];
 
 

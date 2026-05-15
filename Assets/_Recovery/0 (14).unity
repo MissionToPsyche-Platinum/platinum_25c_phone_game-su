@@ -22559,7 +22559,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1768696774}
   - component: {fileID: 1768696773}
-  - component: {fileID: 1768696775}
   m_Layer: 0
   m_Name: BGMController
   m_TagString: Untagged
@@ -22582,7 +22581,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -22679,16 +22678,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!165 &1768696775
-AudioHighPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768696772}
-  m_Enabled: 1
-  m_CutoffFrequency: 10
-  m_HighpassResonanceQ: 1
 --- !u!1 &1776910797
 GameObject:
   m_ObjectHideFlags: 0

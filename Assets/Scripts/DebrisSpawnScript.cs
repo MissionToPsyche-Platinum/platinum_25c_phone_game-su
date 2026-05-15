@@ -19,20 +19,27 @@ public class DebrisSpawnScript : MonoBehaviour
         {0.35f, 0.25f, 0.15f, 0.15f, 0.1f},  //spawn probabilities at Psyche checkpoint
     };
 
-    public float minSpawnInterval = 0f; 
-    public float maxSpawnInterval = 0.2f;
     public float minSize = 0.3f;
     public float maxSize = 1f;
 
-    private float timer = 0f;
-    private float nextSpawnTime;
     private float gameTime = 0f; 
     private float difficultyMultiplier = 1f;
 
-    int numActiveAsteroids = 0;
+    private List<GameObject> activeAsteroids = new List<GameObject>();
+
+    int numLanes = 7;
+    private List<float> laneXPos = new List<float>();
+    private List<int> availableLanes = new List<int>();
+    int currLane = 0;
+
+    float minSpeed = 3f;
+    float maxSpeed = 10f;
+    float maxGap = 10f;
+    float minGap = 5f;
+    float difficultyCutoff = 600f;                  //time when difficulty stops increasing
 
     private float tileSpawnProbability = 0.5f;      //chance of premade tile spawning instead of random spawn
-    private float _spawnIntervalMultiplier = 1f;    //component modifier: >1 means longer interval (fewer spawns)
+    private float gapMultiplier = 1f;    //component modifier: >1 means longer interval (fewer spawns)
     ObstacleTileController tileController;
 
     public event EventHandler<EventArgs> OnDebrisSpawned;
@@ -54,9 +61,15 @@ public class DebrisSpawnScript : MonoBehaviour
 
         scoreSystem = scoreIncrement.GetComponent<ScoreIncrement>();
 
-        nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
-
         tileController = this.gameObject.GetComponent<ObstacleTileController>();
+
+        float minXPos = -2f;
+        float maxXPos = 2f;
+        float laneWidth = (maxXPos - minXPos) / (float)(numLanes - 1);
+        for(int i = 0; i < numLanes; i++){
+            laneXPos.Add(minXPos + (float)i * laneWidth);
+        }
+        
     }
 
     private void OnDestroy()
@@ -69,30 +82,22 @@ public class DebrisSpawnScript : MonoBehaviour
 
     void Update()
     {
-        if (spawnerActive && numActiveAsteroids == 0)
+        if (spawnerActive)
         {
             
-            gameTime += Time.deltaTime;
-            difficultyMultiplier = 1f + (gameTime * 0.01f);
+            if(gameTime < difficultyCutoff){
+                gameTime += Time.deltaTime;
+                difficultyMultiplier = gameTime / difficultyCutoff;
+            }
 
-            timer += Time.deltaTime;
-
-            
-            float adjustedSpawnTime = nextSpawnTime * _spawnIntervalMultiplier / difficultyMultiplier;
-
-            if (timer >= adjustedSpawnTime)
+            float spawnTypeSeed = Random.Range(0f, 1f);
+            if(spawnTypeSeed <= tileSpawnProbability || tileController.UsingTestMode())
             {
-                float spawnTypeSeed = Random.Range(0f, 1f);
-                if(spawnTypeSeed <= tileSpawnProbability || tileController.UsingTestMode())
-                {
-                    SpawnTile();
-                } 
-                else 
-                {
-                    SpawnDebris();
-                }
-                timer = 0f;
-                nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+                SpawnTile();
+            } 
+            else 
+            {
+                SpawnDebris();
             }
         }
     }
@@ -131,6 +136,22 @@ public class DebrisSpawnScript : MonoBehaviour
 
     void SpawnTile(){
         List<ObstacleTileController.DebrisSpawnInfo> spawnInfos = tileController.GetRandomTile();
+
+        //checks if there is room to spawn
+        for(int i = 0; i < spawnInfos.Count; i++){
+            updateActiveAsteroids();
+            for(int j = 0; j < activeAsteroids.Count; j++){
+                float newX = spawnInfos[i].GetPosX();
+                float newY = spawnInfos[i].GetPosY();
+                float currX = activeAsteroids[j].transform.position.x;
+                float currY = activeAsteroids[j].transform.position.y;
+                float gap = Mathf.Lerp(maxGap, minGap, difficultyMultiplier) * gapMultiplier;
+                if((currX - newX) * (currX - newX) + (currY - newY) * (currY - newY) < gap * gap){
+                    return;
+                }
+            }
+        }
+
         for(int i = 0; i < spawnInfos.Count; i++){
             ObstacleTileController.DebrisSpawnInfo spawnInfo = spawnInfos[i];
 
@@ -147,7 +168,7 @@ public class DebrisSpawnScript : MonoBehaviour
             // Spawn the debris
             GameObject newDebris = Instantiate(selectedDebris, spawnPos, Quaternion.identity);
             OnDebrisSpawned?.Invoke(this, EventArgs.Empty);
-            numActiveAsteroids++;
+            activeAsteroids.Add(newDebris);
 
             // Size
             float scale = spawnInfo.GetScale();
@@ -157,8 +178,7 @@ public class DebrisSpawnScript : MonoBehaviour
             DebrisMoveScript script = newDebris.GetComponent<DebrisMoveScript>();
             if (script != null)
             {
-                float baseSpeed = spawnInfo.GetSpeed();
-                script.velocity = baseSpeed * difficultyMultiplier * Vector3.down; // 1% faster per second
+                script.velocity = Mathf.Lerp(minSpeed, maxSpeed, difficultyMultiplier) * Vector3.down; // 1% faster per second
                 script.rotationSpeed = Random.Range(0.05f, 0.4f);
                 script.type = debrisType;
                 script.debrisScale = scale;
@@ -170,12 +190,33 @@ public class DebrisSpawnScript : MonoBehaviour
 
     void SpawnDebris()
     {
+        if(currLane >= numLanes){
+            shuffleLanes();
+            currLane = 0;
+        }
         // Random position of spawn
+        
         Vector3 spawnPos = new Vector3(
-            Random.Range(-2.0f, 2.0f),
+            laneXPos[availableLanes[currLane]],
             10f,
             0f
         );
+
+        updateActiveAsteroids();
+        for(int j = 0; j < activeAsteroids.Count; j++){
+            float newX = spawnPos.x;
+            float newY = spawnPos.y;
+            float currX = activeAsteroids[j].transform.position.x;
+            float currY = activeAsteroids[j].transform.position.y;
+            float gap = Mathf.Lerp(maxGap, minGap, difficultyMultiplier) * gapMultiplier;
+            if((currX - newX) * (currX - newX) + (currY - newY) * (currY - newY) < gap * gap){
+                return;
+            }
+        }
+
+        Debug.Log("Lane " + availableLanes[currLane]);
+        Debug.Log("Pos " + laneXPos[availableLanes[currLane]]);
+        currLane++;
 
         updateSpawnProbabilities();
         // for(int i = 0; i < 5; i++){
@@ -199,7 +240,7 @@ public class DebrisSpawnScript : MonoBehaviour
         // Spawn the debris
         GameObject newDebris = Instantiate(selectedDebris, spawnPos, Quaternion.identity);
         OnDebrisSpawned?.Invoke(this, EventArgs.Empty);
-        numActiveAsteroids++;
+        activeAsteroids.Add(newDebris);
 
         // Random size
         float randomScale = Random.Range(minSize, maxSize);
@@ -209,17 +250,41 @@ public class DebrisSpawnScript : MonoBehaviour
         DebrisMoveScript script = newDebris.GetComponent<DebrisMoveScript>();
         if (script != null)
         {
-            float baseSpeed = Random.Range(2.0f, 8.0f);
-            script.velocity = baseSpeed * difficultyMultiplier * Vector3.down; // 1% faster per second
+            script.velocity = Mathf.Lerp(minSpeed, maxSpeed, difficultyMultiplier) * Vector3.down; // 1% faster per second
             script.rotationSpeed = Random.Range(0.05f, 0.4f);
             script.type = debrisType;
             script.debrisScale = randomScale;
         }
     }
 
+    void shuffleLanes(){
+        List<int> order = new List<int>();
+        bool duplicate = false;
+        for(int i = 0; i < numLanes; i++){
+            duplicate = true;
+            int newIndex = -1;
+            while(duplicate){
+                duplicate = false;
+                newIndex = Random.Range(0, numLanes);
+                for(int j = 0; j < i; j++){
+                    if(order[j] == newIndex){
+                        duplicate = true;
+                    }
+                }
+            }
+            order.Add(newIndex);
+        }
+
+        availableLanes = order;
+    }
+
+    void updateActiveAsteroids(){
+        activeAsteroids.RemoveAll(d => d == null);
+    }
+
     public void SetSpawnIntervalMultiplier(float m)
     {
-        _spawnIntervalMultiplier = m;
+        gapMultiplier = m;
     }
 
     public void DisableSpawning()
@@ -232,20 +297,14 @@ public class DebrisSpawnScript : MonoBehaviour
         spawnerActive = true;
     }
 
-    public void decrementAsteroidCount(){
-        if(numActiveAsteroids > 0){
-            numActiveAsteroids--;
-        }
-    }
-
     private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
         this.gameObject.SetActive(true);
         
         gameTime = 0f;
-        difficultyMultiplier = 1f;
-        timer = 0f;
-        nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+        difficultyMultiplier = 0f;
+        currLane = 0;
+        shuffleLanes();
     }
 
     private void OnStopPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)

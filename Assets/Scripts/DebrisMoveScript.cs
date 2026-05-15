@@ -54,7 +54,6 @@ public class DebrisMoveScript : MonoBehaviour
     void OnDestroy(){
         checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
         if (teleportGhost != null) Destroy(teleportGhost);
-        debrisSpawnScript.decrementAsteroidCount();
     }
 
     // Update is called once per frame
@@ -118,6 +117,7 @@ public class DebrisMoveScript : MonoBehaviour
             homingAmount = 0f;
         }
 
+        velocityScaled = velocity * Time.deltaTime;
         Vector3 normVelocity = velocityScaled.normalized;
         Vector3 debrisToProbeVector = (probePos - transform.position).normalized;
 

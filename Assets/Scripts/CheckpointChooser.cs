@@ -9,7 +9,7 @@ public class CheckpointChooser : MonoBehaviour
 
     [SerializeField] private Button leftButton;
     [SerializeField] private Button rightButton;
-    [SerializeField] private TextMeshProUGUI displayName;
+    [SerializeField] private Text displayName;
     [SerializeField] private Image lockSprite;
     [SerializeField] private Button buyButton;
     [SerializeField] private TextMeshProUGUI buyButtonText;

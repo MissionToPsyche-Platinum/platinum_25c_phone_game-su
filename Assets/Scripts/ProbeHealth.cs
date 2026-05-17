@@ -66,19 +66,20 @@ public class ProbeHealth : MonoBehaviour
         hasShownLowHealthWarning = false;
     }
 
-    public void TakeDamage(int damage)
+    // Returns true if the hit was dodged (no damage taken due to dodge chance).
+    public bool TakeDamage(int damage)
     {
-        if (DebugManager.Instance != null && DebugManager.Instance.GodModeEnabled) return;
+        if (DebugManager.Instance != null && DebugManager.Instance.GodModeEnabled) return false;
 
         if (damageActive)
         {
-            
+
             if (!shieldActive && GameStateManager.Instance != null)
             {
                 int dodgeChance = ProbeUpgradeManager.Instance.GetDodgeChance();
                 if (UnityEngine.Random.Range(0, 100) < dodgeChance)
                 {
-                    return;
+                    return true;
                 }
             }
 
@@ -116,6 +117,7 @@ public class ProbeHealth : MonoBehaviour
             score.PauseScore();
             GameStateManager.Instance.EnterMenuState();
         }
+        return false;
     }
 
     public void AddShield(int shieldHP)

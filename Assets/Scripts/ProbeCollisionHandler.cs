@@ -11,6 +11,7 @@ public class ProbeCollisionHandler : MonoBehaviour
     private bool hasDisplayedAsteroidPopup;
 
     [SerializeField] private AudioClip asteroidCollisionSoundClip;
+    [SerializeField] private AudioClip dodgeSoundClip;
 
     private Coroutine blinkCoroutine;
     private SpriteRenderer probeSprite;
@@ -57,30 +58,44 @@ public class ProbeCollisionHandler : MonoBehaviour
 
             HasCollided = true;
             justGotHit = true;
-            SFXController.instance.PlaySoundFXClip(asteroidCollisionSoundClip, transform, 1f);
-            // Take damage
+
+            bool dodged = false;
             if (healthSystem != null)
             {
-                healthSystem.TakeDamage(1);
-                OnTakeDamage?.Invoke(this, EventArgs.Empty);
+                dodged = healthSystem.TakeDamage(1);
+                if (!dodged)
+                    OnTakeDamage?.Invoke(this, EventArgs.Empty);
             }
-            
-            if (probeController != null)
+
+            if (dodged)
             {
-                probeController.ApplyKnockback(collision.transform.position);
+                if (dodgeSoundClip != null)
+                    SFXController.instance.PlaySoundFXClip(dodgeSoundClip, transform, 1f);
             }
-            
+            else
+            {
+                SFXController.instance.PlaySoundFXClip(asteroidCollisionSoundClip, transform, 1f);
+                if (probeController != null)
+                    probeController.ApplyKnockback(collision.transform.position);
+            }
+
             // Destroy the debris/asteroid
             Destroy(collision.gameObject);
-
 
             if (!gameObject.activeInHierarchy)
             {
                 return;
             }
-            
-            StartCoroutine(cameraShakeScript.Shake(.3f, 1f));
-            StartCoroutine(HitEffectRoutine());
+
+            if (dodged)
+            {
+                StartCoroutine(DodgeFlashRoutine());
+            }
+            else
+            {
+                StartCoroutine(cameraShakeScript.Shake(.3f, 1f));
+                StartCoroutine(HitEffectRoutine());
+            }
         }
 
         if (collision.gameObject.CompareTag("Coin"))
@@ -121,6 +136,16 @@ public class ProbeCollisionHandler : MonoBehaviour
         }
     }
     
+    private IEnumerator DodgeFlashRoutine()
+    {
+        if (probeSprite == null) { justGotHit = false; yield break; }
+        Color original = probeSprite.color;
+        probeSprite.color = Color.green;
+        yield return new WaitForSecondsRealtime(0.2f);
+        probeSprite.color = original;
+        justGotHit = false;
+    }
+
     private IEnumerator HitEffectRoutine()
     {
         yield return StartCoroutine(FreezeFrame(.25f));

@@ -82,9 +82,9 @@ public class DebrisSpawnScript : MonoBehaviour
 
     void Update()
     {
-        if (spawnerActive)
+        if (spawnerActive && GameStateManager.Instance.currentGameState == GameStateManager.GameState.Playing)
         {
-            
+
             if(gameTime < difficultyCutoff){
                 gameTime += Time.deltaTime;
                 difficultyMultiplier = gameTime / difficultyCutoff;
@@ -94,8 +94,8 @@ public class DebrisSpawnScript : MonoBehaviour
             if(spawnTypeSeed <= tileSpawnProbability || tileController.UsingTestMode())
             {
                 SpawnTile();
-            } 
-            else 
+            }
+            else
             {
                 SpawnDebris();
             }

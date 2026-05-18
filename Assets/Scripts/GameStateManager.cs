@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -21,6 +22,13 @@ public class GameStateManager : MonoBehaviour
         Moon,
         Mars,
         Psyche,
+        Jupiter,
+        Saturn, 
+        Uranus,
+        Neptune,
+        ProximaCentauri,
+        AlphaCentauriA,
+        AlphaCentauriB,
         Transition
     }
 
@@ -42,6 +50,9 @@ public class GameStateManager : MonoBehaviour
     public bool moonUnlocked = false;
     public bool marsUnlocked = false;
     public bool psycheUnlocked = false;
+
+    private bool[] checkpointUnlocked = {true, false, false, false, false, false, false, false, false, false, false};
+    private int[] checkpointUnlockCosts = {0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200};
 
     private Vector3 probePosition;
 
@@ -153,14 +164,35 @@ public class GameStateManager : MonoBehaviour
             case 5:
             gameStage = GameStage.Psyche;
             break;
+            case 6:
+            gameStage = GameStage.Jupiter;
+            break;
+            case 7:
+            gameStage = GameStage.Saturn;
+            break;
+            case 8:
+            gameStage = GameStage.Uranus;
+            break;
+            case 9:
+            gameStage = GameStage.Neptune;
+            break;
+            case 10:
+            gameStage = GameStage.ProximaCentauri;
+            break;
+            case 11:
+            gameStage = GameStage.AlphaCentauriA;
+            break;
+            case 12:
+            gameStage = GameStage.AlphaCentauriB;
+            break;
             default:
             gameStage = GameStage.None;
             break;
         }
     }
 
-    public int GetGameStageInt(){
-        switch(gameStage){
+    private int GameStageToInt(GameStage stage){
+        switch(stage){
             case GameStage.None:
             return 0;
             case GameStage.Transition:
@@ -173,31 +205,41 @@ public class GameStateManager : MonoBehaviour
             return 4;
             case GameStage.Psyche:
             return 5;
+            case GameStage.Jupiter:
+            return 6;
+            case GameStage.Saturn:
+            return 7;
+            case GameStage.Uranus:
+            return 8;
+            case GameStage.Neptune:
+            return 9;
+            case GameStage.ProximaCentauri:
+            return 10;
+            case GameStage.AlphaCentauriA:
+            return 11;
+            case GameStage.AlphaCentauriB:
+            return 12;
             default:
             return 0;
         }
     }
 
+    public int GetGameStageInt(){
+        return GameStageToInt(gameStage);
+    }
+
     public bool IsStageUnlocked(GameStage stage)
     {
-        switch (stage)
-        {
-            case GameStage.Moon: return moonUnlocked;
-            case GameStage.Mars: return marsUnlocked;
-            case GameStage.Psyche: return psycheUnlocked;
-            default: return true;
-        }
+        if(GameStageToInt(stage) - 2 < checkpointUnlocked.Length)
+        return checkpointUnlocked[GameStageToInt(stage) - 2];
+        return true;
     }
 
     public int GetStageUnlockCost(GameStage stage)
     {
-        switch (stage)
-        {
-            case GameStage.Moon: return 20;
-            case GameStage.Mars: return 40;
-            case GameStage.Psyche: return 60;
-            default: return 0;
-        }
+        if(GameStageToInt(stage) - 2 < checkpointUnlocked.Length)
+        return checkpointUnlockCosts[GameStageToInt(stage) - 2];
+        return 0;
     }
 
     public bool TryUnlockStage(GameStage stage)
@@ -205,12 +247,7 @@ public class GameStateManager : MonoBehaviour
         int cost = GetStageUnlockCost(stage);
         if (totalCoins < cost) return false;
         AddCoins(-cost);
-        switch (stage)
-        {
-            case GameStage.Moon: moonUnlocked = true; break;
-            case GameStage.Mars: marsUnlocked = true; break;
-            case GameStage.Psyche: psycheUnlocked = true; break;
-        }
+        checkpointUnlocked[GameStageToInt(stage) - 2] = true;
         return true;
     }
 

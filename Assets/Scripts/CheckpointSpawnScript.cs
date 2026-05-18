@@ -22,7 +22,7 @@ public class CheckpointSpawnScript : MonoBehaviour
     [SerializeField] private GameObject psycheArrivalPopupPrefab;
     private GameObject[] checkpointInstances;
 
-    private const int numCheckpoints = 4;
+    private const int numCheckpoints = 11;
     private float checkpointZ = 0.9f; //z-coord of checkpoints for layering with other visuals
 
     private int nextCheckpoint = 0;

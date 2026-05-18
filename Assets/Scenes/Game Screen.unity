@@ -12219,6 +12219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   asteroidCollisionSoundClip: {fileID: 8300000, guid: 97c7e8fc768c84a0c8d2282da7399e46, type: 3}
+  dodgeSoundClip: {fileID: 0}
 --- !u!114 &908402719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17708,11 +17709,18 @@ MonoBehaviour:
   coinSpawner: {fileID: 1480618450}
   powerUpSpawner: {fileID: 201524964}
   checkpoints:
-  - {fileID: 3891233785764602438, guid: 3519526d962fb4371aba2e4054f6e61e, type: 3}
-  - {fileID: 7361094799875311414, guid: 43dd97bb3690d4f9485a2dcd42c56d3b, type: 3}
-  - {fileID: 6422277008596452717, guid: 809863cc2b4dd41c998aa5c016069920, type: 3}
-  - {fileID: 4652785462984765883, guid: 2f756627e0de54fd5943cffb9ae3a379, type: 3}
-  checkpointScores: 000000002c010000e8030000d0070000
+  - {fileID: 3891233785764602438, guid: 648fb32b8048f4f068f495d51dda54e6, type: 3}
+  - {fileID: 7361094799875311414, guid: 9346867c4941d4da0b6266b09dfa1ec4, type: 3}
+  - {fileID: 6422277008596452717, guid: c38b1b203cbda4dbd95e2a0aa21b0db2, type: 3}
+  - {fileID: 4652785462984765883, guid: 2577a85106ccc47189bee20a3cda2464, type: 3}
+  - {fileID: 6422277008596452717, guid: 30cdd9e68c8ba4b5a89c2eedc8628d7c, type: 3}
+  - {fileID: 6422277008596452717, guid: ac2483bc81cec42feac029ac2d446088, type: 3}
+  - {fileID: 6422277008596452717, guid: ebd4dbe0df4bf45468f9fa26e640b9bf, type: 3}
+  - {fileID: 6422277008596452717, guid: 4ba1ae63bd0f945429b7b6ad973d3722, type: 3}
+  - {fileID: 6422277008596452717, guid: 60060b86764944d40b52308ce7779553, type: 3}
+  - {fileID: 6422277008596452717, guid: 66404d4ffe41b4854b93ca8e10ee2659, type: 3}
+  - {fileID: 6422277008596452717, guid: 3a6ae8f0c0550445d8df0ce35b0d10cb, type: 3}
+  checkpointScores: 000000002c010000e8030000d0070000a00f000070170000401f000010270000983a0000204e0000a8610000
   checkpointMessages:
   - Earth
   - Moon
@@ -26934,6 +26942,37 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!1 &2068085305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2068085306}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2068085306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068085305}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 835.1792, y: 1475.0756, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2068803279
 GameObject:
   m_ObjectHideFlags: 0
@@ -27609,6 +27648,34 @@ MonoBehaviour:
   - stage: 4
     startingScore: 2000
     displayName: 16 Psyche
+    unlockCost: 60
+  - stage: 5
+    startingScore: 4000
+    displayName: Jupiter
+    unlockCost: 60
+  - stage: 6
+    startingScore: 6000
+    displayName: Saturn
+    unlockCost: 60
+  - stage: 7
+    startingScore: 8000
+    displayName: Uranus
+    unlockCost: 60
+  - stage: 8
+    startingScore: 10000
+    displayName: Neptune
+    unlockCost: 60
+  - stage: 9
+    startingScore: 15000
+    displayName: Proxima Centauri
+    unlockCost: 60
+  - stage: 10
+    startingScore: 20000
+    displayName: Alpha Centauri A
+    unlockCost: 60
+  - stage: 11
+    startingScore: 25000
+    displayName: Alpha Centauri B
     unlockCost: 60
   leftButton: {fileID: 1373602323}
   rightButton: {fileID: 350911234}
@@ -29015,3 +29082,4 @@ SceneRoots:
   - {fileID: 1142799922}
   - {fileID: 1077806942}
   - {fileID: 279206825}
+  - {fileID: 2068085306}

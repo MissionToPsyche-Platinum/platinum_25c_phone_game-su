@@ -9189,7 +9189,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2f64238f35cbdb64e9a901814eae32d7, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -9212,6 +9212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   whooshSound: {fileID: 8300000, guid: 5f01a1a9b22956b458796c6c7ed5521a, type: 3}
+  shouldSlide: 0
 --- !u!1 &696263283
 GameObject:
   m_ObjectHideFlags: 0
@@ -18025,9 +18026,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 961377958}
   - {fileID: 1110326652}
   - {fileID: 1107036284}
-  - {fileID: 961377958}
   m_Father: {fileID: 785719837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

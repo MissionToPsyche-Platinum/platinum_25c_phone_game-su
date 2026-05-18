@@ -36,6 +36,8 @@ public class IntroText : MonoBehaviour
 		myAnimator.speed = 1.5f;
 		introPanel.SetActive(false);
 		startScreenAnimator.SetTrigger("QueueSlide");
+		StartScreenAnimationHandler ssAH =  startScreenAnimator.GetComponent<StartScreenAnimationHandler>();
+		ssAH.shouldSlide = true;
 	}
 
 	public void SkipAnimation()

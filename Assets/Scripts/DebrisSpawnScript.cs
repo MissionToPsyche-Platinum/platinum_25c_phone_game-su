@@ -171,7 +171,7 @@ public class DebrisSpawnScript : MonoBehaviour
             activeAsteroids.Add(newDebris);
 
             // Size
-            float scale = spawnInfo.GetScale();
+            float scale = spawnInfo.GetScale() * 0.1f;
             newDebris.transform.localScale = Vector3.one * scale;
 
             // Speed with difficulty multiplier
@@ -243,7 +243,7 @@ public class DebrisSpawnScript : MonoBehaviour
         activeAsteroids.Add(newDebris);
 
         // Random size
-        float randomScale = Random.Range(minSize, maxSize);
+        float randomScale = Random.Range(minSize, maxSize) * 0.15f;
         newDebris.transform.localScale = Vector3.one * randomScale;
 
         // Random speed with difficulty multiplier

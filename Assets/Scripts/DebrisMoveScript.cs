@@ -117,8 +117,9 @@ public class DebrisMoveScript : MonoBehaviour
             homingAmount = 0f;
         }
 
-        velocityScaled = velocity * Time.deltaTime;
+        
         Vector3 normVelocity = velocityScaled.normalized;
+        velocityScaled = normVelocity * (velocity * Time.deltaTime).magnitude;
         Vector3 debrisToProbeVector = (probePos - transform.position).normalized;
 
         //rotate asteroid 

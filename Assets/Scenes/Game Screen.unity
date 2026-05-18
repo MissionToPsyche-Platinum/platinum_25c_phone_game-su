@@ -17177,11 +17177,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   scoreIncrement: {fileID: 631130228}
   debrisTypes:
-  - {fileID: 8420540731902456465, guid: 76cdbca5218d6f64e8d462c2619fcf97, type: 3}
-  - {fileID: 1882154104652252273, guid: 862825457e3fd4bcbbdaebb65a82fa24, type: 3}
-  - {fileID: 4854028936632854818, guid: 31c4fdb5ae7e04a4f966de34e0cdf0fc, type: 3}
-  - {fileID: 5079796556950102654, guid: 4096a806567a04c81a56662435b054f8, type: 3}
-  - {fileID: 4483468297061941246, guid: a4594d7885c744bf9ae833379b3266bf, type: 3}
+  - {fileID: 8420540731902456465, guid: 9f3323f9abe3342fe898ab0f6734738f, type: 3}
+  - {fileID: 1882154104652252273, guid: d0ca6970f7e4b4deba09c6abcbefdf42, type: 3}
+  - {fileID: 4854028936632854818, guid: 3ceffc806f0f045c29c8da581982a2d5, type: 3}
+  - {fileID: 5079796556950102654, guid: 39225018fe6cf47baa9c7624403e7f98, type: 3}
+  - {fileID: 4483468297061941246, guid: bd15f186942d745be9f7e76b03f99932, type: 3}
   spawnWeights:
   - 1
   - 1
@@ -18838,9 +18838,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::CoinSpawner
   coinPrefabs:
-  - {fileID: 6901600628307324799, guid: b8706ee15aea34c50a98f2f1cb3e799b, type: 3}
-  - {fileID: 5103829902325286908, guid: 9e144750848564d948c598b2fa5d7fb6, type: 3}
-  - {fileID: 1847062795176755155, guid: 5134d75f029e34d3fa362ed5dedffa9a, type: 3}
+  - {fileID: 6901600628307324799, guid: 6d9224183e9994ade9e717dc37740d7b, type: 3}
+  - {fileID: 5103829902325286908, guid: 7a805bb1dee374d699e65c4268d5136e, type: 3}
+  - {fileID: 1847062795176755155, guid: d4213035861b64f61a4ed434df26feb9, type: 3}
   coinValues: 010000000200000003000000
   coinSpawnWeights: 010000000100000001000000
   minSpawnInterval: 3
@@ -27652,31 +27652,31 @@ MonoBehaviour:
   - stage: 5
     startingScore: 4000
     displayName: Jupiter
-    unlockCost: 60
+    unlockCost: 80
   - stage: 6
     startingScore: 6000
     displayName: Saturn
-    unlockCost: 60
+    unlockCost: 100
   - stage: 7
     startingScore: 8000
     displayName: Uranus
-    unlockCost: 60
+    unlockCost: 120
   - stage: 8
     startingScore: 10000
     displayName: Neptune
-    unlockCost: 60
+    unlockCost: 140
   - stage: 9
     startingScore: 15000
     displayName: Proxima Centauri
-    unlockCost: 60
+    unlockCost: 160
   - stage: 10
     startingScore: 20000
     displayName: Alpha Centauri A
-    unlockCost: 60
+    unlockCost: 180
   - stage: 11
     startingScore: 25000
     displayName: Alpha Centauri B
-    unlockCost: 60
+    unlockCost: 200
   leftButton: {fileID: 1373602323}
   rightButton: {fileID: 350911234}
   displayName: {fileID: 645451444}

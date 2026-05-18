@@ -9,6 +9,8 @@ public class IntroText : MonoBehaviour
 	[SerializeField] private Animator startScreenAnimator;
 	[SerializeField] private GameObject introPanel;
 
+	private bool skippedClicked = false;
+
 	private void Awake()
 	{
 		myAnimator = GetComponent<Animator>();
@@ -16,6 +18,11 @@ public class IntroText : MonoBehaviour
 
 	private void Update()
 	{
+		if (skippedClicked)
+		{
+			return;
+		}
+		
 		bool isHolding =
 			Mouse.current != null && Mouse.current.leftButton.isPressed
 			||
@@ -29,5 +36,12 @@ public class IntroText : MonoBehaviour
 		myAnimator.speed = 1.5f;
 		introPanel.SetActive(false);
 		startScreenAnimator.SetTrigger("QueueSlide");
+	}
+
+	public void SkipAnimation()
+	{
+		Debug.Log("button pressed");
+		skippedClicked = true;
+		myAnimator.speed = 100f;
 	}
 }

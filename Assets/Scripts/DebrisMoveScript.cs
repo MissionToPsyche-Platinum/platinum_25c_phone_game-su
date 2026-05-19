@@ -274,6 +274,6 @@ public class DebrisMoveScript : MonoBehaviour
     }
 
     private void OnCheckpointReached(object sender, EventArgs e){
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 }

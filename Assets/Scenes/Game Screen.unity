@@ -3953,6 +3953,7 @@ GameObject:
   - component: {fileID: 275500336}
   - component: {fileID: 275500337}
   - component: {fileID: 275500338}
+  - component: {fileID: 275500339}
   m_Layer: 5
   m_Name: ProgressBar
   m_TagString: Untagged
@@ -4048,6 +4049,8 @@ MonoBehaviour:
   checkpointSpawnScript: {fileID: 1420386463}
   progressBar: {fileID: 275500336}
   scoreIncrement: {fileID: 631130230}
+  crazySpeed: 1
+  noMoreCheckpointsValue: 99999999
 --- !u!114 &275500338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4060,6 +4063,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1e4882f38b11e4cabe6a96be324966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::HorizontalMirrorUI
+--- !u!95 &275500339
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275500334}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c41c14a760f8d1b4d886ad4167e92f69, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &279206823
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,6 @@
-using System;
-using System.Linq;
+using System.Text;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverPanelController : MonoBehaviour
@@ -12,6 +11,11 @@ public class GameOverPanelController : MonoBehaviour
     [SerializeField] private GameObject gameScreenPanel;
     [SerializeField] private GameObject shopPanel;
 
+    [SerializeField] private TMP_Text missionTitleText;
+    [SerializeField] private TMP_Text missionReportText;
+    [SerializeField] private DistanceTracker distanceTracker;
+    [SerializeField] private ScoreIncrement scoreIncrement;
+
     private void Awake()
     {
         if (restartGameButton != null)
@@ -19,6 +23,67 @@ public class GameOverPanelController : MonoBehaviour
 
         if (shopButton != null)
             shopButton.onClick.AddListener(ShopButtonClicked);
+    }
+
+    // Fires every time the panel is shown (ProbeHealth re-activates it on death).
+    private void OnEnable()
+    {
+        PopulateReport();
+    }
+
+    // Falls back to lookups so the report still works even if the scene's
+    // inspector references were not wired up.
+    private void ResolveReferences()
+    {
+        if (missionReportText == null)
+        {
+            Transform t = transform.Find("ScoreValue");
+            if (t != null)
+                missionReportText = t.GetComponent<TMP_Text>();
+        }
+
+        if (missionTitleText == null)
+        {
+            Transform t = transform.Find("MissionTerminatedTitle");
+            if (t != null)
+                missionTitleText = t.GetComponent<TMP_Text>();
+        }
+
+        if (distanceTracker == null)
+            distanceTracker = FindFirstObjectByType<DistanceTracker>();
+
+        if (scoreIncrement == null)
+            scoreIncrement = FindFirstObjectByType<ScoreIncrement>();
+    }
+
+    private void PopulateReport()
+    {
+        ResolveReferences();
+
+        if (missionTitleText != null)
+            missionTitleText.text = "MISSION TERMINATED";
+
+        if (missionReportText == null)
+        {
+            Debug.LogWarning("GameOverPanelController: missionReportText is not assigned " +
+                             "and no 'ScoreValue' child was found; Mission Report cannot be shown.");
+            return;
+        }
+
+        double distanceKm = distanceTracker != null ? distanceTracker.DistanceKm : 0.0;
+        int finalScore = scoreIncrement != null ? scoreIncrement.FinalScore : 0;
+        int coinsCollected = StatsManager.instance != null ? StatsManager.instance.coinsCollected : 0;
+        int asteroidsDodged = StatsManager.instance != null ? StatsManager.instance.asteroidsDodged : 0;
+
+        StringBuilder report = new StringBuilder();
+        report.AppendLine("MISSION REPORT");
+        report.AppendLine();
+        report.AppendLine($"Distance Traveled:   {distanceKm:N0} km");
+        report.AppendLine($"Final Score:   {finalScore:N0}");
+        report.AppendLine($"Coins Collected:   {coinsCollected}");
+        report.Append($"Asteroids Dodged:   {asteroidsDodged}");
+
+        missionReportText.text = report.ToString();
     }
 
     public void RestartGameButtonClicked()

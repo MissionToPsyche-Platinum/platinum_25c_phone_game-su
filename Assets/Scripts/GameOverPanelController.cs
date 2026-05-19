@@ -10,11 +10,14 @@ public class GameOverPanelController : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameScreenPanel;
     [SerializeField] private GameObject shopPanel;
+    [SerializeField] private GameObject statsScreenPanel;
 
     [SerializeField] private TMP_Text missionTitleText;
     [SerializeField] private TMP_Text missionReportText;
     [SerializeField] private DistanceTracker distanceTracker;
     [SerializeField] private ScoreIncrement scoreIncrement;
+
+    private StatsScreenController statsScreenController;
 
     private void Awake()
     {
@@ -23,6 +26,7 @@ public class GameOverPanelController : MonoBehaviour
 
         if (shopButton != null)
             shopButton.onClick.AddListener(ShopButtonClicked);
+        statsScreenController = statsScreenPanel.GetComponent<StatsScreenController>();
     }
 
     // Fires every time the panel is shown (ProbeHealth re-activates it on death).
@@ -71,7 +75,9 @@ public class GameOverPanelController : MonoBehaviour
         }
 
         double distanceKm = distanceTracker != null ? distanceTracker.DistanceKm : 0.0;
+        statsScreenController.updateTotalDistance((float)(distanceKm / 149597870.691)); //convert to AU
         int finalScore = scoreIncrement != null ? scoreIncrement.FinalScore : 0;
+        statsScreenController.updateHighScore(finalScore);
         int coinsCollected = StatsManager.instance != null ? StatsManager.instance.coinsCollected : 0;
         int asteroidsDodged = StatsManager.instance != null ? StatsManager.instance.asteroidsDodged : 0;
 

@@ -8,10 +8,12 @@ public class ProbeCollisionHandler : MonoBehaviour
     private ProbeHealth healthSystem;
     private PowerUpBehavior powerUpSystem;
     private CameraShake cameraShakeScript;
+    private StatsScreenController statsScreenController;
     private bool hasDisplayedAsteroidPopup;
 
     [SerializeField] private AudioClip asteroidCollisionSoundClip;
     [SerializeField] private AudioClip dodgeSoundClip;
+    [SerializeField] private GameObject statsScreenPanel;
 
     private Coroutine blinkCoroutine;
     private SpriteRenderer probeSprite;
@@ -29,6 +31,7 @@ public class ProbeCollisionHandler : MonoBehaviour
         cameraShakeScript = GetComponent<CameraShake>();
         probeSprite = GetComponent<SpriteRenderer>();
         probeController = GetComponent<ProbeController>();
+        statsScreenController = statsScreenPanel.GetComponent<StatsScreenController>();
         hasDisplayedAsteroidPopup = false;
     }
 
@@ -101,7 +104,9 @@ public class ProbeCollisionHandler : MonoBehaviour
         if (collision.gameObject.CompareTag("Coin"))
         {
             CoinBehavior coinScript = collision.gameObject.GetComponent<CoinBehavior>();
-            GameStateManager.Instance.AddCoins(coinScript.collect());
+            int numCoins = coinScript.collect();
+            GameStateManager.Instance.AddCoins(numCoins);
+            statsScreenController.updateCoinsCollected(numCoins);
             Destroy(collision.gameObject);
         }
 

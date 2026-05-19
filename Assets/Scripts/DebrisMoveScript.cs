@@ -35,6 +35,8 @@ public class DebrisMoveScript : MonoBehaviour
     CheckpointSpawnScript checkpointSpawnScript;
     DebrisSpawnScript debrisSpawnScript;
 
+    StatsScreenController statsScreenController;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,6 +51,9 @@ public class DebrisMoveScript : MonoBehaviour
 
         GameObject debrisSpawn = GameObject.Find("DebrisSpawner");
         debrisSpawnScript = debrisSpawn.GetComponent<DebrisSpawnScript>();
+
+        GameObject statsScreen = GameObject.Find("Canvas/StatsScreenPanel");
+        statsScreenController = statsScreen.GetComponent<StatsScreenController>();
     }
 
     void OnDestroy(){
@@ -100,6 +105,7 @@ public class DebrisMoveScript : MonoBehaviour
         if (hasAppeared && (screenPos.y < -0.1f || screenPos.y > 1.1f || screenPos.x < -0.1f || screenPos.x > 1.1f)) // Slightly off screen
         {
             Destroy(gameObject);
+            statsScreenController.updateAsteroidsAvoided(1);
         }
     }
 

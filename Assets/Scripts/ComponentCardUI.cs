@@ -8,6 +8,7 @@ public class ComponentCardUI : MonoBehaviour
     [SerializeField] private Button actionButton;
     [SerializeField] private Text   buttonLabel;
     [SerializeField] private Image  cardBackground;
+    [SerializeField] private GameObject  coinIcon;
 
     [Header("Card Colors")]
     [SerializeField] private Color lockedColor   = new Color(0.40f, 0.40f, 0.40f, 1f);
@@ -35,18 +36,21 @@ public class ComponentCardUI : MonoBehaviour
 
         if (!unlocked)
         {
-            buttonLabel.text          = "Unlock " + cost + " coins";
+            coinIcon.SetActive(true);
+            buttonLabel.text          = "" + cost;
             actionButton.interactable = canAfford;
             if (cardBackground != null) cardBackground.color = lockedColor;
         }
         else if (equipped)
         {
+            coinIcon.SetActive(false);
             buttonLabel.text          = "Equipped";
             actionButton.interactable = true;
             if (cardBackground != null) cardBackground.color = equippedColor;
         }
         else
         {
+            coinIcon.SetActive(false);
             buttonLabel.text          = "Equip";
             actionButton.interactable = true;
             if (cardBackground != null) cardBackground.color = unlockedColor;

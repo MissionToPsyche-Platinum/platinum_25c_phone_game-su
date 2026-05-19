@@ -56,10 +56,6 @@ public class ProbeHealth : MonoBehaviour
     {
         if (GameStateManager.Instance != null)
         {
-            
-            int calculatedMaxHealth = 3 + GameStateManager.Instance.maxHealthLevel;
-            GameStateManager.Instance.startingHealth = calculatedMaxHealth;
-
             maxHealth = GameStateManager.Instance.startingHealth;
             currentHealth = maxHealth;
         }

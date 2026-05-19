@@ -90,6 +90,7 @@ public class GameStateManager : MonoBehaviour
 
     public void EnterPlayingState()
     {
+        startingHealth = 3 + ProbeUpgradeManager.Instance.GetHealthBonus();
         Time.timeScale = 1f;
         OnStartPlaying?.Invoke(this, new GameStateChangeEventArgs()
         {

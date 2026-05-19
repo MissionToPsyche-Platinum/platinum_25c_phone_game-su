@@ -10,12 +10,14 @@ public class StartScreenButtonsController : MonoBehaviour
     [SerializeField] private GameObject shopScreenPanel;
     [SerializeField] private GameObject settingsScreenPanel;
     [SerializeField] private GameObject statsScreenPanel;
+    [SerializeField] private GameObject codexScreenPanel;
 
     [Header(("Buttons"))]
     [SerializeField] private Button startGameButton;
     [SerializeField] private Button shopScreenButton;
     [SerializeField] private Button statsScreenButton;
     [SerializeField] private Button settingsScreenButton;
+    [SerializeField] private Button codexScreenButton;
     [SerializeField] private Button disclaimerButton;
 
     [Header("Other")]
@@ -36,6 +38,7 @@ public class StartScreenButtonsController : MonoBehaviour
         statsScreenButton.onClick.AddListener(StatsScreenButtonAction);
         settingsScreenButton.onClick.AddListener(SettingsScreenButtonAction);
         disclaimerButton.onClick.AddListener(DisclaimerButtonAction);
+        codexScreenButton.onClick.AddListener(CodexScreenButtonAction);
 
         // Debug button is hidden until unlocked
         if (debugButton != null)
@@ -95,6 +98,13 @@ public class StartScreenButtonsController : MonoBehaviour
         SettingsScreenController controller = settingsScreenPanel.GetComponent<SettingsScreenController>();
         controller.SetPreviousPanel(startScreenPanel);
         MenuNavigationButtons.Instance.SwitchPanels(startScreenPanel, settingsScreenPanel);
+    }
+
+    private void CodexScreenButtonAction(){
+        MenuNavigationButtons.Instance.PlayButtonSound();
+        SettingsScreenController controller = settingsScreenPanel.GetComponent<SettingsScreenController>();
+        controller.SetPreviousPanel(startScreenPanel);
+        MenuNavigationButtons.Instance.SwitchPanels(startScreenPanel, codexScreenPanel);
     }
 
     private void DisclaimerButtonAction()

@@ -4,14 +4,10 @@ using UnityEngine.UI;
 public class TabManager : MonoBehaviour
 {
     [Header(("Buttons"))]
-    [SerializeField] private Button probeButton;
-    [SerializeField] private Button componentButton;
-    [SerializeField] private Button powerUpButton;
+    [SerializeField] private Button[] buttons;
+    [SerializeField] private Text[] buttonTexts;
 
-    [SerializeField] private Text probeText;
-    [SerializeField] private Text componentText;
-    [SerializeField] private Text powerUpText;
-
+    [Header(("Colors"))]
     [SerializeField] private Color selectedColor;
     [SerializeField] private Color inactiveColor;
 
@@ -20,9 +16,10 @@ public class TabManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        probeButton.onClick.AddListener(SwitchToProbe);
-        componentButton.onClick.AddListener(SwitchToComponent);
-        powerUpButton.onClick.AddListener(SwitchToPowerUp);
+        for(int i = 0; i < buttons.Length; i++){
+            int index = i;
+            buttons[i].onClick.AddListener(() => switchToTab(index));
+        }
         currentTab = 0;
         SelectTab(0);
     }
@@ -33,28 +30,16 @@ public class TabManager : MonoBehaviour
         
     }
 
-    public void SwitchToProbe()
-    {
-        SelectTab(0);
-        probeText.color = selectedColor;
-        componentText.color = inactiveColor;
-        powerUpText.color = inactiveColor;
-    }
-
-    public void SwitchToComponent()
-    {
-        SelectTab(1);
-        probeText.color = inactiveColor;
-        componentText.color = selectedColor;
-        powerUpText.color = inactiveColor;
-    }
-
-    public void SwitchToPowerUp()
-    {
-        SelectTab(2);
-        probeText.color = inactiveColor;
-        componentText.color = inactiveColor;
-        powerUpText.color = selectedColor;
+    public void switchToTab(int index){
+        SelectTab(index);
+        for(int i = 0; i < buttons.Length; i++){
+            if(i == index){
+                buttonTexts[i].color = selectedColor;
+            }
+            else {
+                buttonTexts[i].color = inactiveColor;
+            }
+        }
     }
 
     public void SelectTab(int tab)

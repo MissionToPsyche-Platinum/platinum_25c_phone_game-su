@@ -14,6 +14,7 @@ public class IntroText : MonoBehaviour
 	private void Awake()
 	{
 		myAnimator = GetComponent<Animator>();
+		startScreenAnimator.SetTrigger("HidePanel");
 	}
 
 	private void Update()
@@ -33,11 +34,12 @@ public class IntroText : MonoBehaviour
 	
 	public void EndScroll()
 	{
+		Debug.Log("End Scroll called");
 		myAnimator.speed = 1.5f;
 		introPanel.SetActive(false);
 		startScreenAnimator.SetTrigger("QueueSlide");
 		StartScreenAnimationHandler ssAH =  startScreenAnimator.GetComponent<StartScreenAnimationHandler>();
-		ssAH.shouldSlide = true;
+		ssAH.shouldSkipAnimation = true;
 	}
 
 	public void SkipAnimation()

@@ -4,7 +4,7 @@ using UnityEngine;
 public class StartScreenAnimationHandler : MonoBehaviour
 {
 	[SerializeField] private AudioClip whooshSound;
-	public bool shouldSlide = false;
+	public bool shouldSkipAnimation = false;
 
 	private Animator myAnimator;
 
@@ -20,12 +20,12 @@ public class StartScreenAnimationHandler : MonoBehaviour
 
 	private void OnEnable()
 	{
-		Debug.Log("OnEnable heard");
-		if (shouldSlide)
+		// Debug.Log("OnEnable heard");
+		if (shouldSkipAnimation)
 		{
-			Debug.Log("OnEnable heard and shouldSlide = true");
-			Debug.Log(myAnimator.speed);
-			myAnimator.SetTrigger("QueueSlide");
+			// Debug.Log("OnEnable heard and shouldSlide = true");
+			// Debug.Log(myAnimator.speed);
+			// myAnimator.SetTrigger("SkipSlide");
 		}
 	}
 }

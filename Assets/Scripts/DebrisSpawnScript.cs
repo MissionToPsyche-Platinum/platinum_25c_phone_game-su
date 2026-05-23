@@ -22,8 +22,11 @@ public class DebrisSpawnScript : MonoBehaviour
     public float minSize = 0.3f;
     public float maxSize = 1f;
 
-    private float gameTime = 0f; 
+    private float gameTime = 0f;
     private float difficultyMultiplier = 1f;
+
+    private float spawnTimer = 0f;
+    private float spawnInterval = 0.15f;
 
     private List<GameObject> activeAsteroids = new List<GameObject>();
 
@@ -84,20 +87,24 @@ public class DebrisSpawnScript : MonoBehaviour
     {
         if (spawnerActive && GameStateManager.Instance.currentGameState == GameStateManager.GameState.Playing)
         {
-
             if(gameTime < difficultyCutoff){
                 gameTime += Time.deltaTime;
                 difficultyMultiplier = gameTime / difficultyCutoff;
             }
 
-            float spawnTypeSeed = Random.Range(0f, 1f);
-            if(spawnTypeSeed <= tileSpawnProbability || tileController.UsingTestMode())
+            spawnTimer += Time.deltaTime;
+            if (spawnTimer >= spawnInterval)
             {
-                SpawnTile();
-            }
-            else
-            {
-                SpawnDebris();
+                spawnTimer = 0f;
+                float spawnTypeSeed = Random.Range(0f, 1f);
+                if(spawnTypeSeed <= tileSpawnProbability || tileController.UsingTestMode())
+                {
+                    SpawnTile();
+                }
+                else
+                {
+                    SpawnDebris();
+                }
             }
         }
     }

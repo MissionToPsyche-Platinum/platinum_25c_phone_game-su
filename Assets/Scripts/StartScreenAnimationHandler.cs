@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class StartScreenAnimationHandler : MonoBehaviour
@@ -20,12 +21,15 @@ public class StartScreenAnimationHandler : MonoBehaviour
 
 	private void OnEnable()
 	{
-		// Debug.Log("OnEnable heard");
 		if (shouldSkipAnimation)
 		{
-			// Debug.Log("OnEnable heard and shouldSlide = true");
-			// Debug.Log(myAnimator.speed);
-			// myAnimator.SetTrigger("SkipSlide");
+			StartCoroutine(SkipToIdle());
 		}
+	}
+
+	private IEnumerator SkipToIdle()
+	{
+		yield return null;
+		myAnimator.Play("StartPanelIdle", 0, 0f);
 	}
 }

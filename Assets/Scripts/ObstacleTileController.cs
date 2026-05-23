@@ -643,20 +643,16 @@ public class ObstacleTileController : MonoBehaviour
         List<DebrisSpawnInfo> spawnInfos = new List<DebrisSpawnInfo>();
         while(!validTileFound){
             float seed = Random.Range(0f, 1f);
-            int chosenTileSet = -1;
-            float currTotal = setSpawnProbabilities[0];
-            for(int i = 0; i < setSpawnProbabilities.Length - 2; i++)
+            int chosenTileSet = setSpawnProbabilities.Length - 1;
+            float currTotal = 0f;
+            for(int i = 0; i < setSpawnProbabilities.Length; i++)
             {
+                currTotal += setSpawnProbabilities[i];
                 if(seed < currTotal)
                 {
                     chosenTileSet = i;
                     break;
                 }
-                currTotal += setSpawnProbabilities[i + 1];
-            }
-            if(chosenTileSet == -1)
-            {
-                chosenTileSet = setSpawnProbabilities.Length - 2;
             }
 
             if(tileTestMode)
@@ -664,11 +660,7 @@ public class ObstacleTileController : MonoBehaviour
                 chosenTileSet = 3;
             }
 
-            // Debug.Log(obstacleTiles[chosenTileSet].Count);
             int chosenTile = Random.Range(0, obstacleTiles[chosenTileSet].Count);
-    
-            Debug.Log(chosenTileSet);
-            Debug.Log(chosenTile);
             spawnInfos = obstacleTiles[chosenTileSet][chosenTile];
 
 

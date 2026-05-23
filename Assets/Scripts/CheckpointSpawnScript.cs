@@ -193,7 +193,7 @@ public class CheckpointSpawnScript : MonoBehaviour
             }
             else
             {
-                ShowMessage(nextCheckpoint);
+                ShowMessage(arrivedIndex);
             }
         }
     }
@@ -243,6 +243,19 @@ public class CheckpointSpawnScript : MonoBehaviour
             {
                 intro.OnDismissed += () => resumeMovement(arrivedIndex);
             }
+        }
+        else
+        {
+            StartCoroutine(AutoResumeAfterMessage());
+        }
+    }
+
+    private IEnumerator AutoResumeAfterMessage()
+    {
+        yield return new WaitForSeconds(2.5f);
+        if (GameStateManager.Instance.currentGameState == GameStateManager.GameState.Playing)
+        {
+            resumeMovement(nextCheckpoint - 1);
         }
     }
 }

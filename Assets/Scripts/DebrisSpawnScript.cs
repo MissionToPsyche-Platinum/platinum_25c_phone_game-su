@@ -37,9 +37,9 @@ public class DebrisSpawnScript : MonoBehaviour
 
     float minSpeed = 3f;
     float maxSpeed = 10f;
-    float maxGap = 10f;
+    float maxGap = 5f;
     float minGap = 5f;
-    float difficultyCutoff = 600f;                  //time when difficulty stops increasing
+    float difficultyCutoff = 5000;                  //score when difficulty stops increasing
 
     private float tileSpawnProbability = 0.5f;      //chance of premade tile spawning instead of random spawn
     private float gapMultiplier = 1f;    //component modifier: >1 means longer interval (fewer spawns)
@@ -92,9 +92,9 @@ public class DebrisSpawnScript : MonoBehaviour
     {
         if (spawnerActive && GameStateManager.Instance.currentGameState == GameStateManager.GameState.Playing)
         {
-            if(gameTime < difficultyCutoff){
-                gameTime += Time.deltaTime;
-                difficultyMultiplier = gameTime / difficultyCutoff;
+            float score = scoreSystem.GetCurrentScore();
+            if(score < difficultyCutoff){
+                difficultyMultiplier = score / difficultyCutoff;
             }
 
             spawnTimer += Time.deltaTime;

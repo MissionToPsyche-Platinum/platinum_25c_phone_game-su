@@ -34,6 +34,7 @@ public class DebrisMoveScript : MonoBehaviour
 
     CheckpointSpawnScript checkpointSpawnScript;
     DebrisSpawnScript debrisSpawnScript;
+    PowerUpBehavior powerUpBehavior;
 
     StatsScreenController statsScreenController;
 
@@ -52,13 +53,23 @@ public class DebrisMoveScript : MonoBehaviour
         GameObject debrisSpawn = GameObject.Find("DebrisSpawner");
         debrisSpawnScript = debrisSpawn.GetComponent<DebrisSpawnScript>();
 
-        GameObject statsScreen = GameObject.Find("Canvas/StatsScreenPanel");
-        statsScreenController = statsScreen.GetComponent<StatsScreenController>();
+        GameObject canvas = GameObject.Find("Canvas");
+        statsScreenController = canvas.GetComponentInChildren<StatsScreenController>(true);
+
+
+        GameObject probe = GameObject.Find("Probe");
+        powerUpBehavior = probe.GetComponent<PowerUpBehavior>();
+        powerUpBehavior.OnShockwaveActive += OnShockwaveActive;
     }
 
     void OnDestroy(){
         checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
+        powerUpBehavior.OnShockwaveActive -= OnShockwaveActive;
         if (teleportGhost != null) Destroy(teleportGhost);
+    }
+
+    void OnShockwaveActive(object sender, EventArgs e){
+        Destroy(gameObject);
     }
 
     // Update is called once per frame

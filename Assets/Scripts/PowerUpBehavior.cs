@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PowerUpBehavior : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class PowerUpBehavior : MonoBehaviour
     private int coinMultiplier = 2;
     private int ultimateProgress = 0;
     private float ultimateCoinSpawnIncrease = 20f;
+
+    public event EventHandler<EventArgs> OnShockwaveActive;
 
     private int[] powerUpDurations;
 
@@ -69,6 +72,7 @@ public class PowerUpBehavior : MonoBehaviour
                     break;
                 case 3: //Star
                     debrisSpawnSystem.DisableSpawning();
+                    OnShockwaveActive?.Invoke(this, EventArgs.Empty);
                     if (starPopupPrefab != null) PopupManager.Instance.DisplayCenteredPopup(starPopupPrefab, 2f);
                     break;
                 default:

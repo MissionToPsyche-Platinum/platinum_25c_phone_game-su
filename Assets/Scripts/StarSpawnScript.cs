@@ -20,6 +20,9 @@ public class StarSpawnScript : MonoBehaviour
 
     [SerializeField] private Transform starParent;
 
+    private float screenW;
+    private float screenH;
+
     private bool spawnerActive;
 
     CheckpointSpawnScript checkpointSpawnScript;
@@ -27,6 +30,8 @@ public class StarSpawnScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        screenW = Camera.main.orthographicSize * 2f * Camera.main.aspect;
+        screenH = Camera.main.orthographicSize * 2f;
         if (starParent == null)
         {
             GameObject container = new GameObject("BackgroundStars");
@@ -55,15 +60,15 @@ public class StarSpawnScript : MonoBehaviour
         }
 
         int rows = Mathf.CeilToInt((float)initialSpawnCount / gridColumns);
-        float cellW = 4f / gridColumns;
-        float cellH = 10f / rows;
+        float cellW = screenW / gridColumns;
+        float cellH = screenH / rows;
         for (int i = 0; i < initialSpawnCount; i++)
         {
             int col = i % gridColumns;
             int row = i / gridColumns;
             Vector3 spawnPos = new Vector3(
-                -2f + cellW * col + UnityEngine.Random.Range(0f, cellW),
-                -5f + cellH * row + UnityEngine.Random.Range(0f, cellH),
+                -screenW / 2f + cellW * col + UnityEngine.Random.Range(0f, cellW),
+                -screenH / 2f + cellH * row + UnityEngine.Random.Range(0f, cellH),
                 1f
             );
             SpawnStar(spawnPos);
@@ -87,10 +92,10 @@ public class StarSpawnScript : MonoBehaviour
 
             if (timer >= nextSpawnTime)
             {
-                float cellW = 4f / gridColumns;
+                float cellW = screenW / gridColumns;
                 Vector3 spawnPos = new Vector3(
-                    -2f + cellW * nextColumn + UnityEngine.Random.Range(0f, cellW),
-                    5f,
+                    -screenW / 2f + cellW * nextColumn + UnityEngine.Random.Range(0f, cellW),
+                    screenH / 2f,
                     1f
                 );
                 nextColumn = (nextColumn + 1) % gridColumns;

@@ -21744,6 +21744,7 @@ MonoBehaviour:
   - 1
   minSize: 0.2
   maxSize: 0.6
+  screenW: 5.63
 --- !u!4 &1384828552
 Transform:
   m_ObjectHideFlags: 0
@@ -32040,6 +32041,8 @@ MonoBehaviour:
   initialSpawnCount: 50
   gridColumns: 6
   starParent: {fileID: 0}
+  screenW: 5.63
+  screenH: 10
 --- !u!4 &1981466090
 Transform:
   m_ObjectHideFlags: 0

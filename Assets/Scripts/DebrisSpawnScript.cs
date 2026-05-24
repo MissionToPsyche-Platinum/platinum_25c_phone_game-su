@@ -36,9 +36,11 @@ public class DebrisSpawnScript : MonoBehaviour
     int currLane = 0;
 
     float minSpeed = 3f;
-    float maxSpeed = 10f;
+    float maxSpeed = 5f;
     float maxGap = 5f;
-    float minGap = 5f;
+    float minGap = 3f;
+    float minHomingAmount = 0.005f;
+    float maxHomingAmount = 0.02f;
     float difficultyCutoff = 5000;                  //score when difficulty stops increasing
 
     private float tileSpawnProbability = 0.5f;      //chance of premade tile spawning instead of random spawn
@@ -93,9 +95,7 @@ public class DebrisSpawnScript : MonoBehaviour
         if (spawnerActive && GameStateManager.Instance.currentGameState == GameStateManager.GameState.Playing)
         {
             float score = scoreSystem.GetCurrentScore();
-            if(score < difficultyCutoff){
-                difficultyMultiplier = score / difficultyCutoff;
-            }
+            difficultyMultiplier = score < difficultyCutoff ? score / difficultyCutoff : 1f;
 
             spawnTimer += Time.deltaTime;
             if (spawnTimer >= spawnInterval)
@@ -179,6 +179,9 @@ public class DebrisSpawnScript : MonoBehaviour
     
             // Spawn the debris
             GameObject newDebris = Instantiate(selectedDebris, spawnPos, Quaternion.identity);
+            if(debrisType == 1){
+
+            }
             OnDebrisSpawned?.Invoke(this, EventArgs.Empty);
             activeAsteroids.Add(newDebris);
 
@@ -190,6 +193,9 @@ public class DebrisSpawnScript : MonoBehaviour
             DebrisMoveScript script = newDebris.GetComponent<DebrisMoveScript>();
             if (script != null)
             {
+                if(debrisType == 1){
+                    script.homingAmount = Mathf.Lerp(minHomingAmount, maxHomingAmount, difficultyMultiplier);
+                }
                 script.velocity = Mathf.Lerp(minSpeed, maxSpeed, difficultyMultiplier) * Vector3.down; // 1% faster per second
                 script.rotationSpeed = Random.Range(0.05f, 0.4f);
                 script.type = debrisType;
@@ -226,8 +232,7 @@ public class DebrisSpawnScript : MonoBehaviour
             }
         }
 
-        Debug.Log("Lane " + availableLanes[currLane]);
-        Debug.Log("Pos " + laneXPos[availableLanes[currLane]]);
+        Debug.Log(difficultyMultiplier);
         currLane++;
 
         updateSpawnProbabilities();
@@ -262,6 +267,9 @@ public class DebrisSpawnScript : MonoBehaviour
         DebrisMoveScript script = newDebris.GetComponent<DebrisMoveScript>();
         if (script != null)
         {
+            if(debrisType == 1){
+                script.homingAmount = Mathf.Lerp(minHomingAmount, maxHomingAmount, difficultyMultiplier);
+            }
             script.velocity = Mathf.Lerp(minSpeed, maxSpeed, difficultyMultiplier) * Vector3.down; // 1% faster per second
             script.rotationSpeed = Random.Range(0.05f, 0.4f);
             script.type = debrisType;

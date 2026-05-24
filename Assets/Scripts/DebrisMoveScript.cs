@@ -25,7 +25,7 @@ public class DebrisMoveScript : MonoBehaviour
     [SerializeField] private GameObject[] explodingFragments;
     [SerializeField] private int numFragments;
 
-    [SerializeField] private float homingAmount = 0.5f;
+    public float homingAmount = 0.5f;
     [SerializeField] private float fragmentSpreadSpeed = 2f;
 
     private Vector3 velocityScaled;

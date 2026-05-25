@@ -16,6 +16,11 @@ public class CoinSpawner : MonoBehaviour
     public float minX = -2.1f;             
     public float maxX = 2.1f;              
 
+    private float _baseMinX;
+    private float _baseMaxX;
+    private float _baseMinY;
+    private float _baseMaxY;
+
     private float timer = 0f;
     private float nextSpawnTime;
     private float spawnRateMultiplier = 1f;          // set by power-ups (e.g. Hex ultimate)
@@ -32,6 +37,11 @@ public class CoinSpawner : MonoBehaviour
 
     void Start()
     {
+        _baseMinX = minX;
+        _baseMaxX = maxX;
+        _baseMinY = minY;
+        _baseMaxY = maxY;
+
         if(coinPrefabs.Length != coinSpawnWeights.Length){
             throw new Exception("Number of power ups and power up spawn weights do not match.");
         }
@@ -112,6 +122,11 @@ public class CoinSpawner : MonoBehaviour
 
     private void OnStartPlaying(object sender, EventArgs e)
     {
+        float visionMult = ComponentManager.Instance != null ? ComponentManager.Instance.GetVisionMultiplier() : 1f;
+        minX = _baseMinX * visionMult;
+        maxX = _baseMaxX * visionMult;
+        minY = _baseMinY * visionMult;
+        maxY = _baseMaxY * visionMult;
         this.gameObject.SetActive(true);
     }
     

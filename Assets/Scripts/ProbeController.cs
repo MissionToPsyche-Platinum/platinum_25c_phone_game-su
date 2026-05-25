@@ -71,15 +71,6 @@ public class ProbeController : MonoBehaviour
 
         maxAllowedPosition.x = maxScreen.x - playerHalfWidth - extraPadding;
         maxAllowedPosition.y = maxScreen.y - playerHalfHeight - extraPadding;
-
-        // Navigation Camera: expand movement bounds outward from center
-        if (_visionMultiplier != 1f)
-        {
-            float cy = (minAllowedPosition.y + maxAllowedPosition.y) * 0.5f;
-            float hh = (maxAllowedPosition.y - minAllowedPosition.y) * 0.5f;
-            minAllowedPosition.y = cy - hh * _visionMultiplier;
-            maxAllowedPosition.y = cy + hh * _visionMultiplier;
-        }
     }
 
     private void OnDestroy()

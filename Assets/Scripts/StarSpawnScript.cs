@@ -22,6 +22,8 @@ public class StarSpawnScript : MonoBehaviour
 
     private float screenW;
     private float screenH;
+    private float _baseScreenW;
+    private float _baseScreenH;
 
     private bool spawnerActive;
 
@@ -30,8 +32,10 @@ public class StarSpawnScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        screenW = Camera.main.orthographicSize * 2f * Camera.main.aspect;
-        screenH = Camera.main.orthographicSize * 2f;
+        _baseScreenW = Camera.main.orthographicSize * 2f * Camera.main.aspect;
+        _baseScreenH = Camera.main.orthographicSize * 2f;
+        screenW = _baseScreenW;
+        screenH = _baseScreenH;
         if (starParent == null)
         {
             GameObject container = new GameObject("BackgroundStars");
@@ -146,6 +150,9 @@ public class StarSpawnScript : MonoBehaviour
 
     private void OnStartPlaying(object sender, EventArgs e)
     {
+        float visionMult = ComponentManager.Instance != null ? ComponentManager.Instance.GetVisionMultiplier() : 1f;
+        screenW = _baseScreenW * visionMult;
+        screenH = _baseScreenH * visionMult;
         this.gameObject.SetActive(true);
     }
 

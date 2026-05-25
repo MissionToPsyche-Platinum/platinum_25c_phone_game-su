@@ -872,6 +872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2141941827612041596}
   - component: {fileID: -6578269716183658561}
+  - component: {fileID: 6909229717470122864}
   m_Layer: 0
   m_Name: Cassiopeia
   m_TagString: Untagged
@@ -888,7 +889,7 @@ Transform:
   m_GameObject: {fileID: 8136905691502780287}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.17287798, w: 0.9849433}
-  m_LocalPosition: {x: 2.429, y: 3.162, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -912,6 +913,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e091dde7ea4ffb4e9f4074d25b76354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::DestroyOnGameQuit
+--- !u!114 &6909229717470122864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136905691502780287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb192cf4356e42e8b7b89def7106103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::StarMoveScript
+  velocity: {x: 0, y: -0.3, z: 0}
+  alphaFlashSpeed: 0
+  maxAlpha: 1
+  minAlpha: 0
+  isLandmark: 0
 --- !u!1 &8824287234620298455
 GameObject:
   m_ObjectHideFlags: 0

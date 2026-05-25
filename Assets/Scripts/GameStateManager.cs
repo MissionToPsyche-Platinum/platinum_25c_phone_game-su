@@ -77,7 +77,7 @@ public class GameStateManager : MonoBehaviour
 
         currentGameState = GameState.MainMenu;
         gameStage = GameStage.Transition;
-        totalCoins = 1000;
+        totalCoins = 0;
     }
 
     public void UpdateProbePosition(Vector3 newPosition)

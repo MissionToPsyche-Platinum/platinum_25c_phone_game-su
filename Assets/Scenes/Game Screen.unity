@@ -2219,17 +2219,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScript::LandmarkSpawner
   landmarks:
   - prefab: {fileID: 5554854112474469277, guid: 8cfbe29dee05b464fb65be61863848d6, type: 3}
-    triggerScore: 20
+    triggerScore: 100
     spawnYOffset: 2
     spawnX: -1
   - prefab: {fileID: 525565986268334686, guid: 801654f1b07310b4893de92d09979683, type: 3}
-    triggerScore: 120
+    triggerScore: 1000
     spawnYOffset: 2
     spawnX: 1
   - prefab: {fileID: 3691443941826363168, guid: 51b04bcb9a84c66478b2011e1fa7a48c, type: 3}
-    triggerScore: 220
+    triggerScore: 2000
     spawnYOffset: 2
     spawnX: 2
+  - prefab: {fileID: 8136905691502780287, guid: d92ecd5743121fb4cb84f5a987c123dc, type: 3}
+    triggerScore: 4000
+    spawnYOffset: 2
+    spawnX: -1
   myScoreIncrement: {fileID: 631130230}
 --- !u!4 &128683202
 Transform:

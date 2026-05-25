@@ -78,7 +78,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -168,7 +168,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -259,7 +259,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: -1464677727340712012, guid: ecb9c262141bf45778e1b132612cdb4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -284,6 +284,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::StarMoveScript
   velocity: {x: 0, y: 0, z: 0}
+  alphaFlashSpeed: 0
+  maxAlpha: 1
+  minAlpha: 0
+  isLandmark: 0
 --- !u!1 &1193465897778225744
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +432,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: -1464677727340712012, guid: ecb9c262141bf45778e1b132612cdb4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -453,6 +457,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::StarMoveScript
   velocity: {x: 0, y: 0, z: 0}
+  alphaFlashSpeed: 0
+  maxAlpha: 1
+  minAlpha: 0
+  isLandmark: 0
 --- !u!1 &3429591685025381945
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +540,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: -1464677727340712012, guid: ecb9c262141bf45778e1b132612cdb4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -557,6 +565,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::StarMoveScript
   velocity: {x: 0, y: 0, z: 0}
+  alphaFlashSpeed: 0
+  maxAlpha: 1
+  minAlpha: 0
+  isLandmark: 0
 --- !u!1 &3872262606068633059
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +703,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: -1464677727340712012, guid: ecb9c262141bf45778e1b132612cdb4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -716,6 +728,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::StarMoveScript
   velocity: {x: 0, y: 0, z: 0}
+  alphaFlashSpeed: 0
+  maxAlpha: 1
+  minAlpha: 0
+  isLandmark: 0
 --- !u!1 &4642822737277254449
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +811,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: -1464677727340712012, guid: ecb9c262141bf45778e1b132612cdb4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -820,6 +836,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::StarMoveScript
   velocity: {x: 0, y: 0, z: 0}
+  alphaFlashSpeed: 0
+  maxAlpha: 1
+  minAlpha: 0
+  isLandmark: 0
 --- !u!1 &4656637285436979700
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,7 +918,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -988,7 +1008,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1078,7 +1098,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1168,7 +1188,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1259,7 +1279,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: -1464677727340712012, guid: ecb9c262141bf45778e1b132612cdb4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1284,6 +1304,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::StarMoveScript
   velocity: {x: 0, y: 0, z: 0}
+  alphaFlashSpeed: 0
+  maxAlpha: 1
+  minAlpha: 0
+  isLandmark: 0
 --- !u!1 &7578319550143882020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,7 +1386,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1453,7 +1477,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: -1464677727340712012, guid: ecb9c262141bf45778e1b132612cdb4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1478,3 +1502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScript::StarMoveScript
   velocity: {x: 0, y: 0, z: 0}
+  alphaFlashSpeed: 0
+  maxAlpha: 1
+  minAlpha: 0
+  isLandmark: 0

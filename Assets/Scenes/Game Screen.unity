@@ -16522,7 +16522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f23886c3485854abe27d02290bc07a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::CameraShake
-  myCamera: {fileID: 0}
+  myCamera: {fileID: 1866544368}
 --- !u!60 &908402720
 PolygonCollider2D:
   m_ObjectHideFlags: 0

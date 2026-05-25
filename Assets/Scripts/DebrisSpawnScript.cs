@@ -54,12 +54,14 @@ public class DebrisSpawnScript : MonoBehaviour
     private ScoreIncrement scoreSystem;
 
     private float screenW;
+    private float _baseScreenW;
 
     
 
     void Start()
     {
-        screenW = Camera.main.orthographicSize * 2f * Camera.main.aspect;
+        _baseScreenW = Camera.main.orthographicSize * 2f * Camera.main.aspect;
+        screenW = _baseScreenW;
         this.gameObject.SetActive(false);
         GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
         checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
@@ -320,7 +322,16 @@ public class DebrisSpawnScript : MonoBehaviour
     private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
         this.gameObject.SetActive(true);
-        
+
+        float visionMult = ComponentManager.Instance != null ? ComponentManager.Instance.GetVisionMultiplier() : 1f;
+        screenW = _baseScreenW * visionMult;
+        float minXPos = -screenW / 2f;
+        float maxXPos = screenW / 2f;
+        float laneWidth = (maxXPos - minXPos) / (float)(numLanes - 1);
+        laneXPos.Clear();
+        for (int i = 0; i < numLanes; i++)
+            laneXPos.Add(minXPos + (float)i * laneWidth);
+
         gameTime = 0f;
         difficultyMultiplier = 0f;
         currLane = 0;

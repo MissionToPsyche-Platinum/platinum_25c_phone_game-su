@@ -16508,7 +16508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   asteroidCollisionSoundClip: {fileID: 8300000, guid: 97c7e8fc768c84a0c8d2282da7399e46, type: 3}
-  dodgeSoundClip: {fileID: 0}
+  dodgeSoundClip: {fileID: 8300000, guid: 4f222ceee08fc6d4f94f3b615798a0f1, type: 3}
   statsScreenPanel: {fileID: 2037058231}
 --- !u!114 &908402719
 MonoBehaviour:

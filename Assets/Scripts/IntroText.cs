@@ -1,51 +1,121 @@
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class IntroText : MonoBehaviour
 {
-	private Animator myAnimator;
-	[SerializeField] private Animator startScreenAnimator;
-	[SerializeField] private GameObject introPanel;
+    [Header("UI References")]
+    [SerializeField] private Animator startScreenAnimator;
+    [SerializeField] private GameObject introPanel;
 
-	private bool skippedClicked = false;
+    [SerializeField] private RectTransform scrollingText;
+    [SerializeField] private RectTransform topMarker;
+    [SerializeField] private RectTransform bottomMarker;
+    [SerializeField] private Canvas parentCanvas;
 
-	private void Awake()
-	{
-		myAnimator = GetComponent<Animator>();
-		startScreenAnimator.SetTrigger("HidePanel");
-	}
+    [Header("Scroll Speeds")]
+    [SerializeField] private float normalSpeed = 80f;
+    [SerializeField] private float holdSpeed = 300f;
 
-	private void Update()
-	{
-		if (skippedClicked)
-		{
-			return;
-		}
-		
-		bool isHolding =
-			Mouse.current != null && Mouse.current.leftButton.isPressed
-			||
-			Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed;
+    private bool skippedClicked = false;
+    private bool initialized = false;
+    private bool finished = false;
 
-		myAnimator.speed = isHolding ? 5f : 1.5f;
-	}
-	
-	public void EndScroll()
-	{
-		Debug.Log("End Scroll called");
-		myAnimator.speed = 1.5f;
-		introPanel.SetActive(false);
-		startScreenAnimator.SetTrigger("QueueSlide");
-		StartScreenAnimationHandler ssAH =  startScreenAnimator.GetComponent<StartScreenAnimationHandler>();
-		ssAH.shouldSkipAnimation = true;
-	}
+    private float currentSpeed;
 
-	public void SkipAnimation()
-	{
-		Debug.Log("button pressed");
-		skippedClicked = true;
-		myAnimator.speed = 100f;
-	}
+    private void Awake()
+    {
+        currentSpeed = normalSpeed;
+    }
+
+    private void Start()
+    {
+        InitializeStartPosition();
+    }
+
+    private void Update()
+    {
+        if (finished)
+            return;
+
+        if (!initialized)
+            InitializeStartPosition();
+
+        if (skippedClicked)
+        {
+            currentSpeed = 1000f;
+        }
+        else
+        {
+            bool isHolding =
+                (Mouse.current != null && Mouse.current.leftButton.isPressed) ||
+                (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed);
+
+            currentSpeed = isHolding ? holdSpeed : normalSpeed;
+        }
+
+        ScrollUpward();
+        CheckForEnd();
+    }
+
+    private void InitializeStartPosition()
+    {
+        if (scrollingText == null || topMarker == null || bottomMarker == null || parentCanvas == null)
+        {
+            Debug.LogError("Gotta assign stuff to IntroText.cs");
+            return;
+        }
+
+        Vector2 topMarkerScreenPos = RectTransformUtility.WorldToScreenPoint(GetCanvasCamera(), topMarker.position);
+
+        float deltaToBottomOfScreen = 0f - topMarkerScreenPos.y;
+        float anchoredDelta = deltaToBottomOfScreen / parentCanvas.scaleFactor;
+
+        Vector2 anchoredPos = scrollingText.anchoredPosition;
+        anchoredPos.y += anchoredDelta;
+        scrollingText.anchoredPosition = anchoredPos;
+        initialized = true;
+    }
+
+    private void ScrollUpward()
+    {
+        Vector2 anchoredPos = scrollingText.anchoredPosition;
+        anchoredPos.y += (currentSpeed * Time.deltaTime) / parentCanvas.scaleFactor;
+        scrollingText.anchoredPosition = anchoredPos;
+    }
+
+    private void CheckForEnd()
+    {
+        Vector2 bottomMarkerScreenPos = RectTransformUtility.WorldToScreenPoint(GetCanvasCamera(), bottomMarker.position);
+
+        if (bottomMarkerScreenPos.y >= Screen.height)
+        {
+            EndScroll();
+        }
+    }
+
+    private Camera GetCanvasCamera()
+    {
+        if (parentCanvas.renderMode == RenderMode.ScreenSpaceOverlay)
+            return null;
+
+        return parentCanvas.worldCamera;
+    }
+
+    public void EndScroll()
+    {
+        if (finished)
+            return;
+
+        finished = true;
+        introPanel.SetActive(false);
+        startScreenAnimator.SetTrigger("QueueSlide");
+
+        StartScreenAnimationHandler ssAH = startScreenAnimator.GetComponent<StartScreenAnimationHandler>();
+        ssAH.shouldSkipAnimation = true;
+    }
+
+    public void SkipAnimation()
+    {
+        skippedClicked = true;
+    }
 }

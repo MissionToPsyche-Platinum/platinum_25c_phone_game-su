@@ -58,7 +58,17 @@ public class DistanceTracker : MonoBehaviour
             checkpointSpawner = FindFirstObjectByType<CheckpointSpawnScript>();
 
         float score = scoreIncrement != null ? scoreIncrement.GetCurrentScore() : 0f;
-        return JourneyDistanceForScore(score);
+        
+        double distance = JourneyDistanceForScore(score);
+
+        
+        if (GameStateManager.Instance != null && GameStateManager.Instance.longestRealDistance < distance)
+        {
+            Debug.Log("Setting real distance to:  " + distance);
+            GameStateManager.Instance.longestRealDistance = distance;
+        }
+        
+        return distance;
     }
 
     // Maps a score onto the journey milestones with piecewise-linear interpolation.

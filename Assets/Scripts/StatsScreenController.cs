@@ -4,10 +4,23 @@ using UnityEngine.UI;
 public class StatsScreenController : MonoBehaviour
 {
 
+    [Header("Stat fields to update")]
     [SerializeField] private Text highScoreText;
     [SerializeField] private Text totalDistanceText;
     [SerializeField] private Text asteroidsAvoidedText;
     [SerializeField] private Text coinsCollectedText;
+    [SerializeField] private Image reachPsycheImage;
+    [SerializeField] private Text realDistanceTravelledText;
+    [SerializeField] private Image passedArtemisImage;
+    [SerializeField] private Image passedVoyagerImage;
+    [SerializeField] private Text asteroidsHitText;
+
+    [Header("Stuff for managing stats")]
+    [SerializeField] private int PsycheScoreThreshold;
+    [SerializeField] private int ArtemisKmThreshold;
+    [SerializeField] private double VoyagerKmThreshold;
+    [SerializeField] private Sprite emptyStar;
+    [SerializeField] private Sprite filledStar;
 
     private int highScore = -1;
     private float totalDistance = 0; // in AU
@@ -21,12 +34,6 @@ public class StatsScreenController : MonoBehaviour
     void Start()
     {
         RefreshAll();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void updateHighScore(int score){
@@ -54,7 +61,7 @@ public class StatsScreenController : MonoBehaviour
         if(highScore > 0){
             highScoreText.text = "" + highScore;
         } else {
-            highScoreText.text = "-";
+            highScoreText.text = "0";
         }
 
         totalDistanceText.text = totalDistance + "AU";
@@ -62,5 +69,27 @@ public class StatsScreenController : MonoBehaviour
         asteroidsAvoidedText.text = "" + StatsManager.instance.asteroidsDodged;
 
         coinsCollectedText.text = "" + coinsCollected;
+        
+        asteroidsHitText.text = "" + GameStateManager.Instance.TotalAsteroidsHit;
+
+        SetStar(reachPsycheImage, highScore >= PsycheScoreThreshold);
+        SetStar(passedArtemisImage, GameStateManager.Instance.longestRealDistance >= ArtemisKmThreshold);
+        SetStar(passedVoyagerImage, highScore >= VoyagerKmThreshold);
+        
+        realDistanceTravelledText.text = "" + GameStateManager.Instance.longestRealDistance + " km";
+    }
+
+    private void SetStar(Image image, bool isCompleted)
+    {
+        if (isCompleted)
+        {
+            image.sprite = filledStar;
+            image.color = Color.white;
+        }
+        else
+        {
+            image.sprite = emptyStar;
+            image.color = new Color(0, 0, 0, .7f);
+        }
     }
 }

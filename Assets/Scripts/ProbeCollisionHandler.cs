@@ -80,6 +80,8 @@ public class ProbeCollisionHandler : MonoBehaviour
                 SFXController.instance.PlaySoundFXClip(asteroidCollisionSoundClip, transform, 1f);
                 if (probeController != null)
                     probeController.ApplyKnockback(collision.transform.position);
+
+                GameStateManager.Instance.TotalAsteroidsHit++;
             }
 
             // Destroy the debris/asteroid

@@ -42,7 +42,7 @@ public class IntroText : MonoBehaviour
 
         if (skippedClicked)
         {
-            currentSpeed = 1000f;
+            currentSpeed = 2500f;
         }
         else
         {

@@ -44,6 +44,8 @@ public class GameStateManager : MonoBehaviour
     public GameStage startingGameStage;
     public float startingScore;
     public int startingHealth;
+    public double longestRealDistance = 0;
+    public double TotalAsteroidsHit = 0;
 
     public int currentProbeSkin = 0;
 

@@ -166,9 +166,9 @@ MonoBehaviour:
   revSpeed: 0
   activationY: 0.5
   explodingFragments:
-  - {fileID: 4221136308547318587, guid: aae474a5fb4f14a2e9294e577ba60c69, type: 3}
-  - {fileID: 8607791023139143149, guid: 529606bd5da0f4b01a4439fbe5ed29f0, type: 3}
-  - {fileID: 5868264827804270479, guid: f1c1feb447bdd4853b602614373ed612, type: 3}
+  - {fileID: 4221136308547318587, guid: dd2ab35efd4ca47f0af0399c811e2583, type: 3}
+  - {fileID: 8607791023139143149, guid: 2506586b3bdaa487f9057c03697ad166, type: 3}
+  - {fileID: 5868264827804270479, guid: 9c966d791fc0f407ea2be2f55d15647a, type: 3}
   numFragments: 3
   homingAmount: 0.5
   fragmentSpreadSpeed: 2

@@ -160,7 +160,7 @@ public class DebrisMoveScript : MonoBehaviour
                 GameObject newDebris = Instantiate(explodingFragments[i], transform.position, Quaternion.identity);
 
                 //match relative size of original asteroid
-                newDebris.transform.localScale = Vector3.one * 0.3f * debrisScale; //temporary scale of 0.3 because sprites are messed up
+                newDebris.transform.localScale = Vector3.one * 2.5f * debrisScale; //temporary scale of 3 because sprites are messed up
 
                 DebrisMoveScript script = newDebris.GetComponent<DebrisMoveScript>();
                 if (script != null)

@@ -26492,6 +26492,7 @@ MonoBehaviour:
   parentCanvas: {fileID: 785719836}
   normalSpeed: 30
   holdSpeed: 150
+  skipSpeed: 3500
 --- !u!114 &1535438892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26518,7 +26519,7 @@ MonoBehaviour:
     to build the technology necessary to make it a reality. Eyes were set on the
     16-Psyche asteroid: the most metal-rich location in the entire solar system.\n\nThus
     it was decided. 200 years after the liftoff of the original 16-Psyche mission,
-    NASA would launch a new mission to Return to Psyche..."
+    NASA would launch a new mission to..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
   m_sharedMaterial: {fileID: -7032866026977421167, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}

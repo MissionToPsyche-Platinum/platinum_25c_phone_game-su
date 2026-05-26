@@ -15,6 +15,7 @@ public class IntroText : MonoBehaviour
     [Header("Scroll Speeds")]
     [SerializeField] private float normalSpeed = 80f;
     [SerializeField] private float holdSpeed = 300f;
+    [SerializeField] private float skipSpeed = 3000f;
 
     private bool skippedClicked = false;
     private bool initialized = false;
@@ -42,7 +43,7 @@ public class IntroText : MonoBehaviour
 
         if (skippedClicked)
         {
-            currentSpeed = 2500f;
+            currentSpeed = skipSpeed;
         }
         else
         {

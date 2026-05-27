@@ -16399,8 +16399,8 @@ MonoBehaviour:
   myProbeDebuffs:
   - {fileID: 908402717}
   - {fileID: 908402715}
-  - {fileID: 908402716}
   myProbeCollisionHandler: {fileID: 908402718}
+  myHealthSystem: {fileID: 908402712}
   chanceToDebuffOnDamage: 0.15
 --- !u!114 &908402715
 MonoBehaviour:

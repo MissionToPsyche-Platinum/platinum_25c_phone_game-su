@@ -18,6 +18,8 @@ public class ProbeHealth : MonoBehaviour
     private int shieldHealth;
     private bool hasShownLowHealthWarning;
 
+    public EventHandler<EventArgs> OnGainHealth;
+
     void Start()
     {
         damageActive = true;
@@ -144,6 +146,7 @@ public class ProbeHealth : MonoBehaviour
         int gain = Mathf.Min(amount, maxHealth - currentHealth);
         healthUI.AddHP(gain);
         currentHealth += gain;
+        OnGainHealth?.Invoke(this, EventArgs.Empty);
     }
 
     public void SetToZeroLives()

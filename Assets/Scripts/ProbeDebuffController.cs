@@ -8,25 +8,30 @@ public class ProbeDebuffController : MonoBehaviour
 {
     [SerializeField] private List<ProbeDebuff> myProbeDebuffs;
     [SerializeField] private ProbeCollisionHandler myProbeCollisionHandler;
+    [SerializeField] private ProbeHealth myHealthSystem;
     [SerializeField] private float chanceToDebuffOnDamage = 0.3f;
 
     private void Start()
     {
-        myProbeCollisionHandler.OnTakeDamage += HandleProbeTakeDamage;
+        myProbeCollisionHandler.OnTakeDamage += HandleProbeTakeDamage;  
+        myHealthSystem.OnGainHealth += OnGainHealth;
         GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying += OnStopPlaying;
     }
 
+
     private void OnDestroy()
     {
         myProbeCollisionHandler.OnTakeDamage -= HandleProbeTakeDamage;
+        myHealthSystem.OnGainHealth -= OnGainHealth;
         GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
         GameStateManager.Instance.OnStopPlaying -= OnStopPlaying;
     }
 
-    private void HandleProbeTakeDamage(object sender, System.EventArgs e)
+    private void HandleProbeTakeDamage(object sender, ProbeCollisionHandler.DamageEventArgs e)
     {
-        if (Random.value <= chanceToDebuffOnDamage)
+        int newHealth = e.newHealth;
+        if (newHealth <= 1)
         {
             EnableRandomDebuff();
         }
@@ -62,6 +67,10 @@ public class ProbeDebuffController : MonoBehaviour
         }
     }
 
+    private void OnGainHealth(object sender, EventArgs e)
+    {
+        RepairAllDebuffs();
+    }
     private void OnStopPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
     {
         RepairAllDebuffs();

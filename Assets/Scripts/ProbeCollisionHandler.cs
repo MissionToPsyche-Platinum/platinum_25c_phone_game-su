@@ -19,7 +19,17 @@ public class ProbeCollisionHandler : MonoBehaviour
     private SpriteRenderer probeSprite;
     private bool justGotHit = false;
 
-    public event EventHandler<EventArgs> OnTakeDamage;
+    public class DamageEventArgs : EventArgs
+    {
+        public int newHealth;
+
+        public DamageEventArgs(int newHealth)
+        {
+            this.newHealth = newHealth;
+        }
+    }
+    
+    public event EventHandler<DamageEventArgs> OnTakeDamage;
     public event EventHandler<EventArgs> OnCoinCollected;
 
     public bool HasCollided { get; private set; } = false;
@@ -67,7 +77,7 @@ public class ProbeCollisionHandler : MonoBehaviour
             {
                 dodged = healthSystem.TakeDamage(1);
                 if (!dodged)
-                    OnTakeDamage?.Invoke(this, EventArgs.Empty);
+                    OnTakeDamage?.Invoke(this, new DamageEventArgs(healthSystem.currentHealth));
             }
 
             if (dodged)

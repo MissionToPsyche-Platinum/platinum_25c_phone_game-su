@@ -19,13 +19,13 @@ public class ThrustersDebuff : ProbeDebuff
         base.EnableDebuff();
         thrusterSmokeEffect.SetActive(true);
         SFXController.instance.PlaySoundFXClip(thrusterBreakingSoundEffect, this.transform, 1f);
-        myProbeController.SetMoveSpeed(brokenMovementSpeed);
+        // myProbeController.SetMoveSpeed(brokenMovementSpeed);
     }
 
     protected override void RepairDebuff()
     {
         base.RepairDebuff();
         thrusterSmokeEffect.SetActive(false);
-        myProbeController.SetMoveSpeed(4f);
+        // myProbeController.SetMoveSpeed(4f);?
     }
 }

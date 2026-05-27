@@ -127,6 +127,9 @@ public class DebrisMoveScript : MonoBehaviour
 
     void UpdateHoming()
     {
+        if (Time.deltaTime == 0f) return; //for freeze frames, without this the scaled velocity was messing up
+        
+        
         Vector3 probePos = GameStateManager.Instance.GetProbePosition();
 
         //stops homing behavior if below probe

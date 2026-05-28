@@ -1805,8 +1805,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Must be collected in 5 parts. Once all parts are collected, the ship shoots
-    a laser beam that turns all asteroids into coins.
+  m_Text: Must be collected in 5 parts. Once all parts are collected, all asteroids
+    are destroyed and coins fill the screen.
 --- !u!222 &103845775
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15260,7 +15260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &876826643
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31849,7 +31849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1883406685
 RectTransform:
   m_ObjectHideFlags: 0

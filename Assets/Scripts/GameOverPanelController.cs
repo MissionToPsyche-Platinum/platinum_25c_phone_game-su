@@ -1,5 +1,4 @@
 using System.Text;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,8 +11,8 @@ public class GameOverPanelController : MonoBehaviour
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject statsScreenPanel;
 
-    [SerializeField] private TMP_Text missionTitleText;
-    [SerializeField] private TMP_Text missionReportText;
+    [SerializeField] private Text missionTitleText;
+    [SerializeField] private Text missionReportText;
     [SerializeField] private DistanceTracker distanceTracker;
     [SerializeField] private ScoreIncrement scoreIncrement;
 
@@ -43,14 +42,14 @@ public class GameOverPanelController : MonoBehaviour
         {
             Transform t = transform.Find("ScoreValue");
             if (t != null)
-                missionReportText = t.GetComponent<TMP_Text>();
+                missionReportText = t.GetComponent<Text>();
         }
 
         if (missionTitleText == null)
         {
             Transform t = transform.Find("MissionTerminatedTitle");
             if (t != null)
-                missionTitleText = t.GetComponent<TMP_Text>();
+                missionTitleText = t.GetComponent<Text>();
         }
 
         if (distanceTracker == null)
@@ -82,11 +81,13 @@ public class GameOverPanelController : MonoBehaviour
         int asteroidsDodged = StatsManager.instance != null ? StatsManager.instance.asteroidsDodged : 0;
 
         StringBuilder report = new StringBuilder();
-        report.AppendLine("MISSION REPORT");
+        report.AppendLine($"Distance Traveled:");
+        report.AppendLine($"{distanceKm:N0} km");
         report.AppendLine();
-        report.AppendLine($"Distance Traveled:   {distanceKm:N0} km");
         report.AppendLine($"Final Score:   {finalScore:N0}");
+        report.AppendLine();
         report.AppendLine($"Coins Collected:   {coinsCollected}");
+        report.AppendLine();
         report.Append($"Asteroids Dodged:   {asteroidsDodged}");
 
         missionReportText.text = report.ToString();

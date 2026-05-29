@@ -26,8 +26,21 @@ public class StatsManager : MonoBehaviour
     {
         myProbeCollisionHandler.OnCoinCollected += OnCoinCollected;
         myProbeCollisionHandler.OnTakeDamage += OnTakeDamage;
-        
+
         myDebrisSpawnScript.OnDebrisSpawned += OnDebrisSpawned;
+
+        GameStateManager.Instance.OnStartPlaying += OnStartPlaying;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnStartPlaying -= OnStartPlaying;
+    }
+
+    private void OnStartPlaying(object sender, GameStateManager.GameStateChangeEventArgs e)
+    {
+        coinsCollected = 0;
+        asteroidsDodged = 0;
     }
 
     private void OnDebrisSpawned(object sender, EventArgs e)
@@ -41,8 +54,8 @@ public class StatsManager : MonoBehaviour
         highscore = myScoreIncrement.GetCurrentScore();
     }
 
-    private void OnCoinCollected(object sender, EventArgs e)
+    private void OnCoinCollected(object sender, ProbeCollisionHandler.CoinCollectedEventArgs e)
     {
-        coinsCollected++;
+        coinsCollected += e.value;
     }
 }

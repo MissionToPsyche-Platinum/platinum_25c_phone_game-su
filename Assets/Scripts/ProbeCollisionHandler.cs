@@ -29,8 +29,14 @@ public class ProbeCollisionHandler : MonoBehaviour
         }
     }
     
+    public class CoinCollectedEventArgs : EventArgs
+    {
+        public int value;
+        public CoinCollectedEventArgs(int value) { this.value = value; }
+    }
+
     public event EventHandler<DamageEventArgs> OnTakeDamage;
-    public event EventHandler<EventArgs> OnCoinCollected;
+    public event EventHandler<CoinCollectedEventArgs> OnCoinCollected;
 
     public bool HasCollided { get; private set; } = false;
 
@@ -119,6 +125,7 @@ public class ProbeCollisionHandler : MonoBehaviour
             int numCoins = coinScript.collect();
             GameStateManager.Instance.AddCoins(numCoins);
             statsScreenController.updateCoinsCollected(numCoins);
+            OnCoinCollected?.Invoke(this, new CoinCollectedEventArgs(numCoins));
             Destroy(collision.gameObject);
         }
 

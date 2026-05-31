@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 103}
   - component: {fileID: 114}
   - component: {fileID: 130}
+  - component: {fileID: 131}
   - component: {fileID: 104}
   - component: {fileID: 105}
   m_Layer: 5
-  m_Name: MoonArrivalPopup
+  m_Name: NeptuneArrivalPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,6 +107,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeDuration: 0.3
   minDisplayTime: 0.5
+--- !u!114 &131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea9b6502e554f449a1201a9c90e4f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::RandomFactPopup
+  bodyText: {fileID: 503}
+  facts:
+  - Neptune's winds top 2,100 km/h! That is the fastest in the solar system, moving
+    at Mach 1.5.
+  - Neptune was predicted by math before anyone ever saw it. Irregularities in Uranus's
+    orbit let astronomers calculate its exact position first!
+  - Neptune's largest moon Triton orbits the planet backwards. This means it did
+    not form there and was actually captured by Neptune's gravity from the Kuiper
+    Belt.
+  - One Neptune year lasts 164.8 Earth years. Discovered in 1846, the icy planet
+    did not complete a single full orbit until 2011.
+  - Sunlight takes over 4 hours to travel the 4.5 billion kilometers to Neptune.
+  - Neptune's Great Dark Spot was a massive storm the size of Earth photographed
+    by Voyager 2.
+  - Neptune radiates 2.61 times more heat than it receives from the Sun. The exact
+    mechanism generating all this thermal energy remains a mystery.
+  - Neptune actually has complete rings! Its outermost ring contains five incredibly
+    dense dusty clumps called ring arcs that make it look fragmented from Earth.
+  - Neptune has an intense magnetic field tilted 47 degrees from its rotation axis.
+    It is also physically offset from the planet's actual center.
+  - Neptune's deep blue color comes from trace amounts of methane gas in its atmosphere.
+    The methane absorbs red wavelengths of sunlight and reflects blue light back
+    into space.
 --- !u!114 &104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ARRIVED AT MOON
+  m_text: ARRIVED AT NEPTUNE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
   m_sharedMaterial: {fileID: -7032866026977421167, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
@@ -376,7 +412,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 58.4
+  m_fontSize: 50.15
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -384,7 +420,7 @@ MonoBehaviour:
   m_fontSizeMax: 80
   m_fontStyle: 33
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -485,8 +521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Moon has no atmosphere, footprints left by Apollo astronauts will stay
-    there for millions of years.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
   m_sharedMaterial: {fileID: -7032866026977421167, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
@@ -521,7 +556,7 @@ MonoBehaviour:
   m_fontSizeMax: 56
   m_fontStyle: 33
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

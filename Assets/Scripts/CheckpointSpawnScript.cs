@@ -20,6 +20,8 @@ public class CheckpointSpawnScript : MonoBehaviour
     [SerializeField] private GameObject moonArrivalPopupPrefab;
     [SerializeField] private GameObject marsArrivalPopupPrefab;
     [SerializeField] private GameObject psycheArrivalPopupPrefab;
+    [SerializeField] private GameObject neptuneArrivalPopupPrefab;
+    [SerializeField] private GameObject proximaCentauriArrivalPopupPrefab;
     private GameObject[] checkpointInstances;
 
     private const int numCheckpoints = 11;
@@ -171,6 +173,16 @@ public class CheckpointSpawnScript : MonoBehaviour
         KillAllActiveCheckpoints();
     }
     
+    private GameObject GetPopupForCheckpoint(int index) => index switch
+    {
+        1 => moonArrivalPopupPrefab,
+        2 => marsArrivalPopupPrefab,
+        3 => psycheArrivalPopupPrefab,
+        7 => neptuneArrivalPopupPrefab,
+        8 => proximaCentauriArrivalPopupPrefab,
+        _ => null
+    };
+
     void Update()
     {
         if (GameStateManager.Instance.currentGameState != GameStateManager.GameState.Playing)
@@ -186,8 +198,7 @@ public class CheckpointSpawnScript : MonoBehaviour
             spawnCheckpoint(nextCheckpoint);
             stopped = true;
 
-            GameObject[] stagePopups = { null, moonArrivalPopupPrefab, marsArrivalPopupPrefab, psycheArrivalPopupPrefab };
-            if (arrivedIndex >= 1 && arrivedIndex <= 3 && stagePopups[arrivedIndex] != null)
+            if (GetPopupForCheckpoint(arrivedIndex) != null)
             {
                 pendingPopupIndex = arrivedIndex;
             }
@@ -236,8 +247,7 @@ public class CheckpointSpawnScript : MonoBehaviour
         {
             int arrivedIndex = pendingPopupIndex;
             pendingPopupIndex = -1;
-            GameObject[] stagePopups = { null, moonArrivalPopupPrefab, marsArrivalPopupPrefab, psycheArrivalPopupPrefab };
-            GameObject popupInstance = PopupManager.Instance.DisplayFullScreenPopup(stagePopups[arrivedIndex]);
+            GameObject popupInstance = PopupManager.Instance.DisplayFullScreenPopup(GetPopupForCheckpoint(arrivedIndex));
             CheckpointIntroPopup intro = popupInstance.GetComponent<CheckpointIntroPopup>();
             if (intro != null)
             {

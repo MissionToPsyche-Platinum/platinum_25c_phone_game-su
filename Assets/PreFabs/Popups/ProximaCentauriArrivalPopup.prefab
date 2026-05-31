@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 103}
   - component: {fileID: 114}
   - component: {fileID: 130}
+  - component: {fileID: 131}
   - component: {fileID: 104}
   - component: {fileID: 105}
   m_Layer: 5
-  m_Name: MoonArrivalPopup
+  m_Name: ProximaCentauriArrivalPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,6 +107,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeDuration: 0.3
   minDisplayTime: 0.5
+--- !u!114 &131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea9b6502e554f449a1201a9c90e4f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScript::RandomFactPopup
+  bodyText: {fileID: 503}
+  facts:
+  - Proxima Centauri is 4.24 light years away. Even traveling at the speed of the
+    Voyager 1 probe, the journey would still take roughly 73,000 years!
+  - Proxima Centauri is completely invisible to the naked eye from Earth. It is a
+    dim red dwarf needing a telescope to spot.
+  - Proxima b is an Earth sized planet in the star's habitable zone. Unfortunately,
+    it gets bombarded by intense X ray flares that likely stripped away its atmosphere.
+  - Proxima Centauri belongs to the Alpha Centauri triple star system. It orbits
+    the central pair at a distance of about 0.21 light years.
+  - Proxima Centauri will remain the closest star to Earth for the next 33,000 years!
+    After it drifts away, another red dwarf named Ross 248 will take that spot!
+  - A year on Proxima b lasts just 11.2 Earth days. It has to orbit roughly 20 times
+    closer to its star than Earth does to the Sun to stay warm.
+  - In 2017 Proxima Centauri unleashed a violent superflare making it 1,000 times
+    brighter. It released 10 times more energy than the largest solar flare ever
+    recorded on our Sun!
+  - Red dwarfs efficiently recycle all their hydrogen fuel. This means Proxima Centauri
+    can burn for 4 trillion years, which is nearly 300 times longer than our Sun!
+  - The Parker Solar Probe is humanity's fastest spacecraft. If it pointed toward
+    Proxima Centauri at top speed, the trip would still take about 7,200 years.
+  - The Breakthrough Starshot initiative wants to use lasers to blast tiny nanocraft
+    to 20 percent the speed of light. This would cut the travel time to Proxima Centauri
+    to 21 years!
 --- !u!114 &104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ARRIVED AT MOON
+  m_text: ARRIVED AT PROXIMA CENTAURI
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
   m_sharedMaterial: {fileID: -7032866026977421167, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
@@ -376,7 +413,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 58.4
+  m_fontSize: 33.8
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -384,7 +421,7 @@ MonoBehaviour:
   m_fontSizeMax: 80
   m_fontStyle: 33
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -485,8 +522,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Moon has no atmosphere, footprints left by Apollo astronauts will stay
-    there for millions of years.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
   m_sharedMaterial: {fileID: -7032866026977421167, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
@@ -521,7 +557,7 @@ MonoBehaviour:
   m_fontSizeMax: 56
   m_fontStyle: 33
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

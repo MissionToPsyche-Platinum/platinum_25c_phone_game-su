@@ -23896,6 +23896,8 @@ MonoBehaviour:
   moonArrivalPopupPrefab: {fileID: 100, guid: c722bfa4815a9c04eaa8176e467a75ed, type: 3}
   marsArrivalPopupPrefab: {fileID: 100, guid: 80bacab3006ed9d42b58be52a2f3ba4b, type: 3}
   psycheArrivalPopupPrefab: {fileID: 100, guid: 58f34831c9035014da2415f94122831d, type: 3}
+  neptuneArrivalPopupPrefab: {fileID: 100, guid: e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3, type: 3}
+  proximaCentauriArrivalPopupPrefab: {fileID: 100, guid: b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6, type: 3}
 --- !u!4 &1420386464
 Transform:
   m_ObjectHideFlags: 0

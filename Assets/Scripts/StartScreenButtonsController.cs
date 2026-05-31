@@ -11,6 +11,8 @@ public class StartScreenButtonsController : MonoBehaviour
     [SerializeField] private GameObject settingsScreenPanel;
     [SerializeField] private GameObject statsScreenPanel;
     [SerializeField] private GameObject codexScreenPanel;
+    [SerializeField] private GameObject creditsScreenPanel;
+    [SerializeField] private GameObject moreSection;
 
     [Header(("Buttons"))]
     [SerializeField] private Button startGameButton;
@@ -19,6 +21,8 @@ public class StartScreenButtonsController : MonoBehaviour
     [SerializeField] private Button settingsScreenButton;
     [SerializeField] private Button codexScreenButton;
     [SerializeField] private Button disclaimerButton;
+    [SerializeField] private Button moreButton;
+    [SerializeField] private Button creditsScreenButton;
 
     [Header("Other")]
     [SerializeField] private DisclaimerPanelController disclaimerPanel;
@@ -39,6 +43,8 @@ public class StartScreenButtonsController : MonoBehaviour
         settingsScreenButton.onClick.AddListener(SettingsScreenButtonAction);
         disclaimerButton.onClick.AddListener(DisclaimerButtonAction);
         codexScreenButton.onClick.AddListener(CodexScreenButtonAction);
+        moreButton.onClick.AddListener(MoreButtonAction);
+        creditsScreenButton.onClick.AddListener(CreditsScreenButtonAction);
 
         // Debug button is hidden until unlocked
         if (debugButton != null)
@@ -106,11 +112,23 @@ public class StartScreenButtonsController : MonoBehaviour
         controller.SetPreviousPanel(startScreenPanel);
         MenuNavigationButtons.Instance.SwitchPanels(startScreenPanel, codexScreenPanel);
     }
+    
+    private void CreditsScreenButtonAction(){
+        MenuNavigationButtons.Instance.PlayButtonSound();
+        SettingsScreenController controller = settingsScreenPanel.GetComponent<SettingsScreenController>();
+        controller.SetPreviousPanel(startScreenPanel);
+        MenuNavigationButtons.Instance.SwitchPanels(startScreenPanel, creditsScreenPanel);
+    }
 
     private void DisclaimerButtonAction()
     {
         disclaimerPanel.Show();
         startScreenPanel.SetActive(false);
+    }
+    
+    private void MoreButtonAction()
+    {
+        moreSection.SetActive(!moreSection.activeSelf);
     }
 
     // ── Debug unlock ─────────────────────────────────────────────────────────

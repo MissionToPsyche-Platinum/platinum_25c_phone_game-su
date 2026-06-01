@@ -11882,7 +11882,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.7}
   m_AnchorMax: {x: 1, y: 0.7}
-  m_AnchoredPosition: {x: -14.999939, y: 0}
+  m_AnchoredPosition: {x: -15, y: 0}
   m_SizeDelta: {x: -30, y: 130.3272}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &645451444
@@ -25941,6 +25941,8 @@ MonoBehaviour:
   psycheArrivalPopupPrefab: {fileID: 100, guid: 58f34831c9035014da2415f94122831d, type: 3}
   neptuneArrivalPopupPrefab: {fileID: 100, guid: e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3, type: 3}
   proximaCentauriArrivalPopupPrefab: {fileID: 100, guid: b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6, type: 3}
+  alphaCentauriAArrivalPopupPrefab: {fileID: 100, guid: c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7, type: 3}
+  alphaCentauriBAArrivalPopupPrefab: {fileID: 100, guid: d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8, type: 3}
 --- !u!4 &1420386464
 Transform:
   m_ObjectHideFlags: 0

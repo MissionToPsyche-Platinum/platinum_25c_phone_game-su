@@ -132,6 +132,9 @@ public class PowerUpBehavior : MonoBehaviour
         }
     }
 
+    public bool[] GetPowerUpsActive() => powerUpsActive;
+    public float[] GetPowerUpTimers() => powerUpTimers;
+
     float GetShieldHealth(){
         return shieldHealth;
     }

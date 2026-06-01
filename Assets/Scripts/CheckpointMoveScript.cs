@@ -68,7 +68,6 @@ public class CheckpointMoveScript : MonoBehaviour
         // Debug.Log("CheckpointMoveScript::resumeMovement()");
         currentlyStoppedAtCenter = false;
         hasContinued = true;
-        GameStateManager.Instance.SetGameStage(GameStateManager.Instance.GetGameStageInt() + 1);
     }
 
     private void OnStartPlaying(object Sender, EventArgs e){

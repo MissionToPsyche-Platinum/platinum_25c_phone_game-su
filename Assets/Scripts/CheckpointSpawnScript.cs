@@ -122,8 +122,8 @@ public class CheckpointSpawnScript : MonoBehaviour
     }
 
     public void resumeMovement(int index){
+        GameStateManager.Instance.SetGameStage(index + 2);
         OnCheckpointResumed?.Invoke(this, EventArgs.Empty);
-        // Debug.Log("resumeMovement called");
         HideMessage();
     }
 

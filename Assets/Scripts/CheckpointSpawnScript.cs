@@ -22,6 +22,8 @@ public class CheckpointSpawnScript : MonoBehaviour
     [SerializeField] private GameObject psycheArrivalPopupPrefab;
     [SerializeField] private GameObject neptuneArrivalPopupPrefab;
     [SerializeField] private GameObject proximaCentauriArrivalPopupPrefab;
+    [SerializeField] private GameObject alphaCentauriAArrivalPopupPrefab;
+    [SerializeField] private GameObject alphaCentauriBAArrivalPopupPrefab;
     private GameObject[] checkpointInstances;
 
     private const int numCheckpoints = 11;
@@ -120,8 +122,8 @@ public class CheckpointSpawnScript : MonoBehaviour
     }
 
     public void resumeMovement(int index){
+        GameStateManager.Instance.SetGameStage(index + 2);
         OnCheckpointResumed?.Invoke(this, EventArgs.Empty);
-        // Debug.Log("resumeMovement called");
         HideMessage();
     }
 
@@ -180,6 +182,8 @@ public class CheckpointSpawnScript : MonoBehaviour
         3 => psycheArrivalPopupPrefab,
         7 => neptuneArrivalPopupPrefab,
         8 => proximaCentauriArrivalPopupPrefab,
+        9 => alphaCentauriAArrivalPopupPrefab,
+        10 => alphaCentauriBAArrivalPopupPrefab,
         _ => null
     };
 

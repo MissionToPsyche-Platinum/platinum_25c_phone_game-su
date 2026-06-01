@@ -15,7 +15,7 @@ public class DebrisSpawnScript : MonoBehaviour
     {
         {1f, 0f, 0f, 0f, 0f},                //spawn probabilities at Earth checkpoint
         {1f, 0f, 0f, 0f, 0f},                //spawn probabilities at Moon checkpoint
-        {0.7f, 0.2f, 0.1f, 0f, 0f},          //spawn probabilities at Mars checkpoint
+        {0.85f, 0f, 0f, 0.15f, 0f},           //spawn probabilities at Mars checkpoint
         {0.35f, 0.25f, 0.15f, 0.15f, 0.1f},  //spawn probabilities at Psyche checkpoint
     };
 
@@ -122,18 +122,21 @@ public class DebrisSpawnScript : MonoBehaviour
 
         if(gameStage < 2){                          //not at a checkpoint, invalid
             Array.Fill(spawnWeights, 0f);
-        } else if(gameStage >= 5){                  //spawn weights have stopped changing, constant at last checkpoint's probabilities
+        } else if(gameStage >= 5){
             for(int i = 0; i < 5; i++){
                 spawnWeights[i] = spawnWeightsAtCheckpoints[3, i];
             }
         } else {
             float distanceBetweenCheckpoints = checkpointSpawnScript.GetCheckpointScore(gameStage - 1) - checkpointSpawnScript.GetCheckpointScore(gameStage - 2);
             float initialCheckpointScore = checkpointSpawnScript.GetCheckpointScore(gameStage - 2);
-            float progress = (score - initialCheckpointScore) / distanceBetweenCheckpoints;     //percentage of the way to the next checkpoint
+            float progress = (score - initialCheckpointScore) / distanceBetweenCheckpoints;
 
-            //linear interpolation between probabilities at previous and next checkpoint
             for(int i = 0; i < 5; i++){
                 spawnWeights[i] = (spawnWeightsAtCheckpoints[gameStage - 1, i] - spawnWeightsAtCheckpoints[gameStage - 2, i]) * progress + spawnWeightsAtCheckpoints[gameStage - 2, i];
+            }
+            if(gameStage < 5){
+                spawnWeights[0] += spawnWeights[4];
+                spawnWeights[4] = 0f;
             }
         }
 
@@ -242,7 +245,7 @@ public class DebrisSpawnScript : MonoBehaviour
         //     Debug.Log(spawnWeights[i]);
         // }
 
-        int debrisType = debrisTypes.Length - 1;
+        int debrisType = 0;
         GameObject selectedDebris = debrisTypes[debrisType];
         float randVal = UnityEngine.Random.Range(0f, 1f); 
         float currSum = 0;

@@ -668,8 +668,8 @@ public class ObstacleTileController : MonoBehaviour
             validTileFound = true;
             for(int i = 0; i < spawnInfos.Count; i++){
                 if(
-                    (spawnInfos[i].GetType() == 1 && GameStateManager.Instance.GetGameStageInt() < 3) ||
-                    ((spawnInfos[i].GetType() == 2 || spawnInfos[i].GetType() == 3) && GameStateManager.Instance.GetGameStageInt() < 4) ||
+                    ((spawnInfos[i].GetType() == 1 || spawnInfos[i].GetType() == 2) && GameStateManager.Instance.GetGameStageInt() < 4) ||
+                    (spawnInfos[i].GetType() == 3 && GameStateManager.Instance.GetGameStageInt() < 3) ||
                     (spawnInfos[i].GetType() == 4 && GameStateManager.Instance.GetGameStageInt() < 5)
                 )
                 {

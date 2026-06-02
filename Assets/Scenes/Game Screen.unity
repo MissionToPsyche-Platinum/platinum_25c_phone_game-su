@@ -11969,7 +11969,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.7}
   m_AnchorMax: {x: 1, y: 0.7}
-  m_AnchoredPosition: {x: -15, y: 0}
+  m_AnchoredPosition: {x: -15.000061, y: 0}
   m_SizeDelta: {x: -30, y: 130.3272}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &645451444
@@ -35791,6 +35791,30 @@ MonoBehaviour:
   - The materials that make up the Psyche asteroid are estimated to be worth $10
     quintillion.
   - 35% of Psyche's body is made up of empty space.
+  - Scientists predict two crater-like depressions on 16-Psyche, suggesting significant
+    variation in metal composition and color across the asteroid.
+  - With a radius of about 1,080 miles (1,740 kilometers), the Moon is less than
+    a third of the width of Earth. If Earth were the size of a nickel, the Moon would
+    be about as big as a coffee bean.
+  - The Moon is an average of 238,855 miles (384,400 kilometers) away. That means
+    30 Earth-sized planets could fit in between Earth and the Moon.
+  - 'In Latin, the Moon was called Luna, which is the main adjective for all things
+    Moon-related: lunar.'
+  - The Moon is rotating at the same rate that it revolves around Earth (called synchronous
+    rotation), so the same hemisphere faces Earth all the time.
+  - The Moon likely formed after a Mars-sized body collided with Earth several billion
+    years ago. The debris accumulated and solidified within 100 million years.
+  - The gravity on the surface of the Moon is one-sixth of Earth's, which is why
+    in footage of moonwalks, astronauts appear to almost bounce across the surface.
+  - As the Moon orbits Earth, different parts are in sunlight or darkness at different
+    times. The changing illumination is why, from our perspective, the Moon goes
+    through phases.
+  - "On July 20, 1969, NASA\u2019s Apollo 11 mission brought the first humans to
+    the moon."
+  - The moon is exactly 400 times smaller than the sun but also exactly 400 times
+    as close as the sun, which is why they appear to line up during solar eclipses.
+  - The Moon has no atmosphere, footprints left by apollo astronauts will stay there
+    for millions of years.
 --- !u!1 &1934844522
 GameObject:
   m_ObjectHideFlags: 0

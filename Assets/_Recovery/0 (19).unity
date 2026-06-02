@@ -2562,27 +2562,27 @@ MonoBehaviour:
     spawnYOffset: 2
     spawnX: -1
   - prefab: {fileID: 525565986268334686, guid: 801654f1b07310b4893de92d09979683, type: 3}
-    triggerScore: 450
+    triggerScore: 300
     spawnYOffset: 2
     spawnX: 1
   - prefab: {fileID: 3691443941826363168, guid: 51b04bcb9a84c66478b2011e1fa7a48c, type: 3}
-    triggerScore: 700
+    triggerScore: 450
     spawnYOffset: 2
     spawnX: 2
   - prefab: {fileID: 8136905691502780287, guid: d92ecd5743121fb4cb84f5a987c123dc, type: 3}
-    triggerScore: 1000
+    triggerScore: 700
     spawnYOffset: 2
     spawnX: -1
   - prefab: {fileID: 5554854112474469277, guid: 1422bba299c17074582a20291600d460, type: 3}
-    triggerScore: 1500
+    triggerScore: 850
     spawnYOffset: 2
     spawnX: 0
   - prefab: {fileID: 5554854112474469277, guid: 3afe3a421ec89e14e8d21e3c037c8e95, type: 3}
-    triggerScore: 2000
+    triggerScore: 1150
     spawnYOffset: 2
     spawnX: 1
   - prefab: {fileID: 5554854112474469277, guid: 169b4a5cd39ed2f41b63bbaae7acc45c, type: 3}
-    triggerScore: 2500
+    triggerScore: 0
     spawnYOffset: 2
     spawnX: -1
   myScoreIncrement: {fileID: 631130230}

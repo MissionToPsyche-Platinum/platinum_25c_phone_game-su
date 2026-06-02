@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb192cf4356e42e8b7b89def7106103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScript::StarMoveScript
-  velocity: {x: 0, y: -0.4, z: 0}
+  velocity: {x: 0, y: -0.3, z: 0}
   alphaFlashSpeed: 0
   maxAlpha: 1
   minAlpha: 0

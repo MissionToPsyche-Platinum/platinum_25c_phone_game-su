@@ -35756,6 +35756,41 @@ MonoBehaviour:
   funFactText: {fileID: 114257686}
   distanceTracker: {fileID: 9001005}
   scoreIncrement: {fileID: 631130230}
+  funFacts:
+  - "Martian days, called \u201Csols\u201D, last 24.6 hours, which is very similar
+    to Earth\u2019s 23.9 hour long days."
+  - 'Mars has two moons: Phobos and Deimos.'
+  - Test Mars is home to the largest volcano in the solar system, Olympus Mons. It
+    is 25 miles tall, with the base covering an area as large as the state of Arizona.
+  - Our eyes view Mars' sky as hazy and red because of suspended dust.
+  - "Mars\u2019 signature red color comes from the large amount iron oxide, or rust,
+    in its rocks and soil."
+  - Mars is one of the most explored bodies in our solar system, and it's the only
+    planet where we've sent rovers to roam the alien landscape.
+  - The first spacecraft to land on Mars were the Viking Landers, which touched down
+    on the surface in 1976.
+  - Mars is the second smallest planet in the solar system after Mercury. It has
+    a diameter of 6,791 kilometres which makes it about half the size of Earth.
+  - Mars is the second smallest planet in the solar system after Mercury. It has
+    a diameter of 6,791 kilometres which makes it about half the size of Earth.
+  - "At Mars\u2019 equator, temperatures can reach 20\xB0C, but at its poles they
+    can be as low as -140\xB0C. "
+  - It was previously believed that the asteroid Psyche consisted mostly of metal.
+    Updated data shows that it may be a mix of metal and silicate, the same material
+    found in glass and sand.
+  - Psyche was discovered by Italian astronomer Annibale de Gasparis on March 17,
+    1852. He named the asteroid for Psyche, the Greek goddess of the soul
+  - The prefix "16" signifies that it was the sixteenth minor planet in order of
+    discovery.
+  - The 16-Psyche asteroid is located in the asteroid belt between Mars and Jupiter.
+  - The mission to Psyche launched on October 13, 2023.
+  - "Psyche takes about five Earth years to complete one orbit of the Sun, but it
+    takes just over four hours to rotate once on its axis (a Psyche \u201Cday\u201D)."
+  - The goal of the Psyche mission is, among other things, to determine whether Psyche
+    is indeed the core of a planetesimal (a tiny building block of a planet)
+  - The materials that make up the Psyche asteroid are estimated to be worth $10
+    quintillion.
+  - 35% of Psyche's body is made up of empty space.
 --- !u!1 &1934844522
 GameObject:
   m_ObjectHideFlags: 0

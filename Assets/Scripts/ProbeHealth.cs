@@ -9,6 +9,7 @@ public class ProbeHealth : MonoBehaviour
     private ScoreIncrement score;
 
     [SerializeField] private GameObject lowHealthPopupPrefab;
+    [SerializeField] private GameObject shieldVisual;
 
     public int maxHealth = 3;
     public int currentHealth;
@@ -87,6 +88,7 @@ public class ProbeHealth : MonoBehaviour
                 if (shieldHealth <= 0)
                 {
                     shieldActive = false;
+                    if (shieldVisual != null) shieldVisual.SetActive(false);
                 }
             }
             else
@@ -122,12 +124,14 @@ public class ProbeHealth : MonoBehaviour
     {
         shieldActive = true;
         shieldHealth = shieldHP;
+        if (shieldVisual != null) shieldVisual.SetActive(true);
     }
 
     public void RemoveShield()
     {
         shieldActive = false;
         shieldHealth = 0;
+        if (shieldVisual != null) shieldVisual.SetActive(false);
     }
 
     public void DisableDamage()

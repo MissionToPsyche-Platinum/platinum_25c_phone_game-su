@@ -23,12 +23,9 @@ public class StatsScreenController : MonoBehaviour
     [SerializeField] private Sprite filledStar;
 
     private int highScore = -1;
-    private float totalDistance = 0; // in AU
+    private double totalDistance = 0; // in km
     private int asteroidsAvoided = 0;
     private int coinsCollected = 0;
-
-    //number of km in 0.1 light years
-    private float distanceConversion = 946073047258.08f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,7 +38,7 @@ public class StatsScreenController : MonoBehaviour
         RefreshAll();
     }
 
-    public void updateTotalDistance(float distance){
+    public void updateTotalDistance(double distance){
         totalDistance += distance;
         RefreshAll();
     }
@@ -64,7 +61,17 @@ public class StatsScreenController : MonoBehaviour
             highScoreText.text = "0";
         }
 
-        totalDistanceText.text = totalDistance + "AU";
+        double kmToAU = 149597870.7;
+        double kmToLY = 9460730472580.8;
+
+        if(totalDistance < kmToAU){
+            totalDistanceText.text = (long)totalDistance + " km";
+        } else if(totalDistance < kmToLY){
+            totalDistanceText.text = (long)(totalDistance / kmToAU) + " AU";
+        } else {
+            totalDistanceText.text = (long)(totalDistance / kmToLY) + " LY";
+        }
+        
 
         asteroidsAvoidedText.text = "" + StatsManager.instance.asteroidsDodged;
 
@@ -75,8 +82,14 @@ public class StatsScreenController : MonoBehaviour
         SetStar(reachPsycheImage, highScore >= PsycheScoreThreshold);
         SetStar(passedArtemisImage, GameStateManager.Instance.longestRealDistance >= ArtemisKmThreshold);
         SetStar(passedVoyagerImage, highScore >= VoyagerKmThreshold);
-        
-        realDistanceTravelledText.text = "" + GameStateManager.Instance.longestRealDistance + " km";
+
+        if(GameStateManager.Instance.longestRealDistance < kmToAU){
+            realDistanceTravelledText.text = (long)GameStateManager.Instance.longestRealDistance + " km";
+        } else if(totalDistance < kmToLY){
+            realDistanceTravelledText.text = (long)(GameStateManager.Instance.longestRealDistance / kmToAU) + " AU";
+        } else {
+            realDistanceTravelledText.text = (long)(GameStateManager.Instance.longestRealDistance / kmToLY) + " LY";
+        }
     }
 
     private void SetStar(Image image, bool isCompleted)

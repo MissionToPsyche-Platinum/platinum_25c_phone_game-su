@@ -74,7 +74,7 @@ public class GameOverPanelController : MonoBehaviour
         }
 
         double distanceKm = distanceTracker != null ? distanceTracker.DistanceKm : 0.0;
-        statsScreenController.updateTotalDistance((float)(distanceKm / 149597870.691)); //convert to AU
+        statsScreenController.updateTotalDistance(distanceKm); 
         int finalScore = scoreIncrement != null ? scoreIncrement.FinalScore : 0;
         statsScreenController.updateHighScore(finalScore);
         int coinsCollected = StatsManager.instance != null ? StatsManager.instance.coinsCollected : 0;

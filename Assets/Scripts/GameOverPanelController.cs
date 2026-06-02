@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,15 +7,21 @@ public class GameOverPanelController : MonoBehaviour
 {
     [SerializeField] private Button restartGameButton;
     [SerializeField] private Button shopButton;
+    [SerializeField] private Button exitButton;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameScreenPanel;
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject statsScreenPanel;
+    [SerializeField] private GameObject startPanel;
 
     [SerializeField] private Text missionTitleText;
     [SerializeField] private Text missionReportText;
+    [SerializeField] private Text funFactText;
     [SerializeField] private DistanceTracker distanceTracker;
     [SerializeField] private ScoreIncrement scoreIncrement;
+    
+    [Header("Fun Facts")]
+    [SerializeField] private List<string> funFacts;
 
     private StatsScreenController statsScreenController;
 
@@ -25,6 +32,10 @@ public class GameOverPanelController : MonoBehaviour
 
         if (shopButton != null)
             shopButton.onClick.AddListener(ShopButtonClicked);
+        
+        if (exitButton != null)
+            exitButton.onClick.AddListener(ExitButtonClicked);
+        
         statsScreenController = statsScreenPanel.GetComponent<StatsScreenController>();
     }
 
@@ -91,6 +102,8 @@ public class GameOverPanelController : MonoBehaviour
         report.Append($"Asteroids Dodged:   {asteroidsDodged}");
 
         missionReportText.text = report.ToString();
+        
+        funFactText.text = funFacts[Random.Range(0, funFacts.Count)];
     }
 
     public void RestartGameButtonClicked()
@@ -107,5 +120,13 @@ public class GameOverPanelController : MonoBehaviour
         this.gameObject.SetActive(false);
         GameStateManager.Instance.EnterMenuState();
         MenuNavigationButtons.Instance.SwitchPanels(gameOverPanel, shopPanel);
+    }
+    
+    public void ExitButtonClicked()
+    {
+        MenuNavigationButtons.Instance.PlayButtonSound();
+        this.gameObject.SetActive(false);
+        GameStateManager.Instance.EnterMenuState();
+        MenuNavigationButtons.Instance.SwitchPanels(gameOverPanel, startPanel);
     }
 }

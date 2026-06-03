@@ -25,7 +25,7 @@ public class PowerUpUpgradeManager : MonoBehaviour
         {5, 10, 15, 20, 25, 30},    //hyperspace
         {5, 10, 15, 20, 25, 30},    //force field
         {5, 10, 15, 20, 25, 30},    //R.U.M.
-        {2, 4, 6, 8, 10},           //shockwave
+        {1, 2, 3, 4, 5, 6},           //shockwave
         {5, 10, 15, 20, 25, 30}     //laser drill
     };
 

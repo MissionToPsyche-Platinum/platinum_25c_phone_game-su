@@ -95,11 +95,14 @@ public class GameOverPanelController : MonoBehaviour
         report.AppendLine($"Distance Traveled:");
         report.AppendLine($"{distanceKm:N0} km");
         report.AppendLine();
-        report.AppendLine($"Final Score:   {finalScore:N0}");
+        report.AppendLine($"Final Score:");
+        report.AppendLine($"{finalScore:N0}");
         report.AppendLine();
-        report.AppendLine($"Coins Collected:   {coinsCollected}");
+        report.AppendLine($"Coins Collected:");
+        report.AppendLine($"{coinsCollected}");
         report.AppendLine();
-        report.Append($"Asteroids Dodged:   {asteroidsDodged}");
+        report.AppendLine($"Asteroids Dodged:");
+        report.AppendLine($"{asteroidsDodged}");
 
         missionReportText.text = report.ToString();
         

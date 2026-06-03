@@ -15602,7 +15602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: -0.2}
   m_AnchorMax: {x: 0.5, y: -0.2}
-  m_AnchoredPosition: {x: 0, y: -603}
+  m_AnchoredPosition: {x: 0, y: -84}
   m_SizeDelta: {x: 800, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &809414160
@@ -29159,12 +29159,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "In the year 2023, having reached the pinnacle of technological innovation,
+  m_text: "In the year 2223, having reached the pinnacle of technological innovation,
     humans set their eyes on the stars. \n\nDue to new-age science, the ancient problem
     of deep space exploration is solved on paper. However, Earth lacks the minerals
     to build the technology necessary to make it a reality. Eyes were set on the
     16-Psyche asteroid: the most metal-rich location in the entire solar system.\n\nThus
-    it was decided. 200 years after the liftoff of the original 16-Psyche mission,
+    it was decided. 200 years after the liftoff of the original 16-Psyche directive,
     NASA would launch a new mission to..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
@@ -29192,8 +29192,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 43
+  m_fontSizeBase: 43
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -29204,7 +29204,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 55.9
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -30482,7 +30482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -687}
+  m_AnchoredPosition: {x: 0, y: -728}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1646884598

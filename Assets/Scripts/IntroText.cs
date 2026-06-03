@@ -33,7 +33,7 @@ public class IntroText : MonoBehaviour
         InitializeStartPosition();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (finished)
             return;

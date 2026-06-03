@@ -17,6 +17,7 @@ public class DebrisMoveScript : MonoBehaviour
     private float currRotation = 0f;
 
     private bool hasAppeared = false;
+    private bool shouldPause = false;
 
     //area where certain special behaviors will occur (explosion, duplication, teleports)
     public float activationY = 0.5f;
@@ -48,7 +49,8 @@ public class DebrisMoveScript : MonoBehaviour
 
         GameObject checkpointSpawn = GameObject.Find("CheckpointSpawner");
         checkpointSpawnScript = checkpointSpawn.GetComponent<CheckpointSpawnScript>();
-        checkpointSpawnScript.OnCheckpointReached += OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointStopped += CheckpointSpawnScript_OnCheckpointStopped;
+        checkpointSpawnScript.OnCheckpointResumed += CheckpointSpawnScript_OnCheckpointResumed;
 
         GameObject debrisSpawn = GameObject.Find("DebrisSpawner");
         debrisSpawnScript = debrisSpawn.GetComponent<DebrisSpawnScript>();
@@ -63,7 +65,8 @@ public class DebrisMoveScript : MonoBehaviour
     }
 
     void OnDestroy(){
-        checkpointSpawnScript.OnCheckpointReached -= OnCheckpointReached;
+        checkpointSpawnScript.OnCheckpointStopped -= CheckpointSpawnScript_OnCheckpointStopped;
+        checkpointSpawnScript.OnCheckpointResumed -= CheckpointSpawnScript_OnCheckpointResumed;
         powerUpBehavior.OnShockwaveActive -= OnShockwaveActive;
         if (teleportGhost != null) Destroy(teleportGhost);
     }
@@ -75,6 +78,11 @@ public class DebrisMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (shouldPause)
+        {
+            return;
+        }
+        
         switch(type){
             case 0:
             UpdateStandard();
@@ -292,8 +300,15 @@ public class DebrisMoveScript : MonoBehaviour
         Vector3 rotated = new Vector3(v.x * Mathf.Cos(radians) + v.y * Mathf.Sin(radians), v.x * -Mathf.Sin(radians) + v.y * Mathf.Cos(radians), v.z);
         return rotated;
     }
+    
+    
+    private void CheckpointSpawnScript_OnCheckpointStopped(object sender, EventArgs e)
+    {
+        shouldPause = true;
+    }
 
-    private void OnCheckpointReached(object sender, EventArgs e){
-        // Destroy(gameObject);
+    private void CheckpointSpawnScript_OnCheckpointResumed(object sender, EventArgs e)
+    {
+        shouldPause = false;
     }
 }

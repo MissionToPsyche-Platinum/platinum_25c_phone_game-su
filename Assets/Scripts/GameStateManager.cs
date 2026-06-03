@@ -53,8 +53,10 @@ public class GameStateManager : MonoBehaviour
     public bool marsUnlocked = false;
     public bool psycheUnlocked = false;
 
+    private bool[] checkpointAvailable = {true, false, false, false, false, false, false, false, false, false, false};
     private bool[] checkpointUnlocked = {true, false, false, false, false, false, false, false, false, false, false};
     private int[] checkpointUnlockCosts = {0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200};
+    public int[] checkpointScores = {0, 300, 1000, 2000, 4000, 6000, 8000, 10000, 15000, 20000, 25000};
 
     private Vector3 probePosition;
 
@@ -88,6 +90,14 @@ public class GameStateManager : MonoBehaviour
     public Vector3 GetProbePosition()
     {
         return probePosition;
+    }
+
+    public void UpdateAvailableCheckpoints(int score){
+        int index = 0;
+        while(index < checkpointScores.Length && checkpointScores[index] <= score){
+            checkpointAvailable[index] = true;
+            index++;
+        }
     }
 
     public void EnterPlayingState()
@@ -229,6 +239,12 @@ public class GameStateManager : MonoBehaviour
 
     public int GetGameStageInt(){
         return GameStageToInt(gameStage);
+    }
+
+    public bool IsStageAvailable(GameStage stage){
+        if(GameStageToInt(stage) - 2 < checkpointAvailable.Length)
+        return checkpointAvailable[GameStageToInt(stage) - 2];
+        return true;
     }
 
     public bool IsStageUnlocked(GameStage stage)

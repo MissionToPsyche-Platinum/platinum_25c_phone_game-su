@@ -88,6 +88,7 @@ public class GameOverPanelController : MonoBehaviour
         statsScreenController.updateTotalDistance(distanceKm); 
         int finalScore = scoreIncrement != null ? scoreIncrement.FinalScore : 0;
         statsScreenController.updateHighScore(finalScore);
+        GameStateManager.Instance.UpdateAvailableCheckpoints(finalScore);
         int coinsCollected = StatsManager.instance != null ? StatsManager.instance.coinsCollected : 0;
         int asteroidsDodged = StatsManager.instance != null ? StatsManager.instance.asteroidsDodged : 0;
 

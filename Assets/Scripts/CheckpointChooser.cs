@@ -70,15 +70,17 @@ public class CheckpointChooser : MonoBehaviour
     private void UpdateDisplay()
     {
         CheckpointEntry entry = selectableStages[index];
-        bool locked = entry.unlockCost > 0 && !GameStateManager.Instance.IsStageUnlocked(entry.stage);
+        bool available = GameStateManager.Instance.IsStageAvailable(entry.stage);
+        bool locked = !GameStateManager.Instance.IsStageUnlocked(entry.stage);
+        bool affordable = entry.unlockCost > 0;
 
         displayName.text = entry.displayName;
-        lockSprite.gameObject.SetActive(locked);
-        buyButton.gameObject.SetActive(locked);
+        lockSprite.gameObject.SetActive(!available);
+        buyButton.gameObject.SetActive(available && locked);
 
         if (locked)
         {
-            buyButtonText.text = "Unlock: " + entry.unlockCost + " coins";
+            buyButtonText.text = "" + entry.unlockCost;
             buyButton.interactable = GameStateManager.Instance.GetCoins() >= entry.unlockCost;
         }
 

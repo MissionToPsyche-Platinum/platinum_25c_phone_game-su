@@ -273,3 +273,4 @@ public class CheckpointSpawnScript : MonoBehaviour
         }
     }
 }
+

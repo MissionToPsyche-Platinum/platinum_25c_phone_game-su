@@ -1,40 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Keeps the coin/crystal counter text in sync with the player's coin balance.
+// Left-handed mirroring is handled by HorizontalMirrorUI on this element and its
+// sibling icon, so this script is only responsible for the number text.
 public class CoinUI : MonoBehaviour
 {
     public Text coinText;
-
-    private RectTransform _rt;
-    private Vector2 _originalAnchoredPosition;
-    private bool _mirrorEnabled;
-
-    private void Awake()
-    {
-        _rt = GetComponent<RectTransform>();
-        _originalAnchoredPosition = _rt.anchoredPosition;
-        _mirrorEnabled = transform.parent != null && transform.parent.GetComponent<HorizontalMirrorUI>() != null;
-    }
-
-    private void OnEnable()
-    {
-        if (!_mirrorEnabled) return;
-        LeftHandedManager.OnLeftHandedChanged += ApplyMirror;
-        ApplyMirror(LeftHandedManager.IsLeftHanded);
-    }
-
-    private void OnDisable()
-    {
-        if (!_mirrorEnabled) return;
-        LeftHandedManager.OnLeftHandedChanged -= ApplyMirror;
-    }
-
-    private void ApplyMirror(bool isLeftHanded)
-    {
-        Vector2 pos = _originalAnchoredPosition;
-        pos.x = isLeftHanded ? -Mathf.Abs(pos.x) : Mathf.Abs(pos.x);
-        _rt.anchoredPosition = pos;
-    }
 
     void Update()
     {

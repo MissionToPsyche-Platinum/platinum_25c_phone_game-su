@@ -15,8 +15,9 @@ public class DebrisSpawnScript : MonoBehaviour
     {
         {1f, 0f, 0f, 0f, 0f},                //spawn probabilities at Earth checkpoint
         {1f, 0f, 0f, 0f, 0f},                //spawn probabilities at Moon checkpoint
-        {0.85f, 0f, 0f, 0.15f, 0f},           //spawn probabilities at Mars checkpoint
-        {0.35f, 0.25f, 0.15f, 0.15f, 0.1f},  //spawn probabilities at Psyche checkpoint
+        {0.5f, 0f, 0f, 0f, 0.5f},           //spawn probabilities at Mars checkpoint
+        {0.25f, 0.25f, 0.25f, 0f, 0.25f},       //spawn probabilities at Psyche checkpoint
+        {0.2f, 0.2f, 0.2f, 0.2f, 0.2f}      //spawn probabilities at Jupiter checkpoint and beyond
     };
 
     public float minSize = 0.3f;
@@ -81,6 +82,8 @@ public class DebrisSpawnScript : MonoBehaviour
         for(int i = 0; i < numLanes; i++){
             laneXPos.Add(minXPos + (float)i * laneWidth);
         }
+
+        updateSpawnProbabilities();
         
     }
 
@@ -122,9 +125,9 @@ public class DebrisSpawnScript : MonoBehaviour
 
         if(gameStage < 2){                          //not at a checkpoint, invalid
             Array.Fill(spawnWeights, 0f);
-        } else if(gameStage >= 5){
+        } else if(gameStage >= 6){
             for(int i = 0; i < 5; i++){
-                spawnWeights[i] = spawnWeightsAtCheckpoints[3, i];
+                spawnWeights[i] = spawnWeightsAtCheckpoints[4, i];
             }
         } else {
             float distanceBetweenCheckpoints = checkpointSpawnScript.GetCheckpointScore(gameStage - 1) - checkpointSpawnScript.GetCheckpointScore(gameStage - 2);
@@ -133,10 +136,6 @@ public class DebrisSpawnScript : MonoBehaviour
 
             for(int i = 0; i < 5; i++){
                 spawnWeights[i] = (spawnWeightsAtCheckpoints[gameStage - 1, i] - spawnWeightsAtCheckpoints[gameStage - 2, i]) * progress + spawnWeightsAtCheckpoints[gameStage - 2, i];
-            }
-            if(gameStage < 5){
-                spawnWeights[0] += spawnWeights[4];
-                spawnWeights[4] = 0f;
             }
         }
 
@@ -163,9 +162,15 @@ public class DebrisSpawnScript : MonoBehaviour
                 float currX = activeAsteroids[j].transform.position.x;
                 float currY = activeAsteroids[j].transform.position.y;
                 float gap = Mathf.Lerp(maxGap, minGap, difficultyMultiplier) * gapMultiplier;
+                int type = spawnInfos[i].GetType();
                 if((currX - newX) * (currX - newX) + (currY - newY) * (currY - newY) < gap * gap){
                     return;
                 }
+
+                int gameStage = GameStateManager.Instance.GetGameStageInt();
+                if(type == 4 && gameStage < 3) return;
+                if((type == 1 || type == 2) && gameStage < 4) return;
+                if(type == 3 && gameStage < 5) return;
             }
         }
 
@@ -241,9 +246,6 @@ public class DebrisSpawnScript : MonoBehaviour
         currLane++;
 
         updateSpawnProbabilities();
-        // for(int i = 0; i < 5; i++){
-        //     Debug.Log(spawnWeights[i]);
-        // }
 
         int debrisType = 0;
         GameObject selectedDebris = debrisTypes[debrisType];
@@ -258,6 +260,11 @@ public class DebrisSpawnScript : MonoBehaviour
                 break;
             }
         }
+        
+        int gameStage = GameStateManager.Instance.GetGameStageInt();
+        if(debrisType == 4 && gameStage < 3) return;
+        if((debrisType == 1 || debrisType == 2) && gameStage < 4) return;
+        if(debrisType == 3 && gameStage < 5) return;
         
         // Spawn the debris
         GameObject newDebris = Instantiate(selectedDebris, spawnPos, Quaternion.identity);

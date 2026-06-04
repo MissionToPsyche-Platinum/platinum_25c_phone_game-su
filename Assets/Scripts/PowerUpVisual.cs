@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PowerUpVisual : MonoBehaviour
 {
-    float maxScale = 0.1f;
+    float maxScale = 0.3f;
     float minScale = 0.001f;
     float currScale;
     float totalTime = 0f;

@@ -8161,7 +8161,6 @@ GameObject:
   m_Component:
   - component: {fileID: 430305813}
   - component: {fileID: 430305815}
-  - component: {fileID: 430305814}
   m_Layer: 5
   m_Name: More Section
   m_TagString: Untagged
@@ -8190,36 +8189,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &430305814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430305812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &430305815
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12069,7 +12038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.7}
   m_AnchorMax: {x: 1, y: 0.7}
-  m_AnchoredPosition: {x: -15.000305, y: 0}
+  m_AnchoredPosition: {x: -15.000244, y: 0}
   m_SizeDelta: {x: -30, y: 130.3272}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &645451444
@@ -27134,7 +27103,7 @@ MonoBehaviour:
   - Mars
   - Psyche
   messageText: {fileID: 1544722308}
-  moonArrivalPopupPrefab: {fileID: 100, guid: c722bfa4815a9c04eaa8176e467a75ed, type: 3}
+  moonArrivalPopupPrefab: {fileID: 100, guid: d9b350bf7b4d1453fb990f1f257e35b7, type: 3}
   marsArrivalPopupPrefab: {fileID: 100, guid: 80bacab3006ed9d42b58be52a2f3ba4b, type: 3}
   psycheArrivalPopupPrefab: {fileID: 100, guid: 58f34831c9035014da2415f94122831d, type: 3}
   neptuneArrivalPopupPrefab: {fileID: 100, guid: e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3, type: 3}

@@ -20,12 +20,8 @@ public class StartScreenButtonsController : MonoBehaviour
     [SerializeField] private Button statsScreenButton;
     [SerializeField] private Button settingsScreenButton;
     [SerializeField] private Button codexScreenButton;
-    [SerializeField] private Button disclaimerButton;
     [SerializeField] private Button moreButton;
     [SerializeField] private Button creditsScreenButton;
-
-    [Header("Other")]
-    [SerializeField] private DisclaimerPanelController disclaimerPanel;
 
     [Header("Debug")]
     [Tooltip("HoldButton component on the same GameObject as the About/Disclaimer button.")]
@@ -41,7 +37,6 @@ public class StartScreenButtonsController : MonoBehaviour
         shopScreenButton.onClick.AddListener(ShopScreenButtonAction);
         statsScreenButton.onClick.AddListener(StatsScreenButtonAction);
         settingsScreenButton.onClick.AddListener(SettingsScreenButtonAction);
-        disclaimerButton.onClick.AddListener(DisclaimerButtonAction);
         codexScreenButton.onClick.AddListener(CodexScreenButtonAction);
         moreButton.onClick.AddListener(MoreButtonAction);
         creditsScreenButton.onClick.AddListener(CreditsScreenButtonAction);
@@ -118,12 +113,6 @@ public class StartScreenButtonsController : MonoBehaviour
         SettingsScreenController controller = settingsScreenPanel.GetComponent<SettingsScreenController>();
         controller.SetPreviousPanel(startScreenPanel);
         MenuNavigationButtons.Instance.SwitchPanels(startScreenPanel, creditsScreenPanel);
-    }
-
-    private void DisclaimerButtonAction()
-    {
-        disclaimerPanel.Show();
-        startScreenPanel.SetActive(false);
     }
     
     private void MoreButtonAction()

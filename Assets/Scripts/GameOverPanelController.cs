@@ -13,6 +13,7 @@ public class GameOverPanelController : MonoBehaviour
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject statsScreenPanel;
     [SerializeField] private GameObject startPanel;
+    [SerializeField] private Button newFunFactButton;
 
     [SerializeField] private Text missionTitleText;
     [SerializeField] private Text missionReportText;
@@ -35,6 +36,8 @@ public class GameOverPanelController : MonoBehaviour
         
         if (exitButton != null)
             exitButton.onClick.AddListener(ExitButtonClicked);
+        if (newFunFactButton != null)
+            newFunFactButton.onClick.AddListener(SetNewFunFact);
         
         statsScreenController = statsScreenPanel.GetComponent<StatsScreenController>();
     }
@@ -107,7 +110,7 @@ public class GameOverPanelController : MonoBehaviour
 
         missionReportText.text = report.ToString();
         
-        funFactText.text = funFacts[Random.Range(0, funFacts.Count)];
+        SetNewFunFact();
     }
 
     public void RestartGameButtonClicked()
@@ -133,4 +136,10 @@ public class GameOverPanelController : MonoBehaviour
         GameStateManager.Instance.EnterMenuState();
         MenuNavigationButtons.Instance.SwitchPanels(gameOverPanel, startPanel);
     }
+
+    private void SetNewFunFact()
+    {
+        funFactText.text = funFacts[Random.Range(0, funFacts.Count)];
+    }
+
 }

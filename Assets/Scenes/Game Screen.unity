@@ -1488,7 +1488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 431.9004, y: -250}
+  m_AnchoredPosition: {x: 431.83447, y: -250}
   m_SizeDelta: {x: 778.8667, y: 220}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &83661875
@@ -14163,7 +14163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 431.9004, y: -1000}
+  m_AnchoredPosition: {x: 431.83447, y: -1000}
   m_SizeDelta: {x: 778.8667, y: 220}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &732204950
@@ -17941,7 +17941,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: laser drill
+  m_Text: Gold rush
 --- !u!222 &907898925
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20817,7 +20817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 431.9004, y: -500}
+  m_AnchoredPosition: {x: 431.83447, y: -500}
   m_SizeDelta: {x: 778.8667, y: 220}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1013903804
@@ -21053,7 +21053,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: defe51980b9f84ff1b057653ab321188, type: 3}
+  m_Texture: {fileID: 2800000, guid: 15cb4401a2d3bfa4ead7174106d0ffdd, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -21116,7 +21116,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 431.9004, y: 0}
+  m_AnchoredPosition: {x: 431.83447, y: 0}
   m_SizeDelta: {x: 778.8667, y: 220}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1038253933
@@ -28924,7 +28924,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 431.9004, y: -750}
+  m_AnchoredPosition: {x: 431.83447, y: -750}
   m_SizeDelta: {x: 778.8667, y: 220}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1481104776
@@ -33877,7 +33877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1764566809}
   m_Layer: 5
-  m_Name: Laser Drill
+  m_Name: Gold Rush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36949,6 +36949,107 @@ MonoBehaviour:
     as close as the sun, which is why they appear to line up during solar eclipses.
   - The Moon has no atmosphere, footprints left by apollo astronauts will stay there
     for millions of years.
+  - Neptune's winds top 2,100 km/h! That is the fastest in the solar system, moving
+    at Mach 1.5.
+  - Neptune was predicted by math before anyone ever saw it. Irregularities in Uranus's
+    orbit let astronomers calculate its exact position first!
+  - Neptune's largest moon Triton orbits the planet backwards. This means it did
+    not form there and was actually captured by Neptune's gravity from the Kuiper
+    Belt.
+  - One Neptune year lasts 164.8 Earth years. Discovered in 1846, the icy planet
+    did not complete a single full orbit until 2011.
+  - Sunlight takes over 4 hours to travel the 4.5 billion kilometers to Neptune.
+  - Neptune's Great Dark Spot was a massive storm the size of Earth photographed
+    by Voyager 2.
+  - Neptune radiates 2.61 times more heat than it receives from the Sun. The exact
+    mechanism generating all this thermal energy remains a mystery.
+  - Neptune actually has complete rings! Its outermost ring contains five incredibly
+    dense dusty clumps called ring arcs that make it look fragmented from Earth.
+  - Neptune has an intense magnetic field tilted 47 degrees from its rotation axis.
+    It is also physically offset from the planet's actual center.
+  - Neptune's deep blue color comes from trace amounts of methane gas in its atmosphere.
+    The methane absorbs red wavelengths of sunlight and reflects blue light back
+    into space.
+  - Proxima Centauri is 4.24 light years away. Even traveling at the speed of the
+    Voyager 1 probe, the journey would still take roughly 73,000 years!
+  - Proxima Centauri is completely invisible to the naked eye from Earth. It is a
+    dim red dwarf needing a telescope to spot.
+  - Proxima b is an Earth sized planet in the star's habitable zone. Unfortunately,
+    it gets bombarded by intense X ray flares that likely stripped away its atmosphere.
+  - Proxima Centauri belongs to the Alpha Centauri triple star system. It orbits
+    the central pair at a distance of about 0.21 light years.
+  - Proxima Centauri will remain the closest star to Earth for the next 33,000 years!
+    After it drifts away, another red dwarf named Ross 248 will take that spot!
+  - A year on Proxima b lasts just 11.2 Earth days. It has to orbit roughly 20 times
+    closer to its star than Earth does to the Sun to stay warm.
+  - In 2017 Proxima Centauri unleashed a violent superflare making it 1,000 times
+    brighter. It released 10 times more energy than the largest solar flare ever
+    recorded on our Sun!
+  - Red dwarfs efficiently recycle all their hydrogen fuel. This means Proxima Centauri
+    can burn for 4 trillion years, which is nearly 300 times longer than our Sun!
+  - The Parker Solar Probe is humanity's fastest spacecraft. If it pointed toward
+    Proxima Centauri at top speed, the trip would still take about 7,200 years.
+  - The Breakthrough Starshot initiative wants to use lasers to blast tiny nanocraft
+    to 20 percent the speed of light. This would cut the travel time to Proxima Centauri
+    to 21 years!
+  - Alpha Centauri A is a yellow dwarf star remarkably similar to our Sun, but about
+    10% more massive and 22% wider. If you swapped it for the Sun, Earth would still
+    be in the habitable zone!
+  - Alpha Centauri A is a yellow dwarf star remarkably similar to our Sun, but about
+    10% more massive and 22% wider. If you swapped it for the Sun, Earth would still
+    be in the habitable zone!
+  - Alpha Centauri A is roughly 6.5 billion years old, about 2 billion years older
+    than our Sun. It has already burned through more of its hydrogen fuel and will
+    eventually swell into a red giant.
+  - Alpha Centauri A and B orbit each other every 79.9 years. At their closest approach
+    they are only about 11 AU apart, similar to the distance between the Sun and
+    Saturn!
+  - Computer simulations suggest that stable Earth-sized planets could form in the
+    habitable zone around Alpha Centauri A. The gravitational tug of its binary partner
+    makes planet formation tricky but not impossible.
+  - Light from Alpha Centauri A takes 4.37 years to reach Earth. A radio signal sent
+    today would take nearly 9 years to get a reply, even if someone answered immediately.
+  - Alpha Centauri A produces about 1.5 times more energy than our Sun. Any planet
+    at the same distance as Earth would receive significantly more solar radiation.
+  - Sailors in the southern hemisphere have used Alpha Centauri as a navigational
+    star for thousands of years. The ancient Egyptians, Polynesians, and South American
+    cultures all tracked this brilliant star.
+  - The Breakthrough Starshot project aims to send laser-propelled nanocraft to the
+    Alpha Centauri system at 20% the speed of light. The trip would take around 20
+    years and the crafts would zip past at enormous speed.
+  - If you lived on a planet orbiting Alpha Centauri A, Alpha Centauri B would appear
+    as a brilliant second sun up to 4.7 times brighter than the full Moon, casting
+    visible shadows even at night!
+  - Alpha Centauri B is a K-type orange dwarf star slightly smaller and cooler than
+    our Sun. It shines with about half the Sun's luminosity, giving off a warmer
+    orange glow.
+  - Alpha Centauri B orbits Alpha Centauri A in a wide elliptical path every 79.9
+    years. During this orbit their separation swings from 11 to 36 astronomical units,
+    a range wider than our entire solar system!
+  - In 2012 astronomers thought they detected an Earth-sized planet orbiting Alpha
+    Centauri B, but later analysis showed it was a signal artifact. The planet hunt
+    there is still very much alive!
+  - Alpha Centauri B has a surface temperature of about 5,250 Kelvin compared to
+    the Sun's 5,778 Kelvin. That slight difference gives it a noticeably more orange
+    hue than our yellow Sun.
+  - K-type stars like Alpha Centauri B are considered excellent candidates for hosting
+    life. They live longer than the Sun and produce far less harmful ultraviolet
+    radiation, giving life more time to develop.
+  - Alpha Centauri B is gravitationally bound to both Alpha Centauri A and the distant
+    red dwarf Proxima Centauri, forming one of the most famous triple star systems
+    known to astronomers.
+  - From a hypothetical planet around Alpha Centauri B, Alpha Centauri A would blaze
+    in the sky as a brilliant second sun, sometimes appearing nearly 5 times brighter
+    than the full Moon and casting visible shadows at night.
+  - The sci-fi film Avatar used the Alpha Centauri system as its setting, calling
+    it Polyphemus. While fictional, the choice was scientifically inspired since
+    Alpha Centauri B really could host habitable worlds.
+  - K-dwarf stars like Alpha Centauri B can burn for up to 30 billion years, more
+    than twice the Sun's total lifespan. Any life that evolved around it would have
+    enormous time to grow complex.
+  - Alpha Centauri B produces stellar flares less frequently than red dwarf stars,
+    making it a calmer and potentially more life-friendly environment. Scientists
+    rank it among the best nearby targets for the search for life.
 --- !u!1 &1925731175
 GameObject:
   m_ObjectHideFlags: 0

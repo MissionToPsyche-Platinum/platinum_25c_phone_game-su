@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.75}
@@ -103,8 +103,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1b2c3d4e5f607080910111213141516, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   fadeDuration: 0.3
   minDisplayTime: 0.5
 --- !u!114 &131
@@ -117,21 +117,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dea9b6502e554f449a1201a9c90e4f3f, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: GameScript::RandomFactPopup
   bodyText: {fileID: 503}
   facts:
   - Alpha Centauri A is a yellow dwarf star remarkably similar to our Sun, but about
     10% more massive and 22% wider. If you swapped it for the Sun, Earth would still
     be in the habitable zone!
-  - Alpha Centauri A is the brightest member of the nearest stellar system to Earth
-    at 4.37 light years away. To the naked eye it merges with Alpha Centauri B into
-    a single dazzling point of light.
+  - Alpha Centauri A is a yellow dwarf star remarkably similar to our Sun, but about
+    10% more massive and 22% wider. If you swapped it for the Sun, Earth would still
+    be in the habitable zone!
   - Alpha Centauri A is roughly 6.5 billion years old, about 2 billion years older
     than our Sun. It has already burned through more of its hydrogen fuel and will
     eventually swell into a red giant.
   - Alpha Centauri A and B orbit each other every 79.9 years. At their closest approach
-    they are only about 11 AU apart, similar to the distance between the Sun and Saturn!
+    they are only about 11 AU apart, similar to the distance between the Sun and
+    Saturn!
   - Computer simulations suggest that stable Earth-sized planets could form in the
     habitable zone around Alpha Centauri A. The gravitational tug of its binary partner
     makes planet formation tricky but not impossible.
@@ -139,8 +140,8 @@ MonoBehaviour:
     today would take nearly 9 years to get a reply, even if someone answered immediately.
   - Alpha Centauri A produces about 1.5 times more energy than our Sun. Any planet
     at the same distance as Earth would receive significantly more solar radiation.
-  - Sailors in the southern hemisphere have used Alpha Centauri as a navigational star
-    for thousands of years. The ancient Egyptians, Polynesians, and South American
+  - Sailors in the southern hemisphere have used Alpha Centauri as a navigational
+    star for thousands of years. The ancient Egyptians, Polynesians, and South American
     cultures all tracked this brilliant star.
   - The Breakthrough Starshot project aims to send laser-propelled nanocraft to the
     Alpha Centauri system at 20% the speed of light. The trip would take around 20
@@ -158,7 +159,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e091dde7ea4ffb4e9f4074d25b76354, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: GameScript::DestroyOnGameQuit
 --- !u!114 &105
 MonoBehaviour:
@@ -170,7 +171,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5c5da1eb7583a24188826cd33c87f7d, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: GameScript::DestroyOnGameStart
 --- !u!1 &300
 GameObject:
@@ -230,7 +231,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -306,7 +307,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -381,7 +382,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -517,7 +518,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -527,7 +528,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text:
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
   m_sharedMaterial: {fileID: -7032866026977421167, guid: 231d3f9cfdeb71943bae022cd04d0dee, type: 2}
@@ -653,7 +654,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.85}

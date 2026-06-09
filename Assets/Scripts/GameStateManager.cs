@@ -55,7 +55,7 @@ public class GameStateManager : MonoBehaviour
 
     private bool[] checkpointAvailable = {true, false, false, false, false, false, false, false, false, false, false};
     private bool[] checkpointUnlocked = {true, false, false, false, false, false, false, false, false, false, false};
-    private int[] checkpointUnlockCosts = {0, 150, 500, 1000, 2000, 3000, 4000, 5000, 7500, 10000, 12500};
+    private int[] checkpointUnlockCosts = {0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200};
     public int[] checkpointScores = {0, 300, 1000, 2000, 4000, 6000, 8000, 10000, 15000, 20000, 25000};
 
     private Vector3 probePosition;

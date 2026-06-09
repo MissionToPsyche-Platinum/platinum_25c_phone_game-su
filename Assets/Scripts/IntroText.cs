@@ -80,7 +80,7 @@ public class IntroText : MonoBehaviour
     private void ScrollUpward()
     {
         Vector2 anchoredPos = scrollingText.anchoredPosition;
-        anchoredPos.y += (currentSpeed * Time.deltaTime) / parentCanvas.scaleFactor;
+        anchoredPos.y += (currentSpeed * Time.deltaTime);
         scrollingText.anchoredPosition = anchoredPos;
     }
 

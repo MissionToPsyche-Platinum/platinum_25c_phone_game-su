@@ -30115,9 +30115,9 @@ MonoBehaviour:
   topMarker: {fileID: 1110291636}
   bottomMarker: {fileID: 1646884597}
   parentCanvas: {fileID: 785719836}
-  normalSpeed: 30
-  holdSpeed: 150
-  skipSpeed: 3500
+  normalSpeed: 80
+  holdSpeed: 400
+  skipSpeed: 5000
 --- !u!114 &1535438892
 MonoBehaviour:
   m_ObjectHideFlags: 0
